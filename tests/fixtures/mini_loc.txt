@@ -1,0 +1,48 @@
+SetShowTransOn  // Do not translate.
+
+//
+// Estratto di prova nello stile dei file di Loc/Italian
+//
+["GlobalTextData"]  {"Testo per l'intero gioco."}
+
+["Army"]			{"Armata"}
+["Continue"] 		{"Continua"}  // commento dopo il testo
+
+["sieger2desc"]
+{""He is an expert in the art of sieging. -2 years to siege duration. "}
+
+["legswordmes_xzy"] {"One of your warriors has achieved the status of
+ Legendary Swordsman.\nYou may now found a school."}
+
+["url"] {"http://esempio // non e' un commento"}
+
+// tolleranze viste nei file reali
+["Barbary Coast"}		{"Barbary Coast"}
+["Kilij Arslan"]	{"Kilij Arslan}
+//["Kaikawus"]	{"Kaikawus"}
+["Cydwladwr"]			{"Cydwladwr" (Compatriot)}
+
+// etichette ripetute: vince l'ultima
+["Maria"]	{"Mar'ia"}
+["Maria"]	{"Maria"}
+["Pierre"]	{"Pierre"}
+["Pierre"]	{"Pierre"}
+["Spearmen_Desc"]	{"Lanceri"}
+
+// array a indice
+@["country_xzy"]
+@{"Region Zero"}
+@{"Scotland"}   		
+@{"Northumbria"}
+
+@["vuoto_xzy"]
+
+@["country_xzy"]
+@{"Region Zero"}
+@{"Scotland"}
+@{"Northumbria"}
+@{"Mercia"}
+
+["dopo_array"]	{"voce semplice dopo un array"}
+
+SetShowTransOff  // Do not translate.

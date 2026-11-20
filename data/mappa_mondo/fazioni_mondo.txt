@@ -1,0 +1,369 @@
+// Fazioni nuove della mappa del mondo (ADR-079, richiesta di Federico del 16/11/2026; Coreani, Mongoli, Chola e Khmer da ADR-088): Giapponesi, Cinesi, Aztechi,
+// Inca, Kanem (Africa centrale) e Cahokia (nativi del Nord America, gia' Mississippiani). Scritto a mano: unita' ed edifici
+// arruolabili sono per ora quelli della fazione modello di data/fazioni_mondo.cfg, i ritratti quelli della religione.
+// Si aggiunge in fondo allo startpos del mondo in tutte e due le modalita' (WorldMap.startpos_text).
+
+// ---- FN_JAPANESE
+DeclareFaction::	"FN_JAPANESE"
+SetActiveFaction::	FN_JAPANESE	FT_MAJOR
+SetTreasury::	FN_JAPANESE	10000	8000	6000	4000
+SetCulture::	FN_JAPANESE	PAGAN_CULTURE
+SetReligion::	FN_JAPANESE	REL_PAGAN
+SetBehaviour::	FN_JAPANESE	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_JAPANESE	3
+GGConquestReward::	FN_JAPANESE	0.5
+SetShieldImage::	FN_JAPANESE	"Cumans_lge"	"Cumans_sml"	"Cumans"	"F1023"	"F1023"
+SetFactionCol::	FN_JAPANESE	188 30 40	236 230 216
+SetRegionOwner::	ID_KINAI	FN_JAPANESE
+SetRegionOwner::	ID_KYUSHU	FN_JAPANESE
+SetRegionOwner::	ID_TOHOKU	FN_JAPANESE
+MakeBuilding::	ID_KINAI	Castle4
+MakeBuilding::	ID_KINAI	Spearmaker
+MakeBuilding::	ID_KINAI	Bowyer
+MakeBuilding::	ID_KINAI	Horse_breeder
+MakeBuilding::	ID_KINAI	Improved_farmland
+MakeBuilding::	ID_KINAI	Town_watch
+MakeBuilding::	ID_KINAI	Shipyard
+MakeBuilding::	ID_KINAI	Port
+MakeUnit::	ID_KINAI	SteppeHeavyCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	CumanWarriors	100	PAGAN_CULTURE
+// flotta di partenza (18/11/2026): le isole hanno bisogno di navi per uscire
+MakeUnit::	ID_KINAI	Dhow	1
+MakeUnit::	ID_KINAI	Dhow	1
+MakeUnit::	ID_KYUSHU	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KYUSHU	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TOHOKU	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_TOHOKU	RoundShieldSpearmen	100	PAGAN_CULTURE
+SetStartLeader::	FN_JAPANESE	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_KINAI	FN_JAPANESE
+AddHeir::	FN_JAPANESE	1	22
+AddHeir::	FN_JAPANESE	1	16
+AddHeir::	FN_JAPANESE	0	14
+AddHeir::	FN_JAPANESE	1	9
+
+// ---- FN_CHINESE
+DeclareFaction::	"FN_CHINESE"
+SetActiveFaction::	FN_CHINESE	FT_MAJOR
+SetTreasury::	FN_CHINESE	10000	8000	6000	4000
+SetCulture::	FN_CHINESE	PAGAN_CULTURE
+SetReligion::	FN_CHINESE	REL_PAGAN
+SetBehaviour::	FN_CHINESE	ORTHODOX_STAGNANT
+SetFactionMusic::	FN_CHINESE	3
+GGConquestReward::	FN_CHINESE	0.5
+SetShieldImage::	FN_CHINESE	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_CHINESE	214 162 32	139 0 0
+SetRegionOwner::	ID_KAIFENG	FN_CHINESE
+SetRegionOwner::	ID_SHAANXI	FN_CHINESE
+SetRegionOwner::	ID_SICHUAN	FN_CHINESE
+SetRegionOwner::	ID_JIANGNAN	FN_CHINESE
+SetRegionOwner::	ID_HUGUANG	FN_CHINESE
+SetRegionOwner::	ID_FUJIAN	FN_CHINESE
+SetRegionOwner::	ID_LINGNAN	FN_CHINESE
+MakeBuilding::	ID_KAIFENG	Castle4
+MakeBuilding::	ID_KAIFENG	Spearmaker
+MakeBuilding::	ID_KAIFENG	Bowyer
+MakeBuilding::	ID_KAIFENG	Horse_breeder
+MakeBuilding::	ID_KAIFENG	Improved_farmland2
+MakeBuilding::	ID_KAIFENG	Town_watch
+MakeBuilding::	ID_KAIFENG	Watch_towers
+MakeUnit::	ID_KAIFENG	LithuanianCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_SICHUAN	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_SICHUAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_HUGUANG	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_HUGUANG	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_FUJIAN	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_FUJIAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_LINGNAN	Crossbows	60	PAGAN_CULTURE
+MakeUnit::	ID_LINGNAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+SetStartLeader::	FN_CHINESE	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_KAIFENG	FN_CHINESE
+AddHeir::	FN_CHINESE	1	25
+AddHeir::	FN_CHINESE	1	19
+AddHeir::	FN_CHINESE	0	17
+AddHeir::	FN_CHINESE	1	12
+AddHeir::	FN_CHINESE	0	6
+
+// ---- FN_AZTECS
+DeclareFaction::	"FN_AZTECS"
+SetActiveFaction::	FN_AZTECS	FT_MAJOR
+SetTreasury::	FN_AZTECS	10000	8000	6000	4000
+SetCulture::	FN_AZTECS	PAGAN_CULTURE
+SetReligion::	FN_AZTECS	REL_PAGAN
+SetBehaviour::	FN_AZTECS	BARBARIAN_RAIDER
+SetFactionMusic::	FN_AZTECS	3
+GGConquestReward::	FN_AZTECS	0.5
+SetShieldImage::	FN_AZTECS	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_AZTECS	32 150 140	122 31 31
+SetRegionOwner::	ID_TOLLAN	FN_AZTECS
+SetRegionOwner::	ID_MAYA	FN_AZTECS
+MakeBuilding::	ID_TOLLAN	Castle4
+MakeBuilding::	ID_TOLLAN	Spearmaker
+MakeBuilding::	ID_TOLLAN	Bowyer
+MakeBuilding::	ID_TOLLAN	Improved_farmland
+MakeBuilding::	ID_TOLLAN	Town_watch
+MakeUnit::	ID_TOLLAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	Archers	60	PAGAN_CULTURE
+SetStartLeader::	FN_AZTECS	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_TOLLAN	FN_AZTECS
+AddHeir::	FN_AZTECS	1	20
+AddHeir::	FN_AZTECS	1	15
+AddHeir::	FN_AZTECS	0	12
+
+// ---- FN_INCA
+DeclareFaction::	"FN_INCA"
+SetActiveFaction::	FN_INCA	FT_MAJOR
+SetTreasury::	FN_INCA	10000	8000	6000	4000
+SetCulture::	FN_INCA	PAGAN_CULTURE
+SetReligion::	FN_INCA	REL_PAGAN
+SetBehaviour::	FN_INCA	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_INCA	3
+GGConquestReward::	FN_INCA	0.5
+SetShieldImage::	FN_INCA	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_INCA	224 138 30	90 42 130
+SetRegionOwner::	ID_CUZCO	FN_INCA
+SetRegionOwner::	ID_TIWANAKU	FN_INCA
+SetRegionOwner::	ID_CHIMU	FN_INCA
+MakeBuilding::	ID_CUZCO	Castle4
+MakeBuilding::	ID_CUZCO	Spearmaker
+MakeBuilding::	ID_CUZCO	Bowyer
+MakeBuilding::	ID_CUZCO	Improved_farmland
+MakeBuilding::	ID_CUZCO	Town_watch
+MakeUnit::	ID_CUZCO	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	ArmouredSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	Archers	60	PAGAN_CULTURE
+SetStartLeader::	FN_INCA	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_CUZCO	FN_INCA
+AddHeir::	FN_INCA	1	21
+AddHeir::	FN_INCA	0	16
+AddHeir::	FN_INCA	1	13
+
+// ---- FN_KANEM
+DeclareFaction::	"FN_KANEM"
+SetActiveFaction::	FN_KANEM	FT_MAJOR
+SetTreasury::	FN_KANEM	10000	8000	6000	4000
+SetCulture::	FN_KANEM	MUSLIM_CULTURE
+SetReligion::	FN_KANEM	REL_ISLAMIC
+SetBehaviour::	FN_KANEM	MUSLIM_EXPANSIONIST
+SetFactionMusic::	FN_KANEM	1
+GGConquestReward::	FN_KANEM	0.5
+SetShieldImage::	FN_KANEM	"Almohads_lge"	"Almohads_sml"	"Almohads"	"F1000"	"F1000"
+SetFactionCol::	FN_KANEM	40 120 60	230 196 90
+SetRegionOwner::	ID_KANEM	FN_KANEM
+SetRegionOwner::	ID_DARFUR	FN_KANEM
+SetRegionOwner::	ID_HAUSA	FN_KANEM
+MakeBuilding::	ID_KANEM	Castle4
+MakeBuilding::	ID_KANEM	Spearmaker
+MakeBuilding::	ID_KANEM	Bowyer
+MakeBuilding::	ID_KANEM	Horse_breeder
+MakeBuilding::	ID_KANEM	Improved_farmland
+MakeBuilding::	ID_KANEM	Town_watch
+MakeUnit::	ID_KANEM	SaharanCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	SaharanCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	BerberCamel	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_DARFUR	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_DARFUR	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_HAUSA	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_HAUSA	DesertArchers	60	MUSLIM_CULTURE
+SetStartLeader::	FN_KANEM	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_KANEM	FN_KANEM
+AddHeir::	FN_KANEM	1	23
+AddHeir::	FN_KANEM	1	17
+AddHeir::	FN_KANEM	0	15
+AddHeir::	FN_KANEM	1	10
+
+// ---- FN_MISSISSIPPIANS (Cahokia)
+DeclareFaction::	"FN_MISSISSIPPIANS"
+SetActiveFaction::	FN_MISSISSIPPIANS	FT_MAJOR
+SetTreasury::	FN_MISSISSIPPIANS	10000	8000	6000	4000
+SetCulture::	FN_MISSISSIPPIANS	PAGAN_CULTURE
+SetReligion::	FN_MISSISSIPPIANS	REL_PAGAN
+SetBehaviour::	FN_MISSISSIPPIANS	ORTHODOX_STAGNANT
+SetFactionMusic::	FN_MISSISSIPPIANS	3
+GGConquestReward::	FN_MISSISSIPPIANS	0.5
+SetShieldImage::	FN_MISSISSIPPIANS	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_MISSISSIPPIANS	176 110 50	28 28 28
+SetRegionOwner::	ID_MISSISSIPPI	FN_MISSISSIPPIANS
+SetRegionOwner::	ID_APPALACHIA	FN_MISSISSIPPIANS
+SetRegionOwner::	ID_GREAT_LAKES	FN_MISSISSIPPIANS
+MakeBuilding::	ID_MISSISSIPPI	Castle4
+MakeBuilding::	ID_MISSISSIPPI	Spearmaker
+MakeBuilding::	ID_MISSISSIPPI	Bowyer
+MakeBuilding::	ID_MISSISSIPPI	Improved_farmland
+MakeBuilding::	ID_MISSISSIPPI	Town_watch
+MakeUnit::	ID_MISSISSIPPI	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	Archers	60	PAGAN_CULTURE
+SetStartLeader::	FN_MISSISSIPPIANS	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_MISSISSIPPI	FN_MISSISSIPPIANS
+AddHeir::	FN_MISSISSIPPIANS	1	19
+AddHeir::	FN_MISSISSIPPIANS	0	14
+AddHeir::	FN_MISSISSIPPIANS	1	11
+
+// ---- FN_KOREANS  (Goryeo, ADR-088)
+DeclareFaction::	"FN_KOREANS"
+SetActiveFaction::	FN_KOREANS	FT_MAJOR
+SetTreasury::	FN_KOREANS	10000	8000	6000	4000
+SetCulture::	FN_KOREANS	PAGAN_CULTURE
+SetReligion::	FN_KOREANS	REL_PAGAN
+SetBehaviour::	FN_KOREANS	ORTHODOX_STAGNANT
+SetFactionMusic::	FN_KOREANS	3
+GGConquestReward::	FN_KOREANS	0.5
+SetShieldImage::	FN_KOREANS	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_KOREANS	30 75 140	240 236 224
+SetRegionOwner::	ID_KOREA	FN_KOREANS
+MakeBuilding::	ID_KOREA	Castle4
+MakeBuilding::	ID_KOREA	Spearmaker
+MakeBuilding::	ID_KOREA	Bowyer
+MakeBuilding::	ID_KOREA	Horse_breeder
+MakeBuilding::	ID_KOREA	Improved_farmland
+MakeBuilding::	ID_KOREA	Town_watch
+MakeBuilding::	ID_KOREA	Shipyard
+MakeBuilding::	ID_KOREA	Port
+MakeUnit::	ID_KOREA	KoreanGuardsmen	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanGuardsmen	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	HorseArchers	40	PAGAN_CULTURE
+SetStartLeader::	FN_KOREANS	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_KOREA	FN_KOREANS
+AddHeir::	FN_KOREANS	1	21
+AddHeir::	FN_KOREANS	1	15
+AddHeir::	FN_KOREANS	0	13
+
+// ---- FN_MONGOLS  (tribu' mongole, ADR-088)
+DeclareFaction::	"FN_MONGOLS"
+SetActiveFaction::	FN_MONGOLS	FT_MAJOR
+SetTreasury::	FN_MONGOLS	10000	8000	6000	4000
+SetCulture::	FN_MONGOLS	PAGAN_CULTURE
+SetReligion::	FN_MONGOLS	REL_PAGAN
+SetBehaviour::	FN_MONGOLS	BARBARIAN_RAIDER
+SetFactionMusic::	FN_MONGOLS	3
+GGConquestReward::	FN_MONGOLS	0.5
+SetShieldImage::	FN_MONGOLS	"Cumans_lge"	"Cumans_sml"	"Cumans"	"F1024"	"F1024"
+SetFactionCol::	FN_MONGOLS	74 134 192	216 180 74
+SetRegionOwner::	ID_MONGOLIA	FN_MONGOLS
+SetRegionOwner::	ID_EAST_MONGOLIA	FN_MONGOLS
+MakeBuilding::	ID_MONGOLIA	Castle3
+MakeBuilding::	ID_MONGOLIA	Horse_breeder
+MakeBuilding::	ID_MONGOLIA	Bowyer
+MakeBuilding::	ID_MONGOLIA	Town_watch
+MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+SetStartLeader::	FN_MONGOLS	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_MONGOLIA	FN_MONGOLS
+AddHeir::	FN_MONGOLS	1	20
+AddHeir::	FN_MONGOLS	1	16
+AddHeir::	FN_MONGOLS	0	12
+
+// ---- FN_CHOLA  (impero Chola, ADR-088)
+DeclareFaction::	"FN_CHOLA"
+SetActiveFaction::	FN_CHOLA	FT_MAJOR
+SetTreasury::	FN_CHOLA	10000	8000	6000	4000
+SetCulture::	FN_CHOLA	PAGAN_CULTURE
+SetReligion::	FN_CHOLA	REL_PAGAN
+SetBehaviour::	FN_CHOLA	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_CHOLA	3
+GGConquestReward::	FN_CHOLA	0.5
+SetShieldImage::	FN_CHOLA	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_CHOLA	140 28 60	232 192 96
+SetRegionOwner::	ID_CHOLA	FN_CHOLA
+SetRegionOwner::	ID_DECCAN	FN_CHOLA
+SetRegionOwner::	ID_CEYLON	FN_CHOLA
+MakeBuilding::	ID_CHOLA	Castle4
+MakeBuilding::	ID_CHOLA	Spearmaker
+MakeBuilding::	ID_CHOLA	Bowyer
+MakeBuilding::	ID_CHOLA	Horse_breeder
+MakeBuilding::	ID_CHOLA	Improved_farmland
+MakeBuilding::	ID_CHOLA	Town_watch
+MakeBuilding::	ID_CHOLA	Shipyard
+MakeBuilding::	ID_CHOLA	Port
+MakeUnit::	ID_CHOLA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	MediumCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CEYLON	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CEYLON	Archers	60	PAGAN_CULTURE
+SetStartLeader::	FN_CHOLA	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_CHOLA	FN_CHOLA
+AddHeir::	FN_CHOLA	1	24
+AddHeir::	FN_CHOLA	1	18
+AddHeir::	FN_CHOLA	0	15
+AddHeir::	FN_CHOLA	1	10
+
+// ---- FN_KHMER  (impero Khmer, ADR-088)
+DeclareFaction::	"FN_KHMER"
+SetActiveFaction::	FN_KHMER	FT_MAJOR
+SetTreasury::	FN_KHMER	10000	8000	6000	4000
+SetCulture::	FN_KHMER	PAGAN_CULTURE
+SetReligion::	FN_KHMER	REL_PAGAN
+SetBehaviour::	FN_KHMER	ORTHODOX_STAGNANT
+SetFactionMusic::	FN_KHMER	3
+GGConquestReward::	FN_KHMER	0.5
+SetShieldImage::	FN_KHMER	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_KHMER	106 58 138	224 184 80
+SetRegionOwner::	ID_KHMER	FN_KHMER
+MakeBuilding::	ID_KHMER	Castle4
+MakeBuilding::	ID_KHMER	Spearmaker
+MakeBuilding::	ID_KHMER	Bowyer
+MakeBuilding::	ID_KHMER	Horse_breeder
+MakeBuilding::	ID_KHMER	Improved_farmland
+MakeBuilding::	ID_KHMER	Town_watch
+MakeUnit::	ID_KHMER	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	MediumCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Peasants	100	PAGAN_CULTURE
+SetStartLeader::	FN_KHMER	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_KHMER	FN_KHMER
+AddHeir::	FN_KHMER	1	22
+AddHeir::	FN_KHMER	0	16
+AddHeir::	FN_KHMER	1	12
+

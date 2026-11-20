@@ -1,0 +1,22 @@
+Name/Identifier	Unit type	Cost	Support Cost	Production time																																															
+DATA START																																																			
+Spearmen	INFANTRY	100	3	1			100												ALL_PERIODS									ALL_FACTIONS																							
+Archers	INFANTRY	150	5	2			60									"{BOWYER}"			ALL_PERIODS									ALL_FACTIONS																							
+Knights	CAVALRY	400	10	3			40									"{ {CASTLE3}, {CASTLE2, BOWYER2} }"			"HIGH, LATE"									ALL_FACTIONS																							
+Galley	SHIP	500	20	2			1									"{SHIPYARD1}"			ALL_PERIODS									ALL_FACTIONS					"1,5,5,3,50,Galley sunk"																		
+Nizari	INFANTRY	200	4	1			60												ALL_PERIODS									FN_BETA																							
+Alpine	INFANTRY	120	3	1			80												ALL_PERIODS									ALL_FACTIONS	ID_BASSA																						
+GreekHoplite	INFANTRY	130	4	1			90												ALL_PERIODS									ALL_FACTIONS				ORTHODOX																			
+Emissary	EMISSARY	0	0	1			1												ALL_PERIODS									ALL_FACTIONS																							
+Princess	PRINCESS	0	0	1			1												ALL_PERIODS									ALL_FACTIONS																							
+Camel	MOUNT	1	1	1			1												ALL_PERIODS									ALL_FACTIONS																							
+NoFactions	INFANTRY	90	2	1			50												ALL_PERIODS																																
+Spy	SPY	100	0	1			1									"{CASTLE}"			ALL_PERIODS									ALL_FACTIONS																							
+Assassin	ASSASSIN	200	0	1			1									"{CASTLE2}"			ALL_PERIODS									ALL_FACTIONS																							
+Bishop	BISHOP	100	0	1			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Priest	PRIEST	100	0	1			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Cardinal	CARDINAL	150	0	1			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Inquisitor	INQUISITOR	200	0	2			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Mullah	MULLAH	100	0	1			1									"{MOSQUE}"			ALL_PERIODS									FN_BETA																							
+Crusade	CRUSADE	1000	0	4			1									"{CASTLE}"			ALL_PERIODS									ALL_FACTIONS																							
+Jihad	JIHAD	500	0	2			1									"{CASTLE}"			ALL_PERIODS									FN_BETA																							

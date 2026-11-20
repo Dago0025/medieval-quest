@@ -1,0 +1,54 @@
+// File dei nomi di prova per i test delle dinastie (stesso formato di MTW_XL_EARLY_HEROES.TXT).
+// FN_ALPHA ha 3 nomi reali della lista 1 (Henry, Edward, Richard); FN_BETA ne ha 2.
+// Il re famoso di ALPHA e' "Edward I" (nome di indice 1, numerale 1), come il capo iniziale di dynasty_startpos.txt.
+
+SET_FORENAMES::	FN_ALPHA	1	3
+SET_SURNAMES::	FN_ALPHA	1
+SET_PRINCESS::	FN_ALPHA	1
+SET_FORENAMES::	FN_BETA	1	2
+SET_SURNAMES::	FN_BETA	1
+SET_PRINCESS::	FN_BETA	1
+
+FAMOUS_KINGS::	FN_ALPHA	2
+//name	no.	c	d	p	a	portrait			vnv
+1,		1,	3,	7,	3,	4,	-1,			tyrant2
+2,		1,	6,	2,	2,	5,	-1,			fearsome1
+
+FAMOUS_HEROES::	FN_ALPHA	4
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Antico",		"Eroe",					990,	3,	3,	3,	3,	5,	no_v,					GENERAL,	ID_ALTA,			-1
+"Guy",			"Senzaterra",				1003,	4,	5,	4,	3,	6,	attacker2,				GENERAL,	ID_BASSA,			-1
+"Odo",			"Vescovo",				1004,	2,	3,	3,	4,	5,	no_v,					BISHOP,		ID_LIMBO,			-1
+"Tardo",		"Eroe",					1050,	5,	4,	4,	2,	7,	no_v,					GENERAL,	ID_LIMBO,			-1
+
+FAMOUS_HEROES::	FN_BETA	1
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Yusuf",		"Ali",					1010,	5,	4,	4,	2,	6,	moneygrabber2,				GENERAL,	ID_LIMBO,			-1
+
+// 1:	english_forenames
+ADD_FORENAMES::
+"Henry"
+"Edward"
+"Richard"
+"John"
+"William"
+"Alfred"
+"Edmund"
+"Stephen"
+
+// 1:	english_surnames
+ADD_SURNAMES::
+"Plantagenet"
+"Howard"
+"Cromwell"
+"Pole"
+"Talbot"
+"Stanley"
+
+// 1:	princesses
+ADD_PRINCESS::
+"Herleva"
+"Arlette"
+"Matilda"
+"Maud"
+"Adelaide"

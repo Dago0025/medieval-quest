@@ -1,0 +1,4375 @@
+// This file allows you to edit the names of people who appears in the game
+// Anything after a // is ignored and treated as comment
+// The following keywords are available, most of the fields are easy enough to work out
+// This section will explains some of the finer points of the system
+
+// FAMOUS_KINGS::
+// This sets up special kings for a faction, the number list how many kings are listed
+// The name number correspond to the name number in the forenames list, counting from 0
+// For example, a English king with name number 4 will give you "William"
+// The portrait number correspond to a picture name in its folder, a -1 will give you a random picture
+// The vnv entry must match an existing vnv in the game, the see changes.txt and event.txt for the correct text label
+
+// FAMOUS_HEROES::
+// This sets up heroes for a faction, the number shows how many entries are to be read in
+// The forename and surname must correspond to an entry in names.txt or changes.txt
+// Date is the year that this character will start to become available
+// Possible types are: GENERAL, SPY, ASSASSIN, EMISSARY, BISHOP, CARDINAL, INQUISITOR,
+// GRAND_INQUISITOR, PRIEST, ORTHODOX_BISHOP, MULLAH, ULAMA, and PRINCESS
+// Region list the place where the character will appear from, ID_LIMBO means everywhere is possible
+// So if you train any assassin as the English after 1190 anywhere in your kingdom, you will get Guy of Gisbourne
+
+// ADD_FORENAMES::
+// ADD_SURNAMES::
+// ADD_PRINCESS::
+// This create a list of names to be used in the game, each entry must appear in names.txt or changes.txt
+// You can have as many lists, and as many entries in each list as you want
+// The order of creation is important. The first list you create is numbered as 1, the second 2 and so on
+// The three types of names lists are ordered separately
+
+// SET_FORENAMES::
+// This associate a forenames list with a faction, the first number is the list number
+// The second number marks the first n names as royal. While anyone can become king, 
+// it is those first n names that a king will use to name their new born sons
+// If that number is more than the number of forenames, the it will be set to the actual number of names in the list
+
+// SET_SURNAMES::
+// Associate a surnames list with a faction
+
+// SET_PRINCESS::
+// Associate a princess names list with a faction
+
+// SET_REBELS::
+// Rebels don't have kings or princess, the name of a rebel is dependent on where he came from
+// The format is region	forename surname
+
+SET_FORENAMES::	FN_ALMOHAD	8	8
+SET_FORENAMES::	FN_BYZANTINE	6	8
+SET_FORENAMES::	FN_DANISH	2	1
+SET_FORENAMES::	FN_EGYPTIAN	9	8
+SET_FORENAMES::	FN_ENGLISH	1	8
+SET_FORENAMES::	FN_FRENCH	5	5
+SET_FORENAMES::	FN_GERMAN_HRE	16	8
+SET_FORENAMES::	FN_ITALIAN	3	8
+SET_FORENAMES::	FN_POLISH	11	8
+SET_FORENAMES::	FN_RUSSIAN	12	8
+SET_FORENAMES::	FN_SPANISH	7	8
+SET_FORENAMES::	FN_TURKISH	10	8
+SET_FORENAMES::	FN_ARAGONESE	7	8
+SET_FORENAMES::	FN_BOHEMIAN	32	8
+SET_FORENAMES::	FN_GOLDEN_HORDE	21	8
+SET_FORENAMES::	FN_HUNGARIAN	17	8
+SET_FORENAMES::	FN_NOVGOROD	31	8
+SET_FORENAMES::	FN_PAPIST	13	8
+SET_FORENAMES::	FN_SICILIAN	4	8
+SET_FORENAMES::	FN_PORTUGAL	30	8
+SET_FORENAMES::	FN_CUMANS	21	8
+SET_FORENAMES::	FN_IRISH	33	8
+SET_FORENAMES::	FN_NORWEGIAN	26	8
+SET_FORENAMES::	FN_LITHUANIANS	24	8
+SET_FORENAMES::	FN_VOLGA	21	8
+SET_FORENAMES::	FN_SCOTS	14	8
+SET_FORENAMES::	FN_SERBS	29	8
+SET_FORENAMES::	FN_ARMENIANS	25	8
+SET_FORENAMES::	FN_SWEDISH	26	8
+SET_FORENAMES::	FN_GENOANS	27	8
+		
+SET_SURNAMES::	FN_ALMOHAD	7
+SET_SURNAMES::	FN_BYZANTINE	5
+SET_SURNAMES::	FN_DANISH	2
+SET_SURNAMES::	FN_EGYPTIAN	8
+SET_SURNAMES::	FN_ENGLISH	1
+SET_SURNAMES::	FN_FRENCH	4
+SET_SURNAMES::	FN_GERMAN_HRE	12
+SET_SURNAMES::	FN_ITALIAN	3
+SET_SURNAMES::	FN_POLISH	10
+SET_SURNAMES::	FN_RUSSIAN	11
+SET_SURNAMES::	FN_SPANISH	6
+SET_SURNAMES::	FN_TURKISH	9
+SET_SURNAMES::	FN_ARAGONESE	6
+SET_SURNAMES::	FN_BOHEMIAN	20
+SET_SURNAMES::	FN_HUNGARIAN	15
+SET_SURNAMES::	FN_NOVGOROD	11
+SET_SURNAMES::	FN_PAPIST	3
+SET_SURNAMES::	FN_SICILIAN	3
+SET_SURNAMES::	FN_PORTUGAL	19
+SET_SURNAMES::	FN_CUMANS	16
+SET_SURNAMES::	FN_IRISH	24
+SET_SURNAMES::	FN_NORWEGIAN	2
+SET_SURNAMES::	FN_LITHUANIANS	21
+SET_SURNAMES::	FN_VOLGA	16
+SET_SURNAMES::	FN_SCOTS	13
+SET_SURNAMES::	FN_SERBS	23
+SET_SURNAMES::	FN_ARMENIANS	18
+SET_SURNAMES::	FN_SWEDISH	22
+SET_SURNAMES::	FN_GENOANS	3
+		
+SET_PRINCESS::	FN_BYZANTINE	3
+SET_PRINCESS::	FN_DANISH	8
+SET_PRINCESS::	FN_ENGLISH	2
+SET_PRINCESS::	FN_FRENCH	1
+SET_PRINCESS::	FN_GERMAN_HRE	4
+SET_PRINCESS::	FN_ITALIAN	5
+SET_PRINCESS::	FN_POLISH	7
+SET_PRINCESS::	FN_RUSSIAN	9
+SET_PRINCESS::	FN_SPANISH	6
+SET_PRINCESS::	FN_ARAGONESE	6
+SET_PRINCESS::	FN_BOHEMIAN	4
+SET_PRINCESS::	FN_GOLDEN_HORDE	11
+SET_PRINCESS::	FN_HUNGARIAN	10
+SET_PRINCESS::	FN_NOVGOROD	9
+SET_PRINCESS::	FN_PAPIST	5
+SET_PRINCESS::	FN_SICILIAN	5
+SET_PRINCESS::	FN_PORTUGAL	12
+SET_PRINCESS::	FN_CUMANS	11
+SET_PRINCESS::	FN_IRISH	17
+SET_PRINCESS::	FN_NORWEGIAN	8
+SET_PRINCESS::	FN_LITHUANIANS	14
+SET_PRINCESS::	FN_VOLGA	11
+SET_PRINCESS::	FN_SCOTS	5
+SET_PRINCESS::	FN_SERBS	16
+SET_PRINCESS::	FN_ARMENIANS	13
+SET_PRINCESS::	FN_SWEDISH	15
+SET_PRINCESS::	FN_GENOANS	5
+		
+SET_REBELS::	ID_SCOTLAND			14	13
+SET_REBELS::	ID_NORTH_UMBRIA			1	1
+SET_REBELS::	ID_MERCIA			1	1
+SET_REBELS::	ID_WALES			15	14
+SET_REBELS::	ID_WESSEX			1	1
+SET_REBELS::	ID_IRELAND			33	24
+SET_REBELS::	ID_NORWAY			2 	2
+SET_REBELS::	ID_SWEDEN			26 	22
+SET_REBELS:: 	ID_DENMARK			2	2 
+SET_REBELS::	ID_FINLAND			2	2
+SET_REBELS::	ID_NOVGOROD			12	11
+SET_REBELS::	ID_MUSCOVY			12	11
+SET_REBELS::	ID_LIVONIA			24	21
+SET_REBELS::	ID_SMOLENSK			12	11
+SET_REBELS::	ID_RYAZAN			12	11
+SET_REBELS::	ID_CHERNIGOV			12	11
+SET_REBELS::	ID_LITHUANIA			24	21
+SET_REBELS::	ID_PEREYASLAVL			12	11
+SET_REBELS::	ID_VOLGA_BULGARIA		18	16
+SET_REBELS::	ID_KHAZAR			18	16
+SET_REBELS::	ID_KIEV				12	11
+SET_REBELS::	ID_CRIMEA			18	16
+SET_REBELS::	ID_VOLHYNIA			11	10
+SET_REBELS::	ID_PRUSSIA			16	12
+SET_REBELS::	ID_MOLDAVIA			17	15
+SET_REBELS::	ID_CARPATHIA			17	15
+SET_REBELS::	ID_WALLACHIA			17	15
+SET_REBELS::	ID_BULGARIA			18	16
+SET_REBELS::	ID_HUNGARY			17	15
+SET_REBELS::	ID_POLAND			11	10
+SET_REBELS::	ID_POMERANIA			16	12
+SET_REBELS::	ID_BRANDENBURG			16	12
+SET_REBELS::	ID_SILESIA			16	12
+SET_REBELS::	ID_BOHEMIA			11	10
+SET_REBELS::	ID_SAXONY			16	12
+SET_REBELS::	ID_FREISLAND			19	17
+SET_REBELS::	ID_FLANDERS			20	17
+SET_REBELS::	ID_NORMANDY			5	4
+SET_REBELS::	ID_BRITTANY			5	4
+SET_REBELS::	ID_FRANCONIA			16	12
+SET_REBELS::	ID_LORRAINE			5	4
+SET_REBELS::	ID_CHAMPAGNE			5	4
+SET_REBELS::	ID_ILE_DE_FRANCE		5	4
+SET_REBELS::	ID_ANJOU			5	4
+SET_REBELS::	ID_AQUITAINE			5	4
+SET_REBELS::	ID_TOULOUSE			5	4
+SET_REBELS::	ID_PROVENCE			5	4
+SET_REBELS::	ID_BURGUNDY			5	4
+SET_REBELS::	ID_SWABIA			16	12
+SET_REBELS::	ID_BAVARIA			16	12
+SET_REBELS::	ID_SWITZERLAND			16	12
+SET_REBELS::	ID_TYROLIA			16	12
+SET_REBELS::	ID_AUSTRIA			16	12
+SET_REBELS::	ID_CROATIA			6	5
+SET_REBELS::	ID_SERBIA			6	5
+SET_REBELS::	ID_GREECE			6	5
+SET_REBELS::	ID_CONSTANTINOPLE		6	5
+SET_REBELS::	ID_CRETE			6	5
+SET_REBELS::	ID_RHODES			6	5
+SET_REBELS::	ID_GEORGIA			18	16
+SET_REBELS::	ID_ARMENIA			18	16
+SET_REBELS::	ID_RUM				6	5
+SET_REBELS::	ID_LESSER_ARMENIA		6	5
+SET_REBELS::	ID_EDESSA			10	9
+SET_REBELS::	ID_TREBIZOND			6	5
+SET_REBELS::	ID_NICAEA			6	5
+SET_REBELS::	ID_ANATOLIA			6	5
+SET_REBELS::	ID_CYPRUS			6	5
+SET_REBELS::	ID_ANTIOCH			10	9
+SET_REBELS::	ID_SYRIA			10	9
+SET_REBELS::	ID_TRIPOLI			10	9
+SET_REBELS::	ID_JERUSALEM			9	8
+SET_REBELS::	ID_ARABIA			9	8
+SET_REBELS::	ID_SINAI			9	8
+SET_REBELS::	ID_EGYPT			9	8
+SET_REBELS::	ID_LIBYA			9	8
+SET_REBELS::	ID_AFRICA			10	9
+SET_REBELS::	ID_TUNISIA			8	7
+SET_REBELS::	ID_ALGERIA			8	7
+SET_REBELS::	ID_MOROCCO			8	7
+SET_REBELS::	ID_GRANADA			8	7
+SET_REBELS::	ID_CORDOBA			8	7
+SET_REBELS::	ID_PORTUGAL			7	6
+SET_REBELS::	ID_LEON				7	6
+SET_REBELS::	ID_CASTILE			7	6
+SET_REBELS::	ID_VALENCIA			7	6
+SET_REBELS::	ID_NAVARRE			7	6
+SET_REBELS::	ID_ARAGON			7	6
+SET_REBELS::	ID_CORSICA			3	3
+SET_REBELS::	ID_SARDINIA			3	3
+SET_REBELS::	ID_GENOA			3	3
+SET_REBELS::	ID_MILAN			3	3
+SET_REBELS::	ID_VENICE			3	3
+SET_REBELS::	ID_TUSCANY			3	3
+SET_REBELS::	ID_PAPAL_STATES			3	3
+SET_REBELS::	ID_ROME				3	3
+SET_REBELS::	ID_NAPLES			3	3
+SET_REBELS::	ID_MALTA			3	3
+SET_REBELS::	ID_SICILY			3	3
+SET_REBELS::	ID_SCANIA			2	2
+SET_REBELS::	ID_ESTONIA			24	21
+SET_REBELS::	ID_ALGARVE			8	7
+SET_REBELS::	ID_LEVIDIA			18	16
+SET_REBELS::	ID_LESSER_KHAZAR		18	16
+SET_REBELS::	ID_GREAT_POLAND			11	10
+SET_REBELS::	ID_MURCIA			8	7
+SET_REBELS::	ID_SAVOY			5	4
+
+FAMOUS_KINGS::	FN_ALMOHAD	9
+//name	no.	c	d	p	a	portrait			vnv
+1,		1,	3,	3,	5,	5,	-1,			defender3
+2,		1,	3,	3,	5,	5,	-1,			educated1
+4,		1,	3,	3,	5,	5,	-1,			educated1
+1,		1,	2,	6,	5,	5,	-1,			educated1
+5,		1,	2,	6,	5,	5,	-1,			educated1
+6,		1,	2,	6,	5,	5,	-1,			educated1
+3,		1,	2,	6,	5,	5,	-1,			educated1
+7,		1,	2,	6,	5,	5,	-1,			educated1
+0,		1,	2,	6,	5,	5,	-1,			educated1
+
+FAMOUS_KINGS::	FN_BYZANTINE	8
+//name	no.	c	d	p	a	portrait			vnv
+6,		1,	4,	5,	4,	5,	-1,			defender2
+0,		1,	2,	5,	3,	4,	-1,			lawman1
+7,		1,	3,	5,	3,	3,	-1,			tyrant1
+6,		5,	3,	3,	3,	3,	-1,			secretkiller3
+5,		11,	3,	3,	3,	3,	-1,			tyrant1
+3,		3,	2,	6,	4,	5,	-1,			builderking3
+7,		2,	1,	3,	5,	1,	-1,			pious2
+3,		6,	3,	4,	4,	5,	-1,			educated1
+
+FAMOUS_KINGS::	FN_DANISH	8
+//name	no.	c	d	p	a	portrait			vnv
+0,		1,	7,	9,	9,	9,	-1,			fearsome1
+0,		2,	7,	9,	9,	9,	-1,			fearsome1
+0,		3,	7,	9,	9,	9,	-1,			defender3
+0,		4,	7,	9,	9,	9,	-1,			attacker2
+0,		5,	7,	9,	9,	9,	-1,			mightywarrior2
+0,		6,	7,	9,	9,	9,	-1,			attacker2
+0,		7,	7,	9,	9,	9,	-1,			attacker2
+0,		8,	7,	9,	9,	9,	-1,			mightywarrior2
+
+FAMOUS_KINGS::	FN_EGYPTIAN	5
+//name	no.	c	d	p	a	portrait			vnv
+3,		1,	2,	4,	5,	1,	-1,			builderking1
+3,		1,	3,	2,	4,	4,	-1,			educated1
+5,		1,	6,	4,	5,	5,	0,			mightywarrior2
+1,		1,	3,	2,	4,	4,	-1,			educated1
+0,		1,	1,	1,	4,	2,	-1,			educated1
+
+FAMOUS_KINGS::	FN_ENGLISH	12
+//name	no.	c	d	p	a	portrait			vnv
+4,		2,	3,	7,	3,	4,	-1,			tyrant2
+0,		1,	2,	4,	4,	7,	-1,			lawman1
+7,		1,	3,	4,	3,	4,	-1,			vaccilator1
+0,		2,	3,	6,	4,	6,	-1,			anger1
+2,		1,	5,	6,	5,	2,	-1,			mightywarrior3
+3,		1,	2,	5,	2,	2,	-1,			secret_tyrant3
+0,		3,	2,	4,	4,	3,	-1,			charity1
+1,		1,	2,	3,	3,	4,	-1,			lawman1
+1,		2,	1,	2,	3,	3,	-1,			secret_lust1
+1,		3,	3,	4,	3,	3,	-1,			mightywarrior1
+0,		4,	3,	5,	3,	5,	-1,			secret_tyrant3
+0,		5,	5,	4,	4,	5,	-1,			fearsome3
+
+FAMOUS_KINGS::	FN_FRENCH	12
+//name	no.	c	d	p	a	portrait			vnv
+3,		1,	2,	3,	2,	7,	-1,			secret_avarice3
+0,		6,	3,	6,	3,	4,	-1,			gluttony2
+3,		2,	4,	6,	4,	5,	-1,			zealot3
+0,		8,	4,	4,	3,	3,	-1,			attacker3
+0,		9,	3,	3,	7,	3,	-1,			pious4
+3,		3,	2,	6,	5,	5,	-1,			pride
+3,		5,	2,	3,	3,	6,	-1,			attacker1
+3,		6,	2,	4,	3,	2,	-1,			attacker2
+1,		4,	2,	3,	3,	5,	-1,			attacker1
+4,		2,	3,	3,	4,	4,	-1,			bad_attacker1
+1,		5,	4,	4,	5,	5,	-1,			educated2
+1,		6,	1,	1,	3,	2,	-1,			vaccilator2
+
+FAMOUS_KINGS::	FN_GERMAN_HRE	8
+//name	no.	c	d	p	a	portrait			vnv
+2,		4,	5,	4,	4,	3,	-1,			lawman1
+2,		3,	3,	4,	4,	3,	-1,			zealot1
+7,		1,	4,	7,	3,	4,	-1,			lawman2
+1,		6,	4,	5,	3,	4,	-1,			rebel_killer3
+0,		4,	2,	3,	3,	2,	-1,			vaccilator1
+7,		2,	2,	6,	3,	5,	-1,			educated1
+3,		4,	3,	4,	3,	3,	-1,			lawman1
+7,		3,	3,	2,	3,	4,	-1,			vaccilator1
+
+FAMOUS_KINGS::	FN_ITALIAN	3
+//name	no.	c	d	p	a	portrait			vnv
+0,		2,	1,	3,	4,	5,	-1,			traderking1
+7,		1,	4,	5,	4,	5,	-1,			secret_anger3
+2,		6,	1,	3,	4,	5,	-1,			traderking1
+
+FAMOUS_KINGS::	FN_POLISH	4
+//name	no.	c	d	p	a	portrait			vnv
+3,		1,	2,	4,	4,	3,	-1,			mightywarrior2
+1,		3,	2,	4,	4,	3,	-1,			attacker3
+5,		1,	2,	4,	4,	3,	-1,			builder3
+3,		4,	2,	2,	4,	3,	-1,			mightywarrior3
+
+FAMOUS_KINGS::	FN_RUSSIAN	4
+//name	no.	c	d	p	a	portrait			vnv
+2,		1,	3,	5,	4,	2,	-1,			attacker1
+7,		1,	5,	5,	5,	3,	-1,			mightywarrior3
+2,		3,	3,	5,	4,	2,	-1,			defender2
+3,		3,	3,	5,	4,	2,	-1,			attacker2
+
+FAMOUS_KINGS::	FN_SPANISH	12
+//name	no.	c	d	p	a	portrait			vnv
+1,		6,	3,	5,	5,	5,	-1,			defender3
+2,		3,	2,	4,	5,	3,	-1,			secret_lust2
+1,		8,	3,	5,	5,	5,	-1,			defender2
+3,		3,	2,	4,	8,	3,	-1,			pious2
+1,		10,	4,	5,	5,	5,	-1,			educated2
+2,		4,	3,	6,	5,	4,	-1,			secret_anger3
+1,		11,	3,	4,	5,	4,	-1,			lawman2
+6,		1,	3,	5,	3,	3,	-1,			prisoner_killer4
+7,		2,	3,	5,	5,	3,	-1,			attacker1
+7,		3,	1,	4,	5,	5,	-1,			zealot2
+7,		4,	1,	2,	5,	2,	-1,			vaccilator2
+0,		1,	2,	5,	5,	5,	-1,			attacker1
+
+FAMOUS_KINGS::	FN_TURKISH	7
+//name	no.	c	d	p	a	portrait			vnv
+6,		1,	2,	5,	4,	3,	-1,			educated1
+7,		1,	2,	5,	4,	3,	-1,			educated1
+0,		1,	3,	5,	4,	3,	-1,			attacker1
+2,		1,	3,	5,	4,	3,	-1,			lawman1
+4,		1,	3,	5,	4,	3,	-1,			lawman1
+2,		2,	3,	5,	4,	3,	-1,			attacker2
+4,		2,	3,	5,	4,	3,	-1,			fearsome2
+
+FAMOUS_KINGS::	FN_ARAGONESE	10
+//name	no.	c	d	p	a	portrait			vnv
+2,		1,	3,	5,	5,	3,	-1,			mightywarrior1
+6,		1,	3,	4,	5,	3,	-1,			attacker1
+1,		1,	4,	4,	6,	4,	-1,			mightywarrior2
+6,		2,	4,	4,	6,	4,	-1,			zealot2
+6,		3,	2,	3,	5,	3,	-1,			fearsome1
+1,		4,	2,	2,	5,	3,	-1,			merciful2
+6,		4,	4,	6,	5,	5,	-1,			secret_tyrant3
+5,		1,	2,	4,	5,	3,	-1,			sieger1
+1,		5,	2,	4,	6,	4,	-1,			educated2
+5,		2,	3,	5,	5,	5,	-1,			pride
+
+FAMOUS_KINGS::	FN_BOHEMIAN	2
+//name	no.	c	d	p	a	portrait			vnv
+0,		2,	3,	4,	3,	5,	-1,			fearsome1
+1,		3,	3,	3,	4,	5,	-1,			charity2
+
+FAMOUS_KINGS::	FN_GOLDEN_HORDE	1
+//name	no.	c	d	p	a	portrait			vnv
+0,		2,	2,	5,	5,	1,	0,			attacker3
+
+FAMOUS_KINGS::	FN_HUNGARIAN	12
+//name	no.	c	d	p	a	portrait			vnv
+1,		1,	4,	4,	5,	4,	-1,			pious4
+3,		1,	3,	5,	5,	5,	-1,			educated2
+2,		2,	2,	6,	3,	3,	-1,			secret_prisoner_killer4
+5,		3,	1,	5,	3,	1,	-1,			defender1
+2,		3,	3,	4,	4,	6,	-1,			farmerking2
+0,		2,	4,	3,	4,	2,	-1,			zealot1
+2,		4,	3,	3,	4,	4,	-1,			defender1
+5,		5,	3,	5,	1,	1,	-1,			secret_envy2
+1,		4,	3,	5,	2,	1,	-1,			anger2
+0,		3,	3,	4,	4,	3,	-1,			educated2
+6,		1,	4,	3,	3,	4,	-1,			lawman1
+7,		1,	5,	3,	5,	3,	-1,			mightywarrior2
+
+FAMOUS_KINGS::	FN_NOVGOROD	7
+//name	no.	c	d	p	a	portrait			vnv
+2,		1,	3,	5,	4,	2,	-1,			defender1
+0,		2,	3,	5,	4,	2,	-1,			attacker2
+5,		2,	3,	5,	4,	2,	-1,			mightywarrior2
+2,		2,	3,	5,	4,	2,	-1,			pious4
+3,		1,	3,	5,	4,	2,	-1,			fearsome1
+6,		1,	3,	5,	4,	2,	-1,			tyrant1
+2,		3,	3,	5,	4,	2,	-1,			attacker3
+
+FAMOUS_KINGS::	FN_PAPIST	12
+//name	no.	c	d	p	a	portrait			vnv
+4,		2,	0,	5,	5,	4,	-1,			zealot2
+5,		2,	2,	4,	4,	4,	-1,			pious2
+5,		3,	1,	3,	4,	5,	-1,			merciful1	
+7,		9,	0,	4,	3,	4,	-1,			secret_pride2	
+5,		4,	1,	3,	4,	4,	-1,			charity2	
+1,		4,	1,	3,	3,	4,	-1,			zealot1	
+3,		21,	1,	3,	4,	5,	-1,			educated3	
+0,		4,	0,	4,	3,	4,	-1,			builderking2	
+6,		5,	0,	3,	3,	4,	-1,			secret_corruption1	
+3,		22,	0,	4,	3,	6,	-1,			pride	
+6,		6,	0,	3,	3,	4,	-1,			art_lover1	
+4,		6,	2,	3,	3,	4,	-1,			prisoner_killer4	
+
+FAMOUS_KINGS::	FN_SICILIAN	7
+//name	no.	c	d	p	a	portrait			vnv
+0,		1,	3,	3,	3,	5,	-1,			attacker1
+0,		2,	3,	3,	3,	4,	-1,			zealot1
+1,		1,	3,	6,	3,	4,	-1,			tyrant1
+1,		3,	4,	3,	3,	4,	-1,			against_odds_def3
+2,		1,	4,	3,	3,	4,	-1,			defender3
+2,		3,	3,	3,	3,	4,	-1,			attacker1
+3,		1,	2,	3,	3,	5,	-1,			pride
+
+FAMOUS_KINGS::	FN_PORTUGAL	3
+//name	no.	c	d	p	a	portrait			vnv
+7,		1,	3,	5,	5,	3,	-1,			attacker1
+1,		2,	3,	4,	4,	3,	-1,			pious2
+2,		1,	4,	4,	5,	4,	-1,			fearsome1
+
+FAMOUS_KINGS::	FN_CUMANS	2
+//name	no.	c	d	p	a	portrait			vnv
+2,		2,	2,	4,	4,	1,	-1,			attacker1
+1,		2,	2,	3,	4,	2,	-1,			defender1
+
+FAMOUS_KINGS::	FN_IRISH	2
+//name	no.	c	d	p	a	portrait			vnv
+0,		2,	2,	3,	2,	3,	-1,			defender1
+1,		2,	2,	4,	4,	3,	-1,			pious2
+
+FAMOUS_KINGS::	FN_NORWEGIAN	2
+//name	no.	c	d	p	a	portrait			vnv
+2,		2,	3,	3,	3,	3,	-1,			attacker1
+1,		3,	3,	4,	4,	4,	-1,			mightywarrior2
+
+FAMOUS_KINGS::	FN_LITHUANIANS	3
+//name	no.	c	d	p	a	portrait			vnv
+3,		1,	3,	3,	3,	2,	-1,			pious1
+0,		2,	4,	4,	4,	2,	-1,			defender2
+1,		2,	4,	3,	4,	3,	-1,			defender1
+
+FAMOUS_KINGS::	FN_VOLGA	2
+//name	no.	c	d	p	a	portrait			vnv
+3,		2,	2,	4,	4,	1,	-1,			tyrant1
+4,		2,	2,	3,	4,	2,	-1,			pride
+
+FAMOUS_KINGS::	FN_SCOTS	3
+//name	no.	c	d	p	a	portrait			vnv
+0,		1,	3,	3,	3,	5,	-1,			attacker1
+1,		2,	3,	3,	3,	4,	-1,			zealot1
+2,		1,	3,	6,	3,	4,	-1,			tyrant1
+
+FAMOUS_KINGS::	FN_SERBS	3
+//name	no.	c	d	p	a	portrait			vnv
+0,		1,	2,	3,	3,	5,	-1,			defender2
+1,		2,	2,	3,	2,	3,	-1,			zealot2
+1,		1,	3,	4,	3,	3,	-1,			defender1
+
+FAMOUS_KINGS::	FN_ARMENIANS	3
+//name	no.	c	d	p	a	portrait			vnv
+0,		2,	3,	2,	2,	4,	-1,			defender1
+1,		1,	3,	3,	3,	3,	-1,			attacker1
+2,		2,	4,	2,	2,	3,	-1,			defender1
+
+FAMOUS_KINGS::	FN_SWEDISH	3
+//name	no.	c	d	p	a	portrait			vnv
+0,		3,	3,	4,	4,	4,	-1,			pious2
+1,		1,	2,	2,	4,	2,	-1,			educated1
+2,		3,	2,	3,	3,	3,	-1,			lawman1
+
+FAMOUS_KINGS::	FN_GENOANS	3
+//name	no.	c	d	p	a	portrait			vnv
+4,		3,	2,	4,	4,	4,	-1,			attacker1
+3,		2,	3,	3,	3,	5,	-1,			traderking1
+5,		3,	2,	3,	4,	5,	-1,			zealot1
+
+
+
+FAMOUS_HEROES::	FN_REBEL	18																				
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"El",			"Cid",					1054,	4,	5,	4,	3,	3,	attacker2,				GENERAL,	ID_VALENCIA,			 1		//El Cid!
+"Mathilda",		"de Boulogne",				1102,	2,	3,	4,	4,	2,	bad_sieger1,				GENERAL,	ID_ANJOU,			-1		//opponent of King Stephen
+"Leon",			"Sgouros",				1180,	3,	5,	3,	5,	3,	tyrant1,				GENERAL,	ID_GREECE,			-1		//Tyrant of Naphlion
+"Llewellyn",		"ap Gruffydd",				1190,	3,	4,	3,	4,	5,	attacker1,				GENERAL,	ID_WALES,			-1		//Unified Wales in 1250s, ally of Simon de Montfort
+"Robin",		"of Locksley",				1191,	3,	1,	3,	2,	6,	merciful1,				GENERAL,	ID_MERCIA,			 4		//Robin Hood!
+"Fra",			"Dolcino",				1200,	2,	5,	6,	2,	7,	zealot4,				GENERAL,	ID_MILAN,			-1		//Leader of the Dolcinists'"crusade" against Church corruption
+"Simon",		"de Montfort the Younger",		1208,	2,	4,	2,	3,	2,	moneygrabber1,				GENERAL,	ID_MERCIA,			-1		//troublemaker, Barons' struggles against John
+"Stephan",		"Urosh Dushan",				1300,	4,	6,	3,	4,	7,	secret_paranoiac3,			GENERAL,	ID_SERBIA,			-1		//"tsar" of Serbia from 1331; conquered Balkan provinces; locked up his dad
+"Dtienne",		"Marcel",				1316,	1,	4,	3,	5,	2,	moneygrabber2,				GENERAL,	ID_ILE_DE_FRANCE,		-1		//leader of the Paris revolution 1355-58
+"Philip",		"van Artevelde",			1340,	3,	2,	2,	2,	3,	no_v,					GENERAL,	ID_FLANDERS,			-1		//English ally vs. French
+"Wat",			"Tyler",				1351,	1,	2,	4,	0,	2,	bad_attacker3,				GENERAL,	ID_WESSEX,			-1		//Leader of Peasants' Revolt 1381
+"Owain",		"Glyndwr",				1354,	3,	3,	3,	2,	4,	defender2,				GENERAL,	ID_WALES,			-1		//Welsh troublemaker! Fought Henry V
+"Iskander",		"Bey",					1405,	4,	4,	2,	4,	6,	scarred1,				GENERAL,	ID_CROATIA,			-1		//Former Turkish soldier; Albanian independence leader
+"Klaus",		"Stortebeker",				1375,	3,	4,	2,	4,	2,	brigand,				GENERAL,	ID_SAXONY,			-1		//Pirate; preyed on Hanseatic League and Denmark
+"Ivan",			"Asen",					1150,	4,	4,	4,	3,	6,	attacker1,				GENERAL,	ID_BULGARIA,			-1		//Led revolt against Byzantium, established Second Bulgarian Empire
+"Peter",		"Asen",					1151,	4,	4,	4,	3,	6,	attacker1,				GENERAL,	ID_BULGARIA,			-1		//Led revolt against Byzantium, established Second Bulgarian Empire
+"William",		"Tell",					1380,	1,	1,	4,	1,	7,	mightywarrior1,				GENERAL,	ID_SWITZERLAND,			-1		//Best guess for dates
+"Henry",		"von Malters",				1420,	3,	4,	3,	5,	6,	moneygrabber1,				GENERAL,	ID_SWITZERLAND,			-1		//mercenary general 1450 at Pillenreuth
+																									
+FAMOUS_HEROES::	FN_ALMOHAD	5																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Yusuf-ben",		"Yacub",				1150,	3,	3,	5,	4,	6,	pious1,					GENERAL,	ID_LIMBO,			-1		//built the Grand Mosque in Seville
+"Ibn",			"Mardanish",				1147,	3,	2,	5,	4,	6,	no_v,					GENERAL,	ID_LIMBO,			-1
+"Ibn",			"Al-Khatib",				1305,	3,	0,	5,	5,	7,	educated3,				EMISSARY,	ID_LIMBO,			-1		//Historian
+"Muhammad",		"ibn Yacub",				1179,	4,	3,	5,	4,	6,	bad_attacker2,				GENERAL,	ID_LIMBO,			-1		//defeated at Navas de Talosa
+"Ibn Said",		"al Magrebi",				1214,	3,	1,	5,	4,	6,	educated3,				EMISSARY,	ID_LIMBO,			-1
+																									
+FAMOUS_HEROES::	FN_BYZANTINE	6																	
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Theodosios",		"Boradiotes",				1130,	1,	1,	4,	4,	4,	no_v,					BISHOP,		ID_LIMBO,			-1		//patriarch and regent
+"Alexius",		"Branas",				1150,	4,	3,	3,	3,	5,	attacker1,				GENERAL,	ID_LIMBO,			-1		//beat the Normans in 1185; date a guess.
+"Georgius",		"Acropolites",				1203,	1,	0,	3,	4,	6,	no_v,					EMISSARY,	ID_LIMBO,			-1		//delegate to Council of Lyons
+"John",			"Beccus",				1235,	1,	2,	5,	4,	6,	pious1,					BISHOP,		ID_LIMBO,			-1		//patriarch at Council of Lyons
+"Gregory",		"Palamas",				1296,	1,	0,	7,	3,	5,	pious3,					INQUISITOR,	ID_LIMBO,			-1		//Hesychast theologian; sanctified
+"George",		"Sphrantzes",				1401,	1,	1,	3,	4,	7,	no_v,					EMISSARY,	ID_LIMBO,			-1		//governor of Patras, captured at Fall of Constantinople
+																									
+FAMOUS_HEROES::	FN_DANISH	23																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Skjalm", 		"Hvide", 				1062,	7,	9,	9,	9,	9, 	farmer1, 				GENERAL, 	ID_LIMBO, 			-1 		//Skjalm Hvide (b1062, d1113): Powerful nobleman from Zealand, founder of the Hvide clan. He stood high in the favour of royal power, being entrusted to manage the possessions of the king. Prince Knud Lavard was raised by him.
+"Asser", 		"Rig", 					1080,	7,	9,	9,	9,	9, 	pious1, 				GENERAL, 	ID_LIMBO, 			-1 		//Asser Rig (b1080, d1151): Powerful nobleman from Zealand, son of Skjalm Hvide. King Valdemar I was raised at his court together with Asser's son Absalon. He founded the monastery of Sorø, near Copenhagen.
+"Knud", 		"Lavard", 				1096,	7,	9,	9,	9,	9, 	charismatic1, 				GENERAL, 	ID_LIMBO, 			-1 		//Knud Lavard ("the Protector"; b1096, d1131): Popular prince, son of King Erik I and father of King Valdemar I. He was employed as King Niels's jarl in South Jutland. His success against the Wends (Slavs) on the south coast of the Baltic won him great popularity but also the ill will of the king and his supporters, in particular Niels's son Magnus the Strong, who killed him in 1131, causing a civil war.
+"Archbishop", 		"Eskil", 				1100, 	1, 	0, 	6, 	3, 	6, 	pious4, 				BISHOP, 	ID_LIMBO, 			-1 		//Archbishop Eskil (b ca 1100, d1181/82): A man of profound piety, in 1134 he was consecrated bishop of Roskilde and in 1137 archbishop of Lund. He favoured the introduction of monastic orders in Denmark.
+"Magnus", 		"den Stærke", 				1106,	7,	9,	9,	9,	9, 	envy1, 					GENERAL, 	ID_LIMBO, 			-1 		//Magnus den Stærke ("the Strong"; b1106, d1134): Ambitious prince, son of King Niels. He viewed his cousin Knud Lavard as a likely contender for the Danish throne and killed him in 1131. A civil war ensued, and he was killed by Knud's half-brother, King Erik II, at Fodevig (Scania, 1134).
+"Esbern", 		"Snare", 				1127,	7,	9,	9,	9,	9, 	builder1, 				GENERAL, 	ID_LIMBO, 			-1 		//Esbern Snare (b1127, d1204): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his brother Absalon. He built a castle at Kalundborg. Around this grew up the town of same name.
+"Archbishop", 		"Absalon", 				1128,	7,	9,	9,	9,	9, 	mightywarrior3, 			GENERAL, 	ID_DENMARK, 			-1 		//Archbishop Absalon (b1128, d1201): Danish hero, equally great as churchman, statesman and general. He was bishop of Roskilde from 1158, archbishop of Lund from 1178, and chief counsellor of Valdemar I and Knud VI. He waged war against the Wends (Slavs) on the south coast of the Baltic, and in 1184 won a great victory over a Pomeranian fleet. In 1167 he was in charge of fortifying Copenhagen.
+"Sune", 		"Ebbesen", 				1130,	7,	9,	9,	9,	9, 	loyal1, 				GENERAL, 	ID_LIMBO, 			-1 		//Sune Ebbesen (b?, d1186): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his cousins Absalon and Esbern Snare.
+"Sven", 		"Aggesen", 				1140,	7,	9,	9,	9,	9, 	educated2, 				GENERAL, 	ID_LIMBO, 			-1 		//Sven Aggesen (b1140/50, d?): Danish historian, housecarl in service of both King Valdemar I and King Knud VI. He was on many war-expeditions, of which he mentions details in his work "Brevis Historia Regnum Daciae".
+"Saxo", 		"Grammaticus", 				1150, 	1, 	0, 	4, 	4, 	6, 	educated3, 				EMISSARY, 	ID_LIMBO, 			-1 		//Saxo Grammaticus (b ca 1150, d ca 1220): Danish historian. He wrote the chronicle "Gesta Danorum" by order of Archbishop Absalon.
+"Anders", 		"Sunesen", 				1167, 	1, 	0, 	6, 	4, 	6, 	educated2, 				BISHOP, 	ID_LIMBO, 			-1 		//Anders Sunesen (b1167, d1228): Archbishop of Lund from 1201 to 1223. He studied in Paris and also probably in Oxford and Bologna. He transmited his knowledges to the Danish clergy.
+"Snorri",		"Sturluson",				1178,	7,	9,	9,	9,	9,	educated1,				GENERAL,	ID_LIMBO,			-1		//Icelander, but worth including?
+"Jakob", 		"Erlandsen", 				1210, 	1, 	1, 	6, 	3, 	2, 	pious1, 				BISHOP, 	ID_LIMBO, 			-1 		//Jakob Erlandsen (b?, d1274): Archbishop of Lund. Troublesome priest, he maintained a power struggle with King Erik IV.
+"Marsk", 		"Stig", 				1230,	7,	9,	9,	9,	9, 	attacker2, 				GENERAL, 	ID_LIMBO, 			-1 		//Stig Andersen, alias Marsk Stig (b?, d1293): Outstanding Danish magnate, he held the office of "Marsk" (leading general and "minister of war"). At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind King Erik V's death. He then settled at the island of Hjelm from which he ravaged the Danish coasts. He died on his island without having obtained rehabilitation from the Danish court.
+"Rane", 		"Jonsen", 				1240,	7,	9,	9,	9,	9, 	secret_paranoiac3, 			GENERAL, 	ID_LIMBO, 			-1 		//Rane Jonsen (b?, d1294): Nobleman from Zealand. He was "Kammermester" (Chamberlain) of King Erik V. At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind the king's death. He fled to Norway, but was captured and executed at Roskilde in 1294.
+"Ingrid",		"Elovsdottir",				1240,	1,	0,	6,	2,	4,	pious3,					INQUISITOR,	ID_LIMBO,			-1		//St Ingrid of Sweden! d1282
+"Grev", 		"Jakob", 				1250,	7,	9,	9,	9,	9, 	envy1, 					GENERAL, 	ID_LIMBO, 			-1 		//Count Jakob of Halland (b?, d1310): Grev ("Count") of Halland (Scania) from 1283. He was hostile toward the growing power of King Erik V, and was one of the noblemen outlawed at the regicide November 1286. He struggled together with the group of outlaw noblemen and since 1305 took refuge at the Norwegian court.
+"Jens", 		"Grand", 				1260, 	1, 	1, 	6, 	3, 	2, 	pious1, 				BISHOP, 	ID_LIMBO, 			-1 		//Jens Grand (b?, d1327): Archbishop of Lund. Troublesome priest, he maintained a power struggle with King Erik VI.
+"Grev", 		"Gerhard", 				1292,	7,	9,	9,	9,	9, 	tyrant3, 				GENERAL, 	ID_LIMBO, 			-1 		//Count Gerhard III of Holstein (b1292, d1340): Energetic, brutal and deeply religious German magnate, who provided financial support to Danish kings and became a main factor of Danish politics. In 1326 he dethroned King Christoffer II and placed his minor nephew, Valdemar III, on the throne. He acted as regent of Denmark until Christoffer II was restored in 1329. After Christoffer's death he was the real ruler of most of the dissolved country being the lord of both Jutland and Fyn (1332-40).
+"Johan", 		"den Milde", 				1300,	7,	9,	9,	9,	9, 	avarice1, 				GENERAL, 	ID_LIMBO, 			-1 		//Johan den Milde ("the Mild"; b?, d1359): German magnate who funded Danish kings. He played a main role in the restoration of King Christoffer II (1329) but later on had to accept Count Gerhard III as his superior. From 1332 to 1340 he was the lord of eastern Denmark, but he lost Scania which submitted to the Swedish king. After the collapse of Holstein rule he at first cooperated with King Valdemar IV but during the next years he was deprived from his Danish possessions.
+"Niels", 		"Ebbesen", 				1310,	7,	9,	9,	9,	9, 	mightywarrior2, 			GENERAL, 	ID_DENMARK, 			-1 		//Niels Ebbesen (b?, d1340): Danish hero, known for his killing of Count Gerhard III. He turned against the Holstein occupants and when Count Gerhard campaigned in Jutland 1340 he supported the Danish guerrilla. The night of April 1st he and some of his warriors got into the Count's headquarter in Randers, killed him and managed to escape. During the following rebellion he played a main role in the resistance but he was killed the same year during a fight against the Germans.
+"Bo",			"Jonsson Grip",				1315,	7,	9,	9,	9,	9,	lawman1,				GENERAL,	ID_LIMBO,			-1		//politician, financier, Swedish noble and power-broker
+"Henning", 		"Podebusk", 				1320,	7,	9,	9,	9,	9, 	smarttalker1, 				GENERAL, 	ID_LIMBO, 			-1 		//Henning Podebusk (b?, d1388): Danish statesman from the island of Rügen. He was taken into Danish service in 1350 and became the most important and loyal official of King Valdemar IV. In 1365 he was appointed "Drost" (prime minister) and he soon showed his ability during the war 1367-70 against the Hanseatic League and its allies. After Valdemar's death in 1375 he protected the royal interest and was the political mentor of Queen Margrete I.
+
+
+																									
+FAMOUS_HEROES::FN_EGYPTIAN	7																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Al-Afdal",		"Shahinshah",				1055,	5,	5,	4,	3,	6,	fearsome2,				GENERAL,	ID_LIMBO,			-1		//Egyptian general d1121, very tough
+"Najamuddin",		"Ilghazi of Aleppo",			1080,	3,	5,	4,	4,	6,	fearsome2,				GENERAL,	ID_LIMBO,			-1		//victor of the Battle of the Field of Blood, 1119, ruled Aleppo
+"Nur",			"al-Din",				1119,	5,	5,	4,	4,	5,	attacker2,				GENERAL,	ID_LIMBO,			-1		//ruler of Aleppo and strategist
+"Asad",			"al-Din Shirkoh",			1149,	4,	3,	4,	2,	7,	mightywarrior1,				GENERAL,	ID_LIMBO,			-1		//Saladin's uncle and co-general
+"Sharaf",		"ad Din",				1175,	2,	3,	4,	6,	4,	no_v,					GENERAL,	ID_LIMBO,			-1		//Governor of Damascus, 1201-18
+"Fakhr",		"ad-Din",				1219,	4,	3,	4,	2,	4,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Egyptian general d1249
+"Ibn Taymiya",		"al-Harrani",				1263,	1,	0,	6,	2,	6,	zealot2,				INQUISITOR,	ID_LIMBO,			-1		//Theologian
+																									
+FAMOUS_HEROES::	FN_ENGLISH	20																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Odon",			"de Bayeux",				1036,	2,	3,	3,	4,	5,	no_v,					BISHOP,		ID_LIMBO,			-1		//William's half-brother; commissioned Bayeux tapestry
+"Tancred",		"de Normandie",				1078,	3,	3,	3,	3,	3,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//1st Crusade, ruled Tiberias, Antioch and Edessa
+"Odo",			"Borleng",				1080,	3,	4,	3,	2,	5,	captured1,				GENERAL,	ID_LIMBO,			-1		//Captain of Henry I's Household troops 1120s
+"Strongbow",		"FitzGilbert",				1115,	5,	6,	4,	5,	5,	moneygrabber2,				GENERAL,	ID_LIMBO,			-1		//Richard FitzGilbert of Clare, English adventurer, cause of Henry II's Irish mission
+"Thomas",		"Beckett",				1118,	1,	1,	6,	3,	2,	pious1,					BISHOP,		ID_LIMBO,			-1		//"Will no one rid me of this troublesome priest?"
+"John",			"Mercadier",				1145,	2,	7,	3,	4,	6,	prisoner_killer2,			GENERAL,	ID_LIMBO,			-1		//Mercenary under Richard I; flayed the crossbowman who killed Big Dick.
+"William",		"Marshall",				1147,	4,	3,	3,	5,	6,	mightywarrior2,				GENERAL,	ID_LIMBO,			-1		//Regent 1216-8, top general
+"Blondel",		"de Nesle",				1155,	1,	0,	4,	3,	7,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Richard I's troubadour and organiser of his ransom
+"Simon",		"de Montfort the Elder",		1160,	3,	5,	2,	4,	3,	rebel_killer3,				GENERAL,	ID_LIMBO,			-1		//Leader of the Albigensian Crusade
+"Roger",		"Mortimer",				1287,	3,	6,	2,	4,	1,	secret_prisoner_killer4,		GENERAL,	ID_LIMBO,			-1		//The man with red-hot poker up the King's bum!
+"Hugh",			"Calveley",				1322,	1,	2,	3,	2,	5,	siege_defender1,			GENERAL,	ID_LIMBO,			-1		//knight-adventurer in Spain and France
+"John",			"Hawkwood",				1323,	3,	3,	3,	4,	3,	no_v,					GENERAL,	ID_LIMBO,			-1		//Leader of the mercenary White Company 
+"Jean",			"de Grailly",				1330,	4,	3,	3,	2,	3,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Gascon mercenary, Constable of Aquitaine
+"Robert",		"Knollys",				1331,	3,	5,	3,	4,	5,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Master of the Black Prince's Household, captured du Guesclin
+"Geoffrey",		"Chaucer",				1340,	1,	0,	3,	2,	5,	educated2,				EMISSARY,	ID_LIMBO,			-1		//Courtier under Edward III
+"Thomas",		"Camoys",				1360,	3,	3,	4,	3,	4,	attacker1,				GENERAL,	ID_LIMBO,			-1		//commander, left wing @ Agincourt
+"Henry",		"Percy",				1364,	3,	4,	3,	3,	2,	mightywarrior2,				GENERAL,	ID_LIMBO,			-1		//"Hotspur"; Percys were"Kings of the North"; fought against Henry V
+"John",			"Talbot",				1387,	3,	5,	3,	6,	4,	against_odds_atk1,			GENERAL,	ID_LIMBO,			-1		//earl of Shrewsbury, 1422; ruthless raider
+"Guy",			"of Gisbourne",				1190,	3,	2,	2,	2,	1,	killer1,				ASSASSIN,	ID_LIMBO,			-1		//Sheriff of Nottingham's sidekick!
+"Richard",		"Neville",				1418,	3,	4,	3,	6,	4,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//Warwick the Kingmaker!
+																									
+FAMOUS_HEROES::	FN_FRENCH	20																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Hugh",			"of Cluny",				1024,	1,	3,	7,	3,	6,	zealot2,				INQUISITOR,	ID_LIMBO,			-1		//Cluniac monks' leader.
+"Baldwin",		"of Boulogne",				1058,	3,	3,	5,	4,	5,	no_v,					GENERAL,	ID_LIMBO,			-1		//2nd King of Jerusalem
+"Godfrey",		"of Bouillon",				1060,	3,	4,	5,	4,	5,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//1st Latin King of Jerusalem
+"Bernard",		"of Clairvaux",				1090,	1,	5,	5,	5,	4,	zealot3,				INQUISITOR,	ID_LIMBO,			-1		//moving force behind Templars and Crusades
+"Hugh",			"de Payns",				1095,	3,	4,	5,	4,	4,	mightywarrior1,				GENERAL,	ID_LIMBO,			-1		//Founder of the Knights Templar
+"William",		"of Ypres",				1100,	3,	4,	3,	5,	4,	no_v,					GENERAL,	ID_LIMBO,			-1		//Mercenary and Lieutenant of King Stephen of England; died 1162
+"Gerard",		"de Ridefort",				1145,	2,	4,	4,	4,	4,	bad_attacker2,				GENERAL,	ID_LIMBO,			-1		//Grand Master, Templars, blamed for Hattin defeat; died at Acre.
+"ChrQtien",		"de Troyes",				1150,	1,	0,	4,	3,	6,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Poet, troubadour
+"Jean",			"Cadoc",				1175,	3,	5,	2,	3,	5,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//Mercenary captain for Philip II Augustus @ Bouvines 1214
+"Jacques",		"de Molay",				1244,	2,	3,	3,	5,	3,	secret_heretic1,			GENERAL,	ID_LIMBO,			-1		//Last master of the Knights Templar
+"Geoffrey",		"de Charny",				1305,	2,	2,	3,	2,	4,	mightywarrior3,				GENERAL,	ID_LIMBO,			-1		//'paragon' of chivalry
+"Bertrand",		"du Guesclin",				1320,	3,	3,	3,	3,	6,	captured1,				GENERAL,	ID_LIMBO,			-1		//Constable of France, 1370
+"Jean",			"Froissart",				1333,	1,	0,	4,	0,	5,	educated2,				BISHOP,		ID_LIMBO,			-1		//Chronicler, travelled widely; was a priest rather than a bishop.
+"Jean",			"le Maingre Boucicault",		1345,	3,	4,	3,	3,	4,	bad_attacker1,				GENERAL,	ID_LIMBO,			-1		//Marshal of France, 1361-1422
+"Bertrand",		"de la Salle",				1350,	4,	5,	3,	5,	3,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//leader of Breton Company
+"Charles",		"d'Albret",				1370,	2,	2,	3,	3,	6,	mightywarrior1,				GENERAL,	ID_LIMBO,			-1		//Constable of France at Agincourt 1415
+"Arthur",		"de Richmont",				1375,	3,	3,	3,	3,	6,	bad_defender1,				GENERAL,	ID_LIMBO,			-1		//Constable of France, dismissed 1427
+"Jean",			"Bureau",				1400,	1,	0,	3,	0,	5,	sieger3,				GENERAL,	ID_LIMBO,			-1		//artillery master and 100YW character
+"Jean",			"de Bueil",				1410,	3,	4,	3,	3,	4,	assaulter1,				GENERAL,	ID_LIMBO,			-1		//Marshal, military theorist and artillery pioneer
+"Joan",			"of Arc",				1412,	6,	0,	7,	0,	6,	pious4,					GENERAL,	ID_LIMBO,			 3		//Maid of Orleans
+																									
+FAMOUS_HEROES::	FN_GERMAN_HRE	15																	
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Henry",		"the Lion",				1129,	3,	4,	3,	4,	4,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//of Saxony, father of Otto IV
+"Hartmann",		"von Aue",				1155,	2,	2,	4,	4,	6,	no_v,					GENERAL,	ID_LIMBO,			-1		//knight-adventurer, crusader, poet
+"Herman",		"von Salza",				1160,	3,	5,	6,	4,	6,	secret_pride2,				GENERAL,	ID_LIMBO,			-1		//Grand Master Teutonic Knights
+"Albertus",		"Magnus",				1200,	1,	3,	5,	3,	4,	pious2,					BISHOP,		ID_LIMBO,			-1		//Dominican scholar
+"Conrad",		"of Marburg",				1201,	1,	7,	5,	1,	4,	rebel_killer3,				INQUISITOR,	ID_LIMBO,			-1		//murdered 1233
+"John",			"of Bohemia",				1310,	2,	2,	3,	1,	4,	scarred3,				GENERAL,	ID_LIMBO,			-1		//blind when fighting at Crecy!
+"Albert",		"Sterz",				1320,	2,	3,	2,	2,	3,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//Company of the Star leader
+"Hannekin",		"Bongarten",				1330,	2,	3,	2,	2,	3,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//mercenary general
+"Werner",		"von Lrslingen",			1331,	3,	7,	0,	1,	1,	butcher,				GENERAL,	ID_LIMBO,			-1		//"Enemy of God, Enemy of Piety, Enemy of Pity"
+"Jan",			"Zizka",				1360,	4,	3,	5,	2,	3,	scarred2,				GENERAL,	ID_LIMBO,			-1		//Hussite general at end of career; one-eyed, then blind but still a winner!
+"Walther",		"von Vogelweide",			1170,	0,	1,	3,	2,	5,	educated2,				GENERAL,	ID_LIMBO,			-1		//well known chivalric poet. No notable skill in combat, thoughŠ
+"Albrecht",		"der Bar",				1100,	3,	2,	2,	3,	3,	no_v,					GENERAL,	ID_LIMBO,			-1		//Founder of Brandenburg and Askanier dynasty
+"Heinrich",		"von Morungen",				1150,	2,	2,	4,	2,	5,	bookworm1,				EMISSARY,	ID_LIMBO,			-1		//Knight in service of Bishop of Meissen; notable Poet
+"Wolfram",		"von Eschenbach",			1171,	0,	1,	3,	2,	5,	educated2,				EMISSARY,	ID_LIMBO,			-1		//Poet, promotor of chivalric ideals
+"Winrich",		"von Kniprode",				1311,	2,	3,	5,	5,	4,	chivalrous1,				GENERAL,	ID_LIMBO,			-1		//Teutonic Grandmaster 1370-
+																									
+FAMOUS_HEROES::	FN_ITALIAN	15																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Bohemond",		"de Tankerville",			1050,	4,	4,	2,	1,	2,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//Italo-Norman Crusader, Prince of Antioch
+"Boniface",		"of Montferrat",			1160,	3,	4,	2,	4,	3,	assaulter1,				GENERAL,	ID_LIMBO,			-1		//commander, 4th Crusade, King of Thessalonika, died 1207
+"Giovanni",		"de Plano Carpini",			1180,	1,	0,	5,	4,	6,	educated1,				EMISSARY,	ID_LIMBO,			-1		//Ambassador, traveller; reached Batu's Mongol court
+"Francesco",		"d'Assisi",				1182,	1,	0,	7,	1,	4,	pious4,					INQUISITOR,	ID_LIMBO,			-1		//St Francis!
+"Alighieri",		"Dante",				1265,	1,	0,	4,	3,	5,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Writer, father of Italian literature
+"Catruccio",		"Castracane",				1282,	3,	3,	3,	4,	1,	secret_tyrant3,				GENERAL,	ID_LIMBO,			-1		//Condottiere and ruler of Lucca
+"Bartolomeo",		"Colleoni",				1400,	3,	5,	3,	4,	4,	no_v,					GENERAL,	ID_LIMBO,			-1		//Captain-General of Venice
+"Francesco",		"Petrach",				1180,	1,	0,	4,	3,	6,	educated1,				EMISSARY,	ID_LIMBO,			-1		//poet, ambassador
+"Hannekin",		"Bongarten",				1330,	2,	3,	2,	2,	3,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//mercenary general
+"Werner",		"von Urslingen",			1330,	3,	7,	0,	1,	1,	killer3,				GENERAL,	ID_LIMBO,			-1		//"Enemy of God, Enemy of Piety, Enemy of Pity"
+"Jacopo",		"dal Verme",				1350,	4,	4,	3,	4,	5,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//Diplomat, wise, respected and fierce
+"Braccio",		"da Montone",				1368,	4,	3,	1,	3,	1,	man_of_reason1,				GENERAL,	ID_LIMBO,			-1		//Fought for the Pope and then later against him. Created new war tactics.
+"Muzio",		"Attendolo",				1369,	4,	5,	2,	4,	4,	assaulter1,				GENERAL,	ID_LIMBO,			-1		//Peasant Farmer who gained his fortune as a mercernary
+"Francesco",		"da Carmagnola",			1380,	4,	3,	2,	1,	1,	defender1,				GENERAL,	ID_LIMBO,			-1		//Good Strategist who worked for Milan and Venice. Was sentenced to death for betrayal.
+"Marco",		"Polo",					1254,	3,	0,	3,	5,	4,	educated1,				EMISSARY,	ID_LIMBO,			-1		//Venitian merchant. 21 years at the court of Kublai Khan as diplomat.
+
+FAMOUS_HEROES::	FN_GENOANS	5																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Ambrogio",		"Visconti",				1334,	3,	4,	2,	4,	3,	moneygrabber1,				GENERAL,	ID_LIMBO,			-1		//mercenary general
+"Alberigo",		"da Barbiano",				1340,	4,	4,	3,	4,	3,	attacker2,				GENERAL,	ID_LIMBO,			-1		//Great Constable of Naples
+"Francesco",		"Sforza",				1401,	3,	5,	3,	5,	5,	no_v,					GENERAL,	ID_LIMBO,			-1		//Duke of Milan
+"Ezzelino",		"da Romano",				1194,	4,	5,	2,	3,	5,	killer1,				GENERAL,	ID_LIMBO,			-1		//Cruel, good strategist
+"Lodrisio",		"Visconti",				1280,	3,	5,	2,	2,	1,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//Founder of the first mercenary army in Italy, cruel, betrayed his own cousin Galeazzo
+
+																									
+FAMOUS_HEROES::	FN_RUSSIAN	2																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Peter",		"Petrovich",				1258,	1,	2,	6,	2,	5,	zealot1,				BISHOP,		ID_LIMBO,			-1		//1st Metropolitan of Moscow
+"Bartolomei",		"Kirillovich",				1314,	1,	0,	5,	4,	7,	pious1,					BISHOP,		ID_LIMBO,			-1		//rejected Patriarchy of Moscow, healed schisms
+																								
+FAMOUS_HEROES::	FN_POLISH	1																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Zbigniew",		"Oleshnicki",				1389,	1,	0,	5,	3,	7,	pious1,					BISHOP,		ID_LIMBO,			-1		//Cardinal, privy counsellor, statesman
+																									
+FAMOUS_HEROES::	FN_SPANISH	16																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Domingo",		"de GuzmNn",				1170,	1,	3,	7,	4,	5,	secret_prisoner_killer4,		INQUISITOR,	ID_LIMBO,			-1		//founded Dominicans
+"TomNs",		"de Torquemada",			1420,	1,	7,	5,	4,	7,	prisoner_killer3,			INQUISITOR,	ID_LIMBO,			-1		//Nobody expects the Spanish Inquisition!
+"Blvaro",		"de Luna",				1400,	1,	0,	4,	6,	7,	vaccilator1,				GENERAL,	ID_LIMBO,			-1		//Constable of Castille and favourite of Juan II
+"Frenando",		"Martinez",				1340,	2,	5,	6,	3,	6,	no_v,					INQUISITOR,	ID_LIMBO,			-1		//Dominican anti-Semite and prize git.
+"Raimundo",		"DZaz Bermejo",				1125,	1,	0,	6,	5,	6,	educated3,				BISHOP,		ID_LIMBO,			-1		//Scholar and Arabic translator
+"Diego",		"Gelmirez",				1059,	1,	1,	6,	7,	7,	no_v,					CARDINAL,	ID_LIMBO,			-1		//Archbishop of Santiago
+"Rodrigo",		"Jimenez de Rada",			1169,	2,	6,	5,	4,	4,	no_v,					BISHOP,		ID_LIMBO,			-1		//Bishop & Historian
+"Gonzalo",		"de Berceo",				1180,	2,	0,	6,	4,	5,	no_v,					BISHOP,		ID_LIMBO,			-1		//Deacon & Castillian poet
+"Ramon",		"de Bonifaz",				1196,	2,	6,	3,	5,	6,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Naval officer at conquest of Seville
+"Alfonso",		"de Guzman",				1260,	1,	2,	4,	5,	9,	defender2,				GENERAL,	ID_LIMBO,			-1		//Knight in charge of defense of Tarifa
+"Juan",			"Ruiz",					1282,	3,	0,	3,	3,	4,	educated2,				EMISSARY,	ID_LIMBO,			-1		//Wrote "El Libro de Buen Amor"
+"Infante",		"Juan Manuel",				1283,	2,	3,	4,	3,	2,	bookworm3,				GENERAL,	ID_LIMBO,			-1		//Took part in battles against the Muslims but withdrew to devote himself to literature.
+"Ruy",			"Gonzalez de Clavijo",			1350,	4,	2,	4,	6,	7,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Chamberlain in Castile. Sent as an ambassador to Timur Lang to stop the Turkish advance.
+"Pedro",		"de Mendoza",				1428,	3,	4,	3,	7,	6,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Cardinal and Chancellor of Castile. Very powerful with Catholic Kings.
+"Jorge",		"Manrique",				1440,	3,	3,	4,	4,	8,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Fought in support of Isabel in the Castilian civil war. Famous poet.
+"Alonso",		"de Espina",				1441,	3,	5,	5,	7,	1,	secret_prisoner_killer4,		INQUISITOR,	ID_LIMBO,			-1		//Friar and Rector of the University of Salamanca. Anti-Semite.
+																									
+FAMOUS_HEROES::	FN_TURKISH	5																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Hasan-e",		"Sabbah",				1060,	3,	3,	6,	3,	3,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Nazari leader, could be rebel based on Turkish/Iraq border
+"Imad",			"al-Din Zengi",				1100,	2,	3,	4,	5,	6,	unbribable1,				GENERAL,	ID_LIMBO,			-1		//atabeg of Musul 1127 on
+"Qara",			"Timurtash",				1101,	3,	4,	5,	3,	7,	attacker1,				GENERAL,	ID_LIMBO,			-1		//very much a best guess about this bloke!
+"Qutb",			"al-Din Aibak",				1150,	3,	3,	6,	5,	6,	pious2,					GENERAL,	ID_LIMBO,			-1		//"Pole Star of the Faith"; Turkish viceroy in India; needn't have ended up there
+"Gazi",			"Evrenos",				1350,	2,	3,	5,	3,	7,	no_v,					GENERAL,	ID_LIMBO,			-1		//very much a best guess about this bloke!
+																									
+FAMOUS_HEROES::	FN_ARAGONESE	8																	
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Roger",		"de Lauria",				1250,	3,	4,	4,	4,	7,	assaulter1,				GENERAL,	ID_LIMBO,			-1		//admiral, developed Aragonese marines; d1305
+"Raimundo",		"de Penafort",				1180,	3,	3,	6,	2,	4,	pious3,					INQUISITOR,	ID_LIMBO,			-1		//In charge of the Court of the Inquisition in Aragon. Very pious.
+"Raimundo",		"Lulio",				1235,	3,	1,	4,	4,	4,	bookworm2,				BISHOP,		ID_LIMBO,			-1		//Majorcan Franciscan philosopher-poet. Considered a visionary and adventurer.
+"Arnaldo",		"de Vilanova",				1238,	3,	0,	3,	3,	3,	no_v,					BISHOP,		ID_LIMBO,			-1		//Physician & Theologian from Valencia, ideas were controversial in his day.
+"Vincente",		"Ferrer",				1325,	2,	3,	5,	4,	5,	no_v,					INQUISITOR,	ID_LIMBO,			-1		//Theologian and preacher from Valencia. Travelled with flagellants to convert Jews and Muslims.
+"Enrique",		"de Villena",				1384,	3,	3,	1,	2,	3,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Alchemist and writer, controversial character, accused of witchcraft.
+"Ausias",		"March",				1397,	3,	2,	2,	2,	5,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Catalonian poet and Knight serving the King Alfonso V
+"Pedro",		"de Arbues",				1435,	4,	1,	5,	2,	5,	no_v,					INQUISITOR,	ID_LIMBO,			-1		//General inquisitor of Aragon from 1480, not cruel but eventually murdered.
+																																																		
+FAMOUS_HEROES::	FN_HUNGARIAN	22																	
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Prince", 		"Almos", 				1070, 	3, 	5, 	3, 	2, 	1, 	captured2, 				GENERAL, 	ID_LIMBO, 			-1 		//Hungarian prince, he was "Herceg" (duke) of Slavonia (eastern Croatia) and Nitria (northern-west Hungary). After King László I's death, he and his brother Kálmán were competing for the throne, and finally Kálmán won. He organised plots against King Kálmán, but in 1115 he was blinded and imprisoned. His son, Béla II, became king of Hungary.
+"Mihaly", 		"Milvanyi", 				1190, 	4, 	3, 	4, 	1, 	6, 	mightywarrior1, 			GENERAL, 	ID_LIMBO, 			-1 		//Military commander of King András II from 1225. He performed several heroic deeds against the Mongol agressors in 1241. King Béla IV rewarded him for his braveness.
+"Palatin", 		"Denes", 				1200, 	3, 	3, 	6, 	3, 	8, 	courageous1, 				GENERAL, 	ID_LIMBO, 			-1 		//He was "Nádorispán" (palatin, chief minister) during the Mongol invasion (1241-2). In March 1241, he defended the Carpathian passes but the Mongols destroyed his troops. He survived the battle, and fought at the Battle of Mohi (April 1241). Dénes put on King Béla IV's clothes and rode against the Mongols at the head of the bodyguard. The king managed to slip through, but his brave Palatin died that day.
+"Jakab", 		"Csesznegi", 				1220, 	3, 	2, 	3, 	2, 	6, 	builder1, 				GENERAL, 	ID_LIMBO, 			-1 		//Military commander of King Béla IV. He was "Ispán" (bailiff) in the north-west of Hungary (modern Slovakia). He constructed some castles.
+"Pal", 			"Subics", 				1245, 	4, 	2, 	4, 	4, 	5, 	numerate1, 				GENERAL, 	ID_LIMBO, 			-1 		//Member of the Croatian clan Subics, he was "Ban" (governor) of Croatia between 1272-1312. He asserted control over large parts of Dalmatia, Slavonia and Bosnia. He minted his own money, and he supported King Károly I in the fight for the Hungarian throne (1301-8).
+"Amada", 		"Aba", 					1250, 	3, 	2, 	3, 	3, 	5, 	loyal1, 				GENERAL, 	ID_LIMBO, 			-1 		//Member of the Aba clan, governor of northern-east Hungary. He was "Nádorispán" (palatin, chief minister) from 1293. From 1304 till his death he was Károly I's supporter. His power extended over several counties. In 1311 he was murdered in the course of a siege.
+"Mate", 		"Csak", 				1260, 	3, 	5, 	1, 	4, 	1, 	defender2, 				GENERAL, 	ID_LIMBO, 			-1 		//Very rich and influential magnate, member of the Csák clan. He was "Nádorispán" (palatin, chief minister) and "Tárnok" (royal treasurer). He turned against King András III and against the pretender to the Hungarian throne, Vencel of Bohemia. In 1308 he accepted Károly I as king, but in 1311 he rebelled, and so he was excommunicated and declared disloyal. However, the king hadn't success against him. His power expanded over 14 counties in the north-west of Hungary (modern Slovakia), which was called Mátyusföld.
+"Laszlo", 		"Kan", 					1270, 	4, 	4, 	1, 	2, 	5, 	merciful1, 				GENERAL, 	ID_LIMBO, 			-1 		//Powerful Transylvanian voivode between 1297-1315. In 1307 he captured the pretender to the Hungarian throne, Ottó of Bavaria, and kept the Holy Crown with himself, so he was excommunicated. After a short time, he liberated Ottó, who returned to Bavaria. He gave the Holy Crown back in 1310. Till his death in 1315 he didn't turn against King Károly I.
+"Demeter", 		"Nekcsei", 				1290, 	2, 	1, 	5, 	5, 	7, 	numerate3, 				GENERAL, 	ID_LIMBO, 			-1 		//Member of the Aba clan, he was the "Tárnok" (royal reasurer) of Károly I between 1315-38. The king's successful economic policy was attributed to him. He founded a monastery, and he ordered the beautiful codex known as "Demeter Nekcsei's Bible".
+"Miklos", 		"Toldi", 				1320, 	4, 	4, 	5, 	2, 	6, 	captured1, 				GENERAL, 	ID_LIMBO, 			-1 		//Hungarian hero, he was King Lajos I's knight and had an adventurous life. He served as "Ispán" (bailiff) and captain in several towns. Between 1363-4 he led the army sent by Lajos I to help Pope Urban V in Italy. He became a mercenary soldier there. In 1365 he was captured, then he returned to Hungary. His adventures were preserved by folk traditions as "Toldi legend".
+"Benedek", 		"Himfi", 				1325, 	3, 	1, 	5, 	5, 	7, 	smarttalker1, 				GENERAL, 	ID_LIMBO, 			-1 		//Court knight from 1347, he became King Lajos I's favourite man. He spend the majority of his life on the battlefields of his King's campaigns (in 1376 he led an army against Venice) and performed diplomatic duties (for example, at the Papal court of Avignon). He was the "Ispán" (bailiff) of strategically important counties from 1352 to 1380. He must have been a pious and a literate man.
+"Miklos", 		"Garai", 				1360, 	3, 	4, 	4, 	3, 	7, 	loyal3, 				GENERAL,	ID_LIMBO, 			-1 		//He was one of the saviours of King Zsigmond's life at the battle of Nicopolis (1396). Zsigmond appointed him to the post of "Nádorispán" (palatin, chief minister) in 1402. He was one of the main Hungarian supporters of Zsigmond, who later became Holy Roman Emperor.
+"Herman", 		"Cillei", 				1365, 	3, 	3, 	5, 	3, 	6, 	zealot2, 				GENERAL, 	ID_LIMBO, 			-1 		//Count of Cilli, "Ban" (governor) of Croatia and Slavonia. In 1396 he, a soldier in King Zsigmond's crusade against the Ottomans, saved Zsigmond's life at the battle of Nicopolis. In 1408, his daughter married Zsigmond, who later became Holy Roman Emperor.
+"Lorinc", 		"Tar", 					1370, 	2, 	1, 	6, 	3, 	6, 	pious2, 				GENERAL, 	ID_LIMBO, 			-1 		//Member of the Rátót clan, he was King Zsigmond's knight, whose life was rather adventurous. He was "Ispán" (bailiff), and he had offices at the royal court. He visited the West many times on the side of King Zsigmond. Between 1409-11 he visited Ireland. There, he visited St Patrick's purgatory, a sulphurous cave, which was considered the entrance of Hell by medieval pilgrims. His experiences and visions were recorded in the Hungarian folk tradition as "Lorinc Tar's visit to Hell".
+"Janos", 		"Hunyadi", 				1387, 	5, 	4, 	5, 	3, 	7, 	mightywarrior3, 			GENERAL, 	ID_LIMBO, 			-1 		//Hungarian hero of Vlach origin, he was Captain-General of Belgrade, Voivode of Transylvania, and regent of Hungary between 1444-56. He began life as a professional mercenary soldier, but he showed such talent that ascended to high commands. In 1442 he defeated an Ottoman army in Transylvania. Between 1443-4 he undertook offensive campaigns in the Balkans, but was defeated by the Ottomans in Varna. His major achievement came in 1456, when he so heavily routed an Ottoman army which was besieging Belgrade. His son, Mátyás Corvinus, became King of Hungary in 1458.
+"Mihaly", 		"Szilagyi", 				1400, 	3, 	3, 	5, 	3, 	7, 	defender2, 				GENERAL, 	ID_LIMBO, 			-1 		//Brother-in-law of János Hunyadi, he was in charge of the Belgrade's fortress while Hunyadi proceeded to form a relief army to break the Ottoman siege (1456). In 1458 he organised the small nobles to proclaimed Hunyadi's son, Mátyás Corvinus, as Hungarian king.
+"Paulus", 		"Hungarus", 				1195, 	1, 	3, 	7, 	4, 	5, 	no_v, 					INQUISITOR, 	ID_LIMBO, 			-1 		//Dominican friar, he settled down the Dominican order in Hungary. He tried to convert the Cumans, but in 1241 he died as a martyr during the Mongol invasion.
+"Archbishop", 		"Lodomer", 				1240, 	1, 	1, 	6, 	7, 	5, 	no_v, 					BISHOP, 	ID_LIMBO, 			-1 		//Archbishop of Esztergom between 1278-98. Educated man, he objected to King László IV's government measures. He supported King András III on the throne and renovated the political system.
+"Simon", 		"Kezai", 				1255, 	1, 	1, 	4, 	7, 	8, 	no_v, 					EMISSARY, 	ID_LIMBO, 			-1 		//King László IV's loyal court priest. He wrote the historical work, "Gesta Hungarorum". He studied in Italy, and visited France, Germany and Sicily as a member of diplomatic delegations.
+"Balint", 		"Alsani", 				1340, 	1, 	1, 	6, 	6, 	7, 	no_v, 					CARDINAL, 	ID_LIMBO, 			-1 		//Cardinal, Chancellor, Bishop of Pécs between 1374-1408. He was also a diplomat, he participated in the Turin peace treaties with Venice in 1381.
+"JNnos",		"Hunyadi",				1387,	4,	4,	4,	3,	5,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Turkish-fighter par excellence!
+"Vlad",			"Tepes",				1430,	3,	7,	2,	4,	0,	butcher,				GENERAL,	ID_LIMBO,			-1		//Christopher Lee!
+																									
+FAMOUS_HEROES::	FN_NOVGOROD	1																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Domash",		"Tverdislavich",			1200,	3,	6,	4,	3,	7,	no_v,					GENERAL,	ID_LIMBO,			-1		//should be Russian? One of Nevsky's contemporaries
+																									
+FAMOUS_HEROES::	FN_PAPIST	5																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Peter",		"of Verona",				1185,	1,	2,	6,	2,	6,	zealot3,				INQUISITOR,	ID_LIMBO,			-1		//anti-Cathar inquisitor; assassinated and martyred
+"Giles",		"of Rome",				1246,	1,	1,	5,	2,	6,	no_v,					BISHOP,		ID_LIMBO,			-1		//scholar, theologian, archbishop of Bourg
+"John",			"de Monte Corvino",			1247,	1,	1,	6,	3,	6,	no_v,					EMISSARY,	ID_LIMBO,			-1		//missionary ambassador, reached India
+"Cola",			"di Rienzo",				1313,	1,	1,	4,	1,	5,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Politician, nutter and papal spokesman
+"Gil",			"Alvarez Carillo",			1310,	4,	3,	4,	3,	7,	pious1,					GENERAL,	ID_LIMBO,			-1		//Innocent IV's enforcer, general and cardinal
+																									
+FAMOUS_HEROES::	FN_SICILIAN	5																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Roger",		"de Hauteville",			1040,	4,	5,	3,	4,	3,	attacker2,				GENERAL,	ID_LIMBO,			-1		//Norman conqueror of Sicily
+"George",		"of Antioch",				1116,	3,	1,	3,	5,	7,	attacker2,				GENERAL,	ID_LIMBO,			-1		//Sicilian general who conquered Tunisia
+"Cosmas",		"of Mahdia",				1120,	3,	1,	3,	3,	6,	no_v,					BISHOP,		ID_LIMBO,			-1		//Bishop, prime catholic missionary to conquered Tunisia. Catholic Bishop.
+"Margarit",		"of Brindisi",				1150,	5,	4,	1,	2,	6,	courageous2,				GENERAL,	ID_LIMBO,			-1		//Prime Sicilian naval general who warred against the Byzantine empire and Saladin
+"Roger",		"de Flor",				1208,	3,	7,	1,	4,	2,	moneygrabber2,				GENERAL,	ID_LIMBO,			-1		//Templar, and all-round mercenary thug
+
+FAMOUS_HEROES::	FN_PORTUGAL	3																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Goncalo",		"da Maia",				1075,	4,	7,	3,	1,	7,	mightywarrior2,				GENERAL,	ID_LIMBO,			-1		//Nobleman of Afonso I. 
+"Goncalo",		"Vaz Pereira",				1253,	4,	2,	5,	6,	6,	defender1,				GENERAL,	ID_LIMBO,			-1		//Master of the Order of Avis
+"Nuno",			"Alvares Pereira",			1360,	6,	3,	8,	6,	8,	charity2,				GENERAL,	ID_LIMBO,			-1		//Famous Portuguese hero
+
+FAMOUS_HEROES::	FN_IRISH	3																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Dermot",		"McMurrough",				1110,	4,	4,	3,	3,	3,	sieger3,				GENERAL,	ID_LIMBO,			-1		//King of Leinster 
+"Tiernan",		"ORourke",				1120,	4,	2,	5,	4,	6,	attacker2,				GENERAL,	ID_LIMBO,			-1		//King of Breifne
+"Fintan",		"McCarthy",				1220,	5,	3,	4,	2,	7,	sieger2,				GENERAL,	ID_LIMBO,			-1		//Irish hero in the 1250-1270 revolt
+
+FAMOUS_HEROES::	FN_SCOTS	2																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"William",		"Walays",				1272,	5,	4,	3,	2,	7,	fearsome3,				GENERAL,	ID_LIMBO,			-1		//Mel Gibson!
+"Black",		"Agnes Dunbar",				1310,	1,	3,	0,	0,	0,	siege_defender3,			GENERAL,	ID_LIMBO,			-1		//Bit of a troublemaker, by all accounts!
+
+FAMOUS_HEROES::	FN_ARMENIANS	4																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Korike",		"Philaretus",				1075,	2,	4,	4,	7,	4,	no_v,					GENERAL,	ID_LIMBO,			-1		//Armenian Chieftain who in theory governed large amounts of territory for the Byzantines, but in reality was answerable to no-one.
+"Vardan",		"Toros",				1130,	5,	4,	3,	4,	8,	fearsome2,				GENERAL,	ID_LIMBO,			-1		//Armenian noble who lived in hostage at the Byzantine court, then escaped and started an independence struggle for Armenian Cilicia.
+"Mar",			"Athanasius",				1130,	3,	1,	5,	2,	6,	no_v,					BISHOP,		ID_LIMBO,			-1		//Jacobite priest who led Toros into Armenia from Antioch after escaping from the Byzantines.
+"Vahram",		"of Corycus",				1188,	3,	2,	2,	6,	8,	defender1,				GENERAL,	ID_LIMBO,			-1		//Castellan of Corycus who fought the invading Turks in 1221.
+																							
+FAMOUS_HEROES::	FN_SWEDISH	7																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Folke",		"Ingevaldsson",				1100,	1,	3,	3,	2,	6,	gluttony2,				GENERAL,	ID_LIMBO,			-1		//Jarl in Sweden, Folkungadynastys founding father.
+"Jedward",		"Bonde",				1100,	3,	3,	3,	3,	7,	pious3,					GENERAL,	ID_LIMBO,			-1		//Jarl and a knight templar, crusaded against the Finns.
+"Birger",		"Brosa Bengtsson",			1161,	1,	1,	4,	1,	5,	no_v,					EMISSARY,	ID_LIMBO,			-1		//Jarl and realted to both the Swedish and Norwegian royal house which made him very influencial.
+"Birger",		"Jarl Magnusson",			1210,	4,	5,	4,	4,	6,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//Great swedish military leader.
+"Mathias",		"Kettilmundsson",			1280,	2,	3,	3,	3,	6,	defender1,				GENERAL,	ID_LIMBO,			-1		//Chancellor of Sweden and military leader.
+"Bo",			"Jonsson Grip",				1330,	3,	5,	4,	4,	3,	fearsome1,				GENERAL,	ID_LIMBO,			-1		//Jarl of Sweden and archbishop.
+"Engelbrekt",		"Engelbrektsson",			1390,	3,	5,	4,	4,	5,	attacker1,				GENERAL,	ID_LIMBO,			-1		//Lord in Dalarna, duke in Örebro county
+																									
+
+// Name list, these must match an entry in names.txt
+
+// 1:	english_forenames
+ADD_FORENAMES::
+"Henry"
+"Edward"
+"Richard"
+"John"
+"William"
+"Alfred"
+"Edmund"
+"Stephen"
+"Edward"
+"Edgar"
+"Henry"
+"Henry"
+"Henry"
+"Richard"
+"John"
+"Henry"
+"Harry"
+"George"
+"Howard"
+"Michael"
+"Anthony"
+"John"
+"Nigel"
+"Thomas"
+"Thomas"
+"Hugh"
+"Geoffrey"
+"Hubert"
+"Walter"
+"Robert"
+"Charles"
+"Charles"
+"John"
+"Henry"
+"William"
+"Ralph"
+"Jasper"
+"Richard"
+"Edward"
+"Perkin"
+"Roger"
+"Godwine"
+"Tostig"
+"Loefwine"
+"Aelfgar"
+"Morcar"
+"Robin"
+"John"
+
+// 2:	danish_forenames
+ADD_FORENAMES::
+"Darkos"
+"Harald"
+"Olaf"
+"Erik"
+"Knud"
+"Valdemar"
+"Hardeknud"
+"Christoffer"
+"Sweyn"
+"Harald"
+"Olaf"
+"Erik"
+"Knud"
+"Ulf"
+"Hardeknud"
+"Leofric"
+"Niels"
+"Magnus"
+"Thorgeir"
+"Grim"
+"Skapti"
+"Thorkel"
+"Gellir"
+"Gunnar"
+"Kolbein"
+"Sighvat"
+"Markus"
+"Ulfhedin"
+"Bergthor"
+"Haflidhi"
+"Jon"
+"Snorri"
+"Eystein"
+"Sigurd"
+"Haakon"
+"Inge"
+"Thorgils"
+"Anund"
+"Emund"
+"Stenkil"
+"Halstan"
+"Philip"
+"Ragnvald"
+"Sten"
+"Birger"
+"Burislev"
+"Toke"
+"Godfred"
+
+// 3:	venitian_forenames
+ADD_FORENAMES::
+"Vitale"
+"Orso"
+"Giovanni"
+"Lorenzo"
+"Pietro"
+"Jacopo"
+"Marino"
+"Enrico"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Alberto"
+"Bernardo"
+"Giovanni"
+"Gregorio"
+"Pietro"
+"Guido"
+"Sicco"
+"Pietro"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Bieda"
+"Gelasius"
+"Lamberto"
+"Teobaldo"
+"Gregorio"
+"Pietro"
+"Guido"
+"Gherardo"
+"Bernardo"
+"Corrado"
+"Rolando"
+"Ubaldo" 
+"Uberto"
+"Alberto"
+"Paolo"
+"Giacinto"
+"Cencio"
+"Goffredo"
+"Sinibaldo"
+"Ottobono"
+"NiccolX"
+"Guido"
+
+// 4:	sicilian_forenames
+ADD_FORENAMES::
+"Roger"
+"William"
+"Tancred"
+"Charles"
+"Robert"
+"Geoffrey"
+"Stephen"
+"Henry"
+"Edward"
+"John"
+"Hugh"
+"Hubert"
+"Ralph"
+"Otto"
+"Vitale"
+"Orso"
+"Lorenzo"
+"Jacopo"
+"Marino"
+"Enrico"
+"Sicco"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Bieda"
+"Cencius"
+"Gelasius"
+"Lamberto"
+"Teobaldo"
+"Gregorio"
+"Pietro"
+"Guido"
+"Gherardo"
+"Bernardo"
+"Corrado"
+"Rolando"
+"Ubaldo"
+"Uberto"
+"Alberto"
+"Paolo"
+"Giacinto"
+"Cencio"
+"Goffredo"
+"Sinibaldo"
+"Ottobono"
+"NiccolX"
+
+// 5:	french_forenames
+ADD_FORENAMES::
+"Louis"
+"Charles"
+"Henri"
+"Phillipe"
+"Jean"			// ONLY FIRST 5 ARE VALID KING NAMES RATHER THAN 8
+"Charles"
+"Louis"
+"Jean"
+"Charles"
+"Henri"
+"Phillippe"
+"Jean"
+"Francis"
+"Robert"
+"Guillaume"
+"Odo"
+"Lanfrank"
+"Geoffroi"
+"Baldwin"
+"Richard"
+"Fulk"
+"Stephen"
+"Thibaut"
+"Gerbert"
+"Arthur"
+"Pierre"
+"Raymond"
+"Mathieu"
+"Bernard"
+"Jaques"
+"Enguerrand"
+"Dtienne"
+"Georges"
+"Gaspard" 
+"Gaston"
+"Richard"
+"RenQ" 
+"Francis"
+"Robert"
+"Guillaume"
+"Arthur"
+"Pierre"
+"Stephen"
+"Richard"
+"Robert"
+"Lancelot"
+"Gawain"
+"Phillipe"
+
+// 6:	byzantine_forenames
+ADD_FORENAMES::
+"Manuel"
+"Romanus"
+"Michael"
+"John"
+"Nicephorus"
+"Constantine"
+"Alexius"
+"Andronicus"
+"George"
+"Stephen"
+"Isaac"
+"Romanus"
+"Nicephorus"
+"Stephen"
+"Basil"
+"Theodore"
+"Isaac"
+"Basil"
+"Romanus"
+"Nicephorus"
+"John"
+"Constantine"
+"Michael"
+"George"
+"Stephen"
+"Isaac"
+"Romanus"
+"Nicephorus"
+"Alexius"
+"Stephen"
+"Manuel"
+"Andronicus"
+"Theodore"
+"Basil"
+"Romanus"
+"Nicephorus"
+"John"
+"Constantine"
+"Michael"
+"George"
+"Stephen"
+"Isaac"
+"Romanus"
+"Nicephorus"
+"Alexius"
+"Stephen"
+"Manuel"
+"Andronicus"
+
+// 7:	spanish_forenames
+ADD_FORENAMES::
+"Felipe"
+"Alfonso"
+"Sancho"
+"Fernando"
+"GarcZa"
+"Ferdinand"
+"Pedro"
+"Enrique"
+"Felipe"
+"Alfonso"
+"Sancho"
+"Fernando"
+"GarcZa"
+"Ferdinand"
+"Pedro"
+"Enrique"
+"Ramiro"
+"Bermudo"
+"Gonzalo"
+"Raimundo"
+"Rodrigo"
+"Diego"
+"Lope"
+"Blvaro"
+"Beltran"
+"Hernando"
+"Antonio"
+"RamXn"
+"Jaime"
+"Martin"
+"Arias"
+"Ruy"
+"Reinaldos"
+"Pero"
+"MartZn"
+"Alvar"
+"Pedro"
+"Enrique"
+"Felipe"
+"Mario"
+"Ramiro"
+"Bermudo"
+"Gonzalo"
+"Raimundo"
+"Rodrigo"
+"Diego"
+"Lope"
+"Blvaro"
+
+// 8:	almohad_forenames
+ADD_FORENAMES::
+"Ismail"
+"Yusuf"
+"Ali"
+"Idris"
+"Ibrahim"
+"Muhammad"
+"Abdullah"
+"Umar"
+"Ali"
+"Yahya"
+"Tashufin"
+"Ibrahum"
+"Ishaq"
+"Abdul"
+"Yusuf"
+"Yaqub"
+"Abdallah"
+"Idris"
+"Nazar"
+"Ismail"
+"Buluggin"
+"Muhsin"
+"Abu-Said"
+"Hassan"
+"Salim"
+"Hisham"
+"Abur"
+"Abdur"
+"Muhammad"
+"Abdullah"
+"Omar"
+"Inan"
+"Bakr"
+"Badis"
+"Ma'mun"
+"Khalid"
+"Ali"
+"Sharaf"
+"Tashufin"
+"Abu Zayyan"
+"Abu Thabit"
+"Abu Sa'id"
+"Abu Malik"
+"Abu Hammu"
+"Abu Khalid"
+"Abu Sharaf"
+"Abu Badis"	
+"Abu Hatim"
+
+// 9:	egyptian_forenames
+ADD_FORENAMES::
+"Muhammad"
+"al Adil"
+"AlZ"
+"al Mustali"
+"Baybars"
+"Nasir"
+"KhalZl"
+"as Salih"
+"Ibrahim"
+"Ahmad"
+"Abu Bakr"
+"Zakariyya"
+"Umar"
+"Abbas"
+"Yaqub"
+"Dawud"
+"Hamza"
+"Abdul"
+"Knujur"
+"Kafur"
+"Ahmad"
+"Nasir"
+"Muhammad"
+"AlZ"
+"Salim"
+"Hisham"
+"Abur"
+"Abdur"
+"Muhammad"
+"Abdullah"
+"Omar"
+"Inan"
+"Bakr"
+"Badis"
+"Ma'mun"
+"Khalid"
+"Ali"
+"Sharaf"
+"Tashufin"
+"Abu Zayyan"
+"Abu Thabit"
+"Abu Sa'id"
+"Abu Malik"
+"Abu Hammu"
+"Abu Khalid"
+"Abu Sharaf"
+"Abu Badis"	
+"Abu Hatim"
+
+// 10:	turkish_forenames
+ADD_FORENAMES::
+"Osman"
+"Orhan"
+"Murad"
+"Bayezid"
+"Mehmed"
+"Selim"
+"SYleyman"
+"Aybak"
+"Qutuz"
+"Baybars"
+"Baraka"
+"Berke"
+"Salamish"
+"Suleymish"
+"Qalawun"
+"KhalZl"
+"Baydara"
+"Muhammad"
+"Kitbugha"
+"Lachin"
+"Lajin"
+"Kujuk"
+"Kuchuk"
+"Ahmad"
+"Ismail"
+"Shaban"
+"Hajji"
+"Salih"
+"Faraj"
+"Shaykh"
+"Tatar"
+"Barsbay"
+"Yusuf"
+"Chaqmaq"
+"Jaqmaq"
+"Uthman"
+"Inal"
+"Khushqadam"
+"Yalbay"
+"Timurbugha"
+"Qayit"
+"Janbulat"
+"Qansawh"
+"Malik"
+"Masud"
+"Kilij"
+"Kaikubad"
+"Kaikosru"
+
+// 11:	polish_forenames
+ADD_FORENAMES::
+"Mieszko"
+"Boleslaw"
+"Kazimierz"
+"Wladyslaw"
+"Casimir"
+"Leszek"
+"Henry"
+"Konrad"
+"Leszek"
+"Przemysl"
+"Vaclav"
+"Jadwiga"
+"Kazimierz"
+"Jan"
+"Zygmunt"
+"Svyatopolk"
+"Ryksa"
+"Stanislaus"
+"Zbigniew"
+"Przemyslaw"
+"Troiden"
+"Ziemowit"
+"Janus"
+"Stanislaus"
+"Boguslaw"
+"Sobislaw"
+"Msciwoi"
+"Swietopelk"
+"Wartislaw"
+"Ziemowit"
+"Wenceslaus"
+"Ratibor"
+"Barnim"
+"Joachim"
+"Chrosciszko"
+"Bezprym"
+"Jagielon"
+"Kasper"
+"Pawol"
+"Szymon"
+"Chwalimir"
+"Bronisad"
+"Godzimir"
+"Niebor"
+"Przebor"
+"Radoslaw"
+"Pakoslaw"
+"Niegoslaw"
+
+// 12:	russian_forenames
+ADD_FORENAMES::
+"Sviatopolk"
+"Andrei"
+"Ysevolod"
+"Yuri"
+"Yaroslav"
+"Vladimir"
+"Mikhail"
+"Chort"
+"Dmitrii"
+"Domaslav"
+"Domazhir"
+"Drozd"
+"Grechin"
+"Grigorii"
+"Guba"
+"Iosif"
+"Ivan"
+"Kisel"
+"Kozel"
+"Kuritsa"
+"Maksim"
+"Mal"
+"Mil"
+"Miloslav"
+"Miroslav"
+"Mixail"
+"Nezhek"
+"Nikita"
+"Orekh"
+"Pavel"
+"Radoslav"
+"Sbyslav"
+"Shchuka"
+"Shuba"
+"Sidor"
+"Stanimir"
+"Stepan"
+"Tvorimir"
+"Vasilii"
+"Vladimir"
+"Voislav"
+"Volchok"
+"Yaroslav"
+"Zaiats"
+"Zavid"
+"Zhiroslav"
+"Zhiznobud"
+"Zub"
+
+// 13:	papacy_forenames
+ADD_FORENAMES::
+"Nicholas"
+"Alexander"
+"Benedict"
+"John"
+"Urban"
+"Innocent"
+"Clement"
+"Gregory"		// last Pope's name
+"Teofilatto"	// copy of venitian_forenames from here on
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Alberto"
+"Bernardo"
+"Giovanni"
+"Gregorio"
+"Pietro"
+"Guido"
+"Sicco"
+"Pietro"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Bieda"
+"Gelasius"
+"Lamberto"
+"Teobaldo"
+"Gregorio"
+"Pietro"
+"Guido"
+"Gherardo"
+"Bernardo"
+"Corrado"
+"Rolando"
+"Ubaldo"
+"Uberto"
+"Alberto"
+"Paolo"
+"Giacinto"
+"Cencio"
+"Goffredo"
+"Sinibaldo"
+"Ottobono"
+"NiccolX"
+"Guido"
+
+//Minor rebel group names
+
+// 14:	scottish_forenames
+ADD_FORENAMES::
+"Malcolm"
+"Alexander"
+"Robert"
+"Bdam"
+"Aed"
+"Algune"
+"Allan"
+"Aodh"
+"Arcill"
+"Angus"
+"Brian"
+"BrXccZn"
+"Cathal"
+"CennQdig"
+"Comgell"
+"Cormac"
+"Colin"
+"DauZd"
+"Domnall"
+"Domongart"
+"Donnchadh"
+"Donald"
+"Duncan"
+"Dougall"
+"Eoin"
+"Feradac"
+"Fearghus"
+"Finguine"
+"Gille CallZne"
+"Gille Coimded"
+"Gille Petair"
+"Gille Patrick"
+"Hew"
+"James"
+"Lulach"
+"Mac Bethad"
+"Mac Dobarchon"
+"Mal-Colum"
+"MatadZn"
+"Morgunn"
+"Nectan"
+"Patrick"
+"Robert"
+"RuadrZ"
+"William"
+"William"
+"James"
+"Donald"
+"Duncan"
+"Angus"
+
+// 15:	welsh_forenames
+ADD_FORENAMES::
+"Diarmaid"
+"Madog"
+"David"
+"Einion"
+"Iorwerth"
+"Adam"
+"Ieuan"
+"Gronw"
+"Ithel"
+"Gwyn"
+"Cynwrig"
+"Cadwgan"
+"Philip"
+"Rhiryd"
+"Gruffydd"
+"Tegwared"
+"Meilyr"
+"Ednyfed"
+"Gwrgenau"
+"Llywelyn"
+"Gwion"
+"Hywel"
+"Tuder"
+"Heilyn"
+"Cynddelw"
+"Madyn"
+"Meurig"
+"Llywarch"
+"William"
+"Griffri"
+"Ednowain"
+"Moriddig"
+"Cydifor"
+"Iago"
+"Iocyn"
+"John"
+"Rhys"
+"Bleddyn"
+"Cyfnerth"
+"Maredudd"
+"Thomas"
+"Ieuaf"
+"Ifor"
+"Morfran"
+"Seisyll"
+"Deheuwynt"
+"Gwasdewi"
+"Llygad"
+"Robert"
+
+// 16:	german_forenames
+ADD_FORENAMES::
+"Otto"
+"Heinrich"
+"Conrad"
+"Ludwig"
+"Rudolf"
+"Herrmann"
+"Lothair"
+"Friedrich"
+"Andreas"
+"Arnold"
+"Rainald"
+"Tancred"
+"Philipp"
+"Adolf"
+"Leopold"
+"Ferdinand"
+"Otto"
+"Heinrich"
+"Conrad"
+"Welf"
+"Rudolf"
+"Herrmann"
+"Lothair"
+"Friedrich"
+"Andreas"
+"Arnold"
+"Rainald"
+"Tancred"
+"Philipp"
+"Adolf"
+"Leopold"
+"Ferdinand"
+"Johann"
+"Eusebius"
+"Hans"
+"Peter"
+"Albrecht"
+"Wilhelm"
+"Ludwig"
+"Karl"
+"Wenzel"
+"Ruprecht"
+"Jobst"
+"Sigismund"
+"Maximillian"
+"Gottfied"
+"Dietrich"
+"Elberhard"
+
+// 17:	hungarian_forenames
+ADD_FORENAMES::
+"Andras"
+"Laszlo"
+"Bela"
+"Kalman"
+"Geza"
+"Istvan"
+"Karoly"
+"Lajos"
+"Adorjan"
+"Ajtony"
+"Akos"
+"Almos"
+"Amade"
+"Ambrus"
+"Andras"
+"Antal"
+"Balazs"
+"Balint"
+"Bela"
+"Benedek"
+"Bertalan"
+"Boldizsar"
+"Demeter"
+"Denes"
+"Domonkos"
+"Fabian"
+"Felician"
+"Ferenc"
+"Gellert"
+"Gergely"
+"Geza"
+"Gyorgy"
+"Gyula"
+"Herman"
+"Imre"
+"Istvan"
+"Jakab"
+"Janos"
+"Kalman"
+"Karoly"
+"Kazmer"
+"Koppany"
+"Kotony"
+"Lajos"
+"Laszlo"
+"Lodomer"
+"Lorinc"
+"Lukacs"
+"Marton"
+"Mate"
+"Matyas"
+"Mihaly"
+"Miklos"
+"Otto"
+"Pal"
+"Peter"
+"Robert"
+"Salamon"
+"Samuel"
+"Sebestyen"
+"Simon"
+"Taksony"
+"Tamas"
+"Ugrin"
+"Vajk"
+"Vaszoly"
+"Vazul"
+"Vencel"
+"Zoltan"
+"Zsigmond"
+
+// 18:	khazar_forenames
+ADD_FORENAMES::
+"Tarkhan"	// means commander or general
+
+// 19:	fresian_forenames
+ADD_FORENAMES::
+"Aitet"
+"Auutet"
+"Avin"
+"Bentet"
+"Blithulf"
+"Boio"
+"ETelbern"
+"ETelwi"
+"Eilherd"
+"Eilward"
+"Enhard"
+"Esulf"
+"Folkbern"
+"Folkhard"
+"Frethirik"
+"Frethold"
+"Geldulf"
+"Gerbald"
+"Gerbrand"
+"Gerold"
+"Gerulf"
+"Habo"
+"Hathuward"
+"HroThard"
+"Lubbiko"
+"Meginhard"
+"Meginulf"
+"Meintet"
+"Menhard"
+"Meniko"
+"Redbad"
+"Reginhard"
+"Renhard"
+"Riklef"
+"Rikwi"
+"Sibod"
+"Siwi"
+"OsnoT"
+"Tadaco"
+"Thankbern"
+"Thiadbold"
+"Thiadward"
+"Thonkrik"
+"Tiadi"
+"Uulfnoth"
+"Wibad"
+"Wibraht"
+"Wilbrand"
+
+// 20:	dutch_forenames
+ADD_FORENAMES::
+"Adriaen"
+"Alaerdus"
+"Anthonis"
+"Augustiin"
+"Barnaerd"
+"Bartolomeus"
+"Beyndijn"
+"Boeyken"
+"Bonsart"
+"Boudekijn"
+"Boudijn"
+"Buus"
+"Calle"
+"Claesekiin"
+"Coenkijn"
+"Coenselijn"
+"Costijn"
+"Crispiin"
+"Doedeken"
+"Domaes"
+"Faucoen"
+"Floerkijn"
+"Foyken"
+"Frankrijk"
+"Godeken"
+"Godevaart"
+"Goeswiin"
+"Goudriaan"
+"Hillebrant"
+"IJman"
+"IJsbrant"
+"Jan"
+"Klaas"
+"Lauwe"
+"Lemmeken"
+"Lijsmoet"
+"Matheeus"
+"Moyses"
+"Noyden"
+"Oelard"
+"Ogier"
+"Pouwels"
+"Quade"
+"Rutgheer"
+"Vlas"
+"Walraven"
+"Willem"
+"Wolf"
+
+// 21:	moglons
+ADD_FORENAMES::
+"Ogadai"
+"Chagatai"
+"Batu"
+"Subudai"
+"Temudur"
+"Ordhun"
+"MVngke"
+"Khogibag"
+"Abaqha"
+"Aragibag"
+"Arghun"
+"ArigbVge"
+"Arigh Boke"
+"Ayurbarwada"
+"Bayan"
+"Berke"
+"Chaghatai"
+"Chinggis"
+"EgidY"
+"El Temur"
+"Genghis "
+"Ghazan"
+"GYyYk"
+"HYlegY"
+"Hung Ch'a-Ch'iu"
+"Irinjibal"
+"Jagatai "
+"Jebe"
+"JVchi"
+"Kaidu"
+"Kaishan"
+"Kara HYlegY"
+"Khoshila"
+"Kublai"
+"Kubla"
+"Kuyuk"
+"Kublai"
+"Mamai"
+"Mengli Girai"
+"Nayan"
+"Ogatai"
+"JgVdei"
+"JljeitY"
+"Orda"
+"Orjibal"
+"Shidebala"
+"Temujin"
+"Temur Oljeitu"
+"Toghon Temur"
+"Tokhtamysh"
+"Tolui"
+"Tsagadai"
+"Ugedai"
+"Yesugei"
+"Yeh-lY Ch'u-ts'ai"
+"Yesun Temur"
+"Zhen Jin"
+"Shidadai"
+"Ordai"
+"Subujin"
+"Jebu"
+"Jebdun"
+"Tobu"
+"Tobdun"
+"Nayu"
+"Argu"
+"Argudhun"
+"Khoyan"
+"Khoyu"
+"Khodun"
+"Khochi"
+"Abayan"
+"Abadai"
+"Abadhun"
+"Arablai"
+"Abur"
+"Abangis"
+"Abashan"
+"Aboke"
+"Aragei"
+"Aradai"
+"Arabla"
+"Arajibal"
+"Araboge"
+"Aragatai"
+"Araghun"
+"Batudai"
+"Batutai"
+"Batublai"
+"Batuban"
+"Batudhun"
+"Bavdai"
+"Bavaboge"
+"Bavjeitu"
+"Berkei"
+"Berkhungis"
+"Chagla"
+"Chagoke"
+"Chaglai"
+"Chagdu"
+"Chagduk"
+"Chagdhun"
+"Chindu"
+"Egiboge"
+"Egishan"
+"Gendai"
+"Genduk"
+"Genke"
+"Ghazandu"
+"Ghazatai"
+"Ghazuk"
+"Guyke"
+"Huleblai"
+"Huleke"
+"Irindhuk"
+"Iringis"
+"Jagadai"
+"Jagu"
+"Jebuk"
+"Jeblai"
+"Kaiblis"
+"Kaizuk"
+"Khodhun"
+"Khoduk"
+"Khoblai"
+"Khogadai"
+"Khotai"
+"Khuzuk"
+"Khushan"
+"Khundu"
+"Khugis"
+"Kubuk"
+"Kubadai"
+"Kubeke"
+"Kundu"
+"Mamdu"
+"Mamdhuk"
+"Mamgis"
+"Menglai"
+"Mengadai"
+"Menguk"
+"Mongu"
+"Monduk"
+"Mongatai"
+"Nayuk"
+"Naydhun"
+"Ogoshin"
+"Ogoshila"
+"Ogodhun"
+"Shidedai"
+"Shideghuk"
+"Subuke"
+"Temudhuk"
+"Temudhun"
+"Temublai"
+"Temugis"
+"Tsagatai"
+"Tasguk"
+"Ugablai"
+"Ugamysh"
+"Yesublai"
+"Yesugis"
+"Yesugatai"
+"Yesuk"
+
+// 22:	crusader_forenames
+ADD_FORENAMES::
+"Hugh"
+"Henry"
+"John"
+"Richard"
+"William"
+"Alfred"
+"Edmund"
+"Stephen"
+"Edward"
+"Edgar"
+"Henry"
+"Edward"
+"Henry"
+"Richard"
+"John"
+"Henry"
+"Harry"
+"George"
+"Howard"
+"Michael"
+"Anthony"
+"John"
+"Nigel"
+"Thomas"
+"Thomas"
+"Hugh"
+"Geoffrey"
+"Hubert"
+"Walter"
+"Robert"
+"Charles"
+"Charles"
+"John"
+"Henry"
+"William"
+"Ralph"
+"Jasper"
+"Richard"
+"Edward"
+"Perkin"
+"Roger"
+"Godwine"
+"Tostig"
+"Loefwine"
+"Aelfgar"
+"Morcar"
+"Robin"
+"John"
+
+// 23:	teutonic_forenames
+ADD_FORENAMES::
+"Otto"
+"Karl"
+"Werner"
+"Lothar"
+"Dietrich"
+"Ludolf"
+"Herrmann"
+"Lothair"
+"Heinrich"
+"Winrich"
+"Arnold"
+"Rainald"
+"Tancred"
+"Philipp"
+"Adolf"
+"Leopold"
+"Ferdinand"
+"Heinrich"
+"Conrad"
+"Welf"
+"Rudolf"
+"Herrmann"
+"Lothair"
+"Friedrich"
+"Andreas"
+"Arnold"
+"Rainald"
+"Tancred"
+"Philipp"
+"Adolf"
+"Leopold"
+"Ferdinand"
+"Johann"
+"Eusebius"
+"Hans"
+"Peter"
+"Albrecht"
+"Wilhelm"
+"Ludwig"
+"Karl"
+"Wenzel"
+"Ruprecht"
+"Jobst"
+"Sigismund"
+"Maximillian"
+"Gottfied"
+"Dietrich"
+"Elberhard"
+
+// 24:	lithuanian_forenames
+ADD_FORENAMES::
+"Steksys"
+"Gediminas"
+"Mindaugas"
+"Algirdas"
+"Kestutis"
+"Vytautas"
+"Jogaila"
+"Shvarno"
+"Daumantas"
+"Traidenis"
+"Vytenis"
+"Tautginas"
+"Visvaldas"
+"Daugvilas"
+"Ceidvilas"
+"Geidas"
+"Tautenis"
+"Algelis"
+"Kantibutas"
+"Dravenis"
+"Minegal"
+"Gedigold"
+"Mikolajunas"
+"Jasonis"
+"Ivonaitis"
+"Skirgaile"
+"Mitautas"
+"Taviras"
+"Valdas"
+"Gintautas"
+"Jovirdas"
+"Lasukas"
+"Gostautas"
+
+// 25:	armenian_forenames
+ADD_FORENAMES::
+"Reuben"
+"Philip"
+"Leon"
+"Thoros"
+"Hetum"
+"Oshin"
+"Gagik"
+"Asot"
+"Smbat"
+"Leo"
+"Ruben"
+"Mazez"
+"Gagik"
+"Matthew"
+"Nerses"
+"Vardan"
+"Korike"
+"Abraham"
+"Adam"
+"David"
+"Daniel"
+"Franciscos"
+"Garabed"
+"Haig"
+"Israel"
+"Kristapor"
+"Manuel"
+"Pasha"
+"Sahab"
+"Yerem"
+"Zenob"
+"Raphael"
+"Lazar"
+"Izahak"
+"Elijah"
+
+// 26:	swedish_forenames
+ADD_FORENAMES::
+"Inge"
+"Erik"
+"Magnus"
+"Knut"
+"Sverker"
+"Birger"
+"Karl"
+"Valdemar"
+"Joar"
+"Sune"
+"Filip"
+"Johan"
+"Bengt"
+"Gregers"
+"Håkan"
+"Olof"
+"Inge"
+"Filip"
+"Magnus"
+"Erik"
+"Knut"
+"Magnus"
+"Erik"
+"Johan"
+"Ture"
+"Halstan"
+"Folke"
+"Jedward"
+"Birger"
+"Mathias"
+"Bo"
+"Engelbrekt"
+
+// 27:	genoese_forenames
+ADD_FORENAMES::
+"Dauferi"
+"Alberto"
+"Bernardo"
+"Giovanni"
+"Gregorio"
+"Pietro"
+"Guido"
+"Sicco"
+"Pietro"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+"Dauferi"
+"Bieda"
+"Gelasius"
+"Lamberto"
+"Teobaldo"
+"Gregorio"
+"Pietro"
+"Guido"
+"Gherardo"
+"Bernardo"
+"Corrado"
+"Rolando"
+"Ubaldo" 
+"Uberto"
+"Alberto"
+"Paolo"
+"Giacinto"
+"Cencio"
+"Goffredo"
+"Sinibaldo"
+"Ottobono"
+"NiccolX"
+"Guido"
+"Vitale"
+"Orso"
+"Giovanni"
+"Lorenzo"
+"Pietro"
+"Jacopo"
+"Marino"
+"Enrico"
+"Teofilatto"
+"Romano"
+"Giovanni"
+"Anselmo"
+
+// 28:	bulgarian_forenames
+ADD_FORENAMES::
+"Kalojan"
+"Boril"
+"Ivan"
+"Koloman"
+"Mihail"
+"Georgi"
+"Smilech"
+"Todor"
+"Sviatoslav"
+"Izyaslav"
+"Mikhail"
+"Oleg"
+"David"
+"Vasilko"
+"Rostislav"
+"Volodar"
+"Uyacheslav"
+"Yuri"
+"Gleb"
+"Rostaslav"
+"Vladimirko"
+"Igor"
+"Andrei"
+"Roman"
+"Ingvar"
+"Boris"
+"Daniil"
+"Konstantin"
+"Fiodor"
+"Ivan"
+"Vasil"
+"Lev"
+"Vseslav"
+"Dobrynya"
+"Ilya"
+"Alyosh"
+"Dimitri"
+
+// 29:	serb_forenames
+ADD_FORENAMES::
+"Vukan"
+"Stefan"
+"Uros"
+"Desa"
+"Primislav"
+"Belos"
+"Stafan"
+"Uros"
+"Boris"
+"Aca"
+"Aleksandar"
+"Arso"
+"Asim"
+"Boguljub"
+"Bora"
+"Borenko"
+"Boris"
+"Bosko"
+"Branislav"
+"Cedomil"
+"Dejan"
+"Dimitrije"
+"Djodja"
+"Djoka"
+"Djordje"
+"Dobrica"
+"Dositej"
+"Dragisa"
+"Dragoljub"
+"Dragutin"
+"Draza"
+"Dusan"
+"Dushan"
+"Dzevat"
+"Gavrilo"
+"Hurem"
+"Ilija"
+"Ivan"
+"Ivico"
+"Jasa"
+"Jovan"
+"Jovica"
+"Koviljko"
+"Lazar"
+"Ljuba"
+"Marko"
+"Mijalko"
+"Milan"
+"Milo"
+"Milojica"
+"Milorad"
+"Milos"
+"Milovan"
+"Milutin"
+"Misa"
+"Momcilo"
+"Momsilo"
+"Murat"
+"Nebosja"
+"Nenad"
+"Nermin"
+"Niko"
+"Nikola"
+"Ognjeslav"
+"Ostoja"
+"Pacu"
+"Pavle"
+"Pedrag"
+"Petar"
+"Preki"
+"Punisa"
+"Rade"
+"Radoje"
+"Radovan"
+"Rajko"
+"Ratko"
+"Rudjer"
+"Rudko"
+"Semi"
+"Sima"
+"Sinisa"
+"Slavko"
+"Slobodan"
+"Srdjan"
+"Sreten"
+"Stanislav"
+"Stevan"
+"Suljo"
+"Svetozar"
+"Tomislav"
+"Vasa"
+"Velimir"
+"Veljko"
+"Vladimir"
+"Vladislav"
+"Vojislav"
+"Vuk"
+"Zeljko"
+"Zivojin"
+"Zivota"
+
+// 30:	portuguese_forenames
+ADD_FORENAMES::
+"Afonso"
+"Sancho"
+"Dinis"
+"Munio"
+"Goncalo"
+"Fernando"
+"Pedro"
+"Henrique"
+"Filipe"
+"Fernao"
+"Luis"
+"Gilberto"
+"Pero"
+"Henrique"
+"Ramiro"
+"Gil"
+"Rui"
+"Raimundo"
+"Rodrigo"
+"Diogo"
+"Vasco"
+"Augusto"
+"Roberto"
+"Martim"
+"Bermudo"
+"Mendo"
+"Arnaldo"
+"Paio"
+"Alvaro"
+"Gualdim"
+"Nuno"
+"Lopo"
+"Mem"
+"Joao"
+"Manuel"
+"Lourenco"
+"Egidio"
+"Domingos"
+
+// 31:	novgorod_forenames
+ADD_FORENAMES::
+"Constantine"
+"Vsevolod"
+"Mstislav"
+"David"
+"Svyatopolk"
+"Vsevolod"
+"Rostislav"
+"Yaroslav"
+"Mikhail"
+"Chort"
+"Dmitrii"
+"Domaslav"
+"Domazhir"
+"Drozd"
+"Grechin"
+"Grigorii"
+"Guba"
+"Iosif"
+"Ivan"
+"Kisel"
+"Kozel"
+"Kuritsa"
+"Maksim"
+"Mal"
+"Mil"
+"Miloslav"
+"Miroslav"
+"Mixail"
+"Nezhek"
+"Nikita"
+"Orekh"
+"Pavel"
+"Radoslav"
+"Sbyslav"
+"Shchuka"
+"Shuba"
+"Sidor"
+"Stanimir"
+"Stepan"
+"Tvorimir"
+"Vasilii"
+"Vladimir"
+"Voislav"
+"Volchok"
+"Yaroslav"
+"Zaiats"
+"Zavid"
+"Zhiroslav"
+"Zhiznobud"
+"Zub"
+
+// 32:	bohemian_forenames
+ADD_FORENAMES::
+"Vratislav"
+"Jan"
+"Borivoj"
+"Spytihnev"
+"Boleslav"
+"Vladivoj"
+"Jaromir"
+"Oldrich"
+"Bretislav"
+"Vit"
+"Borivoj"
+"Svatopluk"
+"vladislav"
+"Sobeslav"
+"Bedrich"
+"Vaclav"
+"Premsyl"
+"Jindrich"
+"Rudolf"
+"Karel"
+"Zikmund"
+"Ladislav"
+"Ludvik"
+"Jakub"
+"Jiri"
+"Martin"
+"Matej"
+"Matous"
+"Mikulas"
+"Ondrej"
+"Petr"
+"Tomik"
+"Cestmir"
+"Jaroslav"
+"Jirka"
+"Miloslav"
+"Molner"
+"Otik"
+"Rostislav"
+"Otakar"
+"Ambroz"			
+"Arnost"
+"Venceslav"
+"Zikmund"
+
+// 33:	irish_forenames
+ADD_FORENAMES::
+"Diarmaid"
+"Dermot"
+"Tiernan"
+"Fintan"
+"Aed"
+"Oengus"
+"Ailill"
+"Fergus"
+"Eochaid"
+"Lugaid"
+"Domnall"
+"Cairpre"
+"Conall"
+"Cormac"
+"Fland"
+"Muiredach"
+"Cellach"
+"Eogan"
+"Eochu"
+"Diarmait"
+"Colman"
+"Conchobor"
+"Fiachra"
+"Ennae"
+"Cinaed"
+"Crimthann"
+"Fedelmid"
+"Murchad"
+"Cathal"
+"Donnchad"
+"Mael duin"
+"Ronan"
+"Muirchertach"
+"Ercc"
+"Maine"
+"Bran"
+"Cobthach"
+"Niall"
+"Fogartach"
+"Crundmael"
+"Bressal"
+"Congal"
+"Cenn faelad"
+"Dunchad"
+"Suibne"
+"Failbe"
+"Fiachu"
+"Moenach"
+"Donngal"
+"Setnae"
+"Scandlan"
+"Dimmae"
+"Senach"
+"Faelan"
+"Tuathal"
+"Cummascach"
+"Fiachna"
+"Artt"
+"Dungal"
+"Congalach"
+"Fergal"
+"Blathmac"
+"Dubthach"
+"Dunlang"
+"Corcc"
+"Find"
+"Loegaire"
+"Feradach"
+"Findchad"
+"Finan"
+"Cernach"
+"Daire"
+"Ruaidri"
+"Fintan"
+"Guaire"
+"Trian"
+"Tigernach"
+"Sechnassach"
+"Nath i"
+"Tadc"
+"Baetan"
+"Columb"
+"Forannan"
+"Mael tuili"
+"Cilline"
+"Mael ruanaid"
+"Rechtabra"
+"Broccan"
+"Duinechaid"
+"Colcu"
+"Amalgaid"
+"Indrechtach"
+"Condlae"
+"Fothud"
+"Maelodor"
+"Flaithbertach"
+"Imchad"
+"Becc"
+"Carthach"
+"Cerball"
+"Cuan"
+"Tipraite"
+"Cairthenn"
+"Diarmaid"
+"Dermot"
+"Tiernan"
+"Fintan"
+
+
+// 1:	english_surnames
+ADD_SURNAMES::
+"Plantagenet"
+"Howard"
+"Cromwell"
+"Pole"
+"Talbot"
+"Stanley"
+"Roos"
+"Mobray"
+"Grey"
+"Bourchier"
+"Courtnay"
+"Fitzalan"
+"Stafford"
+"Scrope"
+"Neville"
+"Holland"
+"Greystoke"
+"Hastings"
+"Berkeley"
+"Audley"
+"Percy"
+"Beaufort"
+"Herbert"
+"Mortimer"
+"Stuart"
+"Curthose"
+"Giffard"
+"Burnell"
+"Basset"
+"Longchamp"
+"Fitzwalter"
+"Langton"
+"Uhtred"
+"Wulfstan"
+"Eadwulf"
+"Maitland"
+"Fitzneale"
+"Becket"
+"Longchamp"
+"Montfort"
+"Peckham"
+"Gaveston"
+"Despenser"
+"de Vere"
+"de Beauchamp"
+"Bolingbroke"
+"Gascoigne"
+"Swynford"
+
+// 2:	danish_surnames
+ADD_SURNAMES::
+"Ericsson"
+"Forkbeard"
+"Bluetooth"
+"Skotkonung"
+"Haraldsson"
+"Thorkell"
+"Jarl"
+"Tryggvason"
+"Hunger"
+"Eigod"
+"Slyngebard"
+"Grathe "
+"Haengsson "
+"Menved"
+"Thorsteinsson "
+"Guddrodson"
+"Hunthjofson "
+"Tryggvasson "
+"Haraldsson"
+"Svertingsson "
+"Thorrodson"
+"Tjorvason"
+"Bolverksson"
+"Thorgrimsson"
+"Flosason"
+"Surtsson"
+"Skeggjason"
+"Gunnarsson"
+"Hrafnsson"
+"Masson "
+"Loftsson "
+"Sturlasson"
+"Gille"
+"Slembe"
+"Ulfsen"
+"Jedwaerdsson"
+"Henriksson"
+"Bengtsson "
+"Ironside"
+"Hildetand"
+"Bjornsson"
+"Raefillsson"
+"Emundsson"
+"Skottkonung"
+"Stenkilsson"
+"Beleson"
+"Skaaning"
+"Orvendilson"
+
+// 3:	venitian_surnames
+ADD_SURNAMES::
+"Machiavelli"
+"Medici"
+"Piccolomini"
+"Borgia"
+"Collona"
+"Albergati"
+"Juliani"
+"Dei Segni"
+"Fieschi"
+"Orsini"
+"Castiglioni"
+"Savelli"
+"Scotti"
+"Bobone"
+"Scolari"
+"Prignano"
+"Crivelli"
+"Allucingoli"
+"Bandinelli"
+"Crescentius"
+"Fasano"
+"Buccaporci"
+"Tusculani"
+"Granziano"
+"Tomacelli"
+"da Baggio"
+"di Lucca"
+"Frangipani"
+"di Galeata"
+"da Gaetan"
+"Scannabecchi"
+"Buccapeco"
+"Papareschi"
+"Pierleoni"
+"Di Castello"
+"Caccianemici"
+"Paganelli" 
+"Di Suburra"
+"Savelli"
+"Masci"
+"Cetani"
+"Boccasini"
+"Machiavelli"
+"Medici"
+"Piccolomini"
+"Borgia"
+"Collona"
+"Albergati"
+
+// 4:	french_surnames[48] =
+ADD_SURNAMES::
+"Poitevin"
+"de Balliol"
+"des Roches"
+"Mauclerc"
+"de Lusignan"
+"de VendVme"
+"de Brabant"
+"de Dampierre"
+"Saisset"
+"de Nogaret"
+"de Plaisians"
+"de Molay"
+"de Marigny"
+"de Brienne"
+"de Blois"
+"du Guesclin"
+"de La TrQmoille"
+"de Richemont"
+"Coeur"
+"d'OrlQans"
+"Marcel"
+"Sorel"
+"de BrQzQ"
+"de Chabannes"
+"de Bourbon"
+"de Vesc"
+"de ClQves"
+"de Valois"
+"de ChNteaubriant"
+"de Poitiers"
+"Philibert"
+"de Coligny"
+"Touchet"
+"Amyot"
+"ClQment"
+"De Bourbon"
+"d'Albret"
+"de BQthune"
+"Brulart de Sillery"
+"de Neufville"
+"Jeannin"
+"de Luynes"
+"Richelieu"
+"du Lac"
+"de Plater"
+"de Vere"
+"de Beauchamp"
+"Marcel"
+
+// 5:	byzantine_surnames
+ADD_SURNAMES::
+"Comnenus"
+"Ducas"
+"Diogenes"
+"Angelus"
+"Palaeologus"
+"Lascaris"
+"Monomachus"
+"Stratiocus"
+"Calaphates"
+"Argyrus"
+"Bulgaroctonus"
+"Angelus"
+"Prvovencani"
+"Phocas"
+"Tzimisces"
+"Orphanotrophus"
+"Paphlagonian"
+"Maniakes"
+"Bryennius"
+"Botaneiates"
+"Murtzuphlus"
+"Cerularius"
+"Cantacuzenus"
+"Nicephoritzes"
+"Macrembolitissa"
+"Lascaris"
+"Phocas"
+"Basilacius"
+"Melissenus"
+"Dalassena"
+"Branas"
+"Lascaris"
+"Vatatzes"
+"Comnenus"
+"Ducas"
+"Diogenes"
+"Angelus"
+"Palaeologus"
+"Lascaris"
+"Monomachus"
+"Stratiocus"
+"Calaphates"
+"Argyrus"
+"Bulgaroctonus"
+"Angelus"
+"Prvovencani"
+"Phocas"
+"Tzimisces"
+
+// 6:	spanish_surnames
+ADD_SURNAMES::
+"VelNzquez"
+"VermXndez"
+"AntolZnez"
+"Gustios"
+"Mendoza"
+"EnrZquez"
+"Sanchez"
+"Gonzalo"
+"DZaz de Vivar"
+"AnsXrez"
+"RamZrez"
+"GelmZrez"
+"de la Cerda"
+"DZaz de Haro"
+"de Molina"
+"de Padilla"
+"de TrastNmara"
+"de Mena"
+"de Luna"
+"Pacheco"
+"de la Cueva"
+"Mendoza"
+"EnrZquez"
+"de Villena"
+"Cisneros"
+"d'Anghiera"
+"de Nebrija"
+"Berenguer"
+"Ferrer"
+"d'Antequera"
+"PQrez"
+"de Escobedo"
+"de Olivares"
+"MQndez"
+"de Bgreda"
+"Granvelle"
+"Lerma"
+"Claris"
+"Sanchez"
+"Gonzalo"
+"Sanchez"
+"PQrez"
+"Mendoza"
+"EnrZquez"
+"RamZrez"
+"GelmZrez"
+"Ferrer"
+"AnsXrez"
+
+// 7:	almohad_surnames
+ADD_SURNAMES::
+"al-Mu'tamid"
+"ibn Tashufin"
+"al-Mansur"
+"al-Mundhir"
+"al-Hakam"
+"ibn Hamud"
+"al-Oasim"
+"ibn Ali"
+"Rahman"
+"ibn Tashufin"
+"ibn Yusuf"
+"abu Yaqub"
+"ibn Yaqub"
+"Wahid"
+"abu Zakariyya"
+"ibn Idris"
+"ibn Ishaq"
+"abu Abdullah"
+"abu Muhammad"
+"al-Qasim"
+"Hasen"
+"ibn Yusef"
+"ibn Nazar"
+"ibn Idris"
+"al-Ka'id"
+"al-Hajj"
+"Abu Bakr"
+"al-Qasim"
+"ibn Buluggin"
+"ibn Muhsin"
+"ibn Hassan"
+"ibn Ma'mun"
+"ibn Omar"
+"ibn Salim"
+"ibn Inan"
+"ibn Bakr"
+"ibn Khalid"
+"ibn Badis"
+"ibn Sharaf"
+"abu Buluggin"
+"abu Muhsin"
+"abu Hassan"
+"abu Ma'mun"
+"abu Omar"
+"abu Salim"
+"abu Inan"
+"abu Badis"
+"abu Sharaf"
+
+// 8:	egyptian_surnames
+ADD_SURNAMES::
+"as Salih"
+"al Kamil"
+"al Ikhshid"
+"al Labi"
+"al Mahdi"
+"al Qaim"
+"al Mansur"
+"al Muizz"
+"al Aziz"
+"al Hakim"
+"az Zahir"
+"al Mustansir"
+"al Mustali"
+"al Muazzam"
+"al Amir"
+"al Hafiz"
+"az Zafir"
+"al Faiz"
+"al Bdid"
+"al Adil"
+"Salahud Din"
+"Ayyubid"
+"Imad ad Din"
+"Nasir ad Din"
+"Sayf ad Din"
+"Najm ad Din"
+"Muzaffar ad Din"
+"al Wathiq"
+"al Mutadid"
+"al Mutawakkil"
+"al Mutasim"
+"al Mustain"
+"al Mustakfi"
+"al Mustanjid"
+"al Mustamsik"
+"as Salih"
+"al Kamil"
+"al Ikhshid"
+"al Labi"
+"al Mahdi"
+"abu Muhsin"
+"abu Hassan"
+"abu Ma'mun"
+"abu Omar"
+"abu Salim"
+"abu Inan"
+"abu Badis"
+"abu Sharaf"
+
+// 9:	turkish_surnames
+ADD_SURNAMES::
+"Gazi"
+"al Turkumani"
+"al Bunduqdari"
+"al Muizzi"
+"Khan"
+"al Alfi"
+"al Ashqar"
+"al Jashnakir"
+"Burji"
+"Abu Bakr"
+"al Hasan"
+"al Aziz"
+"al Mahmudi"
+"al Zahiri"
+"al Alai"
+"al-Abbas"
+"al-Mansur"
+"al Hadi"
+"al Rashid"
+"al Amin "
+"al Ma'mun "
+"al Mu'tasim"
+"al Muntasir "
+"Arslan"
+"Shah"
+"Beg"
+"al-Mulk"
+"Sokollu"
+"RYstem"
+"al-Su'ud"
+"Candarl"
+"Rokh"
+"al-Mansur"
+"al Hadi"
+"al Rashid"
+"al Amin "
+"al Ma'mun "
+"al Mu'tasim"
+"al Muntasir "
+"Arslan"
+"Gazi"
+"al Turkumani"
+"al Bunduqdari"
+"al Muizzi"
+"Khan"
+"al Alfi"
+"al Ashqar"
+"al Jashnakir"
+ 
+// 10:	polish_surnames
+ADD_SURNAMES::
+"Jagiellonczyk"
+"Jagiello"
+"Wielkopolski"
+"Sandomierz"
+"Maziwiecki"
+"Brodaty"
+"Mazovia"
+"Herman"
+"Adamczyk"
+"Buczak"
+"Czajka"
+"Dudzik"
+"Grycki"
+"Kazczyk"
+"Krawczyk"
+"Kulwiec"
+"Majtyka"
+"Marosz"
+"Miazga"
+"Niemoj"
+"Ogitzak"
+"Orlicki"
+"Penc"
+"Pieritz"
+"Petratz"
+"Plast"
+"Premysl"
+"Czersk"
+"Mazovia"
+"Premyslid"
+"Zapolya"
+"Sochaczew"
+"Psotka"
+"Pyrzyce"
+"Rzegotka"
+"Stawecki"
+"Malewicz"
+"Stasiak"
+"Puch"
+"Turek"
+"Wallach"
+"Wojno"
+"Wos"
+"Zacharek"
+"Zdeb"
+"Zuraw"
+"Wykowski"
+"Wozniak"
+
+// 11:	russian_surnames
+ADD_SURNAMES::
+"Alekseev"
+"Andreev"
+"Boldin"
+"Buiakov"
+"Chernekov"
+"Chortov"
+"Dmitriev"
+"Domaslavov"
+"Domazhirov"
+"Drozdov"
+"Grechinov"
+"Grigoriev"
+"Gubin"
+"Iecifovich"
+"Ivanov"
+"Ivanovich"
+"Kiselev"
+"Kozlov"
+"Kuritsev"
+"Kuz'mich"
+"Maksimov"
+"Malov"
+"Mikhailovich"
+"Miloslavov"
+"Milov"
+"Miroslavov"
+"Nezhkov"
+"Nikitin"
+"Orekhov"
+"Pavlov"
+"Radoslavov"
+"Sbyslavov"
+"Semenov"
+"Shchukin"
+"Shubin"
+"Sidorov"
+"Stanimirov"
+"Stepanov"
+"Tvorimirov"
+"Vasilievich"
+"Voislavov"
+"Volchkov"
+"Zaitsev"
+"Zakhariev"
+"Zavidov"
+"Zhiroslavov"
+"Zhiznobudov"
+"Zubov"
+
+// 12:	german_surnames
+ADD_SURNAMES::
+"Karolinger"
+"Merowinger"
+"Salier"
+"von Wittelsbach"
+"von Hapsburg"
+"von Luxemburg"
+"von Mahren"
+"von Lothringen"
+"von Osterreich"
+"von Nassau"
+"von Kastilien"
+"von Holland"
+"von Schwaben"
+"von Braunschweig"
+"der Rote"
+"von der Pfalz"
+"von Bohmen"
+"der Bartige"
+"Guiskard"
+"von Salza"
+"von Grunungen"
+"von Balk"
+"von Kniprode"
+"von Jungingen"
+"von Felben"
+"von Kassel"
+"der Bar"
+"der Stoltze"
+"von Dassel"
+"von Franken"
+"Raspe"
+"von Holstein"
+"Steffen"
+"Merode"
+"Mandorf"
+"Zirn"
+"Ruesdorf"
+"Erlach"
+"Uttenheim"
+"Wahren"
+"Echter"
+"Windeck"
+"Blankenberg"
+"Seubersdorf"
+"Courcy"
+"Otterbach"
+"Plittersdorf"
+"Herden"
+
+//Minor rebel group names
+
+// 13:	scottish_surnames
+ADD_SURNAMES::
+"Arthyn"
+"the Balleol"
+"Bell"
+"Besat"
+"the Boroundoun"
+"Boyd"
+"Brechyne"
+"the BroiM"
+"Broune"
+"Bunnok"
+"Campbell"
+"of Carnavarane"
+"of Clair"
+"of Cobhame"
+"Comyn"
+"Cwnyngame"
+"of Douglas"
+"Erskyn"
+"FeniM"
+"Forster"
+"Gilbertstoune"
+"Inchmertyn"
+"Macgoulchane"
+"Makartane"
+"Makdowall"
+"Makfulchiane"
+"Makgullane"
+"Makmartane"
+"Maknab"
+"Maknakill"
+"Maknauchtan"
+"Macdonchie"
+"Macconel"
+"Macdougall"
+"Nevell"
+"Randall"
+"the RoM"
+"the Sowlis"
+"Stewart"
+"ViMman"
+"Buchan"
+"Mensies"
+"Mar"
+"Lesly"
+"Colison"
+"Cullane"
+"Wallace"
+"Wallace"
+
+// 14:	welsh_surnames
+ADD_SURNAMES::
+"ap Adam"
+"ap Ieuan"
+"ap Gronw"
+"ap Ithel"
+"ap Gwyn"
+"ap Cynwrig"
+"ap Cadwgan"
+"ap Philip"
+"ap Rhiryd"
+"ap Gruffydd"
+"ap Tegwared"
+"ap Meilyr"
+"ap Ednyfed"
+"ap Gwrgenau"
+"ap Llywelyn"
+"ap Gwion"
+"ap Hywel"
+"ap Tuder"
+"ap Heilyn"
+"ap Cynddelw"
+"ap Madyn"
+"ap Meurig"
+"ap Llywarch"
+"ap William"
+"ap Griffri"
+"ap Ednowain"
+"ap Moriddig"
+"ap Cydifor"
+"ap Iago"
+"ap Iocyn"
+"ap John"
+"Coch"
+"Moel"
+"Bychan"
+"Llwyd"
+"Chwith"
+"Crach"
+"Cam"
+"Cryg"
+"Mawr"
+"Hen"
+"Cethin"
+"Bongam"
+"Cwtta"
+"Rhwth"
+"Bach"
+"Gwyn"
+"Hir"
+
+// 15:	hungarian_surnames
+ADD_SURNAMES::
+"Arpad"
+"Aba"
+"Alsani"
+"Babonics"
+"Bakocz"
+"Bathory"
+"Bicskei"
+"Bocskai"
+"Borsa"
+"Cillei"
+"Csak"
+"Csesznegi"
+"Dozsa"
+"Dragi"
+"Eszes"
+"Feher"
+"Fodor"
+"Frangepan"
+"Garai"
+"Gerenyi"
+"Gyori"
+"Hassagyi"
+"Heder"
+"Hideg"
+"Himfi"
+"Homonnai"
+"Horvat"
+"Hunyadi"
+"Ilosvai"
+"Kan"
+"Kanizsai"
+"Ketyi"
+"Kezai"
+"Konyves"
+"Koszegi"
+"Kovacs"
+"Kukullei"
+"Kun"
+"Lackfi"
+"Lengyel"
+"Melles"
+"Milvanyi"
+"Molnar"
+"Nadasdy"
+"Nagy"
+"Nagymartoni"
+"Nemet"
+"Nemetujvari"
+"Olah"
+"Pap"
+"Pok"
+"Racz"
+"Rad"
+"Rakoczi"
+"Ratot"
+"Selymes"
+"Subics"
+"Szapolyai"
+"Szasz"
+"Szekely"
+"Szepesi"
+"Szigeti"
+"Szilagyi"
+"Tar" 
+"Thokoly"
+"Thuroczy"
+"Tinodi"
+"Toldi"
+"Tot"
+"Totsolymosi"
+"Trencsenyi"
+"Uzsai"
+"Vadas"
+"Vak"
+"Werboczi"
+"Zah"
+"Zrinyi"
+
+// 16:	khazar_surnames
+ADD_SURNAMES::
+"Alp"
+"Amram"
+"Baghatur"
+"Balghichi"
+"Kundaj"
+"Balgitzi"
+"Barjik"
+"Bashtu"
+"Zoilus"
+"Bulchan"
+"Buzer"
+"Chat"
+"Chorpan"
+"Gostata"
+"Gostyata"
+"Hanukkah"
+"Itakh"
+"Khadir"
+"Khatir"
+"Kibar"
+"Kisa"
+"Kufin"
+"Kundajiq"
+"Kupin"
+"MPnPr"
+"MPnPs"
+"MarXt"
+"Menashe"
+"MenmarXt"
+"Menumorut"
+"Morut"
+"Nisi"
+"Papatzys"
+"Reuven"
+"Sabriel"
+"Samsam"
+"Simsam"
+"Tarmach"
+"Yaakov"
+"Yehudah"
+"Yilig"
+"Zambri"
+"Zebulun"
+"Ziebil"
+"Yilig"
+"Zambri"
+"Zebulun"
+"Ziebil"
+
+// 17:	dutch_surnames
+ADD_SURNAMES::
+"Aelbertssoen"
+"Berwoutssoen"
+"Dircxsoen"
+"Fockenzoen"
+"Geerijtsz"
+"Heensoon"
+"Hermanssoen"
+"Coppenz"
+"Janszoon"
+"Kerstantsz"
+"Peterssoen"
+"Rutgeersz"
+"Willems"
+"van Andels"
+"van Bellefelt"
+"van Blitterswijck"
+"van den Broeck"
+"van Dam"
+"van Elven"
+"van den Grave"
+"van Huesden"
+"van Kannen"
+"van Loon"
+"van Oudenberch"
+"van den Putte"
+"van der Spiegel"
+"van Winterswijck"
+"die bastaert"
+"de Cuyper"
+"die Graef"
+"de Hollander"
+"de Heer"
+"die Hase"
+"die Vette"
+"de Vest"
+"die Weyter"
+"die Wolf"
+"Amelonc"
+"Anker"
+"Ballen"
+"Bisscop"
+"Boeffaetgen"
+"Borstelman"
+"Cloppels"
+"Dagier"
+"Henters"
+"Juckhuys"
+"Smaelvelt"
+
+// 18:  armenian_surnames
+ADD_SURNAMES::
+"Rubenid"
+"Bagratuni"
+"Artsruni"
+"Gnuni"
+"Mamikon"
+"Saharuni"
+"Rsutuni"
+"Kamsarakan"
+"Siwnik"
+"Bardanes"
+"Arsabir"
+"Artabasodos"
+"Bardas"
+"Symbatios"
+"Dasxuranci"
+"Ishkanian"
+"Keoshian"
+"Ossian"
+"Astorian"
+"Pilibos"
+"Saffian"
+"Tavrishetsi"
+"Javehirjouni"
+"Arshagouni"
+"Karagozian"
+"Sevacherian"
+"Chulayan"
+"Dardarian"
+"Topalian"
+"Israelizn"
+"Lousinian"
+"Yeretsian"
+"Ter Poggosian"
+"Mardoyan"
+"Jaghajan"
+"Hashonian"
+"Fuzdigian"
+"Boudakian"
+"Chilingirian"
+"Danielian"
+"Igarian"
+"Mathesian"
+"Reizian"
+"Sajian"
+"Sadorian"
+
+// 19:	portuguese_surnames
+ADD_SURNAMES::
+"Henriques"
+"Fernandes"
+"Beniegas"
+"Moniz"
+"Mendonca"
+"Sanches"
+"Goncalves"
+"da Maia"
+"Ramires"
+"Mendes"
+"Giraldes"
+"Raimundes"
+"Vasques "
+"Lopes"
+"Nunes"
+"de Melo"
+"de Albuquerque"
+"de Sousa"
+"Peres da Maia"
+"Pacheco"
+"Pereira"
+"da Gama"
+"Mendonca"
+"de Vasconcelos"
+"Viegas"
+"Pais"
+"Teles"
+"Eanes"
+"Zarco"
+"Baldeia"
+"Tristao Teixeira"
+"de Tavora"
+"de Ataide"
+"de Menezes"
+"Goncalves de Sousa"
+"Vasques de Soveroso"
+"Peres Correia"
+"de Freitas"
+"de Oliveira"
+"Pessanha"
+"de Castro"
+"de Magalhaes"
+"de Avelal"
+"de Andrade"
+"Freire"
+"Alvares Pereira"
+"Martins"
+"de Gois"
+"de Meira"
+"de Sousa"
+"da Cunha"
+"Fafes"
+"Sueiro"
+"Peres"
+"Correia"
+"de Aboim"
+"Cogominho"
+"Pires Ribeires"
+"Vaz Pereira"
+"Martim de Gois"
+"Peres de Castro"
+"Freire de Andrade"
+"Fernandes de Andeiro"
+"Gomes de Avelar"
+"Lopes Teixada"
+"Pais de Meira"
+"Focim"
+"Coutinho"
+"Rodrigues de Sousa"
+"Rodrigues de Sequeira"
+
+// 20:	bohemian_surnames
+ADD_SURNAMES::
+"Korutansky"
+"Benes"
+"Bohumil"
+"Hus"
+"Zizka"
+"Brlety"
+"Capek"
+"Cermak"
+"Chval"
+"Dudek"
+"Ferda"
+"Fleischaker"
+"Franta"
+"Hnedy"
+"Holic"
+"Honza"
+"Hrusosky"
+"Hudak"
+"Jozka"
+"Kopecky"
+"Kral"
+"Krany"
+"Krejci"
+"Krocka"
+"Kusner"
+"Laco"
+"Lev"
+"Martinek"
+"Mirek"
+"Mlynar"
+"Mroz"
+"Novak"
+"Ondrus"
+"Pavlov"
+"Pepik"
+"Peterka"
+"Polak"
+"Lomsky"
+"Risa"
+"Ryba"
+"Silny"
+"Slansky"
+"Tonda"
+"Vrba"
+"Zeleny"
+"Vasek"
+"Svec"
+"Rybar"
+"Tesar"
+"Siman"
+"Pekar"
+"Reznik"
+"Kovar"
+"Kramoris"
+"Lojza"
+"Bednar"
+"Damek"
+"Greguska"
+
+// 21:	lithuanian_surnames
+ADD_SURNAMES::
+"Rimgaudaitis"
+"is Tauras"
+"is Apuole"
+"is Rietavas"
+"is Vilniaus"
+"is Kernave"
+"is Trakai"
+"is Kaunas"
+"is Dabsiai"
+"is Aukstadvaris"
+"is Narkunai"
+"is Tushemlya"
+"is Sauginiai"
+"Vytenitis"
+"Vytautaitis"
+"Jaunuaitis"
+"Jurate"
+"Dravenio"
+"Shvarnitis"
+"Treiniota"
+"Daumantas"
+"Reksnys"
+"Beragis"
+"Aukstakojis"
+"Ingeborga"
+"Gintautaitis"
+"Ivaniuitis"
+"Butwydas"
+"Budigeitis"
+"Vaisalgas"
+"the Curonian"
+"the Sembian"
+"the Aistian"
+"the Samogitian"
+"Leitis"
+"Vatijaitis"
+"Kernius"
+"Zivinbutas"
+"Valgirdas"
+"Gintautas sunnas"
+"Visvaldas sunnas"
+"Daugvilas sunnas"
+"Ceidvilas sunnas"
+"Geidas sunnas"
+"Tautenis sunnas"
+"Algelis sunnas"
+"Kantibutas sunnas"
+"Minegal sunnas"
+"Mitautas sunnas"
+"Taviras sunnas"
+"Valdas sunnas"
+"Jovirdas sunnas"
+"Lasukas sunnas"
+
+// 22:	swedish_surnames
+ADD_SURNAMES::
+"Sverkersson"
+"Ingesson"
+"Nilsson"
+"Karlsson"
+"Eriksson"
+"Henriksson"
+"Birgersson"
+"Magnusson"
+"Bonde"
+"Knutsson"
+"Valdemarsson"
+"Haraldsson"
+"Gunnarsson"
+"Henriksson"
+"Bengtsson "
+"Bjornsson"
+"Emundsson"
+"Ingevaldsson"
+"Kettilmundsson"
+"Engelbrektsson"
+
+// 23:	serb_surnames
+ADD_SURNAMES::
+"Adzovic"
+"Aleksic"
+"Anastasijevic"
+"Andjelic"
+"Bajic"
+"Balasevic"
+"Banovic"
+"Belic"
+"Blagojevic"
+"Blasevic"
+"Brkic"
+"Brnovic"
+"Bulatovic"
+"Buturovic"
+"Cavoski"
+"Chacic"
+"Ckrebic"
+"Cubrilovic"
+"Curuvija"
+"Cvetkovic"
+"Danicic"
+"Davidovic"
+"Djilas"
+"Djokovic"
+"Djorovic"
+"Djukic"
+"Djurdjuvic"
+"Djuric"
+"Drach"
+"Dragomanovic"
+"Dudukovic"
+"Erkocevic"
+"Garasanin"
+"Gavrilovic"
+"Gojkovic"
+"Grol"
+"Grujic"
+"Gvero"
+"Haravan"
+"Hrnjak"
+"Jeftanovic"
+"Jokanovic"
+"Jovanovic"
+"Jugovic"
+"Kadijevic"
+"Kajosevic"
+"Karadzic"
+"Karkunica"
+"Komljenovic"
+"Kontic"
+"Kordic"
+"Kralj"
+"Kraljevic"
+"Kukcenjac"
+"Lekovic"
+"Ljotic"
+"Lovre"
+"Macura"
+"Maric"
+"Maricic"
+"Marinkovic"
+"Miletic"
+"Mirkovic"
+"Mladic"
+"Mladjenovic"
+"Moljevic"
+"Nacuk"
+"Nedic"
+"Nikolic"
+"Nusic"
+"Obradovic"
+"Ogrijenovic"
+"Omeragic"
+"Panic"
+"Pantelic"
+"Pasic"
+"Perisic"
+"Popovic"
+"Pribicevic"
+"Princip"
+"Radoncis"
+"Radosavijevic"
+"Ragulovic"
+"Roganovic"
+"Sainovic"
+"Santrac"
+"Sekulic"
+"Sibincic"
+"Stevic"
+"Stolic"
+"Subasic"
+"Sujic"
+"Svetozar"
+"Tadic"
+"Tucovic"
+"Tukovic"
+"Udovicki"
+"Utjesenovic"
+"Uzunovic"
+"Vasic"
+"Vujica"
+"Vukasinov"
+"Vukmanovic"
+"Zimojic"
+"Zivkovic"
+"Zukic"
+"Zuzoric"
+
+// 24:	irish_surnames
+ADD_SURNAMES::
+"McMurrough"
+"ORourke"
+"McCarthy"
+"Mac Aed"
+"O hOengus"
+"Mac Ailill"
+"O Fergus"
+"Mac Eochaid"
+"O Lugaid"
+"Mac Domnall"
+"O Cairpre"
+"Mac Conall"
+"O Cormac"
+"Mac Fland"
+"O Muiredach"
+"Mac Cellach"
+"O hEogan"
+"Mac Eochu"
+"O Diarmait"
+"Mac Colman"
+"O Conchobor"
+"Mac Fiachra"
+"O hEnnae"
+"Mac Cinaed"
+"O Crimthann"
+"Mac Fedelmid"
+"O Murchad"
+"Mac Cathal"
+"O Donnchad"
+"Mac Mael duin"
+"O Ronan"
+"Mac Muirchertach"	
+"O hErcc"
+"Mac Maine"
+"O Bran"
+"Mac Cobthach"
+"O Niall"
+"Mac Fogartach"
+"O Crundmael"
+"Mac Bressal"
+"O Congal"
+"Mac Cenn faelad"
+"O Dunchad"
+"Mac Suibne"
+"O Failbe"
+"Mac Fiachu"
+"O Moenach"
+"Mac Donngal"
+"O Setnae"
+"Mac Scandlan"
+"O Dimmae"
+"Mac Senach"
+"O Faelan"
+"Mac Tuathal"
+"O Cummascach"
+"Mac Fiachna"
+"O hArtt"
+"Mac Dungal"
+"O Congalach"
+"Mac Fergal"
+"O Blathmac"
+"Mac Dubthach"
+"O Dunlang"
+"Mac Corcc"
+"O Find"
+"Mac Loegaire"
+"O Feradach"
+"Mac Findchad"
+"O Finan"
+"Mac Cernach"
+"O Daire"
+"Mac Ruaidri"
+"O Fintan"
+"Mac Guaire"
+"O Trian"
+"Mac Tigernach"
+"O Sechnassach"
+"Mac Nath i"
+"O Tadc"
+"Mac Baetan"
+"O Columb"
+"Mac Forannan"
+"O Mael tuili"
+"Mac Cilline"
+"O Mael ruanaid"
+"Mac Rechtabra"
+"O Broccan"
+"Mac Duinechaid"
+"O Colcu"
+"Mac Amalgaid"
+"O hIndrechtach"
+"Mac Condlae"
+"O Fothud"
+"Mac Maelodor"
+"O Flaithbertach"
+"Mac Imchad"
+"O Becc"
+"Mac Carthach"
+"O Cerball"
+"Mac Cuan"
+"O Tipraite"
+"Mac Cairthenn"
+"McMurrough"
+"ORourke"
+"McCarthy"
+
+// 1:	French_princesses
+ADD_PRINCESS::	
+"Herleva"
+"Arlette"
+"Matilda"
+"Maud"
+"Adelaide"
+"Eleanor"
+"Margaret"
+"Constance"
+"Marie"
+"Joan"
+"Antoinette"
+"Agnes"
+"Charlotte"
+"Beatrix"
+"Blanche"
+"Adela"
+
+// 2:	english_princesses
+ADD_PRINCESS::
+"Emma"
+"Edith"
+"Adela"
+"Isabella"
+"Blanche"
+"Mary"
+"Elizabeth"
+"Margaret"
+"Catherine"
+"Matilda"
+"Margery"
+"Joan"
+"Alice"
+"Beatrice"
+"Clare"
+"Helen"
+
+// 3:	byzantine_princesses
+ADD_PRINCESS::
+"Theophano"
+"Anna"
+"Zoe"
+"Theodora"
+"Eudocia"
+"Maria"
+"Irene"
+"Kasiane"
+"Zenophilia"
+"Helena"
+"Gregoria"
+"Epiphania"
+"Euphrosyne"
+"Lupicina"
+"Vigilantia"
+"Matasuntha"
+
+// 4:	german_princesses
+ADD_PRINCESS::
+"Gisela"
+"Gunhilda"
+"Judith"
+"Cunigunda"
+"Claudia"
+"Eleonore"
+"Phillipa"
+"Klementina"
+"Salomea"
+"Gertrud"
+"Jutta"
+"Hedwig"
+"Dorothea"
+"Charlotte"
+"Maria"
+"Whilhelmina"
+
+// 5:	venitian_princesses
+ADD_PRINCESS::
+"Caterina"
+"Buzilla"
+"Blanche"
+"Valentina"
+"Maria"
+"Rosana"
+"Bruna"
+"Margarita"
+"Santesa"
+"Angela"
+"Letitia"
+"Verdis"
+"Amata"
+"Massaria"
+"Marina"
+"Florese"
+
+// 6:	spanish_princesses
+ADD_PRINCESS::
+"Leonor"
+"Berenguela"
+"Constancia"
+"Maria"
+"Taraisia"
+"Dulce"
+"Uracca"
+"Beatriz"
+"Isabel"
+"Blanca"
+"Juana"
+"Teresa"
+"Violante"
+"Sancha"
+"Petronila"
+"Jimena"
+  
+// 7:	polish_princesses
+ADD_PRINCESS::
+"Anna"
+"Zophia"
+"Jadwiga"
+"Ielsavet"
+"Elzbieta"
+"Ryska"
+"Swietoslawa"
+"Iogaila"
+"Katarzyna"
+"Maria"
+"Katarzyna"
+"Swatawa"
+"Marta"
+"Apolonia"
+"Emilia"
+"Orszula"
+
+// 8:	danish_princesses
+ADD_PRINCESS::
+"Margrethe"
+"Ingeborg"
+"Thyra"
+"Astrid"
+"Ingrid"
+"Sigrid"
+"Berengaria"
+"Rikissa"
+"Sofie"
+"Regitze"
+"Birgitta"
+"Ingegerd"
+"Ulfhild"
+"Cecilie"
+"Kristina"
+"Ulrikke"
+
+// 9:	russian_princesses
+ADD_PRINCESS::
+"Dobronega"
+"Maria"
+"Anastasia"
+"Anna"
+"Elisaveta"
+"Sofiya"
+"Olga"
+"Tatiana"
+"Ekaterina"
+"Nataliya"
+"Evdokia"
+"Irina"
+"Elena"
+"Prascovia"
+"Svetlana"
+"Zoya"
+
+// 10:	hungarian_princesses
+ADD_PRINCESS::
+"Adelhaid"
+"Sarolt"
+"Caterina"
+"Erzsebet"
+"Iolande"
+"Anna"
+"Katalin"
+"Borbala"
+"Margaretha"
+"Ade"
+"Irisko"
+"Zsofia"
+"Jozsa"
+"Ilona"
+"Sara"
+"Agata"
+
+// 11:	mongol_princesses
+ADD_PRINCESS::
+"Aigiarn"
+"Borte"
+"Chabi"
+"Conchaka"
+"Goland"
+"Ho'elun"
+"Khultulun"
+"Kokachin"
+"Mandughai"
+"Oghul"
+"Orqina"
+"Sorghaghtani"
+"Toregene"
+"Gurbesu"
+"Chotan"
+"Doregene"
+
+// 12:	portuguese_princesses
+ADD_PRINCESS::
+"Adelaide"
+"Agata"
+"Alice"
+"Anastacia"
+"Andreia"
+"Angela"
+"Ana"
+"Antonieta"
+"Beatriz"
+"Carlota"
+"Claudia"
+"Constanca"
+"Dulce"
+"Elisabete"
+"Emilia"
+"Fernanda"
+"Helena"
+"Ines"
+"Irene"
+"Isabel"
+"Josefina"
+"Joana"
+"Judite"
+"Catarina"
+"Cristina"
+"Leonor"
+"Luisa"
+"Margarida"
+"Mafalda"
+"Maria"
+"Mecia"
+"Marta"
+"Laura"
+"Matilde"
+"Natalia"
+"Filipa"
+"Raquel"
+"Salome"
+"Sancha"
+"Sara"
+"Teresa"
+"Urraca"
+"Vitoria"
+"Guilhermina"
+"Sofia"
+
+// 13:	armenian_princesses
+ADD_PRINCESS::
+"Azadouhi"
+"Lusaper"
+"Maro"
+"Maroush"
+"Lusentak"
+"Azkanoush"
+"Dzovig"
+"Dzovinar"
+"Eliz"
+"Eliza"
+"Eojen"
+"Hasmig"
+"Markarid"
+"Maro"
+"Maroush"
+"Marta"
+"Heghine"
+"Undza"
+"Varsenig"
+"Varso"
+
+// 14:	lithuanian_princesses
+ADD_PRINCESS::
+"Martha"
+"Elena"
+"Grazina"
+"Aldona"
+"Ausra"
+"Ruta"
+"Saule"
+"Laima"
+"Gierde"
+"Linas"
+"Gintare"
+"Roze"
+"Svajone"
+
+// 15:	swedish_princesses
+ADD_PRINCESS::
+"Katarina"
+"Ingeborg"
+"Kristina"
+"Margareta"
+"Rikissa"
+"Ingegerd"
+"Agnes"
+"Magdalena"
+"Anna"
+"Cecilia"
+"Birgitta"
+"Ebba"
+"Maud"
+"Blanka"
+
+// 16:	serb_princesses
+ADD_PRINCESS::
+"Aleksa"
+"Aleksandra"
+"Ana"
+"Anita"
+"Biljana"
+"Budislavka"
+"Danica"
+"Dijana"
+"Grada"
+"Ivan"
+"kaJasminka"
+"Jovana"
+"Jovanka"
+"Latinka"
+"Milja"
+"Mira"
+"Mirjana"
+"Natasa"
+"Natka"
+"Navenka"
+"Olivera"
+"Tatijana"
+"Tomka"
+"Vera"
+"Vesna"
+"Vsna"
+"Vukosava"
+
+// 17:	irish_princesses
+ADD_PRINCESS::
+"Abhalach"
+"Ada"
+"Afraic"
+"Aibhilin"
+"Aidhne"
+"Aidchearc"
+"Aife"
+"Be Dhrona"
+"Be Gubha"
+"Beabhail"
+"Beaenad"
+"Beagnat"
+"Creibhrill"
+"Criadha"
+"Croine"
+"Croinseach"
+"Dear Uise"
+"Dearbhail"
+"Dearchu"
+"Dearmhor"
+"Eas"
+"Easu"
+"Eibhear"
+"Eimhear"
+"Maebh"
+"Fiona"
+"Niamh"

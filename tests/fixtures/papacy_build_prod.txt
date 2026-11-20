@@ -1,0 +1,7 @@
+Number of upgrades	Name/Identifier	Localised name	Building type	Cost  including upgrades	Time to build including upgrades	Building conditions																					
+DATA START																											
+3	CASTLE	Castle	"CASTLE, TROOP_PRODUCER"	"400,1000,2000,4000"	"4,8,12,16"	"{},{CASTLE},{CASTLE2},{CASTLE3}"																					
+0	CHURCH	Church	AGENT_PRODUCER	200	2	"{}"								"CATHOLIC, ORTHODOX"													
+0	MOSQUE	Mosque	AGENT_PRODUCER	200	2	"{}"								MUSLIM													
+0	CHAPTER_HOUSE	Chapter_House	TROOP_PRODUCER	600	4	"{CASTLE2}"								CATHOLIC													
+0	RIBAT	Ribat	TROOP_PRODUCER	400	3	"{CASTLE}"								MUSLIM													

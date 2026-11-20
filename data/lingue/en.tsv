@@ -1,0 +1,1974 @@
+# Traduzioni inglesi delle frasi del codice (ADR-066): italiano TAB inglese. \n = a capo, \t = tabulazione, \\ = barra rovescia.
+# Controllo: python tools/testi_lingua.py (e il test test_lingua). Righe in ordine alfabetico della frase italiana.
+Salvataggio della mappa d'Europa: non si puo' caricare sulla mappa del mondo.	Save from the Europe map: it can't be loaded on the world map.
+Salvataggio di un'altra mappa (%s).	Save from another map (%s).
+\n\nAl primo posto: %s, con %d province.	\n\nIn first place: %s, with %d provinces.
+\n  Si sblocca costruendo: %s	\n  Unlocked by building: %s
+\n  Vacante · si concede in %s	\n  Vacant · granted in %s
+\n%d unità · %d uomini	\n%d units · %d men
+\nAssalto ordinato: a fine anno attacca il castello	\nAssault ordered: attacks the castle at the end of the year
+\nC'è posto per %d unità: le altre %d restano fuori.	\nThere is room for %d units: the other %d remain outside.
+\nClic destro: scheda dell'edificio	\nRight-click: building details
+\nClic destro: scheda dell'unità	\nRight-click: unit card
+\nIl dominio era già tuo dal %d.	\nDomination had been yours since %d.
+\nIn corso: %s, %d anni	\nIn progress: %s, %d years
+\nLa tua fazione (%s) è in posizione %d su %d.	\nYour faction (%s) is in position %d of %d.
+\nRichiede: %s	\nRequires: %s
+\nSoglia raggiunta.	\nThreshold reached.
+\nTi mancano %d province.	\nYou need %d more provinces.
+\nUomini: %d · mantenimento: %d	\nMen: %d · upkeep: %d
+\nVittoria per dominio nell'anno %d.	\nVictory by domination in the year %d.
+   locale %d · via mare %d · importazioni %d	   local %d · by sea %d · imports %d
+   rotte commerciali: %d porti stranieri	   trade routes: %d foreign ports
+  %s · acume %d	  %s · acumen %d
+  Esercito: %s	  Army: %s
+  Lealtà %d	  Loyalty %d
+  Titolo: %s	  Title: %s
+  Trascina o clic destro: su una regione = muovi o attacca; su un tuo esercito = unisci	  Drag or right-click: onto a region = move or attack; onto one of your armies = merge
+  Vizi e virtù: %s	  Vices and virtues: %s
+ %d non possono.	 %d cannot.
+ %s lascia il comando.	 %s relinquishes command.
+ (%d religiosi)	 (%d clerics)
+ (%d ribelli)	 (%d rebels)
+ (%d unità restano fuori)	 (%d units remain outside)
+ (%d uomini)	 (%d men)
+ (%s)	 (%s)
+ (effetto provvisorio)	 (provisional effect)
+ (era di %s)	 (formerly held by %s)
+ (erede)	 (heir)
+ (erede).	 (heir).
+ (esercito %d)	 (army %d)
+ (forze %d contro %d)	 (forces %d against %d)
+ (fuori)	 (outside)
+ (governa %s)	 (governs %s)
+ (guida l'esercito %d)	 (leads army %d)
+ (in corso)	 (in progress)
+ (Invio)	 (Enter)
+ (lascia: %s)	 (gives up: %s)
+ (livello 	 (level 
+ (nessun erede maggiorenne: %d altri contendenti).	 (no heir of age: %d other contenders).
+ (probabilità %s)	 (probability %s)
+ (riemersione %d)	 (re-emergence %d)
+ (senza erede maggiorenne)	 (no adult heir)
+ (senza erede maggiorenne: altri %d contendenti)	 (no adult heir: %d other contenders)
+ (si ripete)	 (repeating)
+ (tasti , e .; con Maiusc solo quelle con qualcosa in coda)	 (keys , and .; with Shift only those with something in the queue)
+ (tesoro insufficiente)	 (insufficient treasury)
+ (tu)	 (you)
+ (valore %d)	 (value %d)
+ (zelo %d)	 (zeal %d)
+ (zelo della provincia %d)	 (province zeal %d)
+ a %s	 at %s
+ Alleanze rotte con %s.	 Alliances broken with %s.
+ Alza la lealtà della provincia propria, la abbassa in quelle altrui, cattura gli agenti nemici e può aprire le porte dei castelli.	 Raises loyalty in its own province, lowers it in foreign ones, captures enemy agents and can open castle gates.
+ attaccando a %s	 by attacking %s
+ con %d province	 with %d provinces
+ con %d unità: le altre %d restano fuori, non c'è posto.	 with %d units: the other %d remain outside, there is no room.
+ con %s	 with %s
+ con %s come capo	 with %s as leader
+ con l'estinzione della dinastia	 with the extinction of the dynasty
+ con la caduta della fazione	 with the fall of the faction
+ Con la guarnigione passa %s.	 With the garrison, %s changes hands.
+ Con la guarnigione passa la provincia.	 The province passes over with the garrison.
+ da %s	 from %s
+ del comandante, con il ritratto	 of the commander, with portrait
+ dell'ammiraglio, con il ritratto	 of the admiral, with portrait
+ di %s	 of %s
+ di vecchiaia	 of old age
+ dopo %d anni	 after %d years
+ dopo %d anni di assedio	 after %d years of siege
+ dopo %s	 after %s
+ dopo la sconfitta	 after defeat
+ dopo la vittoria	 after victory
+ e 	 and 
+ e %s resta senza esercito	 and %s is left without an army
+ e altri %d	 and %d more
+ e lealtà -%d	 and loyalty -%d
+ e muore	 and dies
+ ed e' perduta	 and is lost
+ Escluse %d (%s).	 Excluded %d (%s).
+ Fine del viaggio.	 End of the journey.
+ fino al %d	 until %d
+ Il giocatore è %dº.	 The player ranks number %d.
+ Il tesoro non bastava per altre %d.	 The treasury was not enough for %d more.
+ in %d eserciti e guarnigioni	 in %d armies and garrisons
+ In viaggio verso %s.	 Travelling towards %s.
+ L'agente ci va prima.	 The agent goes there first.
+ L'esercito prosegue sul percorso già ordinato.	 The army continues along the route already ordered.
+ L'influenza del suo capo sale di %d.	 Its leader's influence rises by %d.
+ L'influenza del suo capo scende di %d.	 Its leader's influence falls by %d.
+ L'interfaccia usa gli stili di riserva.	 The interface uses the fallback styles.
+ La guerra a %s si dichiara all'ingresso.	 War on %s is declared on entry.
+ La guerra si dichiara a fine anno.	 War is declared at year end.
+ Le crociate in coda sono annullate: rimborsati %d fiorini.	 Crusades in the queue are cancelled: %d florins refunded.
+ Le truppe congedate diventano mercenari.	 Disbanded troops become mercenaries.
+ nel castello	 into the castle
+ Nessun percorso per terra: ordina il movimento con il clic destro.	 No land route: order the movement with a right-click.
+ oppure 	 or 
+ Ora %s tra i mercenari della provincia.	 Now %s among the mercenaries of the province.
+ per diserzione	 through desertion
+ per le perdite	 through losses
+ Percorso: %s.	 Route: %s.
+ Prima in classifica: %s	 First place: %s
+ Prima in classifica: %s.	 First in the ranking: %s.
+ Propone alleanze e tregue e corrompe eserciti.	 Proposes alliances and ceasefires and bribes armies.
+ Ricompensa: %s	 Reward: %s
+ Saltate %d pile (%s).	 Skipped %d units (%s).
+ sul rogo	 at the stake
+ Trascina un tuo esercito sul castello per barricarlo.	 Drag one of your armies onto the castle to withdraw into it.
+ Uccide personaggi e agenti nemici.	 Kills enemy characters and agents.
+ · %d fiorini	 · %d florins
+ · %d scelte	 · %d selected
+ · arrivo in %s	 · arriving in %s
+ · in missione	 · on a mission
+ · obiettivo %s	 · target %s
+ · oltre il %s: rivolta eretica	 · over %s: heretic revolt
+ · Papa %s	 · Pope %s
+ · religione del proprietario	 · owner's religion
+ · si ripete	 · repeating
+ · valore %d	 · valour %d
+%+d fiorini	%+d florins
+%d %s %s %s (esercito %d).	%d %s %s %s (army %d).
+%d %s %s all'esercito %d.	%d %s %s to army %d.
+%d %s %s l'esercito %d%s.	%d %s %s army %d%s.
+%d %s %s per %s (esercito %d).	%d %s %s for %s (army %d).
+%d %s %s per %s e %s all'esercito %d all'arrivo.	%d %s %s for %s and %s army %d on arrival.
+%d %s: trascinane %s sull'obiettivo o clic destro.	%d %s: drag %s onto the target or right-click.
+%d anni	%d years
+%d anni · %d %s	%d years old · %d %s
+%d avvenimenti	%d events
+%d eserciti	%d armies
+%d fiorini	%d florins
+%d fiorini a fine anno se accetta	%d florins at year end if it accepts
+%d fiorini l'anno	%d florins a year
+%d flotte	%d fleets
+%d flotte attaccano la flotta %s (%s).	%d fleets attack the fleet %s (%s).
+%d l'anno	%d a year
+%d non possono (castello pieno o ordine non valido)	%d cannot (castle full or invalid order)
+%d pile dell'esercito %d di %s tornano all'organico pieno a %s (%d uomini, %d fiorini).	%d units of army %d of %s return to full strength at %s (%d men, %d florins).
+%d pile spostate.	%d units moved.
+%d ribelli	%d rebels
+%d si barricano nel castello di %s%s	%d withdraw into the castle at %s%s
+%d stelle	%d stars
+%d su %d	%d of %d
+%d unità	%d units
+%d unità · %d uomini	%d units · %d men
+%d uomini %s catturati	%d men %s captured
+%d vanno a %s per barricarsi	%d go to %s to withdraw into the castle
+%d vanno ad assediare %s	%d go to besiege %s
+%d. %s · %d anni%s	%d. %s · %d years%s
+%d. %s · in pausa: servono %d fiorini	%d. %s · paused: %d florins needed
+%da	%dy
+%d° in coda	No. %d in queue
+%s\n%d f · %d a	%s\n%d f · %d y
+%s\n%d uomini · %d f	%s\n%d men · %d f
+%s\n%d uomini · valore %d\n%s\nClic: scheda dell'unità	%s\n%d men · value %d\n%s\nClick: unit card
+%s\n%d uomini · valore %d%s\n%s	%s\n%d men · value %d%s\n%s
+%s\n%s\nClic: la scheda con il ritratto	%s\n%s\nClick: card with portrait
+%s\n%s\nClic: toglila dalla coda (rimborso %d fiorini).	%s\n%s\nClick: remove it from the queue (refund %d florins).
+%s\n%s\nClic: toglilo dalla coda e torna tra gli edifici da costruire (rimborso %d fiorini, i lavori fatti si perdono).	%s\n%s\nClick: remove it from the queue and return it to the buildings available to build (refund %d florins, work done is lost).
+%s\n%s\nScegli prima le carte da riportare all'organico pieno.	%s\n%s\nFirst choose the cards to bring back to full strength.
+%s\nAcque non osservate	%s\nUnobserved waters
+%s\nClic: la scheda dell'edificio	%s\nClick: building card
+%s\nClic: la scheda dell'unità	%s\nClick: unit details
+%s\nCoda ripetuta in pausa: riparte da sola quando il tesoro basta.	%s\nRepeating queue paused: it restarts by itself when the treasury is enough.
+%s\nVostra provincia	%s\nYour province
+%s %d uomini	%s %d men
+%s %d: bersaglio %s	%s %d: target %s
+%s %d: bersaglio tolto.	%s %d: target cleared.
+%s %d: scegli il bersaglio (zelo %d)	%s %d: choose the target (zeal %d)
+%s %s\n%s · %s\nClic: la finestra della provincia	%s %s\n%s · %s\nClick: province window
+%s %s %s (%d uomini) a %s per %d fiorini.	%s %s %s (%d men) at %s for %d florins.
+%s %s %s con %s	%s %s %s with %s
+%s %s %s e vi si %s all'arrivo, se c'è posto.	%s %s %s and %s it on arrival, if there is room.
+%s %s %s proposta %s%s	%s %s %s proposed %s%s
+%s %s a %s.	%s %s %s.
+%s %s conquista %s.	%s %s conquers %s.
+%s %s dal Papa	%s %s by the Pope
+%s %s fallisce	%s %s fails
+%s %s guerra %s.	%s %s war %s.
+%s %s guerra (attacco a %s).	%s %s war (attack on %s).
+%s %s guerra.	%s %s war.
+%s %s il castello di %s.	%s %s the castle of %s.
+%s %s il castello.	%s %s the castle.
+%s %s l'assedio del castello di %s.	%s %s the siege of the castle of %s.
+%s %s l'esercito %d %s per %d fiorini%s.	%s %s army %d %s for %d florins%s.
+%s %s parte da %s	%s %s sets out from %s
+%s %s perde %s	%s %s loses %s
+%s %s recluta %s a %s	%s %s recruits %s at %s
+%s %s sposa un nobile %s%s	%s %s marries a noble %s%s
+%s %s un agente %s%s: %s, preso %s.	%s %s an agent %s%s: %s, taken %s.
+%s %s un assedio.	%s %s a siege.
+%s %s una provincia	%s %s a province
+%s %s · %d fiorini, %d anni	%s %s · %d florins, %d years
+%s %s%s ha come bersaglio %s	%s %s%s is targeting %s
+%s %s%s non ha più un bersaglio	%s %s%s no longer has a target
+%s (%d fiorini)	%s (%d florins)
+%s (%d pile)	%s (%d units)
+%s (%s di %s)	%s (%s of %s)
+%s (%s di %s) compie %d anni ed e' maggiorenne.	%s (%s of %s) turns %d and comes of age.
+%s (%s) si ferma a %s: nessun percorso porta più a %s.	%s (%s) halts at %s: no route leads to %s any more.
+%s (%s): da %s a %s via mare (%s).%s	%s (%s): from %s to %s by sea (%s).%s
+%s (%s): da %s a %s.%s	%s (%s): from %s to %s.%s
+%s (agente, valore %s, %s)	%s (agent, valour %s, %s)
+%s (ancora %d)	%s (%d more)
+%s (fino al %d)	%s (until %d)
+%s (livello %d)	%s (level %d)
+%s (principessa di %s) compie %d anni ed e' in eta' da marito.	%s (princess of %s) turns %d and reaches marriageable age.
+%s (rimborso %d)	%s (refund %d)
+%s (segreto)	%s (secret)
+%s (valore %s, %s)	%s (valour %s, %s)
+%s a %s: %d uomini morti	%s in %s: %d men dead
+%s assalta il castello di %s: %s.	%s assaults the castle of %s: %s.
+%s assalterà il castello a fine anno.	%s will assault the castle at year end.
+%s assalterà il castello di %s a fine anno.	%s will assault the castle of %s at year end.
+%s assassina %s di %s (%s).	%s assassinates %s of %s (%s).
+%s assedia il castello di %s (%s).	%s besieges the castle of %s (%s).
+%s attaccherà a fine anno %s, qui in %s.	%s will attack %s at year end, here in %s.
+%s cattura l'agente %d (%s) di %s a %s (%s).	%s captures agent %d (%s) of %s at %s (%s).
+%s comanda gia' l'esercito %d	%s already commands army %d
+%s compie %d anni ed %s.	%s turns %d and %s.
+%s con %s	%s with %s
+%s conquista %s (era di %s).	%s conquers %s (it belonged to %s).
+%s corrompe l'esercito %d di %s per %d fiorini (%s).	%s bribes army %d of %s for %d florins (%s).
+%s dal %d	%s since %d
+%s detiene gia' questa carica	%s already holds this office
+%s di %s	%s of %s
+%s di %s conquista %s.	%s of %s conquers %s.
+%s di %s fallisce (%s).	%s of %s fails (%s).
+%s di %s finisce (%s).	%s of %s ends (%s).
+%s di %s ha %s: %s.	%s of %s has %s: %s.
+%s di %s parte da %s con %d pile.	%s of %s sets out from %s with %d units.
+%s di %s prende in moglie %s, nobildonna di %s.	%s of %s takes %s, a noblewoman of %s, as his wife.
+%s dichiara guerra a %s (attacco a %s).	%s declares war on %s (attack on %s).
+%s dichiara guerra a %s (invasione di %s).	%s declares war on %s (invasion of %s).
+%s e %s	%s and %s
+%s e %s firmano una tregua fino al %d (%s).	%s and %s sign a ceasefire until %d (%s).
+%s e %s firmano una tregua fino al %d%s.	%s and %s sign a ceasefire until %d%s.
+%s e %s firmano una tregua%s.	%s and %s sign a ceasefire%s.
+%s e %s non sono piu' in guerra: la tregua non serve	%s and %s are no longer at war: the ceasefire is not needed
+%s e %s non sono piu' neutrali (%s): l'alleanza non si puo' stringere	%s and %s are no longer neutral (%s): the alliance cannot be formed
+%s e %s sono in guerra: niente matrimonio	%s and %s are at war: no marriage
+%s e %s stringono un'alleanza (%s).	%s and %s form an alliance (%s).
+%s e %s stringono un'alleanza%s.	%s and %s form an alliance%s.
+%s e altre %d	%s and %d more
+%s e' di %s, con cui %s ha un trattato (%s)	%s belongs to %s, with whom %s has a treaty (%s)
+%s e' gia' di %s	%s already belongs to %s
+%s e' gia' in coda di costruzione	%s is already in the building queue
+%s e' in %s, fuori dalla portata dell'agente	%s is in %s, out of the agent's reach
+%s e' minorenne	%s is under age
+%s e' scomunicata dal Papa (%s).	%s is excommunicated by the Pope (%s).
+%s e' scomunicata e non puo' bandire una crociata	%s is excommunicated and cannot proclaim a crusade
+%s e' stata distrutta.	%s has been destroyed.
+%s e' troppo giovane per sposarsi	%s is too young to marry
+%s e' un'agente: il bersaglio e' l'agente	%s is an agent: the target is the agent
+%s esce dal castello.	%s leaves the castle.
+%s esce dalla coda ripetuta di %s: %s.	%s leaves the repeating queue at %s: %s.
+%s fino al %d.	%s until %d.
+%s già a %s: %s.	%s already in %s: %s.
+%s governa gia' %s	%s already governs %s
+%s governa ora %s.	%s now governs %s.
+%s guadagna una stella di comando (%d).	%s gains a star of command (%d).
+%s guadagna una stella di comando%s (ora %s).	%s gains a command star%s (now %s).
+%s guida ora %s.	%s now leads %s.
+%s ha gia' il livello massimo	%s is already at the maximum level
+%s ha gia' una crociata attiva (esercito %d)	%s already has an active crusade (army %d)
+%s ha gia' una crociata in coda a %s	%s already has a queued crusade at %s
+%s Il bersaglio è fuori portata: quando l'agente arriva, trascinalo di nuovo sopra.	%s The target is out of range: when the agent arrives, drag it onto the target again.
+%s insegue %s (%s): la raggiunge in circa %d anni, se resta a portata.	%s is chasing %s (%s): it will catch it in about %d years, if it stays within reach.
+%s lascia il titolo di %s.	%s gives up the title of %s.
+%s lascia la carica di %s.	%s gives up the office of %s.
+%s muore di vecchiaia a %d anni.	%s dies of old age aged %d.
+%s non confina con %s	%s does not border %s
+%s non confina con %s%s	%s does not border %s%s
+%s non e' cattolico: l'Inquisizione processa solo i cattolici	%s is not Catholic: the Inquisition tries only Catholics
+%s non e' costruibile con la religione di %s	%s cannot be built with the religion of %s
+%s non e' costruibile da %s	%s cannot be built by %s
+%s non e' disponibile nell'epoca %s	%s is not available in the %s era
+%s non e' in guerra con %s: la tregua si propone a una fazione in guerra	%s is not at war with %s: a ceasefire can only be proposed to a faction at war
+%s non e' neutrale (%s): l'alleanza si propone solo a una fazione neutrale	%s is not neutral (%s): an alliance can only be proposed to a neutral faction
+%s non e' raggiungibile da %s: nessun percorso a piedi o via mare%s	%s cannot be reached from %s: no route on foot or by sea%s
+%s non e' reclutabile (non e' una truppa, una nave o un agente)	%s cannot be recruited (it is not a troop, a ship or an agent)
+%s non e' reclutabile con la cultura %s	%s cannot be recruited with the %s culture
+%s non e' reclutabile da %s	%s cannot be recruited by %s
+%s non e' reclutabile in %s	%s cannot be recruited in %s
+%s non e' reclutabile: le principesse nascono con la dinastia	%s cannot be recruited: princesses are born into the dynasty
+%s non e' un bersaglio di crociata (serve un proprietario scomunicato, ribelle o non cattolico, o una maggioranza eretica)	%s is not a crusade target (it needs an excommunicated, rebel or non-Catholic owner, or a heretic majority)
+%s non e' un capo, un principe o un generale (%s): non si processa	%s is not a leader, a prince or a general (%s): cannot be put on trial
+%s non e' un generale (non si sposano il capo, l'erede, i principi)	%s is not a general (the leader, the heir and the princes cannot be married)
+%s non e' una provincia da riconquistare con il jihad	%s is not a province to reconquer with the jihad
+%s non e' una truppa di terra	%s is not a land troop
+%s non ha ordini da annullare.	%s has no orders to cancel.
+%s non ha un castello.	%s has no castle.
+%s non ha un organico valido	%s has no valid strength
+%s non ha un porto	%s has no port
+%s non ha un titolo	%s has no title
+%s non ha una carica	%s holds no office
+%s non ha una carica legata a %s	%s has no office tied to %s
+%s non puo' comandare (minorenne o principessa)	%s cannot command (under age or a princess)
+%s non puo' governare (minorenne o principessa)	%s cannot govern (under age or a princess)
+%s non puo' restare alleata di %s e di %s, che si fanno guerra: resta con %s e rompe con %s.	%s cannot remain allied to both %s and %s, who are at war with each other: it stays with %s and breaks with %s.
+%s non puo' ricevere cariche (minorenne o principessa)	%s cannot hold offices (under age or a princess)
+%s non si trova in %s	%s is not in %s
+%s ottiene %s.	%s gains %s.
+%s ottiene un vizio o una virtu': %s (livello %d).	%s gains a vice or virtue: %s (level %d).
+%s perde il titolo di %s (%s).	%s loses the title of %s (%s).
+%s perde il titolo di %s.	%s loses the title of %s.
+%s perde la carica di %s.	%s loses the office of %s.
+%s perde una stella di comando (%d).	%s loses a star of command (%d).
+%s perde una stella di comando%s (ora %s).	%s loses a command star%s (now %s).
+%s posti (la cavalleria conta doppio)	%s places (cavalry count double)
+%s prende in moglie %s%s.	%s takes %s as his wife%s.
+%s prende in moglie %s, nobildonna %s%s.	%s takes %s, a noblewoman %s, as his wife%s.
+%s propone a %s: %s (risposta entro il %d) (%s).	%s proposes to %s: %s (reply by %d) (%s).
+%s raggiunge %s a %s e vi si unirà all'arrivo, se c'è posto.	%s reaches %s at %s and will merge on arrival, if there is room.
+%s recluta %s (%s) a %s.	%s recruits %s (%s) at %s.
+%s riceve il titolo di %s (%s).	%s receives the title of %s (%s).
+%s riceve il titolo di %s.	%s receives the title of %s.
+%s riceve la carica di %s.	%s receives the office of %s.
+%s richiede la risorsa %s nella regione	%s requires the resource %s in the province
+%s richiede una regione costiera con porto	%s requires a coastal province with a port
+%s riemerge a %s con %s e %d eserciti.	%s re-emerges at %s under %s with %d armies.
+%s rifiuta la proposta di %s di %s (%s).	%s refuses the %s proposal of %s (%s).
+%s rompe %s con %s attaccando in %s.	%s breaks %s with %s by attacking in %s.
+%s sale al trono	%s accedes to the throne
+%s sale al trono di %s	%s ascends to the throne of %s
+%s scende al livello %d.	%s drops to level %d.
+%s si barrica nel castello	%s withdraws into the castle
+%s si barrica nel castello.	%s withdraws into the castle.
+%s si estingue senza eredi.	%s dies out without heirs.
+%s si estingue senza eredi: %d province diventano ribelli.	%s dies out without heirs: %d provinces go over to the rebels.
+%s si estingue senza eredi: 1 provincia diventa ribelle.	%s dies out without heirs: 1 province goes over to the rebels.
+%s si ritira	%s retreats
+%s si ritira a vita contemplativa a %d anni.	%s retires to a contemplative life aged %d.
+%s si ritira a vita privata (%d anni).	%s retires from public life (aged %d).
+%s si ritira a vita privata.	%s retires from public life.
+%s si unisce a %s.	%s merges with %s.
+%s ti propone %s (rispondi entro il %d).	%s proposes %s to you (reply by %d).
+%s ti propone %s.	%s proposes %s to you.
+%s torna al pieno delle forze a fine anno: %d %s, %d uomini, %d fiorini.	%s returns to full strength at year end: %d %s, %d men, %d florins.
+%s va a %s e a fine anno si barrica nel castello con le unità che ci stanno.	%s moves to %s and at year end withdraws into the castle with the units that fit.
+%s volte quello normale	%s times the normal rate
+%s · %d fiorini, %d anni	%s · %d florins, %d years
+%s · %d unità, %d uomini%s	%s · %d units, %d men%s
+%s · %d uomini%s	%s · %d men%s
+%s · %s · acume %d · lealtà %d	%s · %s · acumen %d · loyalty %d
+%s · %s · lealtà %d	%s · %s · loyalty %d
+%s · Anno %d · %s	%s · Year %d · %s
+%s · di %s · %s	%s · owned by %s · %s
+%s · riepilogo della campagna	%s · campaign summary
+%s · valore %s	%s · valour %s
+%s · zelo %d su 100	%s · zeal %d out of 100
+%s è assediato e non può uscire dal castello.	%s is besieged and cannot leave the castle.
+%s è distrutto.	%s is destroyed.
+%s è già nel castello di %s.	%s is already in the castle of %s.
+%s è in età da marito: diventa un'agente%s%s.	%s is of marriageable age: becomes an agent%s%s.
+%s — %s, %d anni	%s — %s, aged %d
+%s — %s, anno %d · %s	%s — %s, year %d · %s
+%s, %d uomini\nIngaggio: %d fiorini	%s, %d men\nHire cost: %d florins
+%s, eroe di %s, compare a %s.	%s, hero of %s, appears at %s.
+%s, principessa di %s, e' in eta' da marito: diventa un'agente a %s.	%s, princess of %s, is of marriageable age: she becomes an agent at %s.
+%s: %s (%d uomini) contro %s (%d); vince %s. Perdite: %d contro %d.	%s: %s (%d men) against %s (%d); %s wins. Losses: %d against %d.
+%s: %s a %s	%s: %s at %s
+%s: %s%d stella	%s: %s%d star
+%s: %s%d stelle	%s: %s%d stars
+%s: attacco a %s (la guerra si dichiara a fine anno).	%s: attacking %s (war is declared at year end).
+%s: attacco alla flotta %s (%s); se si sposta entro il raggio delle navi, la insegue.	%s: attacking the fleet %s (%s); if it moves within the ships' range, it will give chase.
+%s: ha attaccato un altro alleato.	%s: it attacked another ally.
+%s: in viaggio verso %s, arrivo in %s (%s).	%s: travelling to %s, arriving in %s (%s).
+%s: limite di pile riaddestrate nella provincia raggiunto	%s: limit of retrained units in the province reached
+%s: missione annullata.	%s: mission cancelled.
+%s: movimento annullato.	%s: movement cancelled.
+%s: movimento verso %s, l'assedio sarà tolto.	%s: movement towards %s, the siege will be lifted.
+%s: movimento verso %s.	%s: moving towards %s.
+%s: nessuna missione possibile su quel bersaglio.	%s: no mission possible against that target.
+%s: non si può restare alleati di chi attacca %s.	%s: no one can stay allied with whoever attacks %s.
+%s: ordini annullati.	%s: orders cancelled.
+%s: rotta verso %s, %d zone di mare (%d all'anno: %s).	%s: route to %s, %d sea zones (%d per year: %s).
+%s: sbarco ostile a %s via mare (%s); la guerra si dichiara a fine anno.	%s: hostile landing at %s by sea (%s); war is declared at year end.
+%s: scegli	%s: choose
+%s: trasporto via mare verso %s (%s).	%s: sea transport to %s (%s).
+(in riaddestramento)	(retraining)
+(nessuna stella)	(no stars)
++%d nave alla partenza	+%d ship at the start
++%d navi alla partenza	+%d ships at the start
++%d unità di truppe alla partenza	+%d troop units at the start
+, %d eserciti sciolti	, %d armies disbanded
+, contagio da %s	, contagion from %s
+, e . (o le frecce della barra): provincia precedente o successiva, con Maiusc solo quelle con qualcosa in coda	, and . (or the bar arrows): previous or next province, with Shift only those with something in the queue
+, erede designato	, designated heir
+, eroe	, hero
+, fuori dal castello	, outside the castle
+, sangue reale	, royal blood
+, via mare	, by sea
+- l'influenza del capo cala di %d (una volta);	- the leader's influence drops by %d (once);
+- la lealtà obiettivo delle province scende fino a %d, in proporzione ai cattolici;	- the target loyalty of provinces falls by up to %d, in proportion to Catholics;
+- le alleanze con le fazioni cattoliche sono rotte;	- alliances with Catholic factions are broken;
+- le vostre province sono bersaglio delle crociate;	- your provinces are targets for crusades;
+- non potete bandire crociate.	- you cannot proclaim crusades.
+-%d fiorini	-%d florins
+1 anno	1 year
+1 avvenimento	1 event
+1 esercito	1 army
+1 stella	1 star
+: %d fiorini di mantenimento in meno l'anno.	: %d florins less upkeep a year.
+: %d generali passano ai ribelli	: %d generals defect to the rebels
+: %s %s la provincia	: %s %s the province
+: %s contro %s	: %s against %s
+: %s perde un livello	: %s loses a level
+: a fine anno	: at year end
+: gli eretici sono il %s della popolazione	: heretics are %s of the population
+: in avvicinamento	: approaching
+: la provincia passa ai ribelli	: the province goes over to the rebels
+: nasce un'alleanza	: an alliance is formed
+; %d restano fuori per mancanza di posto	; %d remain outside for lack of room
+[%s] %s · valore %s	[%s] %s · valour %s
+[Agente] %s	[Agent] %s
+[Agente] %s · %d fiorini, %d anni	[Agent] %s · %d florins, %d years
+a %s	to %s
+A fine anno l'esercito assalta il castello invece di attendere.	At year end the army assaults the castle instead of waiting.
+Accetta	Accept
+Acque nemiche: flotte %s	Enemy waters: fleets %s
+Acque neutrali	Neutral waters
+Acque vostre: la vostra flotta apre la rotta ai trasporti	Your waters: your fleet opens the route to transports
+acume	acumen
+Acume	Acumen
+Acume %d	Acumen %d
+AD %d	AD %d
+Addestramento	Training
+Addestramento a %s (%d in coda)	Training at %s (%d queued)
+Addestramento: apre la pergamena di addestramento della provincia scelta	Training: opens the recruitment scroll for the selected province
+Addestramento: scegli una tua provincia e clicca qui	Training: choose one of your provinces and click here
+Affida l'esercito a un altro comandante.	Hand the army over to another commander.
+Edifici: %d anni in più per costruirli	Buildings: %d more years to build
+Edifici: %d anno in meno per costruirli	Buildings: built %d year faster
+Forza delle flotte %s	Fleet strength %s
+agente	agent
+Agente	Agent
+Agente sconosciuto o non tuo: %d	Unknown agent, or not yours: %d
+Agente sconosciuto: %d	Unknown agent: %d
+Agente: %s.	Agent: %s.
+Agenti	Agents
+Agenti presenti	Agents present
+Agricoltura	Farming
+Agricoltura %s	Farming %s
+Agricoltura: %d	Farming: %d
+All'attacco della flotta %d %s	Attacking fleet %d %s
+Costo delle navi %s	Ship cost %s
+Costo delle truppe %s	Troop cost %s
+Forza della fanteria %s	Infantry strength %s
+alleanza	alliance
+Alleanza	Alliance
+Alleanze e diplomazia (D)	Alliances and diplomacy (D)
+Alleata	Allied
+Alleati	Allied
+Alt+clic sui tuoi eserciti, o Alt+trascina un riquadro: li scegli insieme; trascinane uno o clic destro: vanno tutti	Alt+click your armies, or Alt+drag a box: you select them together; drag one or right-click: they all go
+Alta	High
+Altri eventi	Other events
+Altro (eventi, doni, rimborsi): %s	Other (events, gifts, refunds): %s
+Altro esercito della tua fazione nella stessa regione.	Another army of your faction in the same region.
+ammiraglio %s %s	Admiral %s %s
+Ammiraglio %s con %d %s	Admiral %s with %d %s
+anni	years
+Anni di assedio: %d	Years of siege: %d
+anno	year
+Anno %d concluso	Year %d ended
+Anno %d concluso: nessun evento.	Year %d ended: no events.
+Anno del Signore %d	Year of Our Lord %d
+Annulla	Cancel
+Annulla (Esc)	Cancel (Esc)
+Annulla assalto	Cancel assault
+Annulla il movimento ordinato: resta dov'è.	Cancels the ordered movement: it stays where it is.
+Annulla l'assalto	Cancel the assault
+Annulla missione	Cancel mission
+Annulla movimento	Cancel movement
+Annulla movimento e missione	Cancel movement and mission
+Annulla ordini	Cancel orders
+Annulla riaddestramento	Cancel retraining
+Annullato: rimborsati %d fiorini.	Cancelled: %d florins refunded.
+Apre %s sulla scheda Governo, dove si concede la carica.	Opens %s on the Government tab, where the office is granted.
+Apre la finestra della provincia	Opens the province window
+Apre la pergamena informativa (doppio clic sulla pedina o clic destro sulla provincia)	Opens the information scroll (double-click the piece or right-click the province)
+argento	silver
+armata	army
+armate	armies
+Armatura	Armour
+armatura	armour
+Armatura base	Base armour
+armatura: %s (+%d)	armour: %s (+%d)
+Armi	Weapons
+armi	weapons
+armi: %s (+%d)	weapons: %s (+%d)
+arriva a fine anno	arrives at year end
+Arruola (%d)	Recruit (%d)
+Arruolamenti	Recruitment
+Arruolamento	Recruitment
+artiglieria	artillery
+assalta	storms
+Assalta	Assault
+Assalta il castello	Assault the castle
+assaltano	storm
+Assalto al castello	Assault on the castle
+Assalto al castello di %s	Assault on the castle of %s
+Assalto annullato: %s resta ad assediare.	Assault cancelled: %s remains besieging.
+Assalto non possibile.	Assault not possible.
+assalto ordinato a %s	assault ordered on %s
+assassina	assassinates
+Assassina %s	Assassinate %s
+Assassina %s (%s di %s)	Assassinate %s (%s of %s)
+Assassina l'agente %d (%s di %s)	Assassinate agent %d (%s of %s)
+assassinano	assassinate
+assassinare %s	assassinate %s
+assassinio	assassination
+Assassino	Assassin
+Assedi	Sieges
+assediata	besieged
+Assediata da %s	Besieged by %s
+Assedio in una regione sconosciuta nel salvataggio: %s	Siege in an unknown province in the save: %s
+Assegna il titolo a…	Grant the title to…
+Assegna il titolo di governatore: chi lo aveva lo perde e la sua lealtà cala di %d.	Grants the governor's title: whoever held it loses it and their loyalty drops by %d.
+assolda	hires
+assoldano	hire
+attacca	attacks
+Attacca	Attack
+attaccano	attack
+Attaccare %s?	Attack %s?
+Attaccare il Papato porta alla scomunica.	Attacking the Papacy leads to excommunication.
+Attaccare la flotta %s (%s)?	Attack the fleet %s (%s)?
+Attaccare quelle fazioni prima della scadenza significa essere scomunicati.\nSe rispetterete il termine, il Papa imporrà una tregua di %d anni.	Attacking those factions before the deadline means excommunication.\nIf you respect the deadline, the Pope will impose a ceasefire of %d years.
+attacchi	attack
+attacchino	attack
+Attacco	Attack
+Attacco a %s: la guerra si dichiara a fine anno	Attack on %s: war is declared at the end of the year
+Attacco navale	Naval attack
+Attacco non possibile.	Attack not possible.
+attesa	waiting
+Avanti (Esc): ancora %d	Next (Esc): %d more
+Avvisi	Warnings
+Avviso: %s	Warning: %s
+banditi	bandits
+Barricati	Withdraw
+Barricati nel castello	Withdraw into the castle
+Base	Base
+Bassa	Low
+Battaglia	Battle
+Battaglia a %s	Battle of %s
+Battaglia in campo	Field battle
+Battaglia navale in %s	Naval battle in %s
+Battaglie	Battles
+Bersaglio	Target
+Bersaglio non valido.	Invalid target.
+Bersaglio: %s	Target: %s
+Bersaglio: %s (%s).	Target: %s (%s).
+Bersaglio: nessuno (senza bersaglio lo zelo cala di altri %d all'anno)	Target: none (without a target zeal falls a further %d a year)
+blocco navale: flotta non alleata in %s	naval blockade: non-allied fleet in %s
+Blocco navale: i vostri eserciti non passano per mare (%s)	Naval blockade: your armies cannot cross by sea (%s)
+Bonus al morale	Morale bonus
+Bonus all'impatto della carica	Bonus on the impact of the charge
+Bonus in difesa	Defence bonus
+Bonus nel combattimento corpo a corpo	Bonus in hand-to-hand combat
+bronzo	bronze
+C'è una tregua %s: l'attacco la rompe ed è una dichiarazione di guerra.	There is a ceasefire %s: attacking breaks it and is a declaration of war.
+C'è una vostra flotta	You have a fleet here
+C: corte · D: diplomazia · G: classifica · H: questo aiuto	C: court · D: diplomacy · G: standings · H: this help
+Cambia	Change
+Cambia comandante…	Change commander…
+Campagna: %s, inizio %d (epoche: %s)	Campaign: %s, starting %d (eras: %s)
+Capitale: %s	Capital: %s
+Capo	Leader
+capo	leader
+Capo della fazione	Faction leader
+Capo, erede, principi, principesse e generali della dinastia.	Leader, heir, princes, princesses and generals of the dynasty.
+Cardinale	Cardinal
+Carestia a %s: nessun raccolto quest'anno	Famine in %s: no harvest this year
+Carestia a %s: nessun raccolto quest'anno e lealta' in calo.	Famine in %s: no harvest this year and loyalty falling.
+Carica	Load
+Carica di %s revocata a %s: la sua lealtà cala di %d.	Office of %s revoked from %s: their loyalty drops by %d.
+Carica di %s: %s.	Office of %s: %s.
+Carica partita	Load Game
+Carica una partita	Load a game
+Carica una partita (F9 rapido)	Load a game (F9 quick)
+Carica: %s	Office: %s
+Caricamento non riuscito: %s	Load failed: %s
+Cariche di Stato	Offices of State
+Carte scelte e «Congeda» nella barra: le unità lasciano l'esercito senza rimborso e diventano mercenari; niente più mantenimento	Cards chosen and “Disband” in the bar: the units leave the army without a refund and become mercenaries; no more upkeep
+Cartella %s non creata (errore %d)	Folder %s could not be created (error %d)
+Castello	Castle
+Castello · %s	Castle · %s
+Castello · %s · %s	Castle · %s · %s
+Castello: %s	Castle: %s
+catena non più valida	chain no longer valid
+Cattolica	Catholic
+cattolici	Catholics
+cattura	captures
+catturano	capture
+Cavalleria	Cavalry
+certa	certain
+chi la proponeva è scomparso	the proposer has disappeared
+Chiude il pannello della provincia (Esc, dopo aver chiuso gli altri pannelli).	Closes the province panel (Esc, after closing the other panels).
+Chiude il pannello e toglie la selezione dell'agente.	Closes the panel and clears the agent selection.
+Chiude il pannello e toglie la selezione dell'esercito.	Closes the panel and clears the army selection.
+Chiude l'esercito nel castello.	Shuts the army in the castle.
+Chiude la corte e seleziona l'esercito sulla mappa.	Closes the court and selects the army on the map.
+Chiudere %s?\nLa partita non salvata andrà persa.	Close %s?\nUnsaved progress will be lost.
+Chiudi	Close
+Chiudi (Esc)	Close (Esc)
+Chiudi (F1)	Close (F1)
+Chiudi (Q)	Close (Q)
+Ci si barrica solo nel castello di una provincia propria	You can withdraw into the castle of one of your own provinces only
+Classifica (G)	Standings (G)
+Classifica · anno %d · dominio: %d province su %d	Ranking · year %d · domination: %d provinces of %d
+Clic destro con un agente: muovi o scegli la missione	Right-click with an agent: move or choose the mission
+Clic destro con un esercito: muovi o attacca; sulle province cerchiate trasporta via mare	Right-click with an army: move or attack; onto circled provinces it transports by sea
+Clic sinistro: seleziona provincia, esercito o agente · Esc: chiude o deseleziona	Left click: select province, army or agent · Esc: close or deselect
+Clic su un edificio costruito: la sua scheda · le reclute nascono nel castello finché c'è posto	Click on a built building: its card · recruits appear in the castle as long as there is room
+Clic sul castello: le truppe dentro; secondo clic: la pergamena con gli eserciti del castello	Click on the castle: the troops inside; second click: the parchment with the armies of the castle
+Clic: scegli · trascina sulla mappa per separare · «Congeda» per scioglierla · clic destro: scheda	Click: select · drag onto the map to split · “Disband” to dismiss it · right-click: card
+Clic: scheda dell'unità	Click: unit card
+Coda di costruzione (%d/%d)	Construction queue (%d/%d)
+Coda di costruzione piena (%d)	Building queue full (%d)
+Coda di reclutamento (%d/%d)%s	Recruitment queue (%d/%d)%s
+Coda di reclutamento piena (%d)	Recruitment queue full (%d)
+Coda di reclutamento ripetuta	Repeating recruitment queue
+coda ripetuta	repeating queue
+Coda ripetuta attivata: le unità completate tornano in fondo alla coda.	Repeating queue on: completed units go back to the end of the queue.
+Coda ripetuta di %s in pausa: per %s servono %d fiorini. Riprende quando il tesoro basta.	Repeating queue at %s paused: %s needs %d florins. Resumes when the treasury allows.
+Coda ripetuta di %s ripresa: il tesoro basta di nuovo.	Repeating queue at %s resumed: the treasury is sufficient again.
+Coda ripetuta disattivata.	Repeating queue off.
+Coda sconosciuta: %s	Unknown queue: %s
+Code di produzione	Production queues
+Comandante	Commander
+Comandante: %s (%s, %d anni) — %s	Commander: %s (%s, aged %d) — %s
+Comandante: nessuno	Commander: none
+Comandi	Commands
+Comandi e tasti (H)	Commands and keys (H)
+comando	command
+Comando	Command
+Comando %s	Command %s
+Comando non disponibile in questa versione: %s	Command not available in this version: %s
+Comando: %d %s	Command: %d %s
+Commercio	Trade
+Commercio %s	Trade %s
+Commercio di %s: locale %d · via mare %d · importazioni %d	Trade of %s: local %d · by sea %d · imports %d
+Commercio: %d	Trade: %d
+Compagnie di mercenari presenti nella provincia: si assoldano subito.	Mercenary companies present in the province: they can be hired at once.
+Compare l'eroe %s a %s.	The hero %s appears at %s.
+Compare l'eroe %s.	The hero %s appears.
+Con troppi eretici la rivolta della provincia è eretica e più probabile.	With too many heretics the province's revolt is heretical and more likely.
+Concedi	Grant
+Concedi la carica a…	Grant the office to…
+Concedi la carica di %s: chi la deteneva la perde e la sua lealtà cala di %d; una sola carica a testa.	Grant the office of %s: whoever held it loses it and their loyalty drops by %d; one office per person.
+Concedi la mano a %s%s	Grant your hand to %s%s
+Conferma	Confirm
+Confinanti: %s	Neighbours: %s
+Confini (B)	Borders (B)
+Confini: %d	Borders: %d
+Confini: %s	Borders: %s
+Conflitto in sospeso con %s	Pending conflict with %s
+Congeda	Disband
+Congeda %s: %d fiorini di mantenimento in meno l'anno. Chiede conferma.	Disband %s: %d florins less upkeep a year. Asks for confirmation.
+Congeda le %s scelte%s	Disband selected %s%s
+Congeda le unità scelte	Disband selected units
+Congedare %s	Disband %s
+Congedata	Disbanded
+Congedate	Disbanded
+Congedo	Disband
+conquista	conquers
+conquistano	conquer
+Conquiste	Conquests
+contadini	peasants
+contesa: nemici nella provincia	contested: enemies in the province
+Continua	Continue
+Continua a giocare	Continue playing
+controlla	controls
+controllano	control
+corrompe	bribes
+corrompere l'%s	bribe the %s
+Corrompi l'%s (%d uomini)	Bribe the %s (%d men)
+Corrompi l'esercito %d di %s (%d uomini)	Bribe army %d of %s (%d men)
+corrompono	bribe
+Corruzione	Bribery
+corruzione	bribery
+Corte	Court
+Corte (C)	Court (C)
+Corte · %s · anno %d	Court · %s · year %d
+Costo	Cost
+Costo %d fiorini, %d anni.	Cost %d florins, %d years.
+Costo degli edifici %s	Building cost %s
+Costo della cavalleria %s	Cavalry cost %s
+Costo totale: %d fiorini per %d pile.	Total cost: %d florins for %d units.
+Costruisci (%d)	Build (%d)
+Costruiti	Built
+Costruiti (%d)	Built (%d)
+Costruzione	Construction
+Costruzione a %s (%d in coda)	Construction at %s (%d queued)
+Costruzione completata a %s: %s.	Construction completed at %s: %s.
+Costruzione messa in coda: %s.	Construction queued: %s.
+Costruzione: apre la pergamena di costruzione della provincia scelta	Construction: opens the building scroll for the selected province
+Costruzione: scegli una tua provincia e clicca qui	Construction: choose one of your provinces and click here
+Costruzioni	Construction
+crociata	crusade
+Crociata	Crusade
+crociata attiva	active crusade
+Crociata bandita	Crusade proclaimed
+crociata già attiva	crusade already active
+crociata già in coda	crusade already queued
+crociata in coda	queued crusade
+Crociata o jihad senza bersaglio: il clic destro sceglie il bersaglio	Crusade or jihad with no target: the right-click chooses the target
+Crociata: alla fine della coda nasce un esercito che si sceglie un bersaglio tra le province di scomunicati, ribelli, non cattolici o eretici. Una alla volta.	Crusade: at the end of the queue an army is created that chooses a target among the provinces of excommunicated, rebel, non-Catholic or heretic owners. One at a time.
+d'assalto	assault
+da %s	by %s
+Da costruire	To build
+dal forte di confine	by the border fort
+Decidi dopo (Esc)	Decide later (Esc)
+dei proprietari	owner
+del generale	of the general
+del principe	of the prince
+del re	of the king
+dell'erede	of the heir
+della religione	religion
+Della vostra fazione	Of your faction
+dello shader	shader
+Descrizione	Description
+destinatario	the recipient is gone
+Dettagli	Details
+Deve restare almeno una pila nell'esercito di partenza	At least one unit must remain in the original army
+dichiara	declares
+dichiarano	declare
+difensiva	defensive
+Difesa	Defence
+Difficile	Hard
+Difficoltà dell'IA	AI difficulty
+Difficoltà: 	Difficulty: 
+Diplomazia	Diplomacy
+Diplomazia (D)	Diplomacy (D)
+Diplomazia · %s · anno %d	Diplomacy · %s · year %d
+diserzione	desertion
+Distanza dal capo	Distance from the leader
+distrutta in battaglia	destroyed in battle
+distrutto	destroyed
+Dividi le pile scelte	Split selected units
+Dominio: per vincere servono %d province di terra su %d (soglia %s).\nOra ne controlli %d (%s).\nClassifica delle fazioni: G.	Domination: to win you need %d land provinces out of %d (threshold %s).\nYou now control %d (%s).\nFaction ranking: G.
+Dono del Papa per %s: %d fiorini	Papal gift for %s: %d florins
+dopo anni senza conquiste	after years without conquests
+e altri %d porti: +%d	and %d more ports: +%d
+e' annientata	it is wiped out
+Economia: proventi delle province	Economy: income of the provinces
+Economia: proventi delle province nel dettaglio (F1)	Economy: detailed income of the provinces (F1)
+Edifici	Buildings
+edifici	buildings
+Edifici costruiti	Buildings
+Edifici costruiti, in coda e da costruire, con le icone.	Buildings built, queued and available to build, with icons.
+Edifici: %d anni in meno per costruirli	Buildings: built %d years faster
+Edifici: %d anno in più per costruirli	Buildings: %d more year to build
+Edificio	Building
+edificio	building
+Edificio sconosciuto: %s	Unknown building: %s
+Edificio · livello %d	Building · level %d
+Edificio · livello %d su %d	Building · level %d of %d
+Effetti	Effects
+Effetti:	Effects:
+Effetto: %s.	Effect: %s.
+Elenco dei bersagli validi dell'%s, con proprietario e motivo. Senza bersaglio, il clic destro su una regione lo sceglie.	List of valid targets for the %s, with owner and reason. With no target set, a right-click on a region chooses it.
+Elenco dei bersagli validi, con proprietario e motivo.	List of valid targets, with owner and reason.
+Elimina	Delete
+Emissari e principesse	Emissaries and princesses
+Emissario	Emissary
+Entrano %d unità, le altre %d restano fuori.	%d units enter, the other %d remain outside.
+Epoche	Eras
+erede	heir
+Erede	Heir
+erede al trono	heir to the throne
+Eretica	Heretic
+eretici	heretics
+eretici %s in %d province	heretics %s in %d provinces
+eretici %s%% in %s	heretics %s%% in %s
+Errore nei dati: %s	Data error: %s
+Errori nei dati	Data errors
+Errori: %d · comandi ancora da interpretare: %d	Errors: %d · commands still to be interpreted: %d
+Esci	Quit
+Esci dal castello	Leave the castle
+Esci dal gioco	Quit the game
+Esegue il fine anno: movimenti, battaglie, assedi, reddito, costruzioni e reclutamento.	Executes the end of the year: movements, battles, sieges, income, construction and recruitment.
+eserciti scelti	armies selected
+Eserciti uniti.	Armies merged.
+Eserciti: 	Armies: 
+Esercito	Army
+Esercito %d	Army %d
+Esercito %d fermo a %s: %s è di un'altra fazione, conflitto in sospeso.	Army %d halted at %s: %s belongs to another faction, conflict pending.
+Esercito %d in una regione sconosciuta: %s	Army %d in an unknown province: %s
+Esercito %d: da %s a %s via mare (%s).	Army %d: from %s to %s by sea (%s).
+Esercito %d: da %s a %s.	Army %d: from %s to %s.
+esercito %s	army %s
+Esercito diviso: %d pile formano un esercito nuovo.	Army split: %d units form a new army.
+Esercito inesistente	No such army
+Esercito o flotta scelti: clic sulle carte nella barra in basso per sceglierle, poi trascinale sulla mappa per separarle	Army or fleet selected: click the cards in the bar at the bottom to choose them, then drag them onto the map to split them
+Esercito scelto: i suoi comandi (annulla ordini, barricati, assalta, riaddestra, comandante, congeda) sono nella barra in basso	Army selected: its commands (cancel orders, withdraw, assault, retrain, commander, disband) are in the bar at the bottom
+Esercito sconosciuto o non tuo: %d	Unknown army, or not yours: %d
+Esercito sconosciuto: %d	Unknown army: %d
+Esercito sconosciuto: %s	Unknown army: %s
+Esito non valido del comando %s	Invalid result of command %s
+Esperienza della pila	Experience of the unit
+Esportazione delle immagini non trovata: manca %s (va rifatta con export.py).	Image export not found: %s is missing (the export must be redone with export.py).
+espugnato	taken
+Età: %d anni	Age: %d years
+Eventi e storia	Events and history
+Evento storico n. %d	Historical event no. %d
+Evento storico «%s»: %s.	Historical event “%s”: %s.
+Evento storico: %s	Historical event: %s
+Facile	Easy
+Famiglia reale: la corte (C)	Royal family: the court (C)
+Fanteria	Infantry
+Fazione	Faction
+Fazione del giocatore sconosciuta: %s\nControlla scenes/campaign_settings.gd.	Unknown player faction: %s\nCheck scenes/campaign_settings.gd.
+fazione distrutta	faction destroyed
+Fazione sconosciuta nel salvataggio: %s	Unknown faction in the save: %s
+Fazione sconosciuta o non attiva: %s	Unknown or inactive faction: %s
+Fazione sconosciuta: %s	Unknown faction: %s
+Fazioni distrutte	Factions destroyed
+Fazioni: %d dichiarate, %d attive	Factions: %d declared, %d active
+Fede	Faith
+Ferma riaddestr.	Stop retrain.
+Fermati qui (Esc)	Stop here (Esc)
+ferro	iron
+File %s non scrivibile (errore %d)	File %s cannot be written (error %d)
+File prod non trovati:\n%s\n%s	Production files not found:\n%s\n%s
+Fine\nanno	End\nYear
+Fine anno	End Year
+Fine anno (Invio)	End Year (Enter)
+Fine della campagna	End of the campaign
+Fine della campagna (%d).	End of the campaign (%d).
+Fine della campagna (anno %d).	End of the campaign (year %d).
+Flotta	Fleet
+Flotta %d	Fleet %d
+Flotta bersaglio sconosciuta: %d	Unknown target fleet: %d
+Forza della cavalleria %s	Cavalry strength %s
+Forza di arcieri e balestrieri %s	Archer and crossbowman strength %s
+flotta nemica in %s	enemy fleet in %s
+Flotte alleate: %s	Allied fleets: %s
+Flotte neutrali: %s	Neutral fleets: %s
+Forza dell'artiglieria %s	Artillery strength %s
+flotte scelte	fleets selected
+forma	forms
+formano	form
+Forza negli scontri navali	Strength in naval battles
+generale	general
+Generale	General
+Generale sconosciuto o non della tua fazione: %s	Unknown general, or not of your faction: %s
+Generali	Generals
+Giacimenti	Deposits
+già in riaddestramento	already retraining
+Gli agenti si muovono solo a terra (%s e' mare)	Agents move only on land (%s is sea)
+gli assedianti se ne sono andati o sono stati sconfitti	the besiegers have left or been defeated
+Gli eretici di %s (%s, %s%% della popolazione) si ribellano: %d ribelli.	The heretics of %s (%s, %s%% of the population) rise in revolt: %d rebels.
+Gli eserciti devono stare nella stessa regione	The armies must be in the same province
+Gli eserciti si muovono solo a terra	Armies move only on land
+Gli eserciti si muovono solo a terra (%s e' mare)	Armies move only on land (%s is sea)
+Governatore	Governor
+Governatore di %s	Governor of %s
+Governatore: %s (%s, %d anni)	Governor: %s (%s, aged %d)
+Governatore: nessuno	Governor: none
+Governo	Government
+Governo e lealtà	Government and loyalty
+Gran inquisitore	Grand Inquisitor
+Guarnigione	Garrison
+Guarnigione 	Garrison 
+Guarnigione %d/%d	Garrison %d/%d
+Guarnigione sconosciuta: la provincia è fuori vista (nebbia di guerra).	Garrison unknown: the province is out of sight (fog of war).
+Guarnigione: 	Garrison: 
+Guarnigione: %d posti su %d (la cavalleria conta doppio).	Garrison: %d places out of %d (cavalry count double).
+guerra	war
+Guerra civile %s	Civil war %s
+Guerra civile in %s: %d generali sleali (%s) passano ai ribelli con %d eserciti e %d province.	Civil war in %s: %d disloyal generals (%s) go over to the rebels with %d armies and %d provinces.
+Guerre dichiarate	Wars declared
+guidata %s	led %s
+H: comandi e tasti	H: commands and keys
+ha attaccato il Papato	for attacking the Papacy
+ha ignorato l'avvertimento	for ignoring the warning
+ha ignorato l'avvertimento del Papa	for ignoring the Pope's warning
+I %d sovrani in carica nell'anno %d. Clic su un regnante: la sua scheda.	The %d sovereigns reigning in the year %d. Click a ruler: their card.
+I congedati diventano mercenari in %s: potrà assoldarli chi possiede la provincia.	The disbanded troops become mercenaries in %s: whoever owns the province may hire them.
+i difensori	the defenders
+I mercenari non si riaddestrano	Mercenaries cannot be retrained
+I ribelli non entrano in trattati	Rebels do not enter into treaties
+I ribelli sono ostili a tutti.	Rebels are hostile to all.
+Il bersaglio %s dell'esercito %d non e' piu' valido: %s.	The target %s of army %d is no longer valid: %s.
+Il bersaglio del processo e' {"tipo": "personaggio" o "agente", "id": n}	The target of a trial is {"tipo": "personaggio" or "agente", "id": n}
+Il bersaglio dell'assassinio e' {"tipo": "personaggio" o "agente", "id": n}	The target of an assassination is {"tipo": "personaggio" or "agente", "id": n}
+Il bersaglio della corruzione e' un esercito (id)	The target of a bribe is an army (id)
+Il bersaglio deve essere una provincia di terra (%s e' mare)	The target must be a land province (%s is sea)
+Il bersaglio di %s e' una fazione	The target of %s is a faction
+Il bersaglio di sposa_generale e' un generale (id del personaggio)	The target of sposa_generale is a general (character id)
+Il bersaglio e' della tua fazione	The target belongs to your faction
+Il bersaglio e' di un alleato	The target belongs to an ally
+Il bersaglio e' in %s, fuori dalla portata dell'agente	The target is in %s, out of the agent's reach
+Il bersaglio è della tua stessa fazione.	The target is of your own faction.
+Il capo non puo' ricevere un titolo di governatore	The leader cannot be given a governor's title
+Il capo non puo' ricevere una carica	The leader cannot be given an office
+Il capo non si puo' sostituire al comando dell'esercito %d	The leader cannot be replaced as commander of army %d
+il castello e' vuoto	the castle is empty
+il destinatario è scomparso	the recipient has disappeared
+il doppio del normale	double the normal rate
+il forte di confine	the border fort
+Il jihad	The jihad
+Il jihad e' solo dei musulmani: %s non lo e'	The jihad is for Muslims only: %s is not one
+Il livello di tassa modifica il reddito agricolo della provincia.	The tax level changes the province's farming income.
+Il Papa ammonisce %s: non %s %s	The Pope warns %s: do not %s %s
+Il Papa ammonisce %s: per %d anni non deve attaccare %s, o sara' scomunicata.	The Pope warns %s: for %d years it must not attack %s, or it will be excommunicated.
+Il Papa dona %d fiorini a %s.	The Pope gives %d florins to %s.
+Il Papa impone una tregua tra %s e %s	The Pope imposes a ceasefire between %s and %s
+Il Papa impone una tregua tra %s e %s fino al %d.	The Pope imposes a ceasefire between %s and %s until %d.
+Il Papa vi ammonisce: non attaccate 	The Pope warns you: do not attack 
+Il Papa vi ha scomunicati.	The Pope has excommunicated you.
+Il Papato riemerge a %s	The Papacy re-emerges at %s
+Il Papato riemerge a %s con un esercito di %d pile (riemersione %d).	The Papacy re-emerges at %s with an army of %d units (re-emergence %d).
+Il personaggio	The character
+Il porto di %s non e' ancora costruito	The port of %s has not been built yet
+Il prezzo si paga a fine anno solo se l'esercito accetta; se il tesoro non basta la missione fallisce.	The price is paid at year end only if the army accepts; if the treasury is short the mission fails.
+Il processo %s (%s) contro %s%s fallisce%s.	The trial %s (%s) against %s%s fails%s.
+Il processo dell'inquisitore %d di %s contro %s di %s fallisce (%s).	The trial by inquisitor %d of %s against %s of %s fails (%s).
+Il reddito si calcola a fine anno con le stesse regole: le province assediate o con eserciti nemici non rendono nulla; la tassa vale per l'agricoltura.	Income is calculated at year end with the same rules: provinces under siege or with enemy armies yield nothing; the tax applies to farming.
+il tempo per rispondere è finito	the time to reply has run out
+Il tesoro (%d) non basta per tutte: si ripristinano quelle che si possono pagare.	The treasury (%d) is not enough for all of them: those that can be paid for are replenished.
+Il testo originale non è disponibile: i file di Medieval: Total War non sono stati trovati (evento storico %s, anno %d).	The original text is not available: the Medieval: Total War files were not found (historical event %s, year %d).
+Il titolo di %s (%s) e' revocato a %s.	The title of %s (%s) is revoked from %s.
+Il titolo di %s è revocato a %s.	The title of %s is revoked from %s.
+Il trasporto via mare dell'agente %d (%s) di %s da %s a %s e' interrotto (%s).	The sea transport of agent %d (%s) of %s from %s to %s is interrupted (%s).
+Il trasporto via mare dell'esercito %d di %s da %s a %s e' interrotto (%s): l'esercito resta dov'e'.	The sea transport of army %d of %s from %s to %s is interrupted (%s): the army stays where it is.
+Imam	Ulama
+Immagine della mappa non trovata:\n%s	Map image not found:\n%s
+Immagini dell'interfaccia non trovate.	Interface images not found.
+Imperatore Dio e poteri divini	God-Emperor and divine powers
+Impossibile annullare l'assalto.	Cannot cancel the assault.
+Impossibile leggere %s (errore %d).	Cannot read %s (error %d).
+Impossibile leggere la mappa delle regioni:\n%s	Cannot read the region map:\n%s
+Impostazioni	Settings
+Impostazioni non salvate (file non scrivibile).	Settings not saved (file not writable).
+Impostazioni salvate.	Settings saved.
+In addestramento:	In training:
+In addestramento: mancano %s.	In training: %s to go.
+In arruolamento (%d/%d)	In recruitment (%d/%d)
+in attesa di fondi	awaiting funds
+in attesa · %s	waiting · %s
+In battaglia	In battle
+In coda	Queued
+in coda: 	in queue: 
+In coda: %s di addestramento.	Queued: %s of training.
+In coda: %s di lavori.	Queued: %s of work.
+in corso	in progress
+in corso · %s	in progress · %s
+In costruzione (%d/%d)	Under construction (%d/%d)
+In costruzione:	Under construction:
+In costruzione: mancano %s.	Under construction: %s to go.
+In guerra	At war
+In guerra con	At war with
+In guerra con te	At war with you
+In guerra con voi	At war with you
+In guerra con:	At war with:
+In guerra: %s	At war: %s
+in mano ai ribelli	held by rebels
+In mare	At sea
+In pace	At peace
+In viaggio verso %s%s	Travelling to %s%s
+inclinata	tilted
+Inclinazione della plancia	Board tilt
+Indice di coda non valido: %d	Invalid queue index: %d
+Indietro (Esc)	Back (Esc)
+Influenza	Influence
+Influenza %d	Influence %d
+Influenza del capo	Leader's influence
+inizia	begins
+Inizia la campagna	Start Campaign
+iniziano	begin
+Inondazione a %s: il raccolto dell'anno e' dimezzato.	Flood in %s: the year's harvest is halved.
+Inondazione a %s: il raccolto dell'anno è dimezzato.	Flood in %s: the year's harvest is halved.
+Inquisitore	Inquisitor
+Inquisitore:	Inquisitor:
+Inquisitore: nella provincia propria converte gli eretici; con un processo manda sul rogo un cattolico.	Inquisitor: in your own province converts heretics; with a trial sends a Catholic to the stake.
+Inquisitori	Inquisitors
+insieme supererebbero %d pile	together they would exceed %d units
+Intrighe	Intrigue
+Invio: fine anno · F5/F9: salva/carica · F1: economia · clic sullo stemma in basso: opzioni della mappa	Enter: end year · F5/F9: save/load · F1: economy · click on the crest at the bottom: map options
+jihad	jihad
+Jihad	Jihad
+Jihad proclamata	Jihad proclaimed
+Jihad: alla fine della coda nasce un esercito che si sceglie un bersaglio tra le province un tempo musulmane.	Jihad: at the end of the queue an army is created that chooses a target among the formerly Muslim provinces.
+l'agente %d (%s)	agent %d (%s)
+L'agente %d (%s) di %s %s da %s a %s.	Agent %d (%s) of %s %s from %s to %s.
+L'agente %d (%s) di %s si ferma a %s: nessun percorso porta piu' a %s.	Agent %d (%s) of %s stops at %s: no route leads to %s any more.
+L'agente %d aspetta la risposta a una proposta e non ha altre missioni	Agent %d is waiting for the reply to a proposal and has no other missions
+L'agente %d aspetta la risposta a una proposta e non si muove	Agent %d is waiting for the reply to a proposal and does not move
+L'agente %d e' in una regione sconosciuta (%s)	Agent %d is in an unknown province (%s)
+L'agente %d non appartiene a %s	Agent %d does not belong to %s
+L'agente %d non e' cattolico: l'Inquisizione processa solo i cattolici	Agent %d is not Catholic: the Inquisition tries only Catholics
+L'agente %d non ha una missione	Agent %d has no mission
+L'agente resta dov'è senza ordini.	The agent stays where he is with no orders.
+l'alleanza	the alliance
+L'alleanza tra %s e %s cade per la scomunica.	The alliance between %s and %s collapses because of the excommunication.
+L'ammiraglio %s (%s) sale a %s dopo la vittoria in %s.	Admiral %s (%s) rises to %s after victory in %s.
+L'ammiraglio %s sale a %d stelle dopo la vittoria in %s.	Admiral %s rises to %d stars after the victory in %s.
+L'assalto al castello di %s è già ordinato: avverrà a fine anno.	The assault on the castle of %s is already ordered: it will take place at year end.
+L'assalto e' gia' ordinato	The assault has already been ordered
+L'assassino %d di %s fallisce il colpo contro %s%s (%s).	Assassin %d of %s fails to strike %s%s (%s).
+L'assassino %s fallisce il colpo contro %s%s	The assassin %s fails the attempt against %s%s
+L'assedio di %s e' terminato (%s).	The siege of %s has ended (%s).
+L'assedio di %s è terminato	The siege of %s has ended
+L'emissario aspetta la risposta a %s.	The emissary awaits the reply in %s.
+l'emissario non c'è più	the emissary is gone
+L'esercito %d %s rifiuta la corruzione %s%s.	Army %d %s refuses the bribe %s%s.
+L'esercito %d arriva a %s e si barrica nel castello (%d pile)%s.	Army %d arrives at %s and withdraws into the castle (%d units)%s.
+L'esercito %d di %s (%d uomini) e' catturato a %s.	Army %d of %s (%d men) is captured at %s.
+L'esercito %d di %s ha come bersaglio %s.	Army %d of %s is targeting %s.
+L'esercito %d di %s non ha piu' un bersaglio.	Army %d of %s no longer has a target.
+L'esercito %d di %s perde %d pile (%s, zelo %d).	Army %d of %s loses %d units (%s, zeal %d).
+L'esercito %d di %s recluta %d pile a %s (zelo %d).	Army %d of %s recruits %d units at %s (zeal %d).
+L'esercito %d di %s rifiuta la corruzione di %s (%s).	Army %d of %s refuses the bribe of %s (%s).
+L'esercito %d di %s si ritira da %s a %s.	Army %d of %s retreats from %s to %s.
+L'esercito %d di %s si ritira nel castello di %s.	Army %d of %s withdraws into the castle of %s.
+L'esercito %d e' assediato e non puo' uscire dal castello	Army %d is besieged and cannot leave the castle
+L'esercito %d e' assediato nel castello di %s e non puo' muoversi	Army %d is besieged in the castle of %s and cannot move
+L'esercito %d e' assediato nel castello: non si puo' raggiungere	Army %d is besieged in the castle: it cannot be reached
+L'esercito %d e' comandato dal capo o dall'erede: non si corrompe	Army %d is commanded by the leader or the heir: it cannot be bribed
+L'esercito %d e' di un alleato	Army %d belongs to an ally
+L'esercito %d e' gia' al pieno delle forze	Army %d is already at full strength
+L'esercito %d e' gia' della tua fazione	Army %d already belongs to your faction
+L'esercito %d e' gia' nel castello	Army %d is already in the castle
+L'esercito %d e' in %s, fuori dalla portata dell'agente	Army %d is in %s, out of the agent's reach
+L'esercito %d e' in marcia: il riaddestramento richiede che stia fermo	Army %d is on the march: retraining requires it to stay put
+L'esercito %d e' in una regione sconosciuta (%s)	Army %d is in an unknown province (%s)
+L'esercito %d e' nel castello	Army %d is in the castle
+L'esercito %d ha un ordine di movimento: annullalo per assaltare	Army %d has a movement order: cancel it to assault
+L'esercito %d non appartiene a %s	Army %d does not belong to %s
+L'esercito %d non e' in una provincia di %s	Army %d is not in a province of %s
+L'esercito %d non e' nel castello	Army %d is not in the castle
+L'esercito %d non e' un esercito crociato	Army %d is not a crusading army
+L'esercito %d non ha pile	Army %d has no units
+L'esercito %d non si barrica nel castello di %s: %s.	Army %d does not withdraw into the castle at %s: %s.
+L'esercito %d non si unisce all'esercito %d a %s: %s.	Army %d does not join army %d at %s: %s.
+L'esercito %d non sta assediando un castello	Army %d is not besieging a castle
+L'esercito %d si unisce all'esercito %d a %s (%d pile).	Army %d joins army %d at %s (%d units).
+l'esercito da raggiungere non c'e' piu'	the army to join is no longer there
+l'esercito da raggiungere si e' spostato	the army to join has moved
+L'esercito e' gia' in %s: si barrica subito	The army is already in %s: it withdraws into the castle at once
+l'esercito non c'è più	the army is gone
+l'esercito non ha più pile	the army has no units left
+L'esercito si chiude nel castello: se arriva il nemico lo assedia invece di combattere in campo aperto. Se a fine anno nessuno assedia, esce da solo.	The army shuts itself in the castle: if the enemy arrives it is besieged instead of fighting in the open field. If nobody besieges it by year end, it leaves on its own.
+l'esercito si è mosso	the army has moved
+L'esercito torna ad assediare: il castello cede per fame.	The army returns to besieging: the castle will fall to starvation.
+L'esercito torna in campo aperto.	The army returns to the open field.
+l'esercito è andato perso	the army has been lost
+L'esercito è assediato e non può uscire.	The army is besieged and cannot leave.
+l'esercito è distrutto	the army is destroyed
+L'Inquisizione %s manda sul rogo %s%s%s.	The Inquisition %s sends %s to the stake%s%s.
+L'Inquisizione di %s manda sul rogo %s di %s (%s).	The Inquisition of %s sends %s of %s to the stake (%s).
+L'Orda d'Oro %s: %d province passano ai ribelli	The Golden Horde %s: %d provinces pass to the rebels
+L'Orda d'Oro arriva a %s con %d pile (%d uomini).	The Golden Horde arrives in %s with %d units (%d men).
+L'Orda d'Oro scompare (%s): %d province passano ai ribelli.	The Golden Horde vanishes (%s): %d provinces pass to the rebels.
+La %s marcia contro di voi	The %s marches against you
+La carica di %s e' revocata a %s.	The office of %s is revoked from %s.
+La carica di %s è revocata a %s.	The office of %s is revoked from %s.
+La carica si sblocca costruendo %s	The office is unlocked by building %s
+La catena di zone di mare non arriva a %s	The chain of sea zones does not reach %s
+La catena di zone di mare non e' valida	The chain of sea zones is not valid
+La comanda l'ammiraglio %s	Commanded by Admiral %s
+La crociata	The crusade
+La crociata e' solo dei cattolici: %s non lo e'	The crusade is for Catholics only: %s is not one
+La dinastia %s	The dynasty %s
+la dinastia si e' estinta	the dynasty has died out
+la dinastia si è estinta	the dynasty has died out
+la fazione è scomunicata	the faction is excommunicated
+La flotta %d di %s (%d navi) e' affondata a %s.	Fleet %d of %s (%d ships) is sunk at %s.
+La flotta %d e' della stessa fazione	Fleet %d belongs to the same faction
+la flotta %s	the fleet %s
+La guarnigione di %s (%s) cede per fame dopo %d anni di assedio.	The garrison of %s (%s) surrenders from starvation after %d years of siege.
+La guarnigione di %s (%s) fa una sortita: %s.	The garrison of %s (%s) sallies forth: %s.
+La guarnigione di %s fa una sortita.	The garrison of %s makes a sally.
+La guarnigione di %s si arrende per fame	The garrison of %s surrenders through starvation
+La guarnigione fa una sortita.	The garrison makes a sally.
+la guidate voi: l'esercito crociato raccoglie volontari nelle province che attraversa	you lead it: the crusader army gathers volunteers in the provinces it crosses
+La lealta' di %s (%s) scende al %d%%, sotto la soglia di rivolta (%d%%).	The loyalty of %s (%s) falls to %d%%, below the revolt threshold (%d%%).
+La missione %s dell'agente %d (%s) di %s fallisce: %s.	The %s mission of agent %d (%s) of %s fails: %s.
+La partita continua gia'	The game is already continuing
+La partita e' finita: sconfitta nell'anno %d	The game is over: defeat in the year %d
+La partita e' gia' finita (anno %d)	The game is already over (year %d)
+La partita è finita (anno %d).	The game is over (year %d).
+La partita è finita: anno finale %d raggiunto.	The game is over: final year %d reached.
+La partita è finita: sconfitta nell'anno %d.	The game is over: defeat in the year %d.
+La Peste Nera colpisce %s: %d uomini morti.	The Black Death strikes %s: %d men dead.
+La Peste Nera comincia a %s.	The Black Death begins in %s.
+La peste si propaga a %s (da %s): %d uomini morti.	The plague spreads to %s (from %s): %d men dead.
+La pila	The unit
+La pila e' gia' al completo	The unit is already at full strength
+La pila e' gia' in riaddestramento	The unit is already being retrained
+la pila è cambiata (perdite o spostamenti)	the unit has changed (losses or transfers)
+La principessa %s	The princess %s
+La principessa lascia la partita.	The princess leaves the game.
+La principessa non e' piu' in gioco	The princess is no longer in play
+La proposta %d non e' per %s	Proposal %d is not addressed to %s
+La proposta %d non e' piu' valida: l'agente o il proponente sono scomparsi	Proposal %d is no longer valid: the agent or the proposer has gone
+La proposta di %s (%s) a %s decade: %s.	The proposal of %s (%s) to %s lapses: %s.
+La proposta di %s per %s è decaduta: %s.	The proposal from %s for %s has lapsed: %s.
+La provincia %s e' assediata	The province %s is under siege
+La provincia %s non appartiene a %s	The province %s does not belong to %s
+la provincia e' stata conquistata	the province has been conquered
+La provincia non ha un castello	The province has no castle
+la provincia non è più vostra	the province is no longer yours
+La rivolta di %s si estende a %s (%s, lealta' %d%%): %d ribelli (%s).	The revolt of %s spreads to %s (%s, loyalty %d%%): %d rebels (%s).
+La sala dei regnanti	The hall of rulers
+La sala dei regnanti: i sovrani in carica di tutte le fazioni (K)	The hall of rulers: the reigning sovereigns of all factions (K)
+La scomunica %s è revocata	The excommunication %s is lifted
+La scomunica cade con la morte del Papa o del vostro capo.	The excommunication ends with the death of the Pope or of your leader.
+La scomunica di %s e' revocata (%s).	The excommunication of %s is lifted (%s).
+la tregua	the ceasefire
+La tregua tra %s e %s e' scaduta.	The ceasefire between %s and %s has expired.
+La tregua tra %s e %s è scaduta.	The ceasefire between %s and %s has expired.
+La tua fazione	Your faction
+Le code di costruzione e addestramento di tutte le tue province	The construction and training queues of all your provinces
+Le compagnie di mercenari si spostano di provincia in provincia, attratte da locande e taverne, e si sciolgono dopo %d anni. Si assoldano subito, costano il %d%% in più e il loro mantenimento è %s; non si riaddestrano.	Mercenary companies move from province to province, drawn by inns and taverns, and disband after %d years. They can be hired at once, cost %d%% more and their upkeep is %s; they cannot be retrained.
+Le fazioni per province, reddito e quota, e quante province servono per il dominio.	The factions by provinces, income and share, and how many provinces are needed for domination.
+Le flotte non assaltano i castelli	Fleets do not assault castles
+Le flotte non entrano nei castelli	Fleets do not enter castles
+Le flotte non entrano nei castelli.	Fleets cannot enter castles.
+Le flotte non si corrompono (PROVVISORIA)	Fleets cannot be bribed (PROVISIONAL)
+Le flotte non si riaddestrano	Fleets cannot be retrained
+Le flotte si muovono solo in mare (%s e' terra)	Fleets move only at sea (%s is land)
+Le navi si costruiscono solo in regioni con porto	Ships can only be built in provinces with a port
+Le navi stanno in mare, le truppe a terra.	Ships belong at sea, troops on land.
+Le pile che hanno perso uomini sono gia' in riaddestramento	The units that have lost men are already being retrained
+Le pile spuntate formano un esercito nuovo nella stessa regione (riceve un comandante a fine anno).	The ticked units form a new army in the same region (it receives a commander at year end).
+Le proposte tra giocatori non esistono: un giocatore tratta solo con le IA (fase 7b)	There are no proposals between players: a player negotiates only with the AI (phase 7b)
+Lealtà delle province %s	Province loyalty %s
+lealisti	loyalists
+lealta' dei generali %s (%d fazioni)	generals' loyalty %s (%d factions)
+lealtà	loyalty
+Lealtà	Loyalty
+Lealtà %d	Loyalty %d
+Lealtà bassa a %s.	Low loyalty at %s.
+Lealtà bassa a %s: %s.	Low loyalty at %s: %s.
+lealtà dei generali e dei principi %s: %s	loyalty of generals and princes %s: %s
+Lealtà obiettivo: %s	Target loyalty: %s
+Lealtà: %s	Loyalty: %s
+leggera	light
+li attira (%d)	attracts them (%d)
+Limite di %d pile riaddestrate nella provincia raggiunto	Limit of %d retrained units in the province reached
+Livello	Level
+Livello %d	Level %d
+Livello di armatura dell'unità, prima dell'armaiolo	Armour level of the unit, before the armourer
+Livello di tassa non valido: %d (ammessi da 0 a %d)	Invalid tax level: %d (allowed 0 to %d)
+Livello successivo	Next level
+Livello ▶	Level ▶
+lo zelo è esaurito e l'esercito si scioglie	zeal is exhausted and the army disbands
+Macchine d'assedio	Siege engines
+maggioranza eretica	heretic majority
+Manifesto delle immagini non leggibile: %s	Image manifest unreadable: %s
+Manifesto delle immagini vuoto: %s	Image manifest is empty: %s
+Mantenimento	Upkeep
+Mantenimento delle forze	Upkeep of the forces
+Mantenimento delle navi %s	Ship upkeep %s
+Mantenimento delle truppe %s	Troop upkeep %s
+Mappa: %s	Map: %s
+Mappa: trascina con il tasto sinistro o usa le frecce; rotella per lo zoom	Map: drag with the left button or use the arrow keys; mouse wheel to zoom
+matrimonio	marriage
+Matrimonio	Marriage
+medio	average
+Menu	Menu
+Menu iniziale	Main menu
+Mercenari	Mercenaries
+Mercenari (%d)	Mercenaries (%d)
+Mercenari assoldati: %s, nell'esercito %d.	Mercenaries hired: %s, in army %d.
+Merci	Goods
+Mette al comando un personaggio presente nella stessa regione.	Puts a character present in the same region in command.
+Militare: classifica delle fazioni, province e forze (G)	Military: ranking of factions, provinces and forces (G)
+minaccia su %s	threat to %s
+Miniere	Mining
+Miniere %s	Mines %s
+Miniere: %d	Mining: %d
+Mischia	Melee
+Missione fallita (%s): %s %s%s	Mission failed (%s): %s %s%s
+Missione: %s	Mission: %s
+Molto alta	Very high
+Molto bassa	Very low
+Molto difficile	Very hard
+Morale	Morale
+Navi: %d anni in meno per costruirle	Ships: built %d years faster
+Navi: %d anni in più per costruirle	Ships: %d more years to build
+mondo %dx%d	world %dx%d
+morale	morale
+morte del capo	death of the leader
+morte del papa	death of the Pope
+Mostra la provincia	Show the province
+Movimento	Movement
+Movimento annullato.	Movement cancelled.
+Movimento non possibile.	Movement not possible.
+Movimento: %s	Movement: %s
+Munizioni	Ammunition
+Muore %s	%s dies
+Muovi a %s	Move to %s
+Musulmana	Muslim
+Navi: %d anno in meno per costruirle	Ships: built %d year faster
+Navi: %d anno in più per costruirle	Ships: %d more year to build
+musulmani	Muslims
+n. %d	no. %d
+Nasce %s, %s.	%s is born, %s.
+Nasce %s.	%s is born.
+nave	ship
+Nave	Ship
+Nave dell'%s	Flagship of %s
+navi	ships
+Navi	Ships
+Nel %d la tua fazione (%s) è caduta: %s.\n\nLa campagna è finita.	In %d your faction (%s) has fallen: %s.\n\nThe campaign is over.
+Nel %d, alla guida di %s, controlli %d province su %d (%s): il dominio è tuo.\n\nPuoi continuare a giocare fino al %d, o fermarti qui.	In %d, leading %s, you control %d provinces out of %d (%s): domination is yours.\n\nYou can keep playing until %d, or stop here.
+Nel castello non c'e' posto	There is no room in the castle
+Nel castello non c'e' posto: al massimo %d (la cavalleria conta doppio)	There is no room in the castle: at most %d (cavalry counts double)
+Nella provincia in cui si trova converte la popolazione alla sua fede, ogni anno un po' di più secondo il suo valore.	In the province where he stands converts the population to his faith, a little more each year according to his valour.
+Nella provincia propria alza la lealtà e cattura gli agenti nemici; in quella altrui la abbassa e, durante un assedio, può aprire le porte.	In your own province raises loyalty and captures enemy agents; in a foreign one lowers it and, during a siege, can open the gates.
+Nella provincia propria converte gli eretici; con un processo manda sul rogo un cattolico, anche della propria fazione.	In your own province converts heretics; with a trial sends a Catholic to the stake, even one of your own faction.
+Nessun altro esercito qui	No other army here
+Nessun assalto ordinato per l'esercito %d	No assault ordered for army %d
+Nessun assedio tuo al castello di %s: comincia a fine anno, se nel castello c'è il nemico.	You have no siege at the castle of %s: it begins at year end, if the enemy is in the castle.
+nessun avvenimento	no events
+Nessun bersaglio valido in questo momento.	No valid target at this time.
+nessun capo	no leader
+nessun edificio	no building
+nessun edificio colpito.	no buildings hit.
+Nessun edificio in coda.	No building in the queue.
+Nessun edificio.	No buildings.
+nessun effetto	no effect
+Nessun effetto diretto: serve ad altri edifici o alle unità.	No direct effect: required by other buildings or units.
+nessun effetto sul gioco	no effect on the game
+nessun erede	no heir
+Nessun esercito da unire.	No army to merge.
+Nessun esercito nel castello.	No army in the castle.
+Nessun esercito può farlo.	No army can do that.
+Nessun esercito scelto.	No army chosen.
+nessun generale	no general
+Nessun personaggio idoneo	No eligible character
+nessun principe	no prince
+Nessun riaddestramento da annullare per l'esercito %d	No retraining to cancel for army %d
+Nessun trasporto via mare: %s	No sea transport: %s
+Nessun trasporto via mare: %s non e' sulla costa	No sea transport: %s is not on the coast
+Nessun trasporto via mare: nessuna catena di zone con flotte proprie e libere da flotte non alleate (blocco navale) collega %s a %s	No sea transport: no chain of sea zones with fleets of your own and free of non-allied fleets (naval blockade) links %s to %s
+Nessun trasporto via mare: nessuna flotta propria libera nelle zone di mare di %s	No sea transport: no free fleet of your own in the sea zones of %s
+Nessun tuo esercito nuovo nel riquadro.	No new army of yours in the box.
+Nessun viaggio via mare: le flotte nemiche chiudono ogni rotta tra %s e %s	No sea voyage: enemy fleets close every route between %s and %s
+nessuna	none
+Nessuna compagnia di mercenari in questa provincia quest'anno.	No mercenary company in this province this year.
+Nessuna descrizione disponibile.	No description available.
+nessuna fazione coinvolta	no factions involved
+nessuna flotta propria in %s	no fleet of your own in %s
+Nessuna missione: clic destro su un bersaglio.	No mission: right-click on a target.
+Nessuna partita salvata.	No saved games.
+nessuna principessa	no princess
+nessuna provincia coinvolta	no provinces involved
+Nessuna provincia con qualcosa in coda.	No province with anything in its queue.
+Nessuna provincia.	No province.
+Nessuna regione di %s nella regione dell'agente o in una confinante	No province of %s in the agent's region or in a neighbouring one
+Nessuna regione in quel punto.	No region at that spot.
+Nessuna rotta per mare da %s a %s	No sea route from %s to %s
+nessuna stella	no stars
+Nessuna truppa nel castello.	No troops in the castle.
+Nessuna unità in coda.	No unit in the queue.
+Nessuna vittoria per dominio da cui continuare	There is no domination victory to continue from
+nessuno	none
+Neutrale	Neutral
+neutrale	neutral
+Neutrali, in pace con voi	Neutral, at peace with you
+no	no
+Nome di salvataggio non valido: %s	Invalid save name: %s
+Nome di salvataggio non valido: %s (solo lettere, cifre, - e _)	Invalid save name: %s (letters, digits, - and _ only)
+Nome:	Name:
+Non c'e' posto: insieme farebbero %d pile, al massimo %d	There is no room: together they would make %d units, the maximum is %d
+Non c'e' un altro esercito della tua fazione in questa regione.	There is no other army of your faction in this region.
+Non c'è posto: un esercito ha al massimo %d unità.	There is no room: an army has at most %d units.
+Non c'è rimborso e non si torna indietro.	There is no refund and it cannot be undone.
+Non e' un esercito di %s	Not an army of %s
+Non parte	Not moving
+Non partono	Not moving
+Non puoi dare ordini a forze di un'altra fazione.	You cannot give orders to forces of another faction.
+Non puoi dare ordini ad agenti di un'altra fazione.	You cannot give orders to agents of another faction.
+non restano né province né eserciti	neither provinces nor armies remain
+non restano province ne' eserciti	no provinces or armies remain
+Non sei in guerra con nessuna fazione.	You are not at war with any faction.
+Non si propone un matrimonio a una fazione in guerra	You cannot propose a marriage to a faction at war
+Non si tratta con la propria fazione	You cannot negotiate with your own faction
+Non si unisce	Not merging
+Non si uniscono	Not merging
+non è più valida	it is no longer valid
+Non è possibile barricarsi.	It is not possible to withdraw into the castle.
+Normale	Normal
+Notizie dalle altre fazioni	News from other factions
+nozze con un generale	marriage to a general
+nulla in coda	nothing queued
+Nuova campagna	New Campaign
+nuove merci (%s) in %d province	new goods (%s) in %d provinces
+nuove merci per il commercio: %s	new goods for trade: %s
+Nuovo agente%s: %s%s.	New agent%s: %s%s.
+o saranno scomunicati.	or they will be excommunicated.
+o sarà scomunicata.	or it will be excommunicated.
+Ogni porto compra le merci che non ha e vende le sue: un porto ricco e sviluppato rende molto, uno povero poco.	Each port buys the goods it lacks and sells its own: a rich, developed port yields a great deal, a poor one little.
+Ogni unità completata torna in fondo alla coda e si paga di nuovo, all'infinito: imposta fino a %d unità e il giro si ripete. Se il tesoro non basta la coda va in pausa e riprende quando i fondi tornano.	Each completed unit goes back to the end of the queue and is paid for again, endlessly: set up to %d units and the cycle repeats. If the treasury is not enough the queue pauses and resumes when funds return.
+Opzioni della mappa	Map options
+Opzioni della mappa: confini, tinta, prospettiva	Map options: borders, tint, perspective
+Ora è il %d · %s	It is now %d · %s
+Ordine non possibile.	Order not possible.
+originale %dx%d	original %dx%d
+oro	gold
+Ortodossa	Orthodox
+ortodossi	Orthodox
+P, Pagina su/giù: prospettiva · B: confini · R: tinta della religione · N: nomi delle regioni	P, Page up/down: perspective · B: borders · R: religion tint · N: region names
+Pagana	Pagan
+Papa	Pope
+Papa %s	Pope %s
+papato distrutto	Papacy destroyed
+Papato e crociate	Papacy and crusades
+Papato: assente da questa partita	Papacy: absent from this game
+Papato: distrutto · ricompare con un'armata tra %d e %d anni nelle sue terre	Papacy: destroyed · returns with an army in %d to %d years in its lands
+Papato: vivo	Papacy: alive
+Tesoro iniziale %s	Starting treasury %s
+parte	leaves
+Partita caricata (%s): anno %d.	Game loaded (%s): year %d.
+Partita salvata (%s).	Game saved (%s).
+partono	leave
+passa	moves
+Passa ai confini %s (B)	Switch to %s borders (B)
+Passa alla tinta %s (R)	Switch to %s tint (R)
+passano	move
+per la morte del Papa	owing to the death of the Pope
+per la morte del suo capo	owing to the death of its leader
+perché il Papato è distrutto	because the Papacy is destroyed
+perché la fazione è scomparsa	because the faction has disappeared
+Percorso vuoto	Empty route
+perde	loses
+perdite	losses
+Perdite: %s.	Losses: %s.
+perdono	lose
+Permette di arruolare	Allows recruitment of
+perso	lost
+Personaggio sconosciuto o morto: %d	Unknown or dead character: %d
+Personaggio sconosciuto o non di %s: %d	Unknown character, or not of %s: %d
+pesante	heavy
+Peste	Plague
+Peste a %s: %d uomini morti.	Plague in %s: %d men dead.
+Peste Nera	Black Death
+piatta	flat
+Pieno Medioevo	High Middle Ages
+pieta' del capo %s (%d fazioni)	leader's piety %s (%d factions)
+pietà	piety
+Pietà	Piety
+Pietà %d	Piety %d
+pietà del capo %s: %s	leader's piety %s: %s
+pila	unit
+pile	units
+porti	ports
+Porti stranieri raggiunti dalle flotte e quanto rende ciascuno	Foreign ports reached by the fleets and what each one yields
+porto	port
+Porto: %s	Port: %s
+Posizione: %s	Position: %s
+povero	poor
+prima tappa %s	first leg %s
+Primo Medioevo	Early Middle Ages
+principe	prince
+Principe	Prince
+Principessa	Princess
+principessa	princess
+Principessa 	Princess 
+Principessa %s, %d anni	Princess %s, %d years old
+Principesse	Princesses
+Principi	Princes
+Processa %s (%s di %s)	Try %s (%s of %s)
+Processa l'agente %d (%s di %s)	Try agent %d (%s of %s)
+processare %s	put %s on trial
+processo	trial
+Processo a %s: %s	Trial of %s: %s
+Propone alleanze, tregue e matrimoni ai capi, alle principesse, agli emissari e ai vescovi delle altre fazioni; corrompe eserciti e generali.	Proposes alliances, ceasefires and marriages to the leaders, princesses, emissaries and bishops of other factions; bribes armies and generals.
+proponente	the proposer is gone
+Proponi un matrimonio a %s	Propose a marriage to %s
+Proponi un'alleanza a %s	Propose an alliance to %s
+Proponi una tregua a %s	Propose a ceasefire to %s
+proporre un matrimonio a %s	propose a marriage to %s
+proporre un'alleanza a %s	propose an alliance to %s
+proporre una tregua a %s	propose a ceasefire to %s
+Proposta accettata.	Proposal accepted.
+Proposta di %s	Proposal from %s
+Proposta rifiutata.	Proposal declined.
+Proposta sconosciuta: %d	Unknown proposal: %d
+Proposte	Proposals
+Proposte (%d)	Proposals (%d)
+[i]Modalità Auror: al posto dei tratti storici, tutti i potenziamenti degli Auror.[/i]	[i]Auror mode: instead of historical traits, all the Auror powers.[/i]
+proprietari	owners
+proprietario non cattolico	non-Catholic owner
+proprietario scomunicato	excommunicated owner
+Proprietario: %s	Owner: %s
+Prospettiva piatta o inclinata (P)	Flat or tilted perspective (P)
+Prospettiva: %s	Perspective: %s
+Prospettiva: inclinazione %.1f.	Perspective: tilt %.1f.
+Proventi previsti quest'anno	Income expected this year
+Province	Provinces
+province	provinces
+Province %d/%d	Provinces %d/%d
+Province all'inizio: %d	Provinces at start: %d
+Province della fazione %s: %d	Provinces of the %s faction: %d
+Province già reclutate: %s	Provinces already recruited: %s
+Provincia	Province
+provincia	province
+Provincia assediata	Province besieged
+Provincia contesa: reddito zero	Province contested: zero income
+Provincia fuori vista: la guarnigione non si conosce.	Province out of sight: the garrison is unknown.
+Provincia fuori vista: per conoscerla servono un agente o una provincia confinante.	Province out of sight: you need an agent or a neighbouring province to know about it.
+Provincia precedente	Previous province
+Provincia precedente (tasto ,; con Maiusc solo quelle con qualcosa in coda)	Previous province (key ,; with Shift only those with something in the queue)
+Provincia sconosciuta nel salvataggio: %s	Unknown province in the save: %s
+Provincia sconosciuta: %s	Unknown province: %s
+Provincia successiva	Next province
+Provincia successiva (tasto .; con Maiusc solo quelle con qualcosa in coda)	Next province (key .; with Shift only those with something in the queue)
+Punti deboli	Weaknesses
+Punti di forza	Strengths
+Puoi assoldare mercenari solo nelle tue province	You can hire mercenaries only in your own provinces
+Q: le code di costruzione e addestramento di tutte le province	Q: the construction and training queues of all provinces
+Questa compagnia di mercenari non c'e' piu'	This mercenary company is no longer available
+Questa partita non ha dinastie: nessun personaggio da mostrare.	This game has no dynasties: no character to show.
+Quota	Share
+Raggio	Range
+Raggio (zone di mare all'anno)	Range (sea zones per year)
+Reclute già esperte (valore %d)	Seasoned recruits (valour %d)
+raggiunge	reaches
+raggiungono	reach
+re	King
+Reclutamento in coda: %s.	Recruitment queued: %s.
+Reclutata a %s l'unità %s (esercito %d).	Recruited at %s: %s (army %d).
+Reclute	Recruits
+Reddito	Income
+Reddito annuo della provincia	Annual income of the province
+Reddito netto (rendite meno mantenimento): %s	Net income (revenue less upkeep): %s
+Reddito netto dell'anno scorso	Net income last year
+Reddito netto dell'ultimo anno: %s	Net income last year: %s
+Regione sconosciuta	Unknown province
+Regione sconosciuta nel percorso: %s	Unknown province in the route: %s
+Regione sconosciuta: %s	Unknown region: %s
+Regioni: %d di terra, %d di mare	Regions: %d land, %d sea
+Regnanti	Rulers
+Relazione	Relation
+Relazioni con le altre fazioni: guerra, alleanza, tregua, religione, influenza del capo.	Relations with the other factions: war, alliance, ceasefire, religion, the leader's influence.
+Religione	Religion
+religione	religion
+Religione maggioritaria (R)	Majority religion (R)
+Religione: %s	Religion: %s
+Religiosi	Clergy
+Rendita	Income
+Rendita base: %d	Base income: %d
+Requisiti	Requirements
+Requisiti di %s non soddisfatti	Requirements of %s not met
+Resa per fame tra %d anni	Surrender by starvation in %d years
+Resa per fame: alla fine di quest'anno	Surrender by starvation: at the end of this year
+Resistenza negli scontri navali	Resilience in naval battles
+respinge gli assedianti	the besiegers are driven off
+respinto	repulsed
+resta	stays put
+Resta	Stay
+Resta in gioco fino all'anno finale: la vittoria per dominio è già tua.	Stay in the game until the final year: the domination victory is already yours.
+restano	stay put
+Revoca	Revoke
+Riaddestra	Retrain
+Riaddestra le pile scelte	Retrain chosen units
+Riaddestramento	Retraining
+Riaddestramento a %s (esercito %d): %d pile tornano all'organico pieno, +%d uomini (%d fiorini).	Retraining in %s (army %d): %d units return to full strength, +%d men (%d florins).
+Riaddestramento annullato a %s (esercito %d di %s): %d fiorini rimborsati.	Retraining cancelled at %s (army %d of %s): %d florins refunded.
+Riaddestramento annullato a %s (esercito %d): %d pile, %d fiorini rimborsati	Retraining cancelled in %s (army %d): %d units, %d florins refunded
+Riaddestramento annullato: %d fiorini rimborsati per %d pile.	Retraining cancelled: %d florins refunded for %d units.
+Riaddestramento annullato: %d fiorini rimborsati.	Retraining cancelled: %d florins refunded.
+Riaddestramento ordinato: %d pile, %d fiorini (a fine anno tornano all'organico pieno).	Retraining ordered: %d units, %d florins (they return to full strength at year end).
+Ribelli: %d	Rebels: %d
+Ribelli: in guerra con tutti	Rebels: at war with everyone
+Ribellione regionale	Regional rebellion
+ricchissimo	very rich
+ricco	rich
+Richiede	Requires
+riemerge	re-emerges
+riemergono	re-emerge
+Riepilogo (F1)	Summary (F1)
+rifiuta	refuses
+Rifiuta	Decline
+rifiutano	refuse
+Rimborso: %d fiorini	Refund: %d florins
+Ripeti la coda	Repeat the queue
+Riporta al pieno delle forze %d %s entro fine anno: %d uomini, %d fiorini.	Restores %d %s to full strength by year end: %d men, %d florins.
+Riporta all'organico pieno le pile spuntate pagando in proporzione agli uomini mancanti; la pila perde esperienza in proporzione ai nuovi arrivati. Si applica a fine anno, se l'esercito resta fermo qui.	Brings the ticked units back to full strength, paying in proportion to the missing men; the unit loses experience in proportion to the new arrivals. Applied at year end, if the army stays here.
+Riporta l'esercito al pieno delle forze entro fine anno, in una vostra provincia.\n%s	Restores the army to full strength by year end, in one of your provinces.\n%s
+Riprendi	Resume
+Ripristina	Replenish
+Risparmi %d fiorini di mantenimento l'anno.	You save %d florins of upkeep a year.
+Rispondi entro il %d: poi la proposta decade.	Reply by %d: after that the proposal lapses.
+Ritirate e catture	Retreats and captures
+riuscita %s	success %s
+Rivolta a %s	Revolt at %s
+Rivolta a %s (%s, lealta' %d%%): %d ribelli (%s).	Revolt in %s (%s, loyalty %d%%): %d rebels (%s).
+Rivolta eretica a %s (%s)	Heretic revolt at %s (%s)
+Rivolta propagata a %s.	Revolt spreads to %s.
+Rivolta propagata da %s a %s.	Revolt spreads from %s to %s.
+rompe	breaks
+rompono	break
+Rotte via mare	Sea routes
+Sacerdote	Priest
+Saldo dell'ultimo anno: %s fiorini	Last year's balance: %s florins
+Saldo previsto	Expected balance
+Saldo reale dell'anno scorso	Actual balance last year
+Salva	Save
+Salva con un nome. F5: salvataggio rapido.	Save under a name. F5: quick save.
+Salva la partita	Save game
+Salva la partita (F5 rapido)	Save the game (F5 quick)
+Salvare, caricare, tornare al menu iniziale o uscire dal gioco (Esc)	Save, load, return to the main menu or quit the game (Esc)
+Salvataggio non leggibile (JSON non valido): %s	Save cannot be read (invalid JSON): %s
+Salvataggio non riuscito: %s	Save failed: %s
+Salvataggio non trovato: %s	Save not found: %s
+sbarca	lands
+scaduta	the time to reply has run out
+Scegli due eserciti diversi	Choose two different armies
+Scegli il bersaglio	Choose target
+Scegli la tua fazione	Choose your faction
+Scegli prima una o più unità nella barra in basso.	First choose one or more units in the bar at the bottom.
+Scegli una o piu' pile valide dell'esercito %d	Choose one or more valid units of army %d
+Scegli una o più %s, poi congedale: lasciano subito l'esercito, senza rimborso, e non costano più mantenimento.	Choose one or more %s, then disband them: they leave the army at once, with no refund, and cost no more upkeep.
+Scegli una partita salvata. F9: carica il salvataggio rapido.	Choose a saved game. F9: load the quick save.
+schermagliatori	skirmishers
+Sciamano	Shaman
+scioglimento	disbanded
+Scomunica	Excommunication
+scomunica	excommunication
+Scomunicata	Excommunicated
+scomunicata	excommunicated
+Scomunicati	Excommunicated
+Sconfitta	Defeat
+Sconfitta: %s %s, %s.	Defeat: %s %s, %s.
+Sconfitta: %s e' caduta (%s).	Defeat: %s has fallen (%s).
+sconosciuta	unknown
+Scontro navale	Naval engagement
+Scrivi un nome per il salvataggio.	Enter a name for the save.
+Se accetti, la guerra tra voi si ferma per qualche anno.	If you accept, the war between you stops for a few years.
+Se accetti, siete alleati: non vi potete attaccare senza rompere il patto.	If you accept, you are allies: you cannot attack each other without breaking the pact.
+Se accetti, una principessa sposa un loro generale e ne nasce un'alleanza.	If you accept, a princess marries one of their generals and an alliance is born.
+Se il colpo fallisce l'assassino può morire.	If the blow fails the assassin may die.
+Se il nemico resta nel castello, a fine anno comincia l'assedio.	If the enemy stays in the castle, the siege begins at year end.
+Se il processo riesce il bersaglio muore sul rogo; se fallisce l'inquisitore non rischia nulla.	If the trial succeeds the target dies at the stake; if it fails the inquisitor risks nothing.
+Se l'esercito si muove prima di fine anno, il costo è rimborsato.	If the army moves before year end, the cost is refunded.
+Secondo clic sul castello: gli eserciti dentro, da scegliere o far uscire.	Second click on the castle: the armies inside, to select or send out.
+Seleziona	Select
+Seleziona l'agente sulla mappa: poi clic destro per muoverlo o per una missione.	Select the agent on the map: then right-click to move it or for a mission.
+Tratti della fazione	Faction traits
+senza fondi	no funds
+Senza nome	Unnamed
+senza pile	no units left
+shader	shader
+shader (estrazione dei vettoriali in corso)	shader (vector extraction in progress)
+Si continua a giocare: la vittoria per dominio è registrata.	Play continues: the domination victory is recorded.
+si diffonde (%s)	spreads (%s)
+Si imbarca solo da una provincia di terra: %s	You can embark only from a land province: %s
+Si imbarca solo da una provincia propria: %s non appartiene a %s	You can embark only from one of your own provinces: %s does not belong to %s
+si muove	moves
+si scioglie dopo anni senza conquiste	disbands after years without conquests
+Si svolge a %s: l'agente ci va prima (un anno di cammino) e agisce a fine anno.	Takes place at %s: the agent goes there first (a year's journey) and acts at year end.
+Si svolge a fine anno, a %s.	Takes place at year end, at %s.
+Spie e assassini	Spies and assassins
+si uniranno	will join
+si unirà	will join
+si unisce	joins
+si uniscono	join
+Siamo nel %d: la campagna è finita.	It is %d: the campaign is over.
+Siete alleati %s: l'attacco rompe l'alleanza ed è una dichiarazione di guerra.	You are allied %s: attacking breaks the alliance and is a declaration of war.
+Siete in pace %s: l'attacco è una dichiarazione di guerra.	You are at peace %s: attacking is a declaration of war.
+Solo con qualcosa in coda	Only with something in the queue
+Solo in	Only in
+Solo la fazione del giocatore puo' scegliere di continuare	Only the player's faction can choose to continue
+Solo una flotta puo' attaccare una flotta	Only a fleet can attack a fleet
+sono	are
+sono caduti	have fallen
+sono scomunicati	are excommunicated
+sono stati distrutti	have been destroyed
+Sortita dal castello di %s	Sally from the castle of %s
+Sortita della guarnigione	Sally by the garrison
+Sotto 100 la provincia rischia la rivolta.	Below 100 the province risks revolt.
+Spese dell'anno scorso	Expenses last year
+Spese di quest'anno finora	Expenses so far this year
+Spese di quest'anno finora: %s	Expenses so far this year: %s
+Spese: %s	Expenses: %s
+Spia	Spy
+Spia:	Spy:
+Spia: nella provincia propria alza la lealtà e cattura gli agenti nemici; in quella altrui la abbassa.	Spy: in your own province raises loyalty and captures enemy agents; in a foreign one lowers it.
+Spie	Spies
+Spie e messaggi: registro degli eventi dell'anno	Spies and messages: log of the year's events
+Sposa %s	Marry %s
+Sposa un erede o un generale di un'altra fazione (alleanza per matrimonio) oppure un proprio generale poco leale, che diventa membro della famiglia.	Marries an heir or a general of another faction (marriage alliance) or one of her own disloyal generals, who becomes a member of the family.
+sposa_generale	marriage to a general
+sposare %s	marry %s
+Sposta le pile spuntate nell'esercito scelto qui accanto.	Moves the ticked units into the army chosen beside it.
+Sposta le scelte	Move selected
+Spunta le pile da riaddestrare (non i mercenari né gli ordini militari).	Tick the units to retrain (not mercenaries or military orders).
+Stato: assedia il castello (anni di assedio: %d)	Status: besieging the castle (years of siege: %d)
+Stato: in guarnigione nel castello	Status: garrisoned in the castle
+Stato: in guarnigione, assediato (anni di assedio: %d)	Status: garrisoned, besieged (years of siege: %d)
+stella	star
+stelle	stars
+Stelle: %s · battaglie navali vinte %d, perse %d	Stars: %s · naval battles won %d, lost %d
+su cammello	on camels
+sì	yes
+Tappa di quest'anno	This year's leg
+Tardo Medioevo	Late Middle Ages
+Tassa	Tax
+Tassa %s.	Tax %s.
+Tassa:	Tax:
+Tempesta in %s: la flotta %d di %s perde una pila (%d uomini).	Storm in %s: fleet %d of %s loses a unit (%d men).
+Tempesta in %s: la flotta di %s perde una pila (%d uomini)%s.	Storm in %s: the fleet of %s loses a unit (%d men)%s.
+Termini dell'obiettivo:	Target terms:
+terra un tempo musulmana	formerly Muslim land
+Terremoto a %s%s.	Earthquake in %s%s.
+Terremoto a %s: 	Earthquake in %s: 
+terrore	dread
+Terrore	Dread
+Terrore %d	Dread %d
+Terrore del governatore	Governor's dread
+Tesoro	Treasury
+tesoro %s (%d fazioni)	treasury %s (%d factions)
+tesoro %s fiorini: %s	treasury %s florins: %s
+Tesoro iniziale: %d fiorini	Starting treasury: %d florins
+Tesoro insufficiente: ci sono %d fiorini.	Insufficient treasury: you have %d florins.
+Tesoro insufficiente: servono %d fiorini	Insufficient treasury: %d florins needed
+Tesoro insufficiente: servono %d fiorini, ce ne sono %d.	Insufficient treasury: %d florins needed, %d available.
+tesoro insufficiente: servono %d, ci sono %d	insufficient treasury: %d needed, %d available
+Tesoro insufficiente: servono %d, ci sono %d	Insufficient treasury: %d needed, %d available
+Tesoro negativo: %d fiorini.	Negative treasury: %d florins.
+Tesoro: %d	Treasury: %d
+Tinta (R)	Tint (R)
+Tinta: %s	Tint: %s
+Tinta: proprietari.	Tint: owners.
+Tinta: religione maggioritaria (R per tornare ai proprietari).	Tint: majority religion (R to return to owners).
+Tipo di bersaglio sconosciuto: %s	Unknown target type: %s
+Tiratori	Missile troops
+tiratori	missile
+Tiri a disposizione in battaglia	Shots available in battle
+Titolare: %s	Holder: %s
+Titolo di %s revocato a %s: la sua lealtà cala di %d.	Title of %s revoked from %s: their loyalty drops by %d.
+Titolo di %s: %s.	Title of %s: %s.
+Titolo: %s	Title: %s
+Togli il bersaglio	Remove the target
+Toglie il titolo al governatore: la sua lealtà cala di %d.	Removes the governor's title: their loyalty drops by %d.
+Toglie la carica: la lealtà del titolare cala di %d.	Removes the office: the holder's loyalty drops by %d.
+Torna al menu	Return to menu
+Torna al menu iniziale	Return to the main menu
+Torna al menu iniziale (la partita non salvata si perde).	Return to the main menu (unsaved progress is lost).
+Tornare al menu iniziale?\nLa partita non salvata andrà persa.	Return to the main menu?\nUnsaved progress will be lost.
+Totale	Total
+Totale annuo: %d	Annual total: %d
+Trascina l'agente o usa il clic destro: su una regione si muove, su un re, un esercito o un agente sceglie proposte e missioni.	Drag the agent or use the right mouse button: onto a region it moves, onto a king, an army or an agent it offers proposals and missions.
+Trascina o clic destro: su una regione = muovi; su un re, un esercito o un agente = proposte e missioni	Drag or right-click: onto a region = move; onto a king, an army or an agent = proposals and missions
+Trascina un emissario su un re, un esercito o un emissario straniero: alleanza o tregua; una principessa: nozze	Drag an emissary onto a king, an army or a foreign emissary: alliance or ceasefire; a princess: marriage
+Trascina un esercito su un altro tuo: si uniscono (subito, o all'arrivo se è nella regione accanto)	Drag an army onto another of yours: they merge (at once, or on arrival if it is in the next region)
+Trascina un esercito su un tuo castello: si barricano le unità che ci stanno; su uno nemico: assedio o assalto	Drag an army onto a castle of yours: the units that fit withdraw inside; onto an enemy one: siege or assault
+Trascina una tua pedina su una regione: muovi o attacca; nella sua regione la sposti dove vuoi	Drag one of your pieces onto a region: move or attack; within its own region you place it where you like
+Trasporto non valido	Invalid transport
+Trasporto via mare interrotto: l'esercito %d resta a %s (destinazione %s): %s.	Sea transport interrupted: army %d remains at %s (destination %s): %s.
+Trasporto via mare, attraverso: %s	Sea transport, via: %s
+Tregua	Ceasefire
+tregua	ceasefire
+Tregua fino al %d	Ceasefire until %d
+Troppe pile: un esercito ne ha al massimo %d	Too many units: an army can have at most %d
+Truppe	Troops
+Truppe e navi non si mescolano	Troops and ships cannot be mixed
+Truppe e navi non si mescolano.	Troops and ships cannot be mixed.
+Truppe e navi non si scelgono insieme.	Troops and ships cannot be chosen together.
+Truppe e navi non si uniscono.	Troops and ships cannot be merged.
+Tu	You
+Tuo alleato	Your ally
+tutte	all
+Tutte le code (Q)	All queues (Q)
+Uccide generali, principi, capi e agenti stranieri: le probabilità salgono con le sue stelle.	Kills foreign generals, princes, leaders and agents: the chances rise with his stars.
+Ulema	Mullah
+un agente	an agent
+Un agente	An agent
+Un agente %s non puo' svolgere la missione %s	An agent of type %s cannot carry out the mission %s
+Un assedio è terminato	A siege has ended
+Un esercito crociato non si congeda: si scioglie da solo quando lo zelo finisce	A crusading army cannot be disbanded: it disbands by itself when zeal runs out
+Un esercito crociato non si corrompe (PROVVISORIA, fase 5c)	A crusading army cannot be bribed (PROVISIONAL, phase 5c)
+Un esercito crociato non si divide ne' si unisce	A crusading army can be neither split nor merged
+Un esercito crociato non si divide.	A crusader army cannot be split.
+Un esercito crociato non si riaddestra	A crusading army cannot be retrained
+Un esercito e' nel castello e l'altro fuori	One army is in the castle and the other outside
+un figlio maschio	a son
+Un inquisitore non processa se stesso	An inquisitor cannot put himself on trial
+un matrimonio	a marriage
+Un passo all'anno; via mare se la regione non confina e la catena di flotte regge.	One step a year; by sea if the region is not adjacent and the fleet chain holds.
+un personaggio	a character
+un'alleanza	an alliance
+una	one
+una figlia	a daughter
+Una flotta puo' attaccare solo un'altra flotta	A fleet can only attack another fleet
+Una forza %s	A force %s
+Una guarnigione si arrende per fame	A garrison surrenders through starvation
+Una principessa	A princess
+Una principessa %s sposa il generale %s%s: la sua lealtà cresce ed entra nella linea di sangue.	A princess %s marries the general %s%s: her loyalty grows and she joins the bloodline.
+Una principessa di %s sposa il generale %s: lealta' %d, entra nella linea di sangue (%s).	A princess of %s marries general %s: loyalty %d, joins the royal bloodline (%s).
+Una principessa di %s sposa un nobile di %s (%s)%s.	A princess of %s marries a noble of %s (%s)%s.
+una proposta	a proposal
+una proposta uguale aspetta gia' la risposta di %s	an identical proposal is already awaiting the reply of %s
+Una spia %s apre le porte del castello%s	A spy %s opens the castle gates%s
+Una spia di %s apre le porte del castello di %s (%s): l'assedio finisce con la conquista.	A spy of %s opens the gates of the castle of %s (%s): the siege ends in conquest.
+una tregua	a ceasefire
+Unione non possibile.	Merge not possible.
+uniranno	will join
+unirà	will join
+Unisce tutto questo esercito in quello scelto qui accanto (entro il massimo di pile per esercito).	Merges this whole army into the one chosen beside it (up to the maximum number of units per army).
+Unisci tutto	Merge all
+Unita' sconosciuta: %s	Unknown unit: %s
+unità	units
+Unità %s %s	Unit %s %s
+Unità %s catturate	Captured units %s
+Unità iniziali: %d	Starting units: %d
+Unità, agenti e navi arruolabili qui, con le carte. Clic destro su una carta: la scheda.	Units, agents and ships that can be recruited here, with their cards. Right-click a card: its info card.
+Unità: %d · uomini: %d	Units: %d · men: %d
+uno	one
+uno dei due e' nel castello	one of the two is in the castle
+Uno dei due eserciti è nel castello.	One of the two armies is in the castle.
+Uomini	Men
+Uomini %d su %d	Men %d of %d
+Uscire dal gioco	Quit the game
+Vacante	Vacant
+Vai all'esercito	Go to the army
+Valore	Valour
+valore	valour
+Valore:	Valour:
+Valore: %s	Valour: %s
+Valore: %s · posizione: %s	Valour: %s · position: %s
+Vedi la mappa (Esc)	View the map (Esc)
+Velocità	Speed
+Velocità della nave	Speed of the ship
+Versione del salvataggio non supportata: %d (attese da 1 a %d)	Unsupported save version: %d (expected 1 to %d)
+Vescovo	Bishop
+Vescovo ortodosso	Orthodox bishop
+vettoriali	vector
+Vince	Won by
+Vincono	Won by
+vista dall'alto	top-down view
+Vista dall'alto.	Top-down view.
+Vittoria per dominio	Victory by domination
+Vittoria per dominio nell'anno %d: scegli se continuare a giocare	Domination victory in the year %d: choose whether to keep playing
+Vittoria per dominio! %s %s %d province su %d (servivano %d).	Victory by domination! %s %s %d of %d provinces (%d needed).
+Vittoria per dominio: %s controlla %d province su %d.	Domination victory: %s controls %d provinces out of %d.
+Vittoria per dominio: scegli se continuare a giocare.	Victory by domination: choose whether to keep playing.
+Volume degli effetti	Effects volume
+Volume della musica	Music volume
+Vostra	Yours
+Vostro	Yours
+vuota	empty
+Zelo	Zeal
+zelo %s in %d province	zeal %s in %d provinces
+zelo %s: %s	zeal %s: %s
+Zelo (%s): %d su 100	Zeal (%s): %d of 100
+Zelo basso: a fine anno si perde un'armata.	Low zeal: one army will be lost at year end.
+Zelo esaurito: l'esercito si scioglie a fine anno.	Zeal exhausted: the army disbands at year end.
+Zelo molto basso: a fine anno %s disertano.	Very low zeal: %s will desert at year end.
+Zelo: %d su 100	Zeal: %d of 100
+Zona di mare	Sea zone
+Zona di mare.	Sea zone.
+Zone di mare percorse in un anno	Sea zones crossed in a year
+«Menu» in alto a destra (o Esc): salva, carica, menu iniziale, esci dal gioco · F5 e F9: salvataggio e caricamento rapidi	“Menu” at top right (or Esc): save, load, main menu, quit the game · F5 and F9: quick save and quick load
+«Regnanti» in alto a destra (o K): i sovrani in carica · clic destro sulla carta del comandante: la sua scheda con il ritratto	“Rulers” at top right (or K): the reigning sovereigns · right-click on the commander's card: their card with portrait
+è	is
+è caduta	has fallen
+è distrutta	is destroyed
+è in età da marito	is of marriageable age
+È l'intera flotta: la pedina sparisce dalla mappa.	This is the entire fleet: the piece disappears from the map.
+È l'intero esercito: la pedina sparisce dalla mappa%s.	This is the entire army: the piece disappears from the map%s.
+è maggiorenne	comes of age
+è scomunicata	is excommunicated
+è stata distrutta	has been destroyed
+◀ Livello	◀ Level
+Modalità Auror attivata: gli Auror prendono il posto dei Danesi.	Auror mode on: the Auror take the place of the Danes.
+Modalità Auror disattivata: Danesi, Norvegesi e Svedesi come nell'originale.	Auror mode off: Danes, Norwegians and Swedes as in the original.
+Demolisci	Demolish
+Demolisci l'edificio: tornano %d fiorini (la metà del costo). Chiede conferma.	Demolish the building: %d florins come back (half the cost). Asks for confirmation.
+Demolire %s?	Demolish %s?
+L'edificio scende di un livello e tornano nel tesoro %d fiorini. Non si annulla.	The building drops one level and %d florins return to the treasury. It cannot be undone.
+Demolito: %s (+%d fiorini).	Demolished: %s (+%d florins).
+%s non c'e' in questa provincia	%s is not in this province
+%s e' in coda di costruzione: annulla prima i lavori	%s is in the construction queue: cancel the works first
+Serve a %s: non si puo' demolire	Needed by %s: it cannot be demolished
+Edifici distrutti: %s.	Buildings destroyed: %s.
+Edifici danneggiati (un livello in meno): %s.	Buildings damaged (one level lower): %s.
+lealisti di %s	loyal to %s
+I ribelli lealisti consegnano %s a %s: la provincia torna sua con %d uomini.	The loyalist rebels hand %s over to %s: the province returns with %d men.
+ (%d ribelli lealisti %s)	 (%d rebels loyal %s)
+I ribelli lealisti consegnano %s %s.	The loyalist rebels hand %s over %s.
+Occupazione	Occupation
+Ribelli lealisti %s: se prendono la provincia la consegnano a loro	Rebels loyal %s: if they take the province they hand it over to them
+%s e' eletto Papa	%s is elected Pope
+Il Papato ricompare: un'armata di %d pile insorge a %s contro %s.	The Papacy returns: an army of %d stacks rises at %s against %s.
+Decidi prima la sorte dei prigionieri.	First decide the fate of the prisoners.
+%s (%s)	%s (%s)
+%d uomini: %s	%d men: %s
+Dopo lo scontro a %s i tuoi uomini hanno catturato prigionieri di %s:	After the battle at %s your men took prisoners from %s:
+Puoi liberarli, chiedere un riscatto di %d fiorini (%s decide se pagare: se rifiuta saranno giustiziati) o giustiziarli tutti.	You can release them, demand a ransom of %d florins (%s decides whether to pay: if it refuses they will be executed) or execute them all.
+Prigionieri di %s a %s	Prisoners from %s at %s
+Libera	Release
+Chiedi il riscatto (%d)	Demand ransom (%d)
+Giustizia tutti	Execute all
+%s tiene prigionieri questi tuoi uomini, catturati a %s:	%s holds these men of yours, captured at %s:
+Chiede %d fiorini di riscatto (nel tesoro ne hai %d; puoi anche indebitarti).	It demands a ransom of %d florins (your treasury holds %d; you may also go into debt).
+Se paghi tornano a %s; se rifiuti saranno giustiziati.	If you pay they return to %s; if you refuse they will be executed.
+Se rifiuti saranno giustiziati.	If you refuse they will be executed.
+Riscatto chiesto da %s	Ransom demanded by %s
+Paga %d fiorini	Pay %d florins
+%s e' giustiziato da prigioniero a %d anni.	%s is executed in captivity at the age of %d.
+Prigionieri sconosciuti: %d	Unknown prisoners: %d
+Non spetta a %s decidere di questi prigionieri	It is not for %s to decide about these prisoners
+Scelta sconosciuta: %s	Unknown choice: %s
+Nessun riscatto chiesto a %s per questi prigionieri	No ransom demanded from %s for these prisoners
+%s cattura %s a %s.	%s captures %s at %s.
+%s chiede %d fiorini di riscatto per %s.	%s demands %d florins of ransom for %s.
+%s non ha piu' province dove far tornare %s.	%s has no provinces left to bring back %s.
+riscattati	ransomed
+liberati	released
+%s %s tornano a %s.	%s (%s) return to %s.
+%s paga %d fiorini a %s: %s	%s pays %d florins to %s: %s
+%s giustizia %s.	%s executes %s.
+%s rifiuta il riscatto: %s sono giustiziati da %s.	%s refuses the ransom: %s are executed by %s.
+%d uomini di %s	%d men of %s
+%d uomini dell'esercito %d di %s sono fatti prigionieri a %s.	%d men of army %d of %s are taken prisoner at %s.
+%s sfugge al boia e ricompare a %s.	%s escapes the executioner and reappears in %s.
+Culto Imperiale	Imperial Cult
+Imperatore Dio	God-Emperor
+dell'%s	of the %s
+rotta oceanica senza ponte di navi: nessuna flotta propria in %s	ocean route without a bridge of ships: no fleet of your own in %s
+Nessun viaggio via mare tra %s e %s: per attraversare un oceano serve una flotta propria in ogni zona d'oceano, e le flotte nemiche chiudono le rotte	No sea journey between %s and %s: crossing an ocean needs a fleet of your own in every ocean zone, and enemy fleets close the routes
+Popolo ribelle: %s	Rebel people: %s
+Tranquilla	Calm
+Rivolta probabile	Revolt likely
+Scontenta	Restless
+Fedele	Loyal
+stabile	steady
+in crescita verso %d: %d a fine anno	rising towards %d: %d at year end
+in calo verso %d: %d a fine anno	falling towards %d: %d at year end
+Rischio di rivolta a fine anno: nessuno	Risk of revolt at year end: none
+Rischio di rivolta a fine anno: %s	Risk of revolt at year end: %s
+Sotto %d di lealtà, a ogni fine anno la provincia può ribellarsi: %s di probabilità per ogni punto sotto %d, al massimo %s.	Below %d loyalty the province may revolt at every year end: %s chance for each point below %d, at most %s.
+Lealtà: %s (%d su %d)	Loyalty: %s (%d of %d)
+ · rivolta a fine anno %s	 · revolt at year end %s
+Lealtà: %s — %d su %d	Loyalty: %s — %d of %d
+Tendenza: %s	Trend: %s
+Cosa la determina:	What drives it:
+Lealtà %d su %d · sotto %d rischio di rivolta · obiettivo %d	Loyalty %d of %d · revolt risk below %d · target %d
+Dettagli nella scheda Governo	Details in the Government tab
+Lealtà e rischio di rivolta	Loyalty and risk of revolt
+Linea rossa: soglia di rivolta (%d) · linea blu: obiettivo (%d)	Red line: revolt threshold (%d) · blue line: target (%d)
+Dati della campagna non trovati:\n%s	Campaign data not found:\n%s
+Dati della campagna non trovati: %s	Campaign data not found: %s
+Dati della campagna non trovati: impossibile iniziare una campagna.	Campaign data not found: unable to start a campaign.
+Messaggi	Messages
+Raggiungi	Go to
+Nessun agente in campo.	No agents in the field.
+Chiude la finestra, centra la mappa sull'agente e lo seleziona.	Closes the window, centres the map on the agent and selects it.
+In viaggio verso %s	Travelling to %s
+In marcia verso %s	Marching to %s
+In attesa	Waiting
+Messaggi e agenti	Messages and agents
+Edifici sconosciuti: manda una spia nella provincia, o fagliela spiare, per vederli.	Buildings unknown: send a spy into the province, or have one spy on it, to see them.
+l'esercito di %s	the army of %s
+la provincia di %s	the province of %s
+spiare %s	spy on %s
+fomentare il malcontento a %s	stir up unrest in %s
+sabotare un edificio a %s	sabotage a building in %s
+aprire le porte del castello di %s	open the castle gates of %s
+ Spia province ed eserciti, fomenta il malcontento, sabota edifici e apre le porte dei castelli assediati; nelle province proprie cattura gli agenti nemici.	 Spies on provinces and armies, stirs up unrest, sabotages buildings and opens the gates of besieged castles; in your own provinces it catches enemy agents.
+Se riesce vedi edifici, guarnigione, lealtà ed eserciti del bersaglio per %d anni.	If it succeeds you see the target's buildings, garrison, loyalty and armies for %d years.
+Se riesce la lealtà della provincia scende di %d per %d anni.	If it succeeds the province's loyalty drops by %d for %d years.
+Se riesce un edificio (mai il castello) perde un livello; se fallisce la spia può morire.	If it succeeds a building (never the castle) loses a level; if it fails the spy may die.
+Se riesce l'assedio finisce subito con la conquista del castello.	If it succeeds the siege ends at once with the capture of the castle.
+Forze stimate: circa %d uomini. Per conoscere unità e comandante servono una provincia confinante, una vostra flotta vicina o una spia.	Estimated strength: about %d men. To know its units and commander you need a bordering province, one of your fleets nearby or a spy.
+Guarnigione: nessuna truppa in vista. Per i dettagli servono una provincia confinante, una flotta vicina o una spia.	Garrison: no troops in sight. For details you need a bordering province, a fleet nearby or a spy.
+Guarnigione: circa %d uomini. Per unità e comandanti servono una provincia confinante, una vostra flotta vicina o una spia.	Garrison: about %d men. For units and commanders you need a bordering province, one of your fleets nearby or a spy.
+%s e' fuori dalla portata dell'agente	%s is out of the agent's reach
+Bersaglio della propria fazione o di un alleato	Target of your own faction or of an ally
+Dei ribelli si sa gia' tutto	Everything about the rebels is already known
+Nessun assedio della propria fazione a %s	No siege of your faction at %s
+Nessun edificio da sabotare a %s	No building to sabotage at %s
+Spia la provincia di %s	Spy on the province of %s
+Spia l'esercito %d di %s	Spy on army %d of %s
+Fomenta il malcontento a %s	Stir up unrest in %s
+Sabota un edificio a %s	Sabotage a building in %s
+Apri le porte del castello di %s	Open the castle gates of %s
+non riesce (probabilita' %d%%)	fails (chance %d%%)
+ e la spia viene uccisa	 and the spy is killed
+Una spia di %s riferisce tutto sull'esercito %d a %s (informazioni valide fino al %d).	A spy of %s reports everything about army %d at %s (information valid until %d).
+Una spia di %s riferisce tutto sulla provincia di %s (informazioni valide fino al %d).	A spy of %s reports everything about the province of %s (information valid until %d).
+Una spia di %s fomenta il malcontento a %s (%s): lealta' -%d fino al %d.	A spy of %s stirs up unrest in %s (%s): loyalty -%d until %d.
+Una spia di %s sabota %s a %s (%s): l'edificio perde un livello.	A spy of %s sabotages %s at %s (%s): the building loses a level.
+spionaggio	spying
+malcontento	unrest
+sabotaggio	sabotage
+apertura delle porte	opening of the gates
+porte	gates
+Conversione a %s: +%s punti all'anno a %s	Conversion to %s: +%s points a year in %s
+Zelo della provincia: %+d all'anno	Province zeal: %+d a year
+Nessuna conversione: l'inquisitore cerca gli eretici, non converte.	No conversion: the inquisitor hunts heretics, he does not convert.
+Niente da arruolare qui.	Nothing to recruit here.
+Salta tutte	Skip all
+Evento storico	Historical event
+Notizia	News
+Prigionieri	Prisoners
+La provincia passa a voi.	The province is yours.
+La provincia è perduta.	The province is lost.
+Battaglia di %s	Battle of %s
+Battaglia navale	Naval battle
+Battaglia navale: %s	Naval battle: %s
+Assalto	Assault
+Sortita	Sally
+Perdite: voi %d uomini su %d, %s %d su %d.	Losses: you %d men out of %d, %s %d out of %d.
+Catturati %d nemici.	%d enemies captured.
+%d dei vostri sono stati catturati.	%d of your men were captured.
+Vittoria	Victory
+Conquista	Conquest
+Provincia perduta	Province lost
+Conquista di %s	Conquest of %s
+Perdita di %s	Loss of %s
+La provincia è ora vostra.	The province is now yours.
+La provincia passa al nemico.	The province falls to the enemy.
+Assedio	Siege
+Assedio di %s	Siege of %s
+Senza soccorsi la guarnigione resiste finché bastano le scorte.	Without relief the garrison holds out only as long as its supplies last.
+Resa per fame a %s	Starved into surrender at %s
+Guerra	War
+Guerra %s	War %s
+Siete in guerra: le loro armate e flotte vi attaccheranno.	You are at war: their armies and fleets will attack you.
+Avete aperto le ostilità.	You have opened hostilities.
+Alleanza %s	Alliance %s
+Alleanza rotta %s	Alliance broken %s
+Tregua %s	Truce %s
+Tregua rotta %s	Truce broken %s
+Nozze %s	Wedding %s
+Nozze reali	Royal wedding
+Nasce %s	%s is born
+Morte di %s	Death of %s
+Un nuovo sovrano: %s	A new ruler: %s
+Intrighi	Intrigue
+Assassinio	Assassination
+Rivolta degli eretici a %s	Heretic revolt at %s
+Guerra civile	Civil war
+Papato	Papacy
+Scomunica revocata	Excommunication lifted
+Caduta %s	Fall %s
+Inondazione a %s	Flood at %s
+Carestia a %s	Famine at %s
+Terremoto a %s	Earthquake at %s
+Peste a %s	Plague at %s
+Peste Nera a %s	Black Death at %s
+Disastro	Disaster
+Tempesta: %s	Storm: %s
+La Peste Nera	The Black Death
+L'Orda d'Oro	The Golden Horde
+Nella provincia	In the province
+Altrove	Elsewhere
+In blu chi governa già un'altra provincia: ricevendo questo titolo la lascia.	In blue, those who already govern another province: receiving this title, they leave it.
+In blu chi ha già un'altra carica: ricevendo questa la lascia.	In blue, those who already hold another office: receiving this one, they leave it.
+Sala del consiglio	Council chamber
+%s\nClic: la sua scheda	%s\nClick: their sheet
+\n%s\nClic: la sua scheda	\n%s\nClick: their sheet
+\nVacante: clic per concederla (sede: %s)	\nVacant: click to grant it (seat: %s)
+\nSi sblocca costruendo: %s	\nUnlocked by building: %s
+una nobildonna	a noblewoman

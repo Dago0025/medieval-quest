@@ -1,0 +1,130 @@
+//========================================
+// Startpos di prova per i test del Papato, delle scomuniche, delle crociate e dei jihad (fase 5c).
+// Mondo piccolo: 9 regioni di terra, nessun mare, 5 fazioni piu' i ribelli; cinque fazioni con dinastia.
+//   Cattoliche: FN_ALPHA (NORD1, NORD2, NORD3), FN_GAMMA (EST), FN_DELTA (DELTA1), FN_PAPIST = il Papato (ROMA).
+//   Musulmana: FN_BETA (SUD1, SUD2). Ribelli: ID_RIBELLE (cultura pagana).
+//   ID_ROMA - ID_NORD1 - ID_NORD2 - ID_NORD3
+//             ID_NORD1 - ID_EST - ID_DELTA1
+//             ID_NORD2 - ID_SUD1 - ID_SUD2
+//             ID_EST - ID_RIBELLE - ID_SUD1
+// ALPHA ha CHAPTER_HOUSE (Castle3) in NORD1, BETA ha RIBAT (Castle2) in SUD1. Capi: ALPHA a NORD1, BETA a SUD1,
+// GAMMA a EST, DELTA a DELTA1, PAPIST a ROMA, ognuno con un esercito di terra nella propria regione.
+//========================================
+SetStartDate::	1000
+SetPeriod:: EARLY
+SetEarlyPeriodStartDate::	1000
+SetHighPeriodStartDate::	1205
+SetLatePeriodStartDate::	1321
+Prodfiles::		UNITPROD	"papacy_unit_prod.txt"		BUILDINGPROD	"papacy_build_prod.txt"
+
+DeclareFaction::	"FN_REBEL"
+DeclareFaction::	"FN_ALPHA"
+DeclareFaction::	"FN_BETA"
+DeclareFaction::	"FN_GAMMA"
+DeclareFaction::	"FN_DELTA"
+DeclareFaction::	"FN_PAPIST"
+
+DeclareLandRegion::	"ID_ROMA"
+DeclareLandRegion::	"ID_NORD1"
+DeclareLandRegion::	"ID_NORD2"
+DeclareLandRegion::	"ID_NORD3"
+DeclareLandRegion::	"ID_EST"
+DeclareLandRegion::	"ID_DELTA1"
+DeclareLandRegion::	"ID_SUD1"
+DeclareLandRegion::	"ID_SUD2"
+DeclareLandRegion::	"ID_RIBELLE"
+
+DeclareTradegoods:: "GRAIN"		80
+
+SetNeighbours:: ID_ROMA		ID_NORD1
+SetNeighbours:: ID_NORD1	ID_ROMA		ID_NORD2	ID_EST
+SetNeighbours:: ID_NORD2	ID_NORD1	ID_NORD3	ID_SUD1
+SetNeighbours:: ID_NORD3	ID_NORD2
+SetNeighbours:: ID_EST		ID_NORD1	ID_DELTA1	ID_RIBELLE
+SetNeighbours:: ID_DELTA1	ID_EST
+SetNeighbours:: ID_SUD1		ID_NORD2	ID_SUD2		ID_RIBELLE
+SetNeighbours:: ID_SUD2		ID_SUD1
+SetNeighbours:: ID_RIBELLE	ID_EST		ID_SUD1
+
+SetAttributes::	ID_ROMA		"Roma"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	300	"Roma Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_NORD1	"Nord1"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	400	"Nord1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_NORD2	"Nord2"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	300	"Nord2 Castle_xzy"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_NORD3	"Nord3"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	200	"Nord3 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_EST		"Est"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	200	"Est Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_DELTA1	"Delta1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	150	"Delta1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SUD1		"Sud1"		0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	250	"Sud1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SUD2		"Sud2"		0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	200	"Sud2 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_RIBELLE	"Ribelle"	0	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	100	"Ribelle Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+
+SetRegionOwner:: ID_ROMA	FN_PAPIST
+SetRegionOwner:: ID_NORD1	FN_ALPHA
+SetRegionOwner:: ID_NORD2	FN_ALPHA
+SetRegionOwner:: ID_NORD3	FN_ALPHA
+SetRegionOwner:: ID_EST		FN_GAMMA
+SetRegionOwner:: ID_DELTA1	FN_DELTA
+SetRegionOwner:: ID_SUD1	FN_BETA
+SetRegionOwner:: ID_SUD2	FN_BETA
+SetRegionOwner:: ID_RIBELLE	FN_REBEL
+
+SetTradableGoods::	ID_NORD1	GRAIN
+SetTradableGoods::	ID_SUD1		GRAIN
+
+MakeBuilding:: ID_ROMA		Castle
+MakeBuilding:: ID_NORD1		Castle3
+MakeBuilding:: ID_NORD1		Chapter_House
+MakeBuilding:: ID_NORD1		Church
+MakeBuilding:: ID_NORD2		Castle
+MakeBuilding:: ID_EST		Castle2
+MakeBuilding:: ID_DELTA1	Castle
+MakeBuilding:: ID_SUD1		Castle2
+MakeBuilding:: ID_SUD1		Ribat
+MakeBuilding:: ID_SUD1		Mosque
+
+MakeUnit:: ID_ROMA		Spearmen	80
+MakeUnit:: ID_NORD1		Spearmen	100
+MakeUnit:: ID_NORD2		Spearmen	80
+MakeUnit:: ID_NORD3		Spearmen	60
+MakeUnit:: ID_EST		Spearmen	70
+MakeUnit:: ID_DELTA1	Spearmen	60
+MakeUnit:: ID_SUD1		Nizari		60
+MakeUnit:: ID_SUD2		Nizari		40
+MakeUnit:: ID_RIBELLE	Spearmen	50
+MakeUnit:: ID_NORD1		Emissary	985
+
+SetActiveFaction:: FN_ALPHA		FT_MAJOR
+SetActiveFaction:: FN_BETA		FT_MAJOR
+SetActiveFaction:: FN_GAMMA		FT_MAJOR
+SetActiveFaction:: FN_DELTA		FT_MAJOR
+SetActiveFaction:: FN_PAPIST	FT_MAJOR
+SetReligion:: FN_ALPHA		REL_CATHOLIC
+SetReligion:: FN_BETA		REL_ISLAMIC
+SetReligion:: FN_GAMMA		REL_CATHOLIC
+SetReligion:: FN_DELTA		REL_CATHOLIC
+SetReligion:: FN_PAPIST		REL_CATHOLIC
+SetCulture:: FN_ALPHA		CATHOLIC_CULTURE
+SetCulture:: FN_BETA		MUSLIM_CULTURE
+SetCulture:: FN_GAMMA		CATHOLIC_CULTURE
+SetCulture:: FN_DELTA		CATHOLIC_CULTURE
+SetCulture:: FN_PAPIST		CATHOLIC_CULTURE
+SetTreasury:: FN_ALPHA		5000	4000	3000	2000
+SetTreasury:: FN_BETA		5000	4000	3000	2000
+SetTreasury:: FN_GAMMA		5000	4000	3000	2000
+SetTreasury:: FN_DELTA		5000	4000	3000	2000
+SetTreasury:: FN_PAPIST		5000	4000	3000	2000
+
+PlaceLeader:: ID_NORD1		FN_ALPHA
+SetStartLeader:: FN_ALPHA	0		3	0	1	0
+AddHeir:: FN_ALPHA	1 20
+AddHeir:: FN_ALPHA	1 10
+PlaceLeader:: ID_SUD1		FN_BETA
+SetStartLeader:: FN_BETA	0		2	1	0
+AddHeir:: FN_BETA	1 20
+PlaceLeader:: ID_EST		FN_GAMMA
+SetStartLeader:: FN_GAMMA	0		1	0
+AddHeir:: FN_GAMMA	1 20
+PlaceLeader:: ID_DELTA1		FN_DELTA
+SetStartLeader:: FN_DELTA	0		1	0
+AddHeir:: FN_DELTA	1 20
+PlaceLeader:: ID_ROMA		FN_PAPIST
+SetStartLeader:: FN_PAPIST	0		1	0
+AddHeir:: FN_PAPIST	1 20

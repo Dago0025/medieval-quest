@@ -1,0 +1,124 @@
+//========================================
+// Startpos di prova per i test dell'IA (fase 7a). Scritta per questi test, non deriva dai file originali.
+// Mondo: 8 regioni di terra, 1 mare, 4 fazioni attive piu' i ribelli.
+//   ID_A1 (ALPHA, porto) - ID_A2 (ALPHA) - ID_A3 (ALPHA) - ID_B1 (BETA) - ID_B2 (BETA) - ID_P1 (PAPIST)
+//   ID_R1 (ribelli) confina con ID_A3; ID_G1 (GAMMA, predoni, porto) confina solo con il mare ID_MARE, come ID_A1.
+// Comportamenti: ALPHA CATHOLIC_EXPANSIONIST, BETA CATHOLIC_DEFENSIVE, GAMMA BARBARIAN_RAIDER, PAPIST POPE.
+//========================================
+SetStartDate::	1000
+SetPeriod:: EARLY
+SetEarlyPeriodStartDate::	1000
+SetHighPeriodStartDate::	1205
+SetLatePeriodStartDate::	1321
+Prodfiles::		UNITPROD	"ai_unit_prod.txt"		BUILDINGPROD	"ai_build_prod.txt"
+
+DeclareFaction::	"FN_REBEL"
+DeclareFaction::	"FN_ALPHA"
+DeclareFaction::	"FN_BETA"
+DeclareFaction::	"FN_GAMMA"
+DeclareFaction::	"FN_PAPIST"
+
+DeclareLandRegion::	"ID_A1"
+DeclareLandRegion::	"ID_A2"
+DeclareLandRegion::	"ID_A3"
+DeclareLandRegion::	"ID_B1"
+DeclareLandRegion::	"ID_B2"
+DeclareLandRegion::	"ID_P1"
+DeclareLandRegion::	"ID_R1"
+DeclareLandRegion::	"ID_G1"
+DeclareSeaRegion::	"ID_MARE"
+
+DeclareTradegoods:: "GRAIN"		80
+
+SetNeighbours:: ID_A1	ID_A2	ID_MARE
+SetNeighbours:: ID_A2	ID_A1	ID_A3
+SetNeighbours:: ID_A3	ID_A2	ID_B1	ID_R1
+SetNeighbours:: ID_B1	ID_A3	ID_B2
+SetNeighbours:: ID_B2	ID_B1	ID_P1
+SetNeighbours:: ID_P1	ID_B2
+SetNeighbours:: ID_R1	ID_A3
+SetNeighbours:: ID_G1	ID_MARE
+SetNeighbours:: ID_MARE	ID_A1	ID_G1
+
+SetAttributes::	ID_A1	"A1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	300	"A1 Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_A2	"A2"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	280	"A2 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_A3	"A3"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	260	"A3 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_B1	"B1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	240	"B1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_B2	"B2"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	220	"B2 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_P1	"P1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	200	"P1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_R1	"R1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	180	"R1 Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_G1	"G1"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	160	"G1 Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+
+SetRegionOwner:: ID_A1	FN_ALPHA
+SetRegionOwner:: ID_A2	FN_ALPHA
+SetRegionOwner:: ID_A3	FN_ALPHA
+SetRegionOwner:: ID_B1	FN_BETA
+SetRegionOwner:: ID_B2	FN_BETA
+SetRegionOwner:: ID_P1	FN_PAPIST
+SetRegionOwner:: ID_R1	FN_REBEL
+SetRegionOwner:: ID_G1	FN_GAMMA
+
+SetPort::	ID_A1	100	100	2
+SetPort::	ID_G1	100	100	2
+SetTradableGoods::	ID_A1	GRAIN
+SetTradableGoods::	ID_A2	GRAIN
+
+MakeBuilding:: ID_A1	Castle
+MakeBuilding:: ID_A1	PORT
+MakeBuilding:: ID_A1	Improved_Farmland
+MakeBuilding:: ID_A2	Castle
+MakeBuilding:: ID_A2	Improved_Farmland
+MakeBuilding:: ID_A3	Castle
+MakeBuilding:: ID_B1	Castle
+MakeBuilding:: ID_B1	Improved_Farmland
+MakeBuilding:: ID_B2	Castle
+MakeBuilding:: ID_P1	Castle
+MakeBuilding:: ID_R1	Castle
+MakeBuilding:: ID_G1	Castle
+MakeBuilding:: ID_G1	PORT
+
+MakeUnit:: ID_A1	Spearmen	100
+MakeUnit:: ID_A1	Galley	1
+MakeUnit:: ID_A2	Spearmen	80
+MakeUnit:: ID_A3	Spearmen	60
+MakeUnit:: ID_B1	Spearmen	70
+MakeUnit:: ID_B2	Spearmen	50
+MakeUnit:: ID_P1	Spearmen	40
+MakeUnit:: ID_R1	Spearmen	30
+MakeUnit:: ID_G1	Spearmen	90
+MakeUnit:: ID_G1	Galley	1
+
+SetActiveFaction:: FN_ALPHA	FT_MAJOR
+SetReligion:: FN_ALPHA	REL_CATHOLIC
+SetCulture:: FN_ALPHA	CATHOLIC_CULTURE
+SetTreasury:: FN_ALPHA	3000	3000	3000	3000
+SetActiveFaction:: FN_BETA	FT_MAJOR
+SetReligion:: FN_BETA	REL_CATHOLIC
+SetCulture:: FN_BETA	CATHOLIC_CULTURE
+SetTreasury:: FN_BETA	3000	3000	3000	3000
+SetActiveFaction:: FN_GAMMA	FT_MAJOR
+SetReligion:: FN_GAMMA	REL_CATHOLIC
+SetCulture:: FN_GAMMA	CATHOLIC_CULTURE
+SetTreasury:: FN_GAMMA	3000	3000	3000	3000
+SetActiveFaction:: FN_PAPIST	FT_MAJOR
+SetReligion:: FN_PAPIST	REL_CATHOLIC
+SetCulture:: FN_PAPIST	CATHOLIC_CULTURE
+SetTreasury:: FN_PAPIST	3000	3000	3000	3000
+
+SetBehaviour:: FN_ALPHA	CATHOLIC_EXPANSIONIST
+SetBehaviour:: FN_BETA	CATHOLIC_DEFENSIVE
+SetBehaviour:: FN_GAMMA	BARBARIAN_RAIDER
+SetBehaviour:: FN_PAPIST	POPE
+
+PlaceLeader:: ID_A1	FN_ALPHA
+SetStartLeader:: FN_ALPHA	0		3	0	1	0
+AddHeir:: FN_ALPHA	1 20
+PlaceLeader:: ID_B1	FN_BETA
+SetStartLeader:: FN_BETA	0		3	0	1	0
+AddHeir:: FN_BETA	1 20
+PlaceLeader:: ID_G1	FN_GAMMA
+SetStartLeader:: FN_GAMMA	0		3	0	1	0
+AddHeir:: FN_GAMMA	1 20
+PlaceLeader:: ID_P1	FN_PAPIST
+SetStartLeader:: FN_PAPIST	0		3	0	1	0
+AddHeir:: FN_PAPIST	1 20

@@ -1,0 +1,54 @@
+//========================================
+// Startpos minimo per i test (stessa sintassi di EARLY_XL.TXT)
+//========================================
+SetStartDate::	1000
+SetPeriod:: EARLY
+SetEarlyPeriodStartDate::	1000
+SetHighPeriodStartDate::	1205
+SetLatePeriodStartDate::	1321
+Prodfiles::		UNITPROD	"UNITS.TXT"		BUILDINGPROD	"BUILDINGS.TXT"
+
+DeclareFaction::	"FN_REBEL"
+DeclareFaction::	"FN_DANISH"
+DeclareFaction::	"FN_ENGLISH"
+
+DeclareLandRegion::	"ID_DENMARK"
+DeclareLandRegion::	"ID_SWEDEN"
+DeclareLandRegion::	"ID_WESSEX"
+DeclareSeaRegion::	"ID_NORTH_SEA"
+
+DeclareTradegoods:: "FISH"		20
+
+SetNeighbours:: ID_DENMARK	ID_SWEDEN	ID_NORTH_SEA
+SetNeighbours:: ID_SWEDEN	ID_DENMARK
+SetNeighbours:: ID_WESSEX	ID_NORTH_SEA
+SetNeighbours:: ID_NORTH_SEA	ID_DENMARK	ID_WESSEX
+
+SetAttributes::	ID_DENMARK			"Danimarca"			0		CATHOLIC_CULTURE		TEMPERATE	AT_WESTERN_EUROPEAN		-1			400		"Danimarca Castle_xzy"	COAST	FLAT		NO_RIVER	TRUE
+SetAttributes::	ID_WESSEX			"Wessex // non e' un commento"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	350	"Wessex Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+
+SetRegionOwner:: ID_DENMARK			FN_DANISH	// MOD Auror
+SetRegionOwner:: ID_Sweden			fn_danish
+SetRegionOwner:: ID_WESSEX			FN_ENGLISH
+SetRegionRebels::	ID_WESSEX		55
+SetCastle::	ID_DENMARK		7144	4056
+SetPort::	ID_DENMARK		7576	3912	2
+SetTradableGoods::	ID_DENMARK			fish	SALT
+SetResources::	ID_DENMARK			IRON	GOLD	// MOD Auror
+MakeBuilding:: ID_DENMARK			Castle15		// MOD Auror
+MakeUnit:: ID_DENMARK			Huscarles		60
+MakeUnit:: ID_DENMARK			Emissary		985
+MakeUnit:: ID_WESSEX			Spearmen		100		CATHOLIC_CULTURE
+
+SetActiveFaction:: FN_DANISH		FT_MAJOR
+SetReligion:: FN_DANISH			REL_CATHOLIC
+SetCulture:: FN_DANISH			CATHOLIC_CULTURE
+SetBehaviour:: FN_DANISH		CATHOLIC_DEFENSIVE
+SetTreasury:: FN_DANISH			99999	99999	99999	99999	// MOD Auror
+SetFactionCol:: FN_DANISH			255 255 255		255 0 0
+PlaceLeader:: ID_DENMARK		FN_DANISH
+SetStartLeader::  FN_DANISH	0		1	1	// MOD Auror: unico nome reale Darkos
+AddHeir:: FN_DANISH	 1 13
+
+SetRegionOwner:: ID_ATLANTIS		FN_DANISH
+GGConquestReward::	FN_DANISH		0.2

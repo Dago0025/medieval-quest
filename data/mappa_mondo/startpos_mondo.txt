@@ -1,0 +1,2159 @@
+// Mappa del mondo di Medieval Quest (ADR-077). Generato da tools/mondo/genera_startpos.py: non modificare a mano.
+// Il caricatore toglie dallo startpos originale SetNeighbours, SetCastle, SetOrigin, SetPort e SetBorderInfo.
+
+// ---- regioni nuove
+DeclareLandRegion::	"ID_ICELAND"
+DeclareLandRegion::	"ID_LAPLAND"
+DeclareLandRegion::	"ID_BIARMIA"
+DeclareLandRegion::	"ID_PERM"
+DeclareLandRegion::	"ID_BASHKIRIA"
+DeclareLandRegion::	"ID_KIPCHAK"
+DeclareLandRegion::	"ID_OGHUZ"
+DeclareLandRegion::	"ID_KIMEK"
+DeclareLandRegion::	"ID_SIBIR"
+DeclareLandRegion::	"ID_YENISEI"
+DeclareLandRegion::	"ID_BAIKAL"
+DeclareLandRegion::	"ID_YAKUTIA"
+DeclareLandRegion::	"ID_CHUKOTKA"
+DeclareLandRegion::	"ID_AMUR"
+DeclareLandRegion::	"ID_KHWAREZM"
+DeclareLandRegion::	"ID_TRANSOXIANA"
+DeclareLandRegion::	"ID_SEMIRECHYE"
+DeclareLandRegion::	"ID_KHURASAN"
+DeclareLandRegion::	"ID_GHAZNA"
+DeclareLandRegion::	"ID_KASHGAR"
+DeclareLandRegion::	"ID_UIGHURIA"
+DeclareLandRegion::	"ID_MONGOLIA"
+DeclareLandRegion::	"ID_EAST_MONGOLIA"
+DeclareLandRegion::	"ID_SHIRVAN"
+DeclareLandRegion::	"ID_AZERBAIJAN"
+DeclareLandRegion::	"ID_TABARISTAN"
+DeclareLandRegion::	"ID_JIBAL"
+DeclareLandRegion::	"ID_FARS"
+DeclareLandRegion::	"ID_KERMAN"
+DeclareLandRegion::	"ID_SISTAN"
+DeclareLandRegion::	"ID_NAJD"
+DeclareLandRegion::	"ID_YEMEN"
+DeclareLandRegion::	"ID_OMAN"
+DeclareLandRegion::	"ID_SIND"
+DeclareLandRegion::	"ID_PUNJAB"
+DeclareLandRegion::	"ID_KANNAUJ"
+DeclareLandRegion::	"ID_RAJPUTANA"
+DeclareLandRegion::	"ID_GUJARAT"
+DeclareLandRegion::	"ID_BENGAL"
+DeclareLandRegion::	"ID_KALINGA"
+DeclareLandRegion::	"ID_DECCAN"
+DeclareLandRegion::	"ID_CHOLA"
+DeclareLandRegion::	"ID_CEYLON"
+DeclareLandRegion::	"ID_TIBET"
+DeclareLandRegion::	"ID_AMDO"
+DeclareLandRegion::	"ID_TANGUT"
+DeclareLandRegion::	"ID_LIAO"
+DeclareLandRegion::	"ID_MANCHURIA"
+DeclareLandRegion::	"ID_KAIFENG"
+DeclareLandRegion::	"ID_SHAANXI"
+DeclareLandRegion::	"ID_SICHUAN"
+DeclareLandRegion::	"ID_JIANGNAN"
+DeclareLandRegion::	"ID_HUGUANG"
+DeclareLandRegion::	"ID_FUJIAN"
+DeclareLandRegion::	"ID_LINGNAN"
+DeclareLandRegion::	"ID_DALI"
+DeclareLandRegion::	"ID_KOREA"
+DeclareLandRegion::	"ID_KYUSHU"
+DeclareLandRegion::	"ID_KINAI"
+DeclareLandRegion::	"ID_TOHOKU"
+DeclareLandRegion::	"ID_DAI_VIET"
+DeclareLandRegion::	"ID_CHAMPA"
+DeclareLandRegion::	"ID_KHMER"
+DeclareLandRegion::	"ID_BAGAN"
+DeclareLandRegion::	"ID_SRIVIJAYA"
+DeclareLandRegion::	"ID_JAVA"
+DeclareLandRegion::	"ID_BORNEO"
+DeclareLandRegion::	"ID_PHILIPPINES"
+DeclareLandRegion::	"ID_MOLUCCAS"
+DeclareLandRegion::	"ID_NEW_GUINEA"
+DeclareLandRegion::	"ID_WEST_AUSTRALIA"
+DeclareLandRegion::	"ID_NORTH_AUSTRALIA"
+DeclareLandRegion::	"ID_EAST_AUSTRALIA"
+DeclareLandRegion::	"ID_NEW_ZEALAND"
+DeclareLandRegion::	"ID_UPPER_EGYPT"
+DeclareLandRegion::	"ID_NUBIA"
+DeclareLandRegion::	"ID_ETHIOPIA"
+DeclareLandRegion::	"ID_SOMALIA"
+DeclareLandRegion::	"ID_SWAHILI"
+DeclareLandRegion::	"ID_KITARA"
+DeclareLandRegion::	"ID_DARFUR"
+DeclareLandRegion::	"ID_KANEM"
+DeclareLandRegion::	"ID_HAUSA"
+DeclareLandRegion::	"ID_YORUBA"
+DeclareLandRegion::	"ID_AKAN"
+DeclareLandRegion::	"ID_GAO"
+DeclareLandRegion::	"ID_MALI"
+DeclareLandRegion::	"ID_GHANA"
+DeclareLandRegion::	"ID_SANHAJA"
+DeclareLandRegion::	"ID_SIJILMASA"
+DeclareLandRegion::	"ID_HOGGAR"
+DeclareLandRegion::	"ID_FEZZAN"
+DeclareLandRegion::	"ID_CONGO"
+DeclareLandRegion::	"ID_LUBA"
+DeclareLandRegion::	"ID_ZIMBABWE"
+DeclareLandRegion::	"ID_SOUTHERN_AFRICA"
+DeclareLandRegion::	"ID_MADAGASCAR"
+DeclareLandRegion::	"ID_GREENLAND"
+DeclareLandRegion::	"ID_VINLAND"
+DeclareLandRegion::	"ID_HUDSON"
+DeclareLandRegion::	"ID_DENE"
+DeclareLandRegion::	"ID_ALASKA"
+DeclareLandRegion::	"ID_CALIFORNIA"
+DeclareLandRegion::	"ID_CHACO"
+DeclareLandRegion::	"ID_PLAINS"
+DeclareLandRegion::	"ID_GREAT_LAKES"
+DeclareLandRegion::	"ID_MISSISSIPPI"
+DeclareLandRegion::	"ID_APPALACHIA"
+DeclareLandRegion::	"ID_TOLLAN"
+DeclareLandRegion::	"ID_MAYA"
+DeclareLandRegion::	"ID_CENTRAL_AMERICA"
+DeclareLandRegion::	"ID_CARIBBEAN"
+DeclareLandRegion::	"ID_MUISCA"
+DeclareLandRegion::	"ID_AMAZONIA"
+DeclareLandRegion::	"ID_BRAZIL"
+DeclareLandRegion::	"ID_CHIMU"
+DeclareLandRegion::	"ID_CUZCO"
+DeclareLandRegion::	"ID_TIWANAKU"
+DeclareLandRegion::	"ID_PAMPAS"
+DeclareLandRegion::	"ID_CHILE"
+DeclareLandRegion::	"ID_PATAGONIA"
+DeclareSeaRegion::	"ID_CASPIAN_SEA"
+DeclareSeaRegion::	"ID_GREENLAND_SEA"
+DeclareSeaRegion::	"ID_LABRADOR_SEA"
+DeclareSeaRegion::	"ID_HUDSON_BAY"
+DeclareSeaRegion::	"ID_BARENTS_SEA"
+DeclareSeaRegion::	"ID_WHITE_SEA"
+DeclareSeaRegion::	"ID_ARCTIC_OCEAN"
+DeclareSeaRegion::	"ID_BERING_SEA"
+DeclareSeaRegion::	"ID_GULF_ALASKA"
+DeclareSeaRegion::	"ID_NE_PACIFIC"
+DeclareSeaRegion::	"ID_N_PACIFIC"
+DeclareSeaRegion::	"ID_NW_PACIFIC"
+DeclareSeaRegion::	"ID_OKHOTSK"
+DeclareSeaRegion::	"ID_SEA_JAPAN"
+DeclareSeaRegion::	"ID_YELLOW_SEA"
+DeclareSeaRegion::	"ID_EAST_CHINA_SEA"
+DeclareSeaRegion::	"ID_PHILIPPINE_SEA"
+DeclareSeaRegion::	"ID_SOUTH_CHINA_SEA"
+DeclareSeaRegion::	"ID_JAVA_SEA"
+DeclareSeaRegion::	"ID_MALACCA"
+DeclareSeaRegion::	"ID_ANDAMAN_SEA"
+DeclareSeaRegion::	"ID_BAY_BENGAL"
+DeclareSeaRegion::	"ID_BANDA_SEA"
+DeclareSeaRegion::	"ID_TIMOR_SEA"
+DeclareSeaRegion::	"ID_CORAL_SEA"
+DeclareSeaRegion::	"ID_TASMAN_SEA"
+DeclareSeaRegion::	"ID_SOUTHERN_OCEAN"
+DeclareSeaRegion::	"ID_S_INDIAN"
+DeclareSeaRegion::	"ID_C_INDIAN"
+DeclareSeaRegion::	"ID_W_INDIAN"
+DeclareSeaRegion::	"ID_ARABIAN_SEA"
+DeclareSeaRegion::	"ID_GULF_ADEN"
+DeclareSeaRegion::	"ID_RED_SEA"
+DeclareSeaRegion::	"ID_PERSIAN_GULF"
+DeclareSeaRegion::	"ID_MOZAMBIQUE"
+DeclareSeaRegion::	"ID_E_PACIFIC"
+DeclareSeaRegion::	"ID_EQ_PACIFIC"
+DeclareSeaRegion::	"ID_SE_PACIFIC"
+DeclareSeaRegion::	"ID_S_PACIFIC"
+DeclareSeaRegion::	"ID_GULF_MEXICO"
+DeclareSeaRegion::	"ID_CARIBBEAN_SEA"
+DeclareSeaRegion::	"ID_W_ATLANTIC"
+DeclareSeaRegion::	"ID_SARGASSO_SEA"
+DeclareSeaRegion::	"ID_MID_ATLANTIC"
+DeclareSeaRegion::	"ID_CANARY_SEA"
+DeclareSeaRegion::	"ID_EQ_ATLANTIC"
+DeclareSeaRegion::	"ID_GULF_GUINEA"
+DeclareSeaRegion::	"ID_S_ATLANTIC"
+DeclareSeaRegion::	"ID_SE_ATLANTIC"
+DeclareSeaRegion::	"ID_SW_ATLANTIC"
+
+// ---- attributi delle regioni nuove (ribelli all'inizio)
+SetAttributes::	ID_ICELAND	"Iceland"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	160	"Iceland Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_LAPLAND	"Lapland"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	120	"Lapland Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BIARMIA	"Bjarmaland"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	150	"Bjarmaland Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_PERM	"Perm"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	140	"Perm Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BASHKIRIA	"Bashkiria"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	200	"Bashkiria Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KIPCHAK	"Cuman Steppe"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	170	"Cuman Steppe Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_OGHUZ	"Oghuz Steppe"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	180	"Oghuz Steppe Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KIMEK	"Kimek"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	150	"Kimek Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SIBIR	"Sibir"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	120	"Sibir Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_YENISEI	"Yenisei Kyrgyz"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	140	"Yenisei Kyrgyz Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BAIKAL	"Baikal"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	120	"Baikal Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_YAKUTIA	"Yakutia"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	110	"Yakutia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHUKOTKA	"Eastern Siberia"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	110	"Eastern Siberia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_AMUR	"Amur"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	130	"Amur Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KHWAREZM	"Khwarezm"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	420	"Khwarezm Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_TRANSOXIANA	"Transoxiana"	0	MUSLIM_CULTURE	LUSH	AT_ISLAMIC	-1	620	"Transoxiana Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SEMIRECHYE	"Zhetysu"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	260	"Zhetysu Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KHURASAN	"Khorasan"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	560	"Khorasan Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GHAZNA	"Ghazna"	0	MUSLIM_CULTURE	ROCK_DESERT	AT_ISLAMIC	-1	380	"Ghazna Castle"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_KASHGAR	"Kashgar"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	300	"Kashgar Castle"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_UIGHURIA	"Uyghuria"	1	PAGAN_CULTURE	SAND_DESERT	AT_EASTERN_EUROPEAN	-1	280	"Uyghuria Castle"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_MONGOLIA	"Mongolia"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	150	"Mongolia Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_EAST_MONGOLIA	"Eastern Mongolia"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	140	"Eastern Mongolia Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SHIRVAN	"Shirvan"	0	MUSLIM_CULTURE	LUSH	AT_ISLAMIC	-1	300	"Shirvan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_AZERBAIJAN	"Azerbaijan"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	380	"Azerbaijan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_TABARISTAN	"Tabaristan"	0	MUSLIM_CULTURE	LUSH	AT_ISLAMIC	-1	420	"Tabaristan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_JIBAL	"Jibal"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	450	"Jibal Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_FARS	"Fars"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	430	"Fars Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KERMAN	"Kerman"	0	MUSLIM_CULTURE	ROCK_DESERT	AT_ISLAMIC	-1	260	"Kerman Castle"	COAST	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_SISTAN	"Sistan and Makran"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	220	"Sistan and Makran Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_NAJD	"Najd and al-Ahsa"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	200	"Najd and al-Ahsa Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_YEMEN	"Yemen"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	380	"Yemen Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_OMAN	"Oman"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	280	"Oman Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SIND	"Sindh"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	380	"Sindh Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_PUNJAB	"Punjab"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	560	"Punjab Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KANNAUJ	"Kannauj"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	680	"Kannauj Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_RAJPUTANA	"Rajputana"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	360	"Rajputana Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GUJARAT	"Gujarat"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	520	"Gujarat Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BENGAL	"Bengal"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	700	"Bengal Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KALINGA	"Kalinga"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	480	"Kalinga Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_DECCAN	"Deccan"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	500	"Deccan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHOLA	"Chola"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	640	"Chola Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CEYLON	"Ceylon"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	360	"Ceylon Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_TIBET	"Tibet"	1	PAGAN_CULTURE	ROCK_DESERT	AT_EASTERN_EUROPEAN	-1	170	"Tibet Castle"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_AMDO	"Amdo"	1	PAGAN_CULTURE	ROCK_DESERT	AT_EASTERN_EUROPEAN	-1	170	"Amdo Castle"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_TANGUT	"Western Xia"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	340	"Western Xia Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_LIAO	"Liao"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	420	"Liao Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MANCHURIA	"Manchuria"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	220	"Manchuria Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KAIFENG	"Kaifeng"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	880	"Kaifeng Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SHAANXI	"Shaanxi"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	520	"Shaanxi Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SICHUAN	"Sichuan"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	640	"Sichuan Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_JIANGNAN	"Jiangnan"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	900	"Jiangnan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_HUGUANG	"Huguang"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	620	"Huguang Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_FUJIAN	"Fujian"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	560	"Fujian Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_LINGNAN	"Lingnan"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	560	"Lingnan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_DALI	"Dali"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	300	"Dali Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KOREA	"Korea"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	480	"Korea Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KYUSHU	"Kyushu"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	300	"Kyushu Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KINAI	"Kinai"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	420	"Kinai Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_TOHOKU	"Kanto and Tohoku"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	300	"Kanto and Tohoku Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_DAI_VIET	"Dai Viet"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	420	"Dai Viet Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHAMPA	"Champa"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	340	"Champa Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KHMER	"Khmer Empire"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	560	"Khmer Empire Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BAGAN	"Bagan"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	400	"Bagan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SRIVIJAYA	"Srivijaya"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	460	"Srivijaya Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_JAVA	"Java"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	500	"Java Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BORNEO	"Borneo"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	200	"Borneo Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_PHILIPPINES	"Philippines"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	240	"Philippines Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MOLUCCAS	"Celebes and Moluccas"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	300	"Celebes and Moluccas Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_NEW_GUINEA	"New Guinea"	1	PAGAN_CULTURE	LUSH	AT_EASTERN_EUROPEAN	-1	130	"New Guinea Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_WEST_AUSTRALIA	"Western Australia"	1	PAGAN_CULTURE	SAND_DESERT	AT_EASTERN_EUROPEAN	-1	110	"Western Australia Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_NORTH_AUSTRALIA	"Northern Australia"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	110	"Northern Australia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_EAST_AUSTRALIA	"Eastern Australia"	1	PAGAN_CULTURE	ARID	AT_EASTERN_EUROPEAN	-1	130	"Eastern Australia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_NEW_ZEALAND	"Aotearoa"	1	PAGAN_CULTURE	TEMPERATE	AT_EASTERN_EUROPEAN	-1	130	"Aotearoa Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_UPPER_EGYPT	"Upper Egypt"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	420	"Upper Egypt Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_NUBIA	"Nubia"	0	ORTHODOX_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	260	"Nubia Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_ETHIOPIA	"Ethiopia"	0	ORTHODOX_CULTURE	ARID	AT_ISLAMIC	-1	300	"Ethiopia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SOMALIA	"Somalia"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	220	"Somalia Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SWAHILI	"Swahili Coast"	0	MUSLIM_CULTURE	LUSH	AT_ISLAMIC	-1	360	"Swahili Coast Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KITARA	"Kitara"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	220	"Kitara Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_DARFUR	"Darfur"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	180	"Darfur Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_KANEM	"Kanem"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	260	"Kanem Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_HAUSA	"Hausaland"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	320	"Hausaland Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_YORUBA	"Ife"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	360	"Ife Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_AKAN	"Akan"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	340	"Akan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GAO	"Gao"	0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	320	"Gao Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MALI	"Mali"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	360	"Mali Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GHANA	"Ghana"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	420	"Ghana Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SANHAJA	"Sanhaja Lands"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	150	"Sanhaja Lands Castle"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SIJILMASA	"Sijilmasa"	0	MUSLIM_CULTURE	ROCK_DESERT	AT_ISLAMIC	-1	260	"Sijilmasa Castle"	COAST	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_HOGGAR	"Ahaggar"	0	MUSLIM_CULTURE	ROCK_DESERT	AT_ISLAMIC	-1	110	"Ahaggar Castle"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_FEZZAN	"Fezzan"	0	MUSLIM_CULTURE	SAND_DESERT	AT_ISLAMIC	-1	140	"Fezzan Castle"	INLAND	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_CONGO	"Congo"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	200	"Congo Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_LUBA	"Luba"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	180	"Luba Castle"	INLAND	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_ZIMBABWE	"Zimbabwe"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	300	"Zimbabwe Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_SOUTHERN_AFRICA	"Southern Africa"	1	PAGAN_CULTURE	ARID	AT_ISLAMIC	-1	130	"Southern Africa Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MADAGASCAR	"Madagascar"	1	PAGAN_CULTURE	LUSH	AT_ISLAMIC	-1	180	"Madagascar Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GREENLAND	"Greenland"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	110	"Greenland Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_VINLAND	"Vinland"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	120	"Vinland Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_HUDSON	"Hudson Bay"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	110	"Hudson Bay Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_DENE	"Dene Lands"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	110	"Dene Lands Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_ALASKA	"Alaska"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	110	"Alaska Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CALIFORNIA	"California"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	180	"California Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHACO	"Chaco"	1	PAGAN_CULTURE	ARID	AT_WESTERN_EUROPEAN	-1	200	"Chaco Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_PLAINS	"Great Plains"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	150	"Great Plains Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_GREAT_LAKES	"Great Lakes"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	200	"Great Lakes Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MISSISSIPPI	"Mississippi"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	340	"Mississippi Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_APPALACHIA	"Appalachia"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	240	"Appalachia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_TOLLAN	"Tollan"	1	PAGAN_CULTURE	ARID	AT_WESTERN_EUROPEAN	-1	480	"Tollan Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MAYA	"Maya"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	420	"Maya Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CENTRAL_AMERICA	"Central America"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	200	"Central America Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CARIBBEAN	"Antilles"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	200	"Antilles Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_MUISCA	"Muisca"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	320	"Muisca Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_AMAZONIA	"Amazonia"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	130	"Amazonia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_BRAZIL	"Brazil"	1	PAGAN_CULTURE	LUSH	AT_WESTERN_EUROPEAN	-1	150	"Brazil Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHIMU	"Chimor"	1	PAGAN_CULTURE	ARID	AT_WESTERN_EUROPEAN	-1	360	"Chimor Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CUZCO	"Cuzco"	1	PAGAN_CULTURE	ROCK_DESERT	AT_WESTERN_EUROPEAN	-1	300	"Cuzco Castle"	COAST	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_TIWANAKU	"Tiwanaku"	1	PAGAN_CULTURE	ROCK_DESERT	AT_WESTERN_EUROPEAN	-1	380	"Tiwanaku Castle"	COAST	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_PAMPAS	"Pampas"	1	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	130	"Pampas Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_CHILE	"Chile"	1	PAGAN_CULTURE	ARID	AT_WESTERN_EUROPEAN	-1	170	"Chile Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetAttributes::	ID_PATAGONIA	"Patagonia"	1	PAGAN_CULTURE	ARID	AT_WESTERN_EUROPEAN	-1	110	"Patagonia Castle"	COAST	PLAINS	NO_RIVER	TRUE
+SetRegionRebels::	ID_ICELAND	54
+AddTitle::	ID_ICELAND	"Governor of Iceland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_ICELAND	FISH	WHALEBONE
+MakeBuilding::	ID_ICELAND	Castle2
+MakeUnit::	ID_ICELAND	Spearmen	100	CATHOLIC_CULTURE
+MakeUnit::	ID_ICELAND	Archers	60	CATHOLIC_CULTURE
+SetRegionRebels::	ID_LAPLAND	30
+AddTitle::	ID_LAPLAND	"Governor of Lapland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_LAPLAND	FURS	WOOD
+SetResources::	ID_LAPLAND	IRON
+MakeBuilding::	ID_LAPLAND	Castle2
+MakeUnit::	ID_LAPLAND	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_LAPLAND	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_BIARMIA	30
+AddTitle::	ID_BIARMIA	"Governor of Bjarmaland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BIARMIA	FURS	WAX
+SetResources::	ID_BIARMIA	SALT
+MakeBuilding::	ID_BIARMIA	Castle2
+MakeUnit::	ID_BIARMIA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_BIARMIA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_BIARMIA	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_PERM	82
+AddTitle::	ID_PERM	"Governor of Perm"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PERM	FURS	WAX
+SetResources::	ID_PERM	SILVER
+MakeBuilding::	ID_PERM	Castle2
+MakeUnit::	ID_PERM	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_PERM	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_BASHKIRIA	82
+AddTitle::	ID_BASHKIRIA	"Governor of Bashkiria"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BASHKIRIA	HONEY	HIDES
+SetResources::	ID_BASHKIRIA	IRON
+MakeBuilding::	ID_BASHKIRIA	Castle2
+MakeUnit::	ID_BASHKIRIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_BASHKIRIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_BASHKIRIA	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_KIPCHAK	23
+AddTitle::	ID_KIPCHAK	"Governor of Cuman Steppe"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KIPCHAK	HIDES	SALT
+MakeBuilding::	ID_KIPCHAK	Castle2
+MakeUnit::	ID_KIPCHAK	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KIPCHAK	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KIPCHAK	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KIPCHAK	CumanWarriors	100	PAGAN_CULTURE
+SetRegionRebels::	ID_OGHUZ	71
+AddTitle::	ID_OGHUZ	"Governor of Oghuz Steppe"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_OGHUZ	HIDES
+MakeBuilding::	ID_OGHUZ	Castle2
+MakeUnit::	ID_OGHUZ	SteppeCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_OGHUZ	HorseArchers	40	MUSLIM_CULTURE
+MakeUnit::	ID_OGHUZ	TurcomanHorse	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_KIMEK	23
+AddTitle::	ID_KIMEK	"Governor of Kimek"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KIMEK	FURS	HIDES
+MakeBuilding::	ID_KIMEK	Castle2
+MakeUnit::	ID_KIMEK	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KIMEK	HorseArchers	40	PAGAN_CULTURE
+SetRegionRebels::	ID_SIBIR	82
+AddTitle::	ID_SIBIR	"Governor of Sibir"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SIBIR	FURS	WOOD
+MakeBuilding::	ID_SIBIR	Castle2
+MakeUnit::	ID_SIBIR	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_SIBIR	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_YENISEI	23
+AddTitle::	ID_YENISEI	"Governor of Yenisei Kyrgyz"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_YENISEI	FURS
+SetResources::	ID_YENISEI	IRON
+MakeBuilding::	ID_YENISEI	Castle2
+MakeUnit::	ID_YENISEI	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_YENISEI	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_YENISEI	Woodsman	60	PAGAN_CULTURE
+SetRegionRebels::	ID_BAIKAL	23
+AddTitle::	ID_BAIKAL	"Governor of Baikal"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BAIKAL	FURS	FISH
+MakeBuilding::	ID_BAIKAL	Castle2
+MakeUnit::	ID_BAIKAL	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_BAIKAL	Woodsman	60	PAGAN_CULTURE
+SetRegionRebels::	ID_YAKUTIA	82
+AddTitle::	ID_YAKUTIA	"Governor of Yakutia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_YAKUTIA	FURS
+MakeBuilding::	ID_YAKUTIA	Castle2
+MakeUnit::	ID_YAKUTIA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_YAKUTIA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_CHUKOTKA	82
+AddTitle::	ID_CHUKOTKA	"Governor of Eastern Siberia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHUKOTKA	FURS	WHALEBONE
+MakeBuilding::	ID_CHUKOTKA	Castle2
+MakeUnit::	ID_CHUKOTKA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_CHUKOTKA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_AMUR	82
+AddTitle::	ID_AMUR	"Governor of Amur"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_AMUR	FURS	FISH
+MakeBuilding::	ID_AMUR	Castle2
+MakeUnit::	ID_AMUR	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_AMUR	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_AMUR	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_KHWAREZM	71
+AddTitle::	ID_KHWAREZM	"Governor of Khwarezm"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KHWAREZM	COTTON	SILK
+MakeBuilding::	ID_KHWAREZM	Castle2
+MakeUnit::	ID_KHWAREZM	KhwarazmianCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_KHWAREZM	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_KHWAREZM	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_TRANSOXIANA	71
+AddTitle::	ID_TRANSOXIANA	"Governor of Transoxiana"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TRANSOXIANA	SILK	COTTON	GLASSWARE
+SetResources::	ID_TRANSOXIANA	SILVER
+MakeBuilding::	ID_TRANSOXIANA	Castle3
+MakeBuilding::	ID_TRANSOXIANA	Improved_farmland
+MakeUnit::	ID_TRANSOXIANA	TurcomanHorse	40	MUSLIM_CULTURE
+MakeUnit::	ID_TRANSOXIANA	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_TRANSOXIANA	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_TRANSOXIANA	GhulamCavalry	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_SEMIRECHYE	71
+AddTitle::	ID_SEMIRECHYE	"Governor of Zhetysu"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SEMIRECHYE	HIDES	SILK
+MakeBuilding::	ID_SEMIRECHYE	Castle2
+MakeUnit::	ID_SEMIRECHYE	SteppeCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_SEMIRECHYE	HorseArchers	40	MUSLIM_CULTURE
+MakeUnit::	ID_SEMIRECHYE	TurcomanHorse	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_KHURASAN	71
+AddTitle::	ID_KHURASAN	"Governor of Khorasan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KHURASAN	SILK	COTTON	GEMS
+SetResources::	ID_KHURASAN	SILVER
+MakeBuilding::	ID_KHURASAN	Castle2
+MakeBuilding::	ID_KHURASAN	Improved_farmland
+MakeUnit::	ID_KHURASAN	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_KHURASAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_KHURASAN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_GHAZNA	71
+AddTitle::	ID_GHAZNA	"Governor of Ghazna"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GHAZNA	GEMS	HIDES
+MakeBuilding::	ID_GHAZNA	Castle2
+MakeUnit::	ID_GHAZNA	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_GHAZNA	TurcomanHorse	40	MUSLIM_CULTURE
+MakeUnit::	ID_GHAZNA	ArabInfantry	100	MUSLIM_CULTURE
+SetRegionRebels::	ID_KASHGAR	71
+AddTitle::	ID_KASHGAR	"Governor of Kashgar"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KASHGAR	SILK	GEMS
+MakeBuilding::	ID_KASHGAR	Castle2
+MakeUnit::	ID_KASHGAR	HorseArchers	40	MUSLIM_CULTURE
+MakeUnit::	ID_KASHGAR	ArabInfantry	100	MUSLIM_CULTURE
+SetRegionRebels::	ID_UIGHURIA	23
+AddTitle::	ID_UIGHURIA	"Governor of Uyghuria"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_UIGHURIA	SILK	COTTON
+MakeBuilding::	ID_UIGHURIA	Castle2
+MakeUnit::	ID_UIGHURIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_UIGHURIA	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_UIGHURIA	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_MONGOLIA	23
+AddTitle::	ID_MONGOLIA	"Governor of Mongolia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MONGOLIA	HIDES
+MakeBuilding::	ID_MONGOLIA	Castle2
+MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_EAST_MONGOLIA	23
+AddTitle::	ID_EAST_MONGOLIA	"Governor of Eastern Mongolia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_EAST_MONGOLIA	HIDES
+MakeBuilding::	ID_EAST_MONGOLIA	Castle2
+MakeUnit::	ID_EAST_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_SHIRVAN	7
+AddTitle::	ID_SHIRVAN	"Governor of Shirvan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SHIRVAN	SILK	OLIVEOIL
+MakeBuilding::	ID_SHIRVAN	Castle2
+MakeUnit::	ID_SHIRVAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_SHIRVAN	GhulamCavalry	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_AZERBAIJAN	71
+AddTitle::	ID_AZERBAIJAN	"Governor of Azerbaijan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_AZERBAIJAN	SILK	DYES
+MakeBuilding::	ID_AZERBAIJAN	Castle2
+MakeUnit::	ID_AZERBAIJAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_AZERBAIJAN	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_AZERBAIJAN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_TABARISTAN	71
+AddTitle::	ID_TABARISTAN	"Governor of Tabaristan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TABARISTAN	SILK	WOOD
+MakeBuilding::	ID_TABARISTAN	Castle2
+MakeUnit::	ID_TABARISTAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_TABARISTAN	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_TABARISTAN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_JIBAL	71
+AddTitle::	ID_JIBAL	"Governor of Jibal"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_JIBAL	SILK	DYES	POTTERY
+MakeBuilding::	ID_JIBAL	Castle2
+MakeBuilding::	ID_JIBAL	Improved_farmland
+MakeUnit::	ID_JIBAL	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_JIBAL	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_JIBAL	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_FARS	71
+AddTitle::	ID_FARS	"Governor of Fars"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_FARS	SUGAR	DYES	SILK
+MakeBuilding::	ID_FARS	Castle2
+MakeUnit::	ID_FARS	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_FARS	GhulamCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_FARS	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_KERMAN	71
+AddTitle::	ID_KERMAN	"Governor of Kerman"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KERMAN	DYES	COTTON
+SetResources::	ID_KERMAN	COPPER
+MakeBuilding::	ID_KERMAN	Castle2
+MakeUnit::	ID_KERMAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_KERMAN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_SISTAN	10
+AddTitle::	ID_SISTAN	"Governor of Sistan and Makran"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SISTAN	DYES	HIDES
+MakeBuilding::	ID_SISTAN	Castle2
+MakeUnit::	ID_SISTAN	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_SISTAN	ArabInfantry	100	MUSLIM_CULTURE
+SetRegionRebels::	ID_NAJD	10
+AddTitle::	ID_NAJD	"Governor of Najd and al-Ahsa"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_NAJD	SPICES	GEMS
+MakeBuilding::	ID_NAJD	Castle2
+MakeUnit::	ID_NAJD	BedouinCamelWarriors	40	MUSLIM_CULTURE
+MakeUnit::	ID_NAJD	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_NAJD	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_YEMEN	6
+AddTitle::	ID_YEMEN	"Governor of Yemen"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_YEMEN	SPICES	DYES
+MakeBuilding::	ID_YEMEN	Castle2
+MakeUnit::	ID_YEMEN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_YEMEN	BedouinCamelWarriors	40	MUSLIM_CULTURE
+MakeUnit::	ID_YEMEN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_OMAN	6
+AddTitle::	ID_OMAN	"Governor of Oman"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_OMAN	SPICES	FISH
+SetResources::	ID_OMAN	COPPER
+MakeBuilding::	ID_OMAN	Castle2
+MakeUnit::	ID_OMAN	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_OMAN	BedouinCamelWarriors	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_SIND	6
+AddTitle::	ID_SIND	"Governor of Sindh"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SIND	COTTON	DYES
+MakeBuilding::	ID_SIND	Castle2
+MakeUnit::	ID_SIND	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_SIND	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_SIND	GhulamCavalry	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_PUNJAB	62
+AddTitle::	ID_PUNJAB	"Governor of Punjab"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PUNJAB	COTTON	GRAIN	WOOL
+SetResources::	ID_PUNJAB	SALT
+MakeBuilding::	ID_PUNJAB	Castle2
+MakeBuilding::	ID_PUNJAB	Improved_farmland
+MakeUnit::	ID_PUNJAB	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_PUNJAB	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_PUNJAB	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_KANNAUJ	62
+AddTitle::	ID_KANNAUJ	"Governor of Kannauj"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KANNAUJ	COTTON	GRAIN	SPICES
+MakeBuilding::	ID_KANNAUJ	Castle3
+MakeBuilding::	ID_KANNAUJ	Improved_farmland
+MakeUnit::	ID_KANNAUJ	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KANNAUJ	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_KANNAUJ	MediumCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KANNAUJ	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_RAJPUTANA	62
+AddTitle::	ID_RAJPUTANA	"Governor of Rajputana"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_RAJPUTANA	DYES	COTTON
+SetResources::	ID_RAJPUTANA	SILVER
+MakeBuilding::	ID_RAJPUTANA	Castle2
+MakeUnit::	ID_RAJPUTANA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_RAJPUTANA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_RAJPUTANA	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_GUJARAT	62
+AddTitle::	ID_GUJARAT	"Governor of Gujarat"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GUJARAT	COTTON	DYES	SPICES
+MakeBuilding::	ID_GUJARAT	Castle2
+MakeBuilding::	ID_GUJARAT	Improved_farmland
+MakeUnit::	ID_GUJARAT	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_GUJARAT	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_GUJARAT	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_BENGAL	62
+AddTitle::	ID_BENGAL	"Governor of Bengal"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BENGAL	COTTON	SILK	SUGAR
+MakeBuilding::	ID_BENGAL	Castle3
+MakeBuilding::	ID_BENGAL	Improved_farmland
+MakeUnit::	ID_BENGAL	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_BENGAL	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_BENGAL	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_KALINGA	62
+AddTitle::	ID_KALINGA	"Governor of Kalinga"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KALINGA	COTTON	GEMS	SPICES
+MakeBuilding::	ID_KALINGA	Castle2
+MakeBuilding::	ID_KALINGA	Improved_farmland
+MakeUnit::	ID_KALINGA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KALINGA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_KALINGA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_DECCAN	62
+AddTitle::	ID_DECCAN	"Governor of Deccan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_DECCAN	COTTON	GEMS
+SetResources::	ID_DECCAN	GOLD
+MakeBuilding::	ID_DECCAN	Castle2
+MakeBuilding::	ID_DECCAN	Improved_farmland
+MakeUnit::	ID_DECCAN	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_CHOLA	62
+AddTitle::	ID_CHOLA	"Governor of Chola"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHOLA	SPICES	COTTON	GEMS
+MakeBuilding::	ID_CHOLA	Castle3
+MakeBuilding::	ID_CHOLA	Improved_farmland
+MakeUnit::	ID_CHOLA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CEYLON	62
+AddTitle::	ID_CEYLON	"Governor of Ceylon"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CEYLON	SPICES	GEMS	IVORY
+MakeBuilding::	ID_CEYLON	Castle2
+MakeUnit::	ID_CEYLON	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CEYLON	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_TIBET	62
+AddTitle::	ID_TIBET	"Governor of Tibet"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TIBET	WOOL	HIDES
+SetResources::	ID_TIBET	GOLD
+MakeBuilding::	ID_TIBET	Castle2
+MakeUnit::	ID_TIBET	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TIBET	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_TIBET	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_AMDO	62
+AddTitle::	ID_AMDO	"Governor of Amdo"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_AMDO	WOOL	HIDES
+MakeBuilding::	ID_AMDO	Castle2
+MakeUnit::	ID_AMDO	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_AMDO	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_TANGUT	62
+AddTitle::	ID_TANGUT	"Governor of Western Xia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TANGUT	SILK	SALT	HIDES
+MakeBuilding::	ID_TANGUT	Castle2
+MakeUnit::	ID_TANGUT	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_TANGUT	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TANGUT	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_LIAO	62
+AddTitle::	ID_LIAO	"Governor of Liao"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_LIAO	HIDES	SALT	SILK
+MakeBuilding::	ID_LIAO	Castle2
+MakeUnit::	ID_LIAO	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_LIAO	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_LIAO	KoreanSpearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_MANCHURIA	62
+AddTitle::	ID_MANCHURIA	"Governor of Manchuria"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MANCHURIA	FURS	HIDES	GRAIN
+MakeBuilding::	ID_MANCHURIA	Castle2
+MakeUnit::	ID_MANCHURIA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_MANCHURIA	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MANCHURIA	Woodsman	60	PAGAN_CULTURE
+SetRegionRebels::	ID_KAIFENG	62
+AddTitle::	ID_KAIFENG	"Governor of Kaifeng"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KAIFENG	SILK	POTTERY	GRAIN
+SetResources::	ID_KAIFENG	IRON
+MakeBuilding::	ID_KAIFENG	Castle3
+MakeBuilding::	ID_KAIFENG	Improved_farmland
+MakeUnit::	ID_KAIFENG	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_SHAANXI	62
+AddTitle::	ID_SHAANXI	"Governor of Shaanxi"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SHAANXI	SILK	GRAIN	HIDES
+MakeBuilding::	ID_SHAANXI	Castle2
+MakeBuilding::	ID_SHAANXI	Improved_farmland
+MakeUnit::	ID_SHAANXI	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_SICHUAN	62
+AddTitle::	ID_SICHUAN	"Governor of Sichuan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SICHUAN	SILK	SALT	SPICES
+MakeBuilding::	ID_SICHUAN	Castle3
+MakeBuilding::	ID_SICHUAN	Improved_farmland
+MakeUnit::	ID_SICHUAN	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_SICHUAN	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_JIANGNAN	62
+AddTitle::	ID_JIANGNAN	"Governor of Jiangnan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_JIANGNAN	SILK	POTTERY	GRAIN
+MakeBuilding::	ID_JIANGNAN	Castle3
+MakeBuilding::	ID_JIANGNAN	Improved_farmland
+MakeUnit::	ID_JIANGNAN	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	KoreanSpearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_HUGUANG	62
+AddTitle::	ID_HUGUANG	"Governor of Huguang"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_HUGUANG	GRAIN	SILK	POTTERY
+MakeBuilding::	ID_HUGUANG	Castle3
+MakeBuilding::	ID_HUGUANG	Improved_farmland
+MakeUnit::	ID_HUGUANG	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_HUGUANG	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_FUJIAN	62
+AddTitle::	ID_FUJIAN	"Governor of Fujian"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_FUJIAN	POTTERY	SILK	SUGAR
+MakeBuilding::	ID_FUJIAN	Castle2
+MakeBuilding::	ID_FUJIAN	Improved_farmland
+MakeUnit::	ID_FUJIAN	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_FUJIAN	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_LINGNAN	62
+AddTitle::	ID_LINGNAN	"Governor of Lingnan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_LINGNAN	SPICES	SUGAR	SILK
+MakeBuilding::	ID_LINGNAN	Castle2
+MakeBuilding::	ID_LINGNAN	Improved_farmland
+MakeUnit::	ID_LINGNAN	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_LINGNAN	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_DALI	62
+AddTitle::	ID_DALI	"Governor of Dali"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_DALI	GEMS	HIDES
+SetResources::	ID_DALI	SILVER
+MakeBuilding::	ID_DALI	Castle2
+MakeUnit::	ID_DALI	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_DALI	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_KOREA	62
+AddTitle::	ID_KOREA	"Governor of Korea"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KOREA	SILK	POTTERY	GRAIN
+MakeBuilding::	ID_KOREA	Castle2
+MakeBuilding::	ID_KOREA	Improved_farmland
+MakeUnit::	ID_KOREA	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanSkirmishers	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KoreanGuardsmen	60	PAGAN_CULTURE
+SetRegionRebels::	ID_KYUSHU	62
+AddTitle::	ID_KYUSHU	"Governor of Kyushu"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KYUSHU	SILK	FISH
+SetResources::	ID_KYUSHU	SILVER
+MakeBuilding::	ID_KYUSHU	Castle2
+MakeUnit::	ID_KYUSHU	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KYUSHU	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_KINAI	62
+AddTitle::	ID_KINAI	"Governor of Kinai"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KINAI	SILK	POTTERY	FISH
+MakeBuilding::	ID_KINAI	Castle2
+MakeUnit::	ID_KINAI	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	KoreanSkirmishers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_TOHOKU	62
+AddTitle::	ID_TOHOKU	"Governor of Kanto and Tohoku"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TOHOKU	FISH	WOOD
+SetResources::	ID_TOHOKU	GOLD
+MakeBuilding::	ID_TOHOKU	Castle2
+MakeUnit::	ID_TOHOKU	KoreanSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TOHOKU	HorseArchers	40	PAGAN_CULTURE
+SetRegionRebels::	ID_DAI_VIET	62
+AddTitle::	ID_DAI_VIET	"Governor of Dai Viet"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_DAI_VIET	SILK	SPICES	GRAIN
+MakeBuilding::	ID_DAI_VIET	Castle2
+MakeUnit::	ID_DAI_VIET	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_DAI_VIET	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_DAI_VIET	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CHAMPA	62
+AddTitle::	ID_CHAMPA	"Governor of Champa"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHAMPA	SPICES	IVORY
+MakeBuilding::	ID_CHAMPA	Castle2
+MakeUnit::	ID_CHAMPA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHAMPA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_KHMER	62
+AddTitle::	ID_KHMER	"Governor of Khmer Empire"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KHMER	SPICES	IVORY	GRAIN
+MakeBuilding::	ID_KHMER	Castle2
+MakeBuilding::	ID_KHMER	Improved_farmland
+MakeUnit::	ID_KHMER	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_BAGAN	62
+AddTitle::	ID_BAGAN	"Governor of Bagan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BAGAN	GEMS	IVORY
+SetResources::	ID_BAGAN	SILVER
+MakeBuilding::	ID_BAGAN	Castle2
+MakeUnit::	ID_BAGAN	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_BAGAN	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_SRIVIJAYA	62
+AddTitle::	ID_SRIVIJAYA	"Governor of Srivijaya"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SRIVIJAYA	SPICES	SILK
+SetResources::	ID_SRIVIJAYA	GOLD
+MakeBuilding::	ID_SRIVIJAYA	Castle2
+MakeBuilding::	ID_SRIVIJAYA	Improved_farmland
+MakeUnit::	ID_SRIVIJAYA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_SRIVIJAYA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_JAVA	62
+AddTitle::	ID_JAVA	"Governor of Java"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_JAVA	SPICES	SUGAR
+MakeBuilding::	ID_JAVA	Castle2
+MakeBuilding::	ID_JAVA	Improved_farmland
+MakeUnit::	ID_JAVA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_JAVA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_JAVA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_BORNEO	62
+AddTitle::	ID_BORNEO	"Governor of Borneo"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BORNEO	SPICES	WOOD
+SetResources::	ID_BORNEO	GOLD
+MakeBuilding::	ID_BORNEO	Castle2
+MakeUnit::	ID_BORNEO	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_BORNEO	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_PHILIPPINES	62
+AddTitle::	ID_PHILIPPINES	"Governor of Philippines"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PHILIPPINES	SPICES
+SetResources::	ID_PHILIPPINES	GOLD
+MakeBuilding::	ID_PHILIPPINES	Castle2
+MakeUnit::	ID_PHILIPPINES	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_PHILIPPINES	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_MOLUCCAS	62
+AddTitle::	ID_MOLUCCAS	"Governor of Celebes and Moluccas"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MOLUCCAS	SPICES
+MakeBuilding::	ID_MOLUCCAS	Castle2
+MakeUnit::	ID_MOLUCCAS	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MOLUCCAS	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_NEW_GUINEA	62
+AddTitle::	ID_NEW_GUINEA	"Governor of New Guinea"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_NEW_GUINEA	SPICES	WOOD
+MakeBuilding::	ID_NEW_GUINEA	Castle2
+MakeUnit::	ID_NEW_GUINEA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_NEW_GUINEA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_WEST_AUSTRALIA	62
+AddTitle::	ID_WEST_AUSTRALIA	"Governor of Western Australia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_WEST_AUSTRALIA	HIDES
+SetResources::	ID_WEST_AUSTRALIA	GOLD
+MakeBuilding::	ID_WEST_AUSTRALIA	Castle2
+MakeUnit::	ID_WEST_AUSTRALIA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_WEST_AUSTRALIA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_NORTH_AUSTRALIA	62
+AddTitle::	ID_NORTH_AUSTRALIA	"Governor of Northern Australia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_NORTH_AUSTRALIA	HIDES
+MakeBuilding::	ID_NORTH_AUSTRALIA	Castle2
+MakeUnit::	ID_NORTH_AUSTRALIA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_NORTH_AUSTRALIA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_EAST_AUSTRALIA	62
+AddTitle::	ID_EAST_AUSTRALIA	"Governor of Eastern Australia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_EAST_AUSTRALIA	HIDES	WOOL
+MakeBuilding::	ID_EAST_AUSTRALIA	Castle2
+MakeUnit::	ID_EAST_AUSTRALIA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_EAST_AUSTRALIA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_NEW_ZEALAND	62
+AddTitle::	ID_NEW_ZEALAND	"Governor of Aotearoa"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_NEW_ZEALAND	FISH	WOOD
+MakeBuilding::	ID_NEW_ZEALAND	Castle2
+MakeUnit::	ID_NEW_ZEALAND	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_NEW_ZEALAND	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_UPPER_EGYPT	28
+AddTitle::	ID_UPPER_EGYPT	"Governor of Upper Egypt"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_UPPER_EGYPT	GRAIN	LINEN	SUGAR
+SetResources::	ID_UPPER_EGYPT	GOLD
+MakeBuilding::	ID_UPPER_EGYPT	Castle2
+MakeUnit::	ID_UPPER_EGYPT	ArabInfantry	100	MUSLIM_CULTURE
+MakeUnit::	ID_UPPER_EGYPT	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_UPPER_EGYPT	BedouinCamelWarriors	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_NUBIA	28
+AddTitle::	ID_NUBIA	"Governor of Nubia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_NUBIA	IVORY
+SetResources::	ID_NUBIA	GOLD
+MakeBuilding::	ID_NUBIA	Castle2
+MakeUnit::	ID_NUBIA	NegroSpearmen	100	ORTHODOX_CULTURE
+MakeUnit::	ID_NUBIA	Archers	60	ORTHODOX_CULTURE
+MakeUnit::	ID_NUBIA	BerberCamel	40	ORTHODOX_CULTURE
+SetRegionRebels::	ID_ETHIOPIA	28
+AddTitle::	ID_ETHIOPIA	"Governor of Ethiopia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_ETHIOPIA	IVORY	SPICES
+SetResources::	ID_ETHIOPIA	GOLD
+MakeBuilding::	ID_ETHIOPIA	Castle2
+MakeUnit::	ID_ETHIOPIA	AbyssinianGuard	60	ORTHODOX_CULTURE
+MakeUnit::	ID_ETHIOPIA	NegroSpearmen	100	ORTHODOX_CULTURE
+MakeUnit::	ID_ETHIOPIA	Archers	60	ORTHODOX_CULTURE
+SetRegionRebels::	ID_SOMALIA	10
+AddTitle::	ID_SOMALIA	"Governor of Somalia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SOMALIA	SPICES	IVORY
+MakeBuilding::	ID_SOMALIA	Castle2
+MakeUnit::	ID_SOMALIA	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_SOMALIA	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_SOMALIA	BedouinCamelWarriors	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_SWAHILI	6
+AddTitle::	ID_SWAHILI	"Governor of Swahili Coast"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SWAHILI	IVORY	SPICES
+SetResources::	ID_SWAHILI	GOLD
+MakeBuilding::	ID_SWAHILI	Castle2
+MakeUnit::	ID_SWAHILI	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_SWAHILI	Archers	60	MUSLIM_CULTURE
+MakeUnit::	ID_SWAHILI	ArabInfantry	100	MUSLIM_CULTURE
+SetRegionRebels::	ID_KITARA	62
+AddTitle::	ID_KITARA	"Governor of Kitara"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KITARA	IVORY	HIDES
+SetResources::	ID_KITARA	IRON
+MakeBuilding::	ID_KITARA	Castle2
+MakeUnit::	ID_KITARA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KITARA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_DARFUR	62
+AddTitle::	ID_DARFUR	"Governor of Darfur"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_DARFUR	IVORY	HIDES
+MakeBuilding::	ID_DARFUR	Castle2
+MakeUnit::	ID_DARFUR	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_DARFUR	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_DARFUR	BerberCamel	40	PAGAN_CULTURE
+SetRegionRebels::	ID_KANEM	79
+AddTitle::	ID_KANEM	"Governor of Kanem"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_KANEM	IVORY	SALT
+SetResources::	ID_KANEM	SALT
+MakeBuilding::	ID_KANEM	Castle2
+MakeUnit::	ID_KANEM	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KANEM	SaharanCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_KANEM	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_HAUSA	62
+AddTitle::	ID_HAUSA	"Governor of Hausaland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_HAUSA	HIDES	COTTON
+MakeBuilding::	ID_HAUSA	Castle2
+MakeUnit::	ID_HAUSA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_HAUSA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_YORUBA	62
+AddTitle::	ID_YORUBA	"Governor of Ife"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_YORUBA	IVORY	DYES
+MakeBuilding::	ID_YORUBA	Castle2
+MakeUnit::	ID_YORUBA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_YORUBA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_YORUBA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_AKAN	62
+AddTitle::	ID_AKAN	"Governor of Akan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_AKAN	IVORY
+SetResources::	ID_AKAN	GOLD
+MakeBuilding::	ID_AKAN	Castle2
+MakeUnit::	ID_AKAN	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_AKAN	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_GAO	79
+AddTitle::	ID_GAO	"Governor of Gao"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GAO	SALT	IVORY
+SetResources::	ID_GAO	SALT
+MakeBuilding::	ID_GAO	Castle2
+MakeUnit::	ID_GAO	NegroSpearmen	100	MUSLIM_CULTURE
+MakeUnit::	ID_GAO	SaharanCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_GAO	Archers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_MALI	62
+AddTitle::	ID_MALI	"Governor of Mali"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MALI	IVORY
+SetResources::	ID_MALI	GOLD
+MakeBuilding::	ID_MALI	Castle2
+MakeUnit::	ID_MALI	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MALI	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MALI	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_GHANA	62
+AddTitle::	ID_GHANA	"Governor of Ghana"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GHANA	SALT
+SetResources::	ID_GHANA	GOLD
+MakeBuilding::	ID_GHANA	Castle2
+MakeUnit::	ID_GHANA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_GHANA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_GHANA	MediumCavalry	40	PAGAN_CULTURE
+SetRegionRebels::	ID_SANHAJA	12
+AddTitle::	ID_SANHAJA	"Governor of Sanhaja Lands"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SANHAJA	SALT
+SetResources::	ID_SANHAJA	SALT
+MakeBuilding::	ID_SANHAJA	Castle2
+MakeUnit::	ID_SANHAJA	BerberCamel	40	MUSLIM_CULTURE
+MakeUnit::	ID_SANHAJA	SaharanCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_SANHAJA	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_SIJILMASA	12
+AddTitle::	ID_SIJILMASA	"Governor of Sijilmasa"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SIJILMASA	SALT	DYES
+SetResources::	ID_SIJILMASA	GOLD
+MakeBuilding::	ID_SIJILMASA	Castle2
+MakeUnit::	ID_SIJILMASA	BerberCamel	40	MUSLIM_CULTURE
+MakeUnit::	ID_SIJILMASA	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_SIJILMASA	SaharanCavalry	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_HOGGAR	79
+AddTitle::	ID_HOGGAR	"Governor of Ahaggar"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_HOGGAR	SALT
+MakeBuilding::	ID_HOGGAR	Castle2
+MakeUnit::	ID_HOGGAR	BerberCamel	40	MUSLIM_CULTURE
+MakeUnit::	ID_HOGGAR	SaharanCavalry	40	MUSLIM_CULTURE
+SetRegionRebels::	ID_FEZZAN	79
+AddTitle::	ID_FEZZAN	"Governor of Fezzan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_FEZZAN	SALT	IVORY
+MakeBuilding::	ID_FEZZAN	Castle2
+MakeUnit::	ID_FEZZAN	BerberCamel	40	MUSLIM_CULTURE
+MakeUnit::	ID_FEZZAN	SaharanCavalry	40	MUSLIM_CULTURE
+MakeUnit::	ID_FEZZAN	DesertArchers	60	MUSLIM_CULTURE
+SetRegionRebels::	ID_CONGO	62
+AddTitle::	ID_CONGO	"Governor of Congo"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CONGO	IVORY	WOOD
+SetResources::	ID_CONGO	COPPER
+MakeBuilding::	ID_CONGO	Castle2
+MakeUnit::	ID_CONGO	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CONGO	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_LUBA	62
+AddTitle::	ID_LUBA	"Governor of Luba"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_LUBA	IVORY	HIDES
+SetResources::	ID_LUBA	COPPER
+MakeBuilding::	ID_LUBA	Castle2
+MakeUnit::	ID_LUBA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_LUBA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_ZIMBABWE	62
+AddTitle::	ID_ZIMBABWE	"Governor of Zimbabwe"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_ZIMBABWE	IVORY
+SetResources::	ID_ZIMBABWE	GOLD
+MakeBuilding::	ID_ZIMBABWE	Castle2
+MakeUnit::	ID_ZIMBABWE	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_ZIMBABWE	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_SOUTHERN_AFRICA	62
+AddTitle::	ID_SOUTHERN_AFRICA	"Governor of Southern Africa"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_SOUTHERN_AFRICA	HIDES	IVORY
+MakeBuilding::	ID_SOUTHERN_AFRICA	Castle2
+MakeUnit::	ID_SOUTHERN_AFRICA	NegroSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_SOUTHERN_AFRICA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_MADAGASCAR	62
+AddTitle::	ID_MADAGASCAR	"Governor of Madagascar"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MADAGASCAR	SPICES	GEMS
+MakeBuilding::	ID_MADAGASCAR	Castle2
+MakeUnit::	ID_MADAGASCAR	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MADAGASCAR	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_GREENLAND	54
+AddTitle::	ID_GREENLAND	"Governor of Greenland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GREENLAND	FURS	WHALEBONE
+MakeBuilding::	ID_GREENLAND	Castle2
+MakeUnit::	ID_GREENLAND	Spearmen	100	CATHOLIC_CULTURE
+MakeUnit::	ID_GREENLAND	Archers	60	CATHOLIC_CULTURE
+SetRegionRebels::	ID_VINLAND	62
+AddTitle::	ID_VINLAND	"Governor of Vinland"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_VINLAND	FURS	FISH	WOOD
+MakeBuilding::	ID_VINLAND	Castle2
+MakeUnit::	ID_VINLAND	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_VINLAND	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_HUDSON	62
+AddTitle::	ID_HUDSON	"Governor of Hudson Bay"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_HUDSON	FURS	WHALEBONE
+MakeBuilding::	ID_HUDSON	Castle2
+MakeUnit::	ID_HUDSON	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_HUDSON	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_DENE	62
+AddTitle::	ID_DENE	"Governor of Dene Lands"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_DENE	FURS	WOOD	FISH
+MakeBuilding::	ID_DENE	Castle2
+MakeUnit::	ID_DENE	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_DENE	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_ALASKA	62
+AddTitle::	ID_ALASKA	"Governor of Alaska"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_ALASKA	FURS	FISH	WHALEBONE
+MakeBuilding::	ID_ALASKA	Castle2
+MakeUnit::	ID_ALASKA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_ALASKA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_CALIFORNIA	62
+AddTitle::	ID_CALIFORNIA	"Governor of California"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CALIFORNIA	FISH	HIDES
+SetResources::	ID_CALIFORNIA	GOLD
+MakeBuilding::	ID_CALIFORNIA	Castle2
+MakeUnit::	ID_CALIFORNIA	Peasants	100	PAGAN_CULTURE
+MakeUnit::	ID_CALIFORNIA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_CHACO	62
+AddTitle::	ID_CHACO	"Governor of Chaco"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHACO	POTTERY	GEMS
+SetResources::	ID_CHACO	SILVER
+MakeBuilding::	ID_CHACO	Castle2
+MakeUnit::	ID_CHACO	Peasants	100	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_PLAINS	62
+AddTitle::	ID_PLAINS	"Governor of Great Plains"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PLAINS	HIDES
+MakeBuilding::	ID_PLAINS	Castle2
+MakeUnit::	ID_PLAINS	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_PLAINS	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_PLAINS	Woodsman	60	PAGAN_CULTURE
+SetRegionRebels::	ID_GREAT_LAKES	62
+AddTitle::	ID_GREAT_LAKES	"Governor of Great Lakes"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_GREAT_LAKES	FURS	WOOD	FISH
+SetResources::	ID_GREAT_LAKES	COPPER
+MakeBuilding::	ID_GREAT_LAKES	Castle2
+MakeUnit::	ID_GREAT_LAKES	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_MISSISSIPPI	62
+AddTitle::	ID_MISSISSIPPI	"Governor of Mississippi"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MISSISSIPPI	GRAIN	HIDES	POTTERY
+MakeBuilding::	ID_MISSISSIPPI	Castle2
+MakeUnit::	ID_MISSISSIPPI	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_APPALACHIA	62
+AddTitle::	ID_APPALACHIA	"Governor of Appalachia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_APPALACHIA	HIDES	WOOD	FURS
+MakeBuilding::	ID_APPALACHIA	Castle2
+MakeUnit::	ID_APPALACHIA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_TOLLAN	62
+AddTitle::	ID_TOLLAN	"Governor of Tollan"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TOLLAN	DYES	POTTERY	GEMS
+SetResources::	ID_TOLLAN	SILVER
+MakeBuilding::	ID_TOLLAN	Castle2
+MakeBuilding::	ID_TOLLAN	Improved_farmland
+MakeUnit::	ID_TOLLAN	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_MAYA	62
+AddTitle::	ID_MAYA	"Governor of Maya"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MAYA	DYES	COTTON	SPICES
+MakeBuilding::	ID_MAYA	Castle2
+MakeUnit::	ID_MAYA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CENTRAL_AMERICA	62
+AddTitle::	ID_CENTRAL_AMERICA	"Governor of Central America"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CENTRAL_AMERICA	DYES
+SetResources::	ID_CENTRAL_AMERICA	GOLD
+MakeBuilding::	ID_CENTRAL_AMERICA	Castle2
+MakeUnit::	ID_CENTRAL_AMERICA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CENTRAL_AMERICA	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_CARIBBEAN	62
+AddTitle::	ID_CARIBBEAN	"Governor of Antilles"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CARIBBEAN	SPICES	COTTON
+SetResources::	ID_CARIBBEAN	GOLD
+MakeBuilding::	ID_CARIBBEAN	Castle2
+MakeUnit::	ID_CARIBBEAN	Peasants	100	PAGAN_CULTURE
+MakeUnit::	ID_CARIBBEAN	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_MUISCA	62
+AddTitle::	ID_MUISCA	"Governor of Muisca"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_MUISCA	GEMS	SALT
+SetResources::	ID_MUISCA	GOLD
+MakeBuilding::	ID_MUISCA	Castle2
+MakeUnit::	ID_MUISCA	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_MUISCA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MUISCA	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_AMAZONIA	62
+AddTitle::	ID_AMAZONIA	"Governor of Amazonia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_AMAZONIA	WOOD	DYES	SPICES
+MakeBuilding::	ID_AMAZONIA	Castle2
+MakeUnit::	ID_AMAZONIA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_AMAZONIA	Woodsman	60	PAGAN_CULTURE
+SetRegionRebels::	ID_BRAZIL	62
+AddTitle::	ID_BRAZIL	"Governor of Brazil"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_BRAZIL	DYES	WOOD	SUGAR
+MakeBuilding::	ID_BRAZIL	Castle2
+MakeUnit::	ID_BRAZIL	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_BRAZIL	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_BRAZIL	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CHIMU	62
+AddTitle::	ID_CHIMU	"Governor of Chimor"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHIMU	COTTON	FISH
+SetResources::	ID_CHIMU	GOLD
+MakeBuilding::	ID_CHIMU	Castle2
+MakeUnit::	ID_CHIMU	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CUZCO	62
+AddTitle::	ID_CUZCO	"Governor of Cuzco"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CUZCO	WOOL
+SetResources::	ID_CUZCO	GOLD
+MakeBuilding::	ID_CUZCO	Castle2
+MakeUnit::	ID_CUZCO	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_TIWANAKU	62
+AddTitle::	ID_TIWANAKU	"Governor of Tiwanaku"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_TIWANAKU	WOOL	GEMS
+SetResources::	ID_TIWANAKU	SILVER
+MakeBuilding::	ID_TIWANAKU	Castle2
+MakeUnit::	ID_TIWANAKU	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	Peasants	100	PAGAN_CULTURE
+SetRegionRebels::	ID_PAMPAS	62
+AddTitle::	ID_PAMPAS	"Governor of Pampas"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PAMPAS	HIDES
+MakeBuilding::	ID_PAMPAS	Castle2
+MakeUnit::	ID_PAMPAS	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_PAMPAS	Spearmen	100	PAGAN_CULTURE
+SetRegionRebels::	ID_CHILE	62
+AddTitle::	ID_CHILE	"Governor of Chile"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_CHILE	COTTON	FISH
+SetResources::	ID_CHILE	COPPER
+MakeBuilding::	ID_CHILE	Castle2
+MakeUnit::	ID_CHILE	Spearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_CHILE	Archers	60	PAGAN_CULTURE
+SetRegionRebels::	ID_PATAGONIA	62
+AddTitle::	ID_PATAGONIA	"Governor of Patagonia"	+1	0	0	0	0	0	0
+SetTradableGoods::	ID_PATAGONIA	HIDES
+MakeBuilding::	ID_PATAGONIA	Castle2
+MakeUnit::	ID_PATAGONIA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_PATAGONIA	Spearmen	100	PAGAN_CULTURE
+
+// ---- posizioni nella geometria del mondo (pixel x 16)
+SetCastle::	ID_SCOTLAND	95656	14744
+SetCastle::	ID_NORTH_UMBRIA	97304	16472
+SetCastle::	ID_MERCIA	97272	17512
+SetCastle::	ID_WALES	95976	17800
+SetCastle::	ID_WESSEX	97160	18712
+SetCastle::	ID_IRELAND	94312	16952
+SetCastle::	ID_NORWAY	104120	11576
+SetCastle::	ID_SWEDEN	108088	11608
+SetCastle::	ID_DENMARK	104872	15128
+SetCastle::	ID_FINLAND	110744	11112
+SetCastle::	ID_NOVGOROD	115928	12760
+SetCastle::	ID_MUSCOVY	119592	15032
+SetCastle::	ID_LIVONIA	111800	14056
+SetCastle::	ID_SMOLENSK	116376	15816
+SetCastle::	ID_RYAZAN	120968	16072
+SetCastle::	ID_CHERNIGOV	115944	18392
+SetCastle::	ID_LITHUANIA	112488	15896
+SetCastle::	ID_PEREYASLAVL	116040	19464
+SetCastle::	ID_VOLGA_BULGARIA	126168	15656
+SetCastle::	ID_KHAZAR	125592	22200
+SetCastle::	ID_KIEV	115496	19176
+SetCastle::	ID_CRIMEA	117560	23208
+SetCastle::	ID_VOLHYNIA	112504	18952
+SetCastle::	ID_PRUSSIA	109736	16120
+SetCastle::	ID_MOLDAVIA	113816	21624
+SetCastle::	ID_CARPATHIA	111496	22408
+SetCastle::	ID_WALLACHIA	112952	23576
+SetCastle::	ID_BULGARIA	112680	24536
+SetCastle::	ID_HUNGARY	108712	21160
+SetCastle::	ID_POLAND	109400	19480
+SetCastle::	ID_POMERANIA	106296	16888
+SetCastle::	ID_BRANDENBURG	105144	17688
+SetCastle::	ID_SILESIA	107736	18680
+SetCastle::	ID_BOHEMIA	106232	19464
+SetCastle::	ID_SAXONY	103976	17784
+SetCastle::	ID_FREISLAND	101256	17064
+SetCastle::	ID_FLANDERS	100056	18728
+SetCastle::	ID_NORMANDY	98552	19944
+SetCastle::	ID_BRITTANY	96952	20920
+SetCastle::	ID_FRANCONIA	103656	19672
+SetCastle::	ID_LORRAINE	101480	20184
+SetCastle::	ID_CHAMPAGNE	100248	20072
+SetCastle::	ID_ILE_DE_FRANCE	99272	20376
+SetCastle::	ID_ANJOU	97608	21400
+SetCastle::	ID_AQUITAINE	97592	23288
+SetCastle::	ID_TOULOUSE	98744	24168
+SetCastle::	ID_PROVENCE	101064	24216
+SetCastle::	ID_BURGUNDY	100824	21496
+SetCastle::	ID_SWABIA	103688	20712
+SetCastle::	ID_BAVARIA	104888	20264
+SetCastle::	ID_SWITZERLAND	102840	21512
+SetCastle::	ID_TYROLIA	104488	21544
+SetCastle::	ID_AUSTRIA	107352	20856
+SetCastle::	ID_CROATIA	107128	22600
+SetCastle::	ID_SERBIA	109736	24488
+SetCastle::	ID_GREECE	111352	27784
+SetCastle::	ID_CONSTANTINOPLE	114552	25912
+SetCastle::	ID_CRETE	112392	29752
+SetCastle::	ID_RHODES	114168	29032
+SetCastle::	ID_GEORGIA	123720	25480
+SetCastle::	ID_ARMENIA	123016	26296
+SetCastle::	ID_RUM	119240	26824
+SetCastle::	ID_LESSER_ARMENIA	118600	28280
+SetCastle::	ID_EDESSA	120264	28552
+SetCastle::	ID_TREBIZOND	120792	25976
+SetCastle::	ID_NICAEA	115032	26360
+SetCastle::	ID_ANATOLIA	116632	28088
+SetCastle::	ID_CYPRUS	117128	29864
+SetCastle::	ID_ANTIOCH	118744	29192
+SetCastle::	ID_SYRIA	119048	31016
+SetCastle::	ID_TRIPOLI	118568	30344
+SetCastle::	ID_JERUSALEM	118200	32056
+SetCastle::	ID_ARABIA	120728	36616
+SetCastle::	ID_SINAI	117384	33176
+SetCastle::	ID_EGYPT	115912	33160
+SetCastle::	ID_LIBYA	109480	31832
+SetCastle::	ID_AFRICA	123464	31080
+SetCastle::	ID_TUNISIA	103784	28792
+SetCastle::	ID_ALGERIA	99688	28824
+SetCastle::	ID_MOROCCO	95048	30600
+SetCastle::	ID_GRANADA	95848	28536
+SetCastle::	ID_CORDOBA	95160	28072
+SetCastle::	ID_PORTUGAL	93064	26504
+SetCastle::	ID_LEON	94712	24856
+SetCastle::	ID_CASTILE	95208	26200
+SetCastle::	ID_VALENCIA	97704	27016
+SetCastle::	ID_NAVARRE	96968	24712
+SetCastle::	ID_ARAGON	97416	25528
+SetCastle::	ID_CORSICA	103160	25176
+SetCastle::	ID_SARDINIA	103176	27176
+SetCastle::	ID_GENOA	103064	23592
+SetCastle::	ID_MILAN	103208	22840
+SetCastle::	ID_VENICE	105016	22856
+SetCastle::	ID_TUSCANY	104344	24040
+SetCastle::	ID_PAPAL_STATES	104488	23544
+SetCastle::	ID_ROME	105128	25352
+SetCastle::	ID_NAPLES	106136	26072
+SetCastle::	ID_MALTA	106280	29384
+SetCastle::	ID_SICILY	105608	27912
+SetCastle::	ID_SCANIA	105512	15080
+SetCastle::	ID_ESTONIA	112184	11976
+SetCastle::	ID_ALGARVE	93352	28648
+SetCastle::	ID_LEVIDIA	116936	21656
+SetCastle::	ID_LESSER_KHAZAR	122168	21256
+SetCastle::	ID_GREAT_POLAND	107672	17688
+SetCastle::	ID_MURCIA	97272	28008
+SetCastle::	ID_SAVOY	101336	22776
+SetCastle::	ID_ICELAND	85304	7800
+SetCastle::	ID_LAPLAND	111832	6200
+SetCastle::	ID_BIARMIA	121912	7736
+SetCastle::	ID_PERM	130472	11144
+SetCastle::	ID_BASHKIRIA	130152	15864
+SetCastle::	ID_KIPCHAK	127704	21368
+SetCastle::	ID_OGHUZ	133640	22968
+SetCastle::	ID_KIMEK	140184	15672
+SetCastle::	ID_SIBIR	137240	13016
+SetCastle::	ID_YENISEI	150568	16680
+SetCastle::	ID_BAIKAL	159896	18120
+SetCastle::	ID_YAKUTIA	172648	9720
+SetCastle::	ID_CHUKOTKA	184776	11832
+SetCastle::	ID_AMUR	175720	20648
+SetCastle::	ID_KHWAREZM	131992	25080
+SetCastle::	ID_TRANSOXIANA	136488	26888
+SetCastle::	ID_SEMIRECHYE	141272	24760
+SetCastle::	ID_KHURASAN	131784	29192
+SetCastle::	ID_GHAZNA	137336	30920
+SetCastle::	ID_KASHGAR	141688	27016
+SetCastle::	ID_UIGHURIA	149496	24696
+SetCastle::	ID_MONGOLIA	157144	21592
+SetCastle::	ID_EAST_MONGOLIA	161624	21512
+SetCastle::	ID_SHIRVAN	125944	26216
+SetCastle::	ID_AZERBAIJAN	124584	27944
+SetCastle::	ID_TABARISTAN	127544	29592
+SetCastle::	ID_JIBAL	127688	31496
+SetCastle::	ID_FARS	128184	33432
+SetCastle::	ID_KERMAN	130792	33000
+SetCastle::	ID_SISTAN	133544	32568
+SetCastle::	ID_NAJD	126488	36056
+SetCastle::	ID_YEMEN	123368	42072
+SetCastle::	ID_OMAN	130600	36680
+SetCastle::	ID_SIND	137384	35736
+SetCastle::	ID_PUNJAB	140744	32200
+SetCastle::	ID_KANNAUJ	143960	35032
+SetCastle::	ID_RAJPUTANA	140920	35400
+SetCastle::	ID_GUJARAT	139464	37000
+SetCastle::	ID_BENGAL	148680	36376
+SetCastle::	ID_KALINGA	147640	38808
+SetCastle::	ID_DECCAN	142248	40584
+SetCastle::	ID_CHOLA	143512	44760
+SetCastle::	ID_CEYLON	144232	46200
+SetCastle::	ID_TIBET	150392	33400
+SetCastle::	ID_AMDO	156312	29128
+SetCastle::	ID_TANGUT	159128	27688
+SetCastle::	ID_LIAO	166680	23912
+SetCastle::	ID_MANCHURIA	171048	22824
+SetCastle::	ID_KAIFENG	163784	30104
+SetCastle::	ID_SHAANXI	160664	30456
+SetCastle::	ID_SICHUAN	157864	32760
+SetCastle::	ID_JIANGNAN	167128	33016
+SetCastle::	ID_HUGUANG	162536	32968
+SetCastle::	ID_FUJIAN	166232	36344
+SetCastle::	ID_LINGNAN	163160	37432
+SetCastle::	ID_DALI	155672	35928
+SetCastle::	ID_KOREA	170808	28024
+SetCastle::	ID_KYUSHU	173096	30936
+SetCastle::	ID_KINAI	176120	29976
+SetCastle::	ID_TOHOKU	179128	27784
+SetCastle::	ID_DAI_VIET	158888	38696
+SetCastle::	ID_CHAMPA	160760	42936
+SetCastle::	ID_KHMER	157752	43224
+SetCastle::	ID_BAGAN	152552	38616
+SetCastle::	ID_SRIVIJAYA	158264	52712
+SetCastle::	ID_JAVA	161400	55384
+SetCastle::	ID_BORNEO	164104	48168
+SetCastle::	ID_PHILIPPINES	167592	42520
+SetCastle::	ID_MOLUCCAS	171288	50536
+SetCastle::	ID_NEW_GUINEA	178568	53304
+SetCastle::	ID_WEST_AUSTRALIA	164648	70040
+SetCastle::	ID_NORTH_AUSTRALIA	173288	58200
+SetCastle::	ID_EAST_AUSTRALIA	185016	71272
+SetCastle::	ID_NEW_ZEALAND	198600	76216
+SetCastle::	ID_UPPER_EGYPT	116632	35976
+SetCastle::	ID_NUBIA	115624	40376
+SetCastle::	ID_ETHIOPIA	120216	42792
+SetCastle::	ID_SOMALIA	124024	49816
+SetCastle::	ID_SWAHILI	120680	56152
+SetCastle::	ID_KITARA	116008	50872
+SetCastle::	ID_DARFUR	112520	43096
+SetCastle::	ID_KANEM	105464	42728
+SetCastle::	ID_HAUSA	102824	44040
+SetCastle::	ID_YORUBA	100552	46680
+SetCastle::	ID_AKAN	96552	46280
+SetCastle::	ID_GAO	97896	41544
+SetCastle::	ID_MALI	93096	44408
+SetCastle::	ID_GHANA	93336	41832
+SetCastle::	ID_SANHAJA	90376	38952
+SetCastle::	ID_SIJILMASA	95464	32376
+SetCastle::	ID_HOGGAR	101096	37640
+SetCastle::	ID_FEZZAN	106632	35576
+SetCastle::	ID_CONGO	106728	53464
+SetCastle::	ID_LUBA	113192	55896
+SetCastle::	ID_ZIMBABWE	115736	62824
+SetCastle::	ID_SOUTHERN_AFRICA	111752	67864
+SetCastle::	ID_MADAGASCAR	125288	62008
+SetCastle::	ID_GREENLAND	71704	10488
+SetCastle::	ID_VINLAND	65928	18312
+SetCastle::	ID_HUDSON	43672	12536
+SetCastle::	ID_DENE	32040	9336
+SetCastle::	ID_ALASKA	12840	7160
+SetCastle::	ID_CALIFORNIA	27944	27608
+SetCastle::	ID_CHACO	35736	29288
+SetCastle::	ID_PLAINS	40328	25976
+SetCastle::	ID_GREAT_LAKES	52200	24136
+SetCastle::	ID_MISSISSIPPI	46040	27560
+SetCastle::	ID_APPALACHIA	53320	28296
+SetCastle::	ID_TOLLAN	40696	39288
+SetCastle::	ID_MAYA	46904	38904
+SetCastle::	ID_CENTRAL_AMERICA	48216	43992
+SetCastle::	ID_CARIBBEAN	57656	40232
+SetCastle::	ID_MUISCA	55240	48344
+SetCastle::	ID_AMAZONIA	63368	52776
+SetCastle::	ID_BRAZIL	75752	58504
+SetCastle::	ID_CHIMU	52376	55672
+SetCastle::	ID_CUZCO	56472	58824
+SetCastle::	ID_TIWANAKU	58360	60616
+SetCastle::	ID_PAMPAS	64280	71752
+SetCastle::	ID_CHILE	57224	71000
+SetCastle::	ID_PATAGONIA	59048	79416
+SetOrigin::	ID_SCOTLAND	95576	14200
+SetOrigin::	ID_NORTH_UMBRIA	96840	16152
+SetOrigin::	ID_MERCIA	97384	17512
+SetOrigin::	ID_WALES	96120	17624
+SetOrigin::	ID_WESSEX	96824	18520
+SetOrigin::	ID_IRELAND	93560	16936
+SetOrigin::	ID_NORWAY	103880	10136
+SetOrigin::	ID_SWEDEN	108248	6920
+SetOrigin::	ID_DENMARK	103160	14792
+SetOrigin::	ID_FINLAND	112216	9528
+SetOrigin::	ID_NOVGOROD	117432	10072
+SetOrigin::	ID_MUSCOVY	121880	13496
+SetOrigin::	ID_LIVONIA	112712	13864
+SetOrigin::	ID_SMOLENSK	116120	15080
+SetOrigin::	ID_RYAZAN	121880	17368
+SetOrigin::	ID_CHERNIGOV	116488	17576
+SetOrigin::	ID_LITHUANIA	112904	16280
+SetOrigin::	ID_PEREYASLAVL	117048	19736
+SetOrigin::	ID_VOLGA_BULGARIA	126744	13736
+SetOrigin::	ID_KHAZAR	124824	20664
+SetOrigin::	ID_KIEV	114728	19080
+SetOrigin::	ID_CRIMEA	117656	22872
+SetOrigin::	ID_VOLHYNIA	112216	19064
+SetOrigin::	ID_PRUSSIA	110424	16376
+SetOrigin::	ID_MOLDAVIA	114264	21976
+SetOrigin::	ID_CARPATHIA	112248	21928
+SetOrigin::	ID_WALLACHIA	112648	23416
+SetOrigin::	ID_BULGARIA	113096	24712
+SetOrigin::	ID_HUNGARY	109144	21768
+SetOrigin::	ID_POLAND	110808	19192
+SetOrigin::	ID_POMERANIA	107576	16552
+SetOrigin::	ID_BRANDENBURG	105592	17800
+SetOrigin::	ID_SILESIA	106712	18536
+SetOrigin::	ID_BOHEMIA	107144	19720
+SetOrigin::	ID_SAXONY	103176	17496
+SetOrigin::	ID_FREISLAND	101464	17432
+SetOrigin::	ID_FLANDERS	99944	19096
+SetOrigin::	ID_NORMANDY	97560	20440
+SetOrigin::	ID_BRITTANY	96600	20984
+SetOrigin::	ID_FRANCONIA	103064	19256
+SetOrigin::	ID_LORRAINE	101768	19896
+SetOrigin::	ID_CHAMPAGNE	100808	20120
+SetOrigin::	ID_ILE_DE_FRANCE	99000	21224
+SetOrigin::	ID_ANJOU	97736	21416
+SetOrigin::	ID_AQUITAINE	97848	23784
+SetOrigin::	ID_TOULOUSE	99304	23864
+SetOrigin::	ID_PROVENCE	101432	23880
+SetOrigin::	ID_BURGUNDY	100600	21928
+SetOrigin::	ID_SWABIA	102440	20888
+SetOrigin::	ID_BAVARIA	104936	20504
+SetOrigin::	ID_SWITZERLAND	104008	21544
+SetOrigin::	ID_TYROLIA	104600	21816
+SetOrigin::	ID_AUSTRIA	106712	21400
+SetOrigin::	ID_CROATIA	107464	23416
+SetOrigin::	ID_SERBIA	109240	24232
+SetOrigin::	ID_GREECE	110152	26472
+SetOrigin::	ID_CONSTANTINOPLE	113192	25816
+SetOrigin::	ID_CRETE	112312	29880
+SetOrigin::	ID_RHODES	114008	29192
+SetOrigin::	ID_GEORGIA	123192	25016
+SetOrigin::	ID_ARMENIA	123480	27000
+SetOrigin::	ID_RUM	117832	26760
+SetOrigin::	ID_LESSER_ARMENIA	118104	28104
+SetOrigin::	ID_EDESSA	121960	28888
+SetOrigin::	ID_TREBIZOND	121752	26296
+SetOrigin::	ID_NICAEA	114264	27176
+SetOrigin::	ID_ANATOLIA	116376	27352
+SetOrigin::	ID_CYPRUS	117048	29960
+SetOrigin::	ID_ANTIOCH	119128	29240
+SetOrigin::	ID_SYRIA	120776	31128
+SetOrigin::	ID_TRIPOLI	118664	31000
+SetOrigin::	ID_JERUSALEM	118664	32200
+SetOrigin::	ID_ARABIA	121528	36136
+SetOrigin::	ID_SINAI	117480	33112
+SetOrigin::	ID_EGYPT	115192	34072
+SetOrigin::	ID_LIBYA	110984	33448
+SetOrigin::	ID_AFRICA	123016	33544
+SetOrigin::	ID_TUNISIA	103592	32344
+SetOrigin::	ID_ALGERIA	99528	30552
+SetOrigin::	ID_MOROCCO	95016	30824
+SetOrigin::	ID_GRANADA	96200	28424
+SetOrigin::	ID_CORDOBA	94680	27976
+SetOrigin::	ID_PORTUGAL	93608	25832
+SetOrigin::	ID_LEON	94520	24744
+SetOrigin::	ID_CASTILE	95784	26200
+SetOrigin::	ID_VALENCIA	97944	25992
+SetOrigin::	ID_NAVARRE	96664	24840
+SetOrigin::	ID_ARAGON	97576	25208
+SetOrigin::	ID_CORSICA	103176	25096
+SetOrigin::	ID_SARDINIA	103144	26344
+SetOrigin::	ID_GENOA	102392	23576
+SetOrigin::	ID_MILAN	103304	22760
+SetOrigin::	ID_VENICE	105256	22328
+SetOrigin::	ID_TUSCANY	104520	24520
+SetOrigin::	ID_PAPAL_STATES	104760	23832
+SetOrigin::	ID_ROME	105384	25368
+SetOrigin::	ID_NAPLES	106968	26120
+SetOrigin::	ID_MALTA	106296	29432
+SetOrigin::	ID_SICILY	106280	28312
+SetOrigin::	ID_SCANIA	105736	14824
+SetOrigin::	ID_ESTONIA	112488	12392
+SetOrigin::	ID_ALGARVE	93368	27704
+SetOrigin::	ID_LEVIDIA	119208	20872
+SetOrigin::	ID_LESSER_KHAZAR	121592	20968
+SetOrigin::	ID_GREAT_POLAND	108280	17416
+SetOrigin::	ID_MURCIA	97080	27944
+SetOrigin::	ID_SAVOY	101224	22888
+SetOrigin::	ID_ICELAND	86952	7352
+SetOrigin::	ID_LAPLAND	113496	4344
+SetOrigin::	ID_BIARMIA	126024	7544
+SetOrigin::	ID_PERM	131576	8184
+SetOrigin::	ID_BASHKIRIA	131368	16216
+SetOrigin::	ID_KIPCHAK	130120	20616
+SetOrigin::	ID_OGHUZ	134872	21672
+SetOrigin::	ID_KIMEK	140840	17832
+SetOrigin::	ID_SIBIR	138776	10040
+SetOrigin::	ID_YENISEI	150008	9944
+SetOrigin::	ID_BAIKAL	159560	14472
+SetOrigin::	ID_YAKUTIA	171464	7704
+SetOrigin::	ID_CHUKOTKA	187528	6136
+SetOrigin::	ID_AMUR	175576	19496
+SetOrigin::	ID_KHWAREZM	131384	26392
+SetOrigin::	ID_TRANSOXIANA	137480	25640
+SetOrigin::	ID_SEMIRECHYE	142904	23288
+SetOrigin::	ID_KHURASAN	133624	28712
+SetOrigin::	ID_GHAZNA	137160	29336
+SetOrigin::	ID_KASHGAR	144088	27640
+SetOrigin::	ID_UIGHURIA	148392	23720
+SetOrigin::	ID_MONGOLIA	153976	20456
+SetOrigin::	ID_EAST_MONGOLIA	162824	21288
+SetOrigin::	ID_SHIRVAN	125416	26280
+SetOrigin::	ID_AZERBAIJAN	124888	28088
+SetOrigin::	ID_TABARISTAN	128808	29896
+SetOrigin::	ID_JIBAL	125672	30072
+SetOrigin::	ID_FARS	128456	33448
+SetOrigin::	ID_KERMAN	130504	31752
+SetOrigin::	ID_SISTAN	133800	32472
+SetOrigin::	ID_NAJD	125112	36584
+SetOrigin::	ID_YEMEN	125272	40968
+SetOrigin::	ID_OMAN	129560	38712
+SetOrigin::	ID_SIND	137096	34616
+SetOrigin::	ID_PUNJAB	140712	31096
+SetOrigin::	ID_KANNAUJ	144296	34808
+SetOrigin::	ID_RAJPUTANA	140488	35352
+SetOrigin::	ID_GUJARAT	139256	37240
+SetOrigin::	ID_BENGAL	148520	36184
+SetOrigin::	ID_KALINGA	145544	38792
+SetOrigin::	ID_DECCAN	141560	40104
+SetOrigin::	ID_CHOLA	142712	44440
+SetOrigin::	ID_CEYLON	144504	46888
+SetOrigin::	ID_TIBET	148408	31896
+SetOrigin::	ID_AMDO	153752	30456
+SetOrigin::	ID_TANGUT	153368	25864
+SetOrigin::	ID_LIAO	166744	24456
+SetOrigin::	ID_MANCHURIA	171160	23032
+SetOrigin::	ID_KAIFENG	164216	29096
+SetOrigin::	ID_SHAANXI	160392	29992
+SetOrigin::	ID_SICHUAN	158968	33368
+SetOrigin::	ID_JIANGNAN	165736	33208
+SetOrigin::	ID_HUGUANG	162568	33304
+SetOrigin::	ID_FUJIAN	165272	36008
+SetOrigin::	ID_LINGNAN	160392	36936
+SetOrigin::	ID_DALI	156280	36168
+SetOrigin::	ID_KOREA	171672	29128
+SetOrigin::	ID_KYUSHU	173496	31384
+SetOrigin::	ID_KINAI	176744	29512
+SetOrigin::	ID_TOHOKU	178216	28904
+SetOrigin::	ID_DAI_VIET	158216	38392
+SetOrigin::	ID_CHAMPA	159944	42680
+SetOrigin::	ID_KHMER	156632	41496
+SetOrigin::	ID_BAGAN	153160	38248
+SetOrigin::	ID_SRIVIJAYA	157144	52264
+SetOrigin::	ID_JAVA	162040	55304
+SetOrigin::	ID_BORNEO	163656	50776
+SetOrigin::	ID_PHILIPPINES	167832	41144
+SetOrigin::	ID_MOLUCCAS	167128	52152
+SetOrigin::	ID_NEW_GUINEA	179432	54312
+SetOrigin::	ID_WEST_AUSTRALIA	167912	66696
+SetOrigin::	ID_NORTH_AUSTRALIA	175624	63144
+SetOrigin::	ID_EAST_AUSTRALIA	181352	68904
+SetOrigin::	ID_NEW_ZEALAND	195432	78904
+SetOrigin::	ID_UPPER_EGYPT	115816	36904
+SetOrigin::	ID_NUBIA	116856	41096
+SetOrigin::	ID_ETHIOPIA	120024	45448
+SetOrigin::	ID_SOMALIA	124120	46920
+SetOrigin::	ID_SWAHILI	119560	57832
+SetOrigin::	ID_KITARA	115896	50552
+SetOrigin::	ID_DARFUR	111560	43064
+SetOrigin::	ID_KANEM	106904	45176
+SetOrigin::	ID_HAUSA	102344	43432
+SetOrigin::	ID_YORUBA	103048	46840
+SetOrigin::	ID_AKAN	96888	46408
+SetOrigin::	ID_GAO	97512	40904
+SetOrigin::	ID_MALI	91528	44968
+SetOrigin::	ID_GHANA	90184	41960
+SetOrigin::	ID_SANHAJA	91656	37240
+SetOrigin::	ID_SIJILMASA	95864	33976
+SetOrigin::	ID_HOGGAR	100312	36312
+SetOrigin::	ID_FEZZAN	110840	37400
+SetOrigin::	ID_CONGO	107976	51672
+SetOrigin::	ID_LUBA	113768	57784
+SetOrigin::	ID_ZIMBABWE	115368	62936
+SetOrigin::	ID_SOUTHERN_AFRICA	111288	67800
+SetOrigin::	ID_MADAGASCAR	124824	61672
+SetOrigin::	ID_GREENLAND	72648	3592
+SetOrigin::	ID_VINLAND	59656	15704
+SetOrigin::	ID_HUDSON	40488	8888
+SetOrigin::	ID_DENE	28760	10776
+SetOrigin::	ID_ALASKA	10040	6072
+SetOrigin::	ID_CALIFORNIA	30120	24936
+SetOrigin::	ID_CHACO	34920	30168
+SetOrigin::	ID_PLAINS	37992	20408
+SetOrigin::	ID_GREAT_LAKES	47480	20696
+SetOrigin::	ID_MISSISSIPPI	46232	27768
+SetOrigin::	ID_APPALACHIA	51272	28984
+SetOrigin::	ID_TOLLAN	39208	36760
+SetOrigin::	ID_MAYA	45480	41464
+SetOrigin::	ID_CENTRAL_AMERICA	48680	42904
+SetOrigin::	ID_CARIBBEAN	53896	38968
+SetOrigin::	ID_MUISCA	55736	49880
+SetOrigin::	ID_AMAZONIA	62680	53576
+SetOrigin::	ID_BRAZIL	71464	60888
+SetOrigin::	ID_CHIMU	53464	54168
+SetOrigin::	ID_CUZCO	56088	57384
+SetOrigin::	ID_TIWANAKU	60520	61752
+SetOrigin::	ID_PAMPAS	63016	67368
+SetOrigin::	ID_CHILE	57352	74136
+SetOrigin::	ID_PATAGONIA	57496	80744
+SetOrigin::	ID_NORTH_ATLANTIC	87976	11528
+SetOrigin::	ID_IRISH_SEA	94120	18440
+SetOrigin::	ID_NORWEGIAN_SEA	100408	4392
+SetOrigin::	ID_SKAGERRAK	102168	13800
+SetOrigin::	ID_BALTIC_SEA	109112	10072
+SetOrigin::	ID_NORTH_SEA	99064	14376
+SetOrigin::	ID_ENGLISH_CHANNEL	94008	20536
+SetOrigin::	ID_ATLANTIC_OCEAN	87336	21096
+SetOrigin::	ID_BAY_OF_BISCAY	96168	22936
+SetOrigin::	ID_COSTA_VERDE	93016	23000
+SetOrigin::	ID_SPANISH_COAST	91464	25048
+SetOrigin::	ID_GULF_CADIZ	93608	29480
+SetOrigin::	ID_STRAITS_GIBRALTAR	95624	29320
+SetOrigin::	ID_WESTERN_MED	99752	27976
+SetOrigin::	ID_GULF_LIONS	100776	25416
+SetOrigin::	ID_TYRRHENIAN_SEA	104408	26104
+SetOrigin::	ID_STRAITS_SICILY	106312	27032
+SetOrigin::	ID_ADRIATIC_OCEAN	108088	25400
+SetOrigin::	ID_IONIAN_SEA	108872	28312
+SetOrigin::	ID_AEGEAN_SEA	112488	27288
+SetOrigin::	ID_BLACK_SEA	115992	24200
+SetOrigin::	ID_EASTERN_MED	115560	30248
+SetOrigin::	ID_ATLANTIC_COAST	90824	31480
+SetOrigin::	ID_CASPIAN_SEA	127384	27480
+SetOrigin::	ID_GREENLAND_SEA	78888	11800
+SetOrigin::	ID_LABRADOR_SEA	69576	15032
+SetOrigin::	ID_HUDSON_BAY	47400	11336
+SetOrigin::	ID_BARENTS_SEA	121368	2008
+SetOrigin::	ID_WHITE_SEA	122488	4664
+SetOrigin::	ID_ARCTIC_OCEAN	18856	1432
+SetOrigin::	ID_BERING_SEA	202136	13688
+SetOrigin::	ID_GULF_ALASKA	14360	17240
+SetOrigin::	ID_NE_PACIFIC	20280	31560
+SetOrigin::	ID_N_PACIFIC	198776	27688
+SetOrigin::	ID_NW_PACIFIC	185128	30712
+SetOrigin::	ID_OKHOTSK	184136	17224
+SetOrigin::	ID_SEA_JAPAN	175256	26840
+SetOrigin::	ID_YELLOW_SEA	168616	30168
+SetOrigin::	ID_EAST_CHINA_SEA	175448	33080
+SetOrigin::	ID_PHILIPPINE_SEA	176104	40600
+SetOrigin::	ID_SOUTH_CHINA_SEA	165032	40008
+SetOrigin::	ID_JAVA_SEA	157400	60888
+SetOrigin::	ID_MALACCA	152024	51240
+SetOrigin::	ID_ANDAMAN_SEA	152872	45048
+SetOrigin::	ID_BAY_BENGAL	147256	43752
+SetOrigin::	ID_BANDA_SEA	177368	50040
+SetOrigin::	ID_TIMOR_SEA	167160	59112
+SetOrigin::	ID_CORAL_SEA	187224	60456
+SetOrigin::	ID_TASMAN_SEA	188136	80360
+SetOrigin::	ID_SOUTHERN_OCEAN	158456	77832
+SetOrigin::	ID_S_INDIAN	135832	74888
+SetOrigin::	ID_C_INDIAN	145608	56264
+SetOrigin::	ID_W_INDIAN	125512	52888
+SetOrigin::	ID_ARABIAN_SEA	135048	42872
+SetOrigin::	ID_GULF_ADEN	128744	46312
+SetOrigin::	ID_RED_SEA	121176	40840
+SetOrigin::	ID_PERSIAN_GULF	132824	37032
+SetOrigin::	ID_MOZAMBIQUE	121560	73032
+SetOrigin::	ID_E_PACIFIC	38776	49912
+SetOrigin::	ID_EQ_PACIFIC	15480	47112
+SetOrigin::	ID_SE_PACIFIC	42952	76408
+SetOrigin::	ID_S_PACIFIC	20712	75912
+SetOrigin::	ID_GULF_MEXICO	47816	35896
+SetOrigin::	ID_CARIBBEAN_SEA	54760	42456
+SetOrigin::	ID_W_ATLANTIC	57016	32280
+SetOrigin::	ID_SARGASSO_SEA	67480	35608
+SetOrigin::	ID_MID_ATLANTIC	75768	24600
+SetOrigin::	ID_CANARY_SEA	84056	36504
+SetOrigin::	ID_EQ_ATLANTIC	77272	44824
+SetOrigin::	ID_GULF_GUINEA	96264	54296
+SetOrigin::	ID_S_ATLANTIC	87096	61128
+SetOrigin::	ID_SE_ATLANTIC	101192	76872
+SetOrigin::	ID_SW_ATLANTIC	73432	76808
+SetPort::	ID_SCOTLAND	95768	14792	0
+SetPort::	ID_NORTH_UMBRIA	97592	16664	1
+SetPort::	ID_MERCIA	97976	17288	1
+SetPort::	ID_WALES	95624	17576	5
+SetPort::	ID_WESSEX	97128	18856	7
+SetPort::	ID_IRELAND	94376	16968	1
+SetPort::	ID_NORWAY	104088	11592	6
+SetPort::	ID_SWEDEN	108360	11976	0
+SetPort::	ID_DENMARK	104872	15080	4
+SetPort::	ID_FINLAND	110712	11144	6
+SetPort::	ID_NOVGOROD	115288	11592	4
+SetPort::	ID_LIVONIA	111736	13976	3
+SetPort::	ID_LITHUANIA	110120	15192	5
+SetPort::	ID_CRIMEA	117768	23384	7
+SetPort::	ID_PRUSSIA	109368	15896	4
+SetPort::	ID_MOLDAVIA	115000	22632	7
+SetPort::	ID_BULGARIA	113768	24920	1
+SetPort::	ID_POMERANIA	106312	16728	3
+SetPort::	ID_SAXONY	103432	16744	3
+SetPort::	ID_FREISLAND	101240	16952	3
+SetPort::	ID_FLANDERS	100120	18488	2
+SetPort::	ID_NORMANDY	98472	19576	3
+SetPort::	ID_BRITTANY	96712	20520	3
+SetPort::	ID_AQUITAINE	97560	23144	3
+SetPort::	ID_TOULOUSE	99720	24520	0
+SetPort::	ID_PROVENCE	100984	24360	6
+SetPort::	ID_CROATIA	106456	23112	6
+SetPort::	ID_SERBIA	109192	25400	6
+SetPort::	ID_GREECE	111256	27896	6
+SetPort::	ID_CONSTANTINOPLE	114488	25992	7
+SetPort::	ID_CRETE	112392	29736	3
+SetPort::	ID_RHODES	114120	28952	2
+SetPort::	ID_GEORGIA	121896	25192	5
+SetPort::	ID_LESSER_ARMENIA	118648	28728	7
+SetPort::	ID_TREBIZOND	120792	25944	2
+SetPort::	ID_NICAEA	115000	26168	4
+SetPort::	ID_ANATOLIA	116328	28968	6
+SetPort::	ID_CYPRUS	117128	29752	3
+SetPort::	ID_ANTIOCH	118632	29288	5
+SetPort::	ID_TRIPOLI	118568	30312	4
+SetPort::	ID_JERUSALEM	117912	31912	4
+SetPort::	ID_SINAI	117960	33592	7
+SetPort::	ID_EGYPT	116568	33400	1
+SetPort::	ID_LIBYA	109448	31832	4
+SetPort::	ID_TUNISIA	103816	28792	2
+SetPort::	ID_ALGERIA	99704	28808	3
+SetPort::	ID_MOROCCO	95272	29848	2
+SetPort::	ID_GRANADA	95848	28856	7
+SetPort::	ID_CORDOBA	94184	28712	5
+SetPort::	ID_PORTUGAL	92824	26392	4
+SetPort::	ID_LEON	94936	24232	2
+SetPort::	ID_CASTILE	95336	24296	3
+SetPort::	ID_VALENCIA	97752	27016	1
+SetPort::	ID_NAVARRE	96840	24328	3
+SetPort::	ID_ARAGON	99208	25688	7
+SetPort::	ID_CORSICA	102936	25224	5
+SetPort::	ID_SARDINIA	103160	27192	7
+SetPort::	ID_GENOA	103064	23608	6
+SetPort::	ID_VENICE	105000	22856	0
+SetPort::	ID_TUSCANY	103928	24328	5
+SetPort::	ID_PAPAL_STATES	105016	23544	1
+SetPort::	ID_ROME	105064	25512	6
+SetPort::	ID_NAPLES	106136	26088	6
+SetPort::	ID_MALTA	106360	29304	2
+SetPort::	ID_SICILY	105640	27912	2
+SetPort::	ID_SCANIA	105432	15096	5
+SetPort::	ID_ESTONIA	112184	11944	3
+SetPort::	ID_ALGARVE	93320	28680	7
+SetPort::	ID_LEVIDIA	116344	21816	6
+SetPort::	ID_LESSER_KHAZAR	120584	21656	4
+SetPort::	ID_MURCIA	97464	28136	0
+SetPort::	ID_ICELAND	85304	7784	4
+SetPort::	ID_LAPLAND	111896	6248	7
+SetPort::	ID_BIARMIA	121256	7416	3
+SetPort::	ID_PERM	131976	3720	2
+SetPort::	ID_KIPCHAK	127688	21688	6
+SetPort::	ID_OGHUZ	128952	25208	6
+SetPort::	ID_SIBIR	138440	5736	3
+SetPort::	ID_YENISEI	143432	4536	4
+SetPort::	ID_YAKUTIA	178648	13416	7
+SetPort::	ID_CHUKOTKA	184744	11880	7
+SetPort::	ID_AMUR	177752	21704	0
+SetPort::	ID_KHWAREZM	129464	25944	5
+SetPort::	ID_SHIRVAN	126280	25976	1
+SetPort::	ID_AZERBAIJAN	126072	27832	1
+SetPort::	ID_TABARISTAN	127608	28888	3
+SetPort::	ID_FARS	127240	33784	5
+SetPort::	ID_KERMAN	130584	34984	6
+SetPort::	ID_SISTAN	132792	36024	6
+SetPort::	ID_NAJD	126872	35912	1
+SetPort::	ID_YEMEN	122632	42312	5
+SetPort::	ID_OMAN	130600	36664	1
+SetPort::	ID_SIND	136632	36456	5
+SetPort::	ID_GUJARAT	139608	37912	7
+SetPort::	ID_BENGAL	149944	37256	0
+SetPort::	ID_KALINGA	147912	39016	0
+SetPort::	ID_DECCAN	140104	41000	5
+SetPort::	ID_CHOLA	143624	45048	7
+SetPort::	ID_CEYLON	143896	46184	4
+SetPort::	ID_LIAO	167736	26024	7
+SetPort::	ID_MANCHURIA	173192	24824	0
+SetPort::	ID_KAIFENG	165784	27800	2
+SetPort::	ID_JIANGNAN	167176	33016	1
+SetPort::	ID_FUJIAN	166280	36376	0
+SetPort::	ID_LINGNAN	163304	37480	7
+SetPort::	ID_KOREA	170728	28088	6
+SetPort::	ID_KYUSHU	173016	30872	3
+SetPort::	ID_KINAI	175896	30200	6
+SetPort::	ID_TOHOKU	179176	27816	0
+SetPort::	ID_DAI_VIET	159400	38712	0
+SetPort::	ID_CHAMPA	160872	42920	1
+SetPort::	ID_KHMER	157032	43944	6
+SetPort::	ID_BAGAN	151864	39384	6
+SetPort::	ID_SRIVIJAYA	158200	52504	2
+SetPort::	ID_JAVA	161320	55560	6
+SetPort::	ID_BORNEO	164088	48120	3
+SetPort::	ID_PHILIPPINES	167576	42520	5
+SetPort::	ID_MOLUCCAS	171304	50536	5
+SetPort::	ID_NEW_GUINEA	178744	52392	2
+SetPort::	ID_WEST_AUSTRALIA	164568	70040	5
+SetPort::	ID_NORTH_AUSTRALIA	173288	58216	3
+SetPort::	ID_EAST_AUSTRALIA	185064	71304	0
+SetPort::	ID_NEW_ZEALAND	198600	76200	5
+SetPort::	ID_UPPER_EGYPT	118088	36392	1
+SetPort::	ID_NUBIA	119384	39576	1
+SetPort::	ID_ETHIOPIA	120808	42216	2
+SetPort::	ID_SOMALIA	124040	49832	7
+SetPort::	ID_SWAHILI	120680	56168	1
+SetPort::	ID_YORUBA	100408	47320	6
+SetPort::	ID_AKAN	96104	47912	6
+SetPort::	ID_MALI	91192	46936	6
+SetPort::	ID_GHANA	89256	44072	5
+SetPort::	ID_SANHAJA	88568	39160	5
+SetPort::	ID_SIJILMASA	92408	32008	4
+SetPort::	ID_CONGO	105416	54376	5
+SetPort::	ID_ZIMBABWE	117880	62472	0
+SetPort::	ID_SOUTHERN_AFRICA	112792	71192	7
+SetPort::	ID_MADAGASCAR	126168	62200	0
+SetPort::	ID_GREENLAND	71720	10488	6
+SetPort::	ID_VINLAND	65928	18296	2
+SetPort::	ID_HUDSON	43672	12520	3
+SetPort::	ID_DENE	32312	4408	2
+SetPort::	ID_ALASKA	11896	10200	5
+SetPort::	ID_CALIFORNIA	27752	27960	5
+SetPort::	ID_CHACO	32776	32440	5
+SetPort::	ID_PLAINS	43224	33640	0
+SetPort::	ID_GREAT_LAKES	54920	23160	1
+SetPort::	ID_MISSISSIPPI	47224	32760	7
+SetPort::	ID_APPALACHIA	53416	28440	0
+SetPort::	ID_TOLLAN	41944	38888	1
+SetPort::	ID_MAYA	46808	38440	3
+SetPort::	ID_CENTRAL_AMERICA	48072	44152	6
+SetPort::	ID_CARIBBEAN	57656	40248	7
+SetPort::	ID_MUISCA	53528	48744	5
+SetPort::	ID_AMAZONIA	67576	51896	1
+SetPort::	ID_BRAZIL	75720	58504	7
+SetPort::	ID_CHIMU	52360	55688	6
+SetPort::	ID_CUZCO	55640	60472	6
+SetPort::	ID_TIWANAKU	57320	61640	6
+SetPort::	ID_PAMPAS	64312	71736	2
+SetPort::	ID_CHILE	56648	71048	5
+SetPort::	ID_PATAGONIA	59064	79416	0
+
+// ---- confinanti: contatti della mappa del mondo piu' tutti quelli dello startpos originale
+SetNeighbours::	ID_SCOTLAND	ID_IRISH_SEA	ID_NORTH_ATLANTIC	ID_NORTH_SEA	ID_NORTH_UMBRIA
+SetNeighbours::	ID_NORTH_UMBRIA	ID_IRISH_SEA	ID_MERCIA	ID_NORTH_SEA	ID_SCOTLAND
+SetNeighbours::	ID_MERCIA	ID_ENGLISH_CHANNEL	ID_IRISH_SEA	ID_NORTH_SEA	ID_NORTH_UMBRIA	ID_WALES	ID_WESSEX
+SetNeighbours::	ID_WALES	ID_IRISH_SEA	ID_MERCIA	ID_WESSEX
+SetNeighbours::	ID_WESSEX	ID_ENGLISH_CHANNEL	ID_IRISH_SEA	ID_MERCIA	ID_WALES
+SetNeighbours::	ID_IRELAND	ID_ATLANTIC_OCEAN	ID_IRISH_SEA	ID_NORTH_ATLANTIC
+SetNeighbours::	ID_NORWAY	ID_LAPLAND	ID_NORTH_SEA	ID_NORWEGIAN_SEA	ID_SKAGERRAK	ID_SWEDEN
+SetNeighbours::	ID_SWEDEN	ID_BALTIC_SEA	ID_FINLAND	ID_LAPLAND	ID_NORWAY	ID_NORWEGIAN_SEA	ID_SCANIA	ID_SKAGERRAK
+SetNeighbours::	ID_DENMARK	ID_BALTIC_SEA	ID_NORTH_SEA	ID_SAXONY	ID_SCANIA	ID_SKAGERRAK
+SetNeighbours::	ID_FINLAND	ID_BALTIC_SEA	ID_LAPLAND	ID_LIVONIA	ID_NOVGOROD	ID_SWEDEN
+SetNeighbours::	ID_NOVGOROD	ID_BALTIC_SEA	ID_BIARMIA	ID_ESTONIA	ID_FINLAND	ID_LAPLAND	ID_LITHUANIA	ID_LIVONIA	ID_MUSCOVY	ID_SMOLENSK	ID_WHITE_SEA
+SetNeighbours::	ID_MUSCOVY	ID_BIARMIA	ID_CHERNIGOV	ID_NOVGOROD	ID_RYAZAN	ID_SMOLENSK	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_LIVONIA	ID_BALTIC_SEA	ID_ESTONIA	ID_FINLAND	ID_LITHUANIA	ID_NOVGOROD
+SetNeighbours::	ID_SMOLENSK	ID_CHERNIGOV	ID_LITHUANIA	ID_MUSCOVY	ID_NOVGOROD
+SetNeighbours::	ID_RYAZAN	ID_CHERNIGOV	ID_LESSER_KHAZAR	ID_MUSCOVY	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_CHERNIGOV	ID_KIEV	ID_LESSER_KHAZAR	ID_LITHUANIA	ID_MUSCOVY	ID_PEREYASLAVL	ID_RYAZAN	ID_SMOLENSK
+SetNeighbours::	ID_LITHUANIA	ID_BALTIC_SEA	ID_CHERNIGOV	ID_KIEV	ID_LIVONIA	ID_NOVGOROD	ID_PRUSSIA	ID_SMOLENSK	ID_VOLHYNIA
+SetNeighbours::	ID_PEREYASLAVL	ID_CHERNIGOV	ID_KIEV	ID_LESSER_KHAZAR	ID_LEVIDIA
+SetNeighbours::	ID_VOLGA_BULGARIA	ID_BASHKIRIA	ID_BIARMIA	ID_KHAZAR	ID_KIPCHAK	ID_MUSCOVY	ID_PERM	ID_RYAZAN
+SetNeighbours::	ID_KHAZAR	ID_CASPIAN_SEA	ID_GEORGIA	ID_KIPCHAK	ID_LESSER_KHAZAR	ID_SHIRVAN	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_KIEV	ID_CHERNIGOV	ID_LEVIDIA	ID_LITHUANIA	ID_PEREYASLAVL	ID_VOLHYNIA
+SetNeighbours::	ID_CRIMEA	ID_BLACK_SEA	ID_LESSER_KHAZAR	ID_LEVIDIA
+SetNeighbours::	ID_VOLHYNIA	ID_GREAT_POLAND	ID_KIEV	ID_LEVIDIA	ID_LITHUANIA	ID_MOLDAVIA	ID_POLAND	ID_PRUSSIA
+SetNeighbours::	ID_PRUSSIA	ID_BALTIC_SEA	ID_GREAT_POLAND	ID_LITHUANIA	ID_POMERANIA	ID_VOLHYNIA
+SetNeighbours::	ID_MOLDAVIA	ID_BLACK_SEA	ID_BULGARIA	ID_CARPATHIA	ID_LEVIDIA	ID_POLAND	ID_VOLHYNIA	ID_WALLACHIA
+SetNeighbours::	ID_CARPATHIA	ID_HUNGARY	ID_MOLDAVIA	ID_POLAND	ID_WALLACHIA
+SetNeighbours::	ID_WALLACHIA	ID_BULGARIA	ID_CARPATHIA	ID_HUNGARY	ID_MOLDAVIA
+SetNeighbours::	ID_BULGARIA	ID_BLACK_SEA	ID_CONSTANTINOPLE	ID_GREECE	ID_HUNGARY	ID_MOLDAVIA	ID_SERBIA	ID_WALLACHIA
+SetNeighbours::	ID_HUNGARY	ID_AUSTRIA	ID_BOHEMIA	ID_BULGARIA	ID_CARPATHIA	ID_CROATIA	ID_POLAND	ID_SERBIA	ID_WALLACHIA
+SetNeighbours::	ID_POLAND	ID_BOHEMIA	ID_CARPATHIA	ID_GREAT_POLAND	ID_HUNGARY	ID_MOLDAVIA	ID_VOLHYNIA
+SetNeighbours::	ID_POMERANIA	ID_BALTIC_SEA	ID_BRANDENBURG	ID_GREAT_POLAND	ID_PRUSSIA	ID_SAXONY	ID_SKAGERRAK
+SetNeighbours::	ID_BRANDENBURG	ID_FRANCONIA	ID_GREAT_POLAND	ID_POMERANIA	ID_SAXONY	ID_SILESIA
+SetNeighbours::	ID_SILESIA	ID_BOHEMIA	ID_BRANDENBURG	ID_FRANCONIA	ID_GREAT_POLAND
+SetNeighbours::	ID_BOHEMIA	ID_AUSTRIA	ID_BAVARIA	ID_FRANCONIA	ID_GREAT_POLAND	ID_HUNGARY	ID_POLAND	ID_SILESIA
+SetNeighbours::	ID_SAXONY	ID_BALTIC_SEA	ID_BRANDENBURG	ID_DENMARK	ID_FRANCONIA	ID_FREISLAND	ID_NORTH_SEA	ID_POMERANIA	ID_SKAGERRAK
+SetNeighbours::	ID_FREISLAND	ID_ENGLISH_CHANNEL	ID_FLANDERS	ID_FRANCONIA	ID_LORRAINE	ID_NORTH_SEA	ID_SAXONY
+SetNeighbours::	ID_FLANDERS	ID_CHAMPAGNE	ID_ENGLISH_CHANNEL	ID_FREISLAND	ID_ILE_DE_FRANCE	ID_LORRAINE	ID_NORMANDY	ID_NORTH_SEA
+SetNeighbours::	ID_NORMANDY	ID_ANJOU	ID_BRITTANY	ID_ENGLISH_CHANNEL	ID_FLANDERS	ID_ILE_DE_FRANCE
+SetNeighbours::	ID_BRITTANY	ID_ANJOU	ID_AQUITAINE	ID_BAY_OF_BISCAY	ID_ENGLISH_CHANNEL	ID_NORMANDY
+SetNeighbours::	ID_FRANCONIA	ID_BAVARIA	ID_BOHEMIA	ID_BRANDENBURG	ID_FREISLAND	ID_LORRAINE	ID_SAXONY	ID_SILESIA	ID_SWABIA
+SetNeighbours::	ID_LORRAINE	ID_BURGUNDY	ID_CHAMPAGNE	ID_FLANDERS	ID_FRANCONIA	ID_FREISLAND	ID_ILE_DE_FRANCE	ID_SWABIA
+SetNeighbours::	ID_CHAMPAGNE	ID_FLANDERS	ID_ILE_DE_FRANCE	ID_LORRAINE
+SetNeighbours::	ID_ILE_DE_FRANCE	ID_ANJOU	ID_BURGUNDY	ID_CHAMPAGNE	ID_FLANDERS	ID_LORRAINE	ID_NORMANDY	ID_TOULOUSE
+SetNeighbours::	ID_ANJOU	ID_AQUITAINE	ID_BRITTANY	ID_ILE_DE_FRANCE	ID_NORMANDY	ID_TOULOUSE
+SetNeighbours::	ID_AQUITAINE	ID_ANJOU	ID_ARAGON	ID_BAY_OF_BISCAY	ID_BRITTANY	ID_NAVARRE	ID_TOULOUSE
+SetNeighbours::	ID_TOULOUSE	ID_ANJOU	ID_AQUITAINE	ID_ARAGON	ID_BURGUNDY	ID_GULF_LIONS	ID_ILE_DE_FRANCE	ID_PROVENCE
+SetNeighbours::	ID_PROVENCE	ID_BURGUNDY	ID_GENOA	ID_GULF_LIONS	ID_SAVOY	ID_TOULOUSE
+SetNeighbours::	ID_BURGUNDY	ID_ILE_DE_FRANCE	ID_LORRAINE	ID_MILAN	ID_PROVENCE	ID_SAVOY	ID_SWABIA	ID_SWITZERLAND	ID_TOULOUSE	ID_TYROLIA
+SetNeighbours::	ID_SWABIA	ID_BAVARIA	ID_BURGUNDY	ID_FRANCONIA	ID_LORRAINE	ID_SWITZERLAND	ID_TYROLIA
+SetNeighbours::	ID_BAVARIA	ID_AUSTRIA	ID_BOHEMIA	ID_FRANCONIA	ID_SWABIA	ID_TYROLIA
+SetNeighbours::	ID_SWITZERLAND	ID_BURGUNDY	ID_SWABIA	ID_TYROLIA
+SetNeighbours::	ID_TYROLIA	ID_AUSTRIA	ID_BAVARIA	ID_BURGUNDY	ID_MILAN	ID_SWABIA	ID_SWITZERLAND	ID_VENICE
+SetNeighbours::	ID_AUSTRIA	ID_BAVARIA	ID_BOHEMIA	ID_CROATIA	ID_HUNGARY	ID_TYROLIA	ID_VENICE
+SetNeighbours::	ID_CROATIA	ID_ADRIATIC_OCEAN	ID_AUSTRIA	ID_HUNGARY	ID_SERBIA	ID_VENICE
+SetNeighbours::	ID_SERBIA	ID_ADRIATIC_OCEAN	ID_BULGARIA	ID_CROATIA	ID_GREECE	ID_HUNGARY
+SetNeighbours::	ID_GREECE	ID_ADRIATIC_OCEAN	ID_AEGEAN_SEA	ID_BULGARIA	ID_CONSTANTINOPLE	ID_IONIAN_SEA	ID_SERBIA
+SetNeighbours::	ID_CONSTANTINOPLE	ID_AEGEAN_SEA	ID_BLACK_SEA	ID_BULGARIA	ID_GREECE	ID_NICAEA
+SetNeighbours::	ID_CRETE	ID_AEGEAN_SEA
+SetNeighbours::	ID_RHODES	ID_AEGEAN_SEA
+SetNeighbours::	ID_GEORGIA	ID_ARMENIA	ID_BLACK_SEA	ID_KHAZAR	ID_LESSER_KHAZAR	ID_SHIRVAN	ID_TREBIZOND
+SetNeighbours::	ID_ARMENIA	ID_AFRICA	ID_AZERBAIJAN	ID_GEORGIA	ID_RUM	ID_SHIRVAN	ID_TREBIZOND
+SetNeighbours::	ID_RUM	ID_AFRICA	ID_ANATOLIA	ID_ARMENIA	ID_EDESSA	ID_LESSER_ARMENIA	ID_TREBIZOND
+SetNeighbours::	ID_LESSER_ARMENIA	ID_ANATOLIA	ID_ANTIOCH	ID_EASTERN_MED	ID_EDESSA	ID_RUM
+SetNeighbours::	ID_EDESSA	ID_AFRICA	ID_ANTIOCH	ID_LESSER_ARMENIA	ID_RUM	ID_SYRIA
+SetNeighbours::	ID_TREBIZOND	ID_ANATOLIA	ID_ARMENIA	ID_BLACK_SEA	ID_GEORGIA	ID_NICAEA	ID_RUM
+SetNeighbours::	ID_NICAEA	ID_AEGEAN_SEA	ID_ANATOLIA	ID_BLACK_SEA	ID_CONSTANTINOPLE	ID_EASTERN_MED	ID_TREBIZOND
+SetNeighbours::	ID_ANATOLIA	ID_AEGEAN_SEA	ID_EASTERN_MED	ID_LESSER_ARMENIA	ID_NICAEA	ID_RUM	ID_TREBIZOND
+SetNeighbours::	ID_CYPRUS	ID_EASTERN_MED
+SetNeighbours::	ID_ANTIOCH	ID_EASTERN_MED	ID_EDESSA	ID_LESSER_ARMENIA	ID_SYRIA	ID_TRIPOLI
+SetNeighbours::	ID_SYRIA	ID_AFRICA	ID_ANTIOCH	ID_ARABIA	ID_EDESSA	ID_JERUSALEM	ID_TRIPOLI
+SetNeighbours::	ID_TRIPOLI	ID_ANTIOCH	ID_EASTERN_MED	ID_JERUSALEM	ID_SYRIA
+SetNeighbours::	ID_JERUSALEM	ID_ARABIA	ID_EASTERN_MED	ID_RED_SEA	ID_SINAI	ID_SYRIA	ID_TRIPOLI
+SetNeighbours::	ID_ARABIA	ID_AFRICA	ID_JERUSALEM	ID_NAJD	ID_RED_SEA	ID_SINAI	ID_SYRIA	ID_YEMEN
+SetNeighbours::	ID_SINAI	ID_ARABIA	ID_EASTERN_MED	ID_EGYPT	ID_JERUSALEM	ID_RED_SEA	ID_UPPER_EGYPT
+SetNeighbours::	ID_EGYPT	ID_EASTERN_MED	ID_FEZZAN	ID_LIBYA	ID_RED_SEA	ID_SINAI	ID_UPPER_EGYPT
+SetNeighbours::	ID_LIBYA	ID_EASTERN_MED	ID_EGYPT	ID_FEZZAN	ID_IONIAN_SEA	ID_STRAITS_SICILY	ID_TUNISIA
+SetNeighbours::	ID_AFRICA	ID_ARABIA	ID_ARMENIA	ID_AZERBAIJAN	ID_EDESSA	ID_FARS	ID_JIBAL	ID_NAJD	ID_PERSIAN_GULF	ID_RUM	ID_SYRIA
+SetNeighbours::	ID_TUNISIA	ID_ALGERIA	ID_FEZZAN	ID_HOGGAR	ID_LIBYA	ID_STRAITS_SICILY	ID_WESTERN_MED
+SetNeighbours::	ID_ALGERIA	ID_HOGGAR	ID_MOROCCO	ID_SIJILMASA	ID_STRAITS_GIBRALTAR	ID_TUNISIA	ID_WESTERN_MED
+SetNeighbours::	ID_MOROCCO	ID_ALGERIA	ID_ATLANTIC_COAST	ID_GULF_CADIZ	ID_SIJILMASA	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_GRANADA	ID_CORDOBA	ID_MURCIA	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_CORDOBA	ID_ALGARVE	ID_CASTILE	ID_GRANADA	ID_GULF_CADIZ	ID_LEON	ID_MURCIA	ID_PORTUGAL	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_PORTUGAL	ID_ALGARVE	ID_CORDOBA	ID_LEON	ID_SPANISH_COAST
+SetNeighbours::	ID_LEON	ID_CASTILE	ID_CORDOBA	ID_COSTA_VERDE	ID_PORTUGAL	ID_SPANISH_COAST
+SetNeighbours::	ID_CASTILE	ID_ARAGON	ID_CORDOBA	ID_COSTA_VERDE	ID_LEON	ID_MURCIA	ID_NAVARRE	ID_VALENCIA
+SetNeighbours::	ID_VALENCIA	ID_ARAGON	ID_CASTILE	ID_GULF_LIONS	ID_MURCIA	ID_WESTERN_MED
+SetNeighbours::	ID_NAVARRE	ID_AQUITAINE	ID_ARAGON	ID_BAY_OF_BISCAY	ID_CASTILE	ID_COSTA_VERDE
+SetNeighbours::	ID_ARAGON	ID_AQUITAINE	ID_CASTILE	ID_GULF_LIONS	ID_NAVARRE	ID_TOULOUSE	ID_VALENCIA
+SetNeighbours::	ID_CORSICA	ID_GULF_LIONS	ID_TYRRHENIAN_SEA
+SetNeighbours::	ID_SARDINIA	ID_GULF_LIONS	ID_TYRRHENIAN_SEA	ID_WESTERN_MED
+SetNeighbours::	ID_GENOA	ID_GULF_LIONS	ID_MILAN	ID_PROVENCE	ID_SAVOY	ID_TUSCANY
+SetNeighbours::	ID_MILAN	ID_BURGUNDY	ID_GENOA	ID_SAVOY	ID_TUSCANY	ID_TYROLIA	ID_VENICE
+SetNeighbours::	ID_VENICE	ID_ADRIATIC_OCEAN	ID_AUSTRIA	ID_CROATIA	ID_MILAN	ID_PAPAL_STATES	ID_TUSCANY	ID_TYROLIA
+SetNeighbours::	ID_TUSCANY	ID_GENOA	ID_GULF_LIONS	ID_MILAN	ID_PAPAL_STATES	ID_ROME	ID_TYRRHENIAN_SEA	ID_VENICE
+SetNeighbours::	ID_PAPAL_STATES	ID_ADRIATIC_OCEAN	ID_NAPLES	ID_ROME	ID_TUSCANY	ID_VENICE
+SetNeighbours::	ID_ROME	ID_NAPLES	ID_PAPAL_STATES	ID_TUSCANY	ID_TYRRHENIAN_SEA
+SetNeighbours::	ID_NAPLES	ID_ADRIATIC_OCEAN	ID_IONIAN_SEA	ID_PAPAL_STATES	ID_ROME	ID_SICILY	ID_STRAITS_SICILY	ID_TYRRHENIAN_SEA
+SetNeighbours::	ID_MALTA	ID_STRAITS_SICILY
+SetNeighbours::	ID_SICILY	ID_NAPLES	ID_STRAITS_SICILY
+SetNeighbours::	ID_SCANIA	ID_BALTIC_SEA	ID_DENMARK	ID_SKAGERRAK	ID_SWEDEN
+SetNeighbours::	ID_ESTONIA	ID_BALTIC_SEA	ID_LIVONIA	ID_NOVGOROD
+SetNeighbours::	ID_ALGARVE	ID_CORDOBA	ID_GULF_CADIZ	ID_PORTUGAL	ID_SPANISH_COAST
+SetNeighbours::	ID_LEVIDIA	ID_BLACK_SEA	ID_CRIMEA	ID_KIEV	ID_LESSER_KHAZAR	ID_MOLDAVIA	ID_PEREYASLAVL	ID_VOLHYNIA
+SetNeighbours::	ID_LESSER_KHAZAR	ID_BLACK_SEA	ID_CHERNIGOV	ID_CRIMEA	ID_GEORGIA	ID_KHAZAR	ID_LEVIDIA	ID_PEREYASLAVL	ID_RYAZAN
+SetNeighbours::	ID_GREAT_POLAND	ID_BOHEMIA	ID_BRANDENBURG	ID_POLAND	ID_POMERANIA	ID_PRUSSIA	ID_SILESIA	ID_VOLHYNIA
+SetNeighbours::	ID_MURCIA	ID_CASTILE	ID_CORDOBA	ID_GRANADA	ID_STRAITS_GIBRALTAR	ID_VALENCIA	ID_WESTERN_MED
+SetNeighbours::	ID_SAVOY	ID_BURGUNDY	ID_GENOA	ID_MILAN	ID_PROVENCE
+SetNeighbours::	ID_ICELAND	ID_GREENLAND_SEA	ID_NORTH_ATLANTIC
+SetNeighbours::	ID_LAPLAND	ID_BALTIC_SEA	ID_BARENTS_SEA	ID_FINLAND	ID_NORWAY	ID_NORWEGIAN_SEA	ID_NOVGOROD	ID_SWEDEN	ID_WHITE_SEA
+SetNeighbours::	ID_BIARMIA	ID_BARENTS_SEA	ID_MUSCOVY	ID_NOVGOROD	ID_PERM	ID_VOLGA_BULGARIA	ID_WHITE_SEA
+SetNeighbours::	ID_PERM	ID_BARENTS_SEA	ID_BASHKIRIA	ID_BIARMIA	ID_SIBIR	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_BASHKIRIA	ID_KIMEK	ID_KIPCHAK	ID_OGHUZ	ID_PERM	ID_SIBIR	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_KIPCHAK	ID_BASHKIRIA	ID_CASPIAN_SEA	ID_KHAZAR	ID_OGHUZ	ID_VOLGA_BULGARIA
+SetNeighbours::	ID_OGHUZ	ID_BASHKIRIA	ID_CASPIAN_SEA	ID_KHWAREZM	ID_KIMEK	ID_KIPCHAK	ID_SEMIRECHYE	ID_TRANSOXIANA
+SetNeighbours::	ID_KIMEK	ID_BASHKIRIA	ID_OGHUZ	ID_SEMIRECHYE	ID_SIBIR	ID_YENISEI
+SetNeighbours::	ID_SIBIR	ID_BARENTS_SEA	ID_BASHKIRIA	ID_KIMEK	ID_PERM	ID_YENISEI
+SetNeighbours::	ID_YENISEI	ID_BAIKAL	ID_BARENTS_SEA	ID_KIMEK	ID_MONGOLIA	ID_SEMIRECHYE	ID_SIBIR	ID_UIGHURIA	ID_YAKUTIA
+SetNeighbours::	ID_BAIKAL	ID_AMUR	ID_EAST_MONGOLIA	ID_MANCHURIA	ID_MONGOLIA	ID_YAKUTIA	ID_YENISEI
+SetNeighbours::	ID_YAKUTIA	ID_AMUR	ID_ARCTIC_OCEAN	ID_BAIKAL	ID_CHUKOTKA	ID_OKHOTSK	ID_YENISEI
+SetNeighbours::	ID_CHUKOTKA	ID_ALASKA	ID_ARCTIC_OCEAN	ID_BERING_SEA	ID_OKHOTSK	ID_YAKUTIA
+SetNeighbours::	ID_AMUR	ID_BAIKAL	ID_MANCHURIA	ID_OKHOTSK	ID_SEA_JAPAN	ID_YAKUTIA
+SetNeighbours::	ID_KHWAREZM	ID_CASPIAN_SEA	ID_KHURASAN	ID_OGHUZ	ID_TABARISTAN	ID_TRANSOXIANA
+SetNeighbours::	ID_TRANSOXIANA	ID_GHAZNA	ID_KASHGAR	ID_KHURASAN	ID_KHWAREZM	ID_OGHUZ	ID_PUNJAB	ID_SEMIRECHYE
+SetNeighbours::	ID_SEMIRECHYE	ID_KASHGAR	ID_KIMEK	ID_OGHUZ	ID_TRANSOXIANA	ID_UIGHURIA	ID_YENISEI
+SetNeighbours::	ID_KHURASAN	ID_GHAZNA	ID_KERMAN	ID_KHWAREZM	ID_SISTAN	ID_TABARISTAN	ID_TRANSOXIANA
+SetNeighbours::	ID_GHAZNA	ID_KHURASAN	ID_PUNJAB	ID_SIND	ID_SISTAN	ID_TRANSOXIANA
+SetNeighbours::	ID_KASHGAR	ID_PUNJAB	ID_SEMIRECHYE	ID_TIBET	ID_TRANSOXIANA	ID_UIGHURIA
+SetNeighbours::	ID_UIGHURIA	ID_AMDO	ID_KASHGAR	ID_MONGOLIA	ID_SEMIRECHYE	ID_TANGUT	ID_TIBET	ID_YENISEI
+SetNeighbours::	ID_MONGOLIA	ID_BAIKAL	ID_EAST_MONGOLIA	ID_LIAO	ID_TANGUT	ID_UIGHURIA	ID_YENISEI
+SetNeighbours::	ID_EAST_MONGOLIA	ID_BAIKAL	ID_LIAO	ID_MANCHURIA	ID_MONGOLIA
+SetNeighbours::	ID_SHIRVAN	ID_ARMENIA	ID_AZERBAIJAN	ID_CASPIAN_SEA	ID_GEORGIA	ID_KHAZAR
+SetNeighbours::	ID_AZERBAIJAN	ID_AFRICA	ID_ARMENIA	ID_CASPIAN_SEA	ID_JIBAL	ID_SHIRVAN	ID_TABARISTAN
+SetNeighbours::	ID_TABARISTAN	ID_AZERBAIJAN	ID_CASPIAN_SEA	ID_JIBAL	ID_KERMAN	ID_KHURASAN	ID_KHWAREZM
+SetNeighbours::	ID_JIBAL	ID_AFRICA	ID_AZERBAIJAN	ID_FARS	ID_KERMAN	ID_TABARISTAN
+SetNeighbours::	ID_FARS	ID_AFRICA	ID_JIBAL	ID_KERMAN	ID_PERSIAN_GULF
+SetNeighbours::	ID_KERMAN	ID_FARS	ID_JIBAL	ID_KHURASAN	ID_PERSIAN_GULF	ID_SISTAN	ID_TABARISTAN
+SetNeighbours::	ID_SISTAN	ID_GHAZNA	ID_KERMAN	ID_KHURASAN	ID_PERSIAN_GULF	ID_SIND
+SetNeighbours::	ID_NAJD	ID_AFRICA	ID_ARABIA	ID_OMAN	ID_PERSIAN_GULF	ID_YEMEN
+SetNeighbours::	ID_YEMEN	ID_ARABIA	ID_GULF_ADEN	ID_NAJD	ID_OMAN	ID_RED_SEA
+SetNeighbours::	ID_OMAN	ID_ARABIAN_SEA	ID_GULF_ADEN	ID_NAJD	ID_PERSIAN_GULF	ID_YEMEN
+SetNeighbours::	ID_SIND	ID_ARABIAN_SEA	ID_GHAZNA	ID_GUJARAT	ID_PERSIAN_GULF	ID_PUNJAB	ID_RAJPUTANA	ID_SISTAN
+SetNeighbours::	ID_PUNJAB	ID_GHAZNA	ID_KANNAUJ	ID_KASHGAR	ID_RAJPUTANA	ID_SIND	ID_TIBET	ID_TRANSOXIANA
+SetNeighbours::	ID_KANNAUJ	ID_BENGAL	ID_KALINGA	ID_PUNJAB	ID_RAJPUTANA	ID_TIBET
+SetNeighbours::	ID_RAJPUTANA	ID_DECCAN	ID_GUJARAT	ID_KALINGA	ID_KANNAUJ	ID_PUNJAB	ID_SIND
+SetNeighbours::	ID_GUJARAT	ID_ARABIAN_SEA	ID_DECCAN	ID_RAJPUTANA	ID_SIND
+SetNeighbours::	ID_BENGAL	ID_BAGAN	ID_BAY_BENGAL	ID_KALINGA	ID_KANNAUJ	ID_TIBET
+SetNeighbours::	ID_KALINGA	ID_BAY_BENGAL	ID_BENGAL	ID_CHOLA	ID_DECCAN	ID_KANNAUJ	ID_RAJPUTANA
+SetNeighbours::	ID_DECCAN	ID_ARABIAN_SEA	ID_CHOLA	ID_GUJARAT	ID_KALINGA	ID_RAJPUTANA
+SetNeighbours::	ID_CHOLA	ID_ARABIAN_SEA	ID_BAY_BENGAL	ID_C_INDIAN	ID_DECCAN	ID_KALINGA
+SetNeighbours::	ID_CEYLON	ID_BAY_BENGAL	ID_C_INDIAN
+SetNeighbours::	ID_TIBET	ID_AMDO	ID_BAGAN	ID_BENGAL	ID_KANNAUJ	ID_KASHGAR	ID_PUNJAB	ID_UIGHURIA
+SetNeighbours::	ID_AMDO	ID_BAGAN	ID_DALI	ID_SICHUAN	ID_TANGUT	ID_TIBET	ID_UIGHURIA
+SetNeighbours::	ID_TANGUT	ID_AMDO	ID_LIAO	ID_MONGOLIA	ID_SHAANXI	ID_SICHUAN	ID_UIGHURIA
+SetNeighbours::	ID_LIAO	ID_EAST_MONGOLIA	ID_KAIFENG	ID_KOREA	ID_MANCHURIA	ID_MONGOLIA	ID_SHAANXI	ID_TANGUT	ID_YELLOW_SEA
+SetNeighbours::	ID_MANCHURIA	ID_AMUR	ID_BAIKAL	ID_EAST_MONGOLIA	ID_KOREA	ID_LIAO	ID_SEA_JAPAN
+SetNeighbours::	ID_KAIFENG	ID_HUGUANG	ID_JIANGNAN	ID_LIAO	ID_SHAANXI	ID_YELLOW_SEA
+SetNeighbours::	ID_SHAANXI	ID_HUGUANG	ID_KAIFENG	ID_LIAO	ID_SICHUAN	ID_TANGUT
+SetNeighbours::	ID_SICHUAN	ID_AMDO	ID_DALI	ID_HUGUANG	ID_LINGNAN	ID_SHAANXI	ID_TANGUT
+SetNeighbours::	ID_JIANGNAN	ID_EAST_CHINA_SEA	ID_FUJIAN	ID_HUGUANG	ID_KAIFENG	ID_LINGNAN	ID_YELLOW_SEA
+SetNeighbours::	ID_HUGUANG	ID_JIANGNAN	ID_KAIFENG	ID_LINGNAN	ID_SHAANXI	ID_SICHUAN
+SetNeighbours::	ID_FUJIAN	ID_EAST_CHINA_SEA	ID_JIANGNAN	ID_LINGNAN	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_LINGNAN	ID_DAI_VIET	ID_DALI	ID_FUJIAN	ID_HUGUANG	ID_JIANGNAN	ID_SICHUAN	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_DALI	ID_AMDO	ID_BAGAN	ID_DAI_VIET	ID_KHMER	ID_LINGNAN	ID_SICHUAN
+SetNeighbours::	ID_KOREA	ID_LIAO	ID_MANCHURIA	ID_SEA_JAPAN	ID_YELLOW_SEA
+SetNeighbours::	ID_KYUSHU	ID_EAST_CHINA_SEA	ID_KINAI	ID_SEA_JAPAN	ID_YELLOW_SEA
+SetNeighbours::	ID_KINAI	ID_EAST_CHINA_SEA	ID_KYUSHU	ID_NW_PACIFIC	ID_SEA_JAPAN	ID_TOHOKU
+SetNeighbours::	ID_TOHOKU	ID_KINAI	ID_NW_PACIFIC	ID_OKHOTSK	ID_SEA_JAPAN
+SetNeighbours::	ID_DAI_VIET	ID_CHAMPA	ID_DALI	ID_KHMER	ID_LINGNAN	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_CHAMPA	ID_DAI_VIET	ID_KHMER	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_KHMER	ID_ANDAMAN_SEA	ID_BAGAN	ID_CHAMPA	ID_DAI_VIET	ID_DALI	ID_SOUTH_CHINA_SEA	ID_SRIVIJAYA
+SetNeighbours::	ID_BAGAN	ID_AMDO	ID_ANDAMAN_SEA	ID_BAY_BENGAL	ID_BENGAL	ID_DALI	ID_KHMER	ID_TIBET
+SetNeighbours::	ID_SRIVIJAYA	ID_ANDAMAN_SEA	ID_JAVA_SEA	ID_KHMER	ID_MALACCA	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_JAVA	ID_BANDA_SEA	ID_JAVA_SEA
+SetNeighbours::	ID_BORNEO	ID_BANDA_SEA	ID_JAVA_SEA	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_PHILIPPINES	ID_BANDA_SEA	ID_PHILIPPINE_SEA	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_MOLUCCAS	ID_BANDA_SEA	ID_JAVA_SEA	ID_TIMOR_SEA
+SetNeighbours::	ID_NEW_GUINEA	ID_BANDA_SEA	ID_CORAL_SEA	ID_PHILIPPINE_SEA	ID_TIMOR_SEA
+SetNeighbours::	ID_WEST_AUSTRALIA	ID_EAST_AUSTRALIA	ID_NORTH_AUSTRALIA	ID_SOUTHERN_OCEAN	ID_TIMOR_SEA
+SetNeighbours::	ID_NORTH_AUSTRALIA	ID_CORAL_SEA	ID_EAST_AUSTRALIA	ID_TIMOR_SEA	ID_WEST_AUSTRALIA
+SetNeighbours::	ID_EAST_AUSTRALIA	ID_CORAL_SEA	ID_NORTH_AUSTRALIA	ID_SOUTHERN_OCEAN	ID_TASMAN_SEA	ID_WEST_AUSTRALIA
+SetNeighbours::	ID_NEW_ZEALAND	ID_S_PACIFIC	ID_TASMAN_SEA
+SetNeighbours::	ID_UPPER_EGYPT	ID_EGYPT	ID_FEZZAN	ID_NUBIA	ID_RED_SEA	ID_SINAI
+SetNeighbours::	ID_NUBIA	ID_DARFUR	ID_ETHIOPIA	ID_FEZZAN	ID_KITARA	ID_RED_SEA	ID_UPPER_EGYPT
+SetNeighbours::	ID_ETHIOPIA	ID_KITARA	ID_NUBIA	ID_RED_SEA	ID_SOMALIA	ID_SWAHILI
+SetNeighbours::	ID_SOMALIA	ID_ETHIOPIA	ID_GULF_ADEN	ID_RED_SEA	ID_SWAHILI	ID_W_INDIAN
+SetNeighbours::	ID_SWAHILI	ID_ETHIOPIA	ID_KITARA	ID_LUBA	ID_MOZAMBIQUE	ID_SOMALIA	ID_W_INDIAN	ID_ZIMBABWE
+SetNeighbours::	ID_KITARA	ID_CONGO	ID_DARFUR	ID_ETHIOPIA	ID_LUBA	ID_NUBIA	ID_SWAHILI
+SetNeighbours::	ID_DARFUR	ID_CONGO	ID_FEZZAN	ID_KANEM	ID_KITARA	ID_NUBIA
+SetNeighbours::	ID_KANEM	ID_CONGO	ID_DARFUR	ID_FEZZAN	ID_HAUSA	ID_HOGGAR	ID_YORUBA
+SetNeighbours::	ID_HAUSA	ID_AKAN	ID_GAO	ID_HOGGAR	ID_KANEM	ID_YORUBA
+SetNeighbours::	ID_YORUBA	ID_AKAN	ID_CONGO	ID_GULF_GUINEA	ID_HAUSA	ID_KANEM
+SetNeighbours::	ID_AKAN	ID_GAO	ID_GULF_GUINEA	ID_HAUSA	ID_MALI	ID_YORUBA
+SetNeighbours::	ID_GAO	ID_AKAN	ID_GHANA	ID_HAUSA	ID_HOGGAR	ID_MALI	ID_SANHAJA
+SetNeighbours::	ID_MALI	ID_AKAN	ID_CANARY_SEA	ID_GAO	ID_GHANA	ID_GULF_GUINEA
+SetNeighbours::	ID_GHANA	ID_CANARY_SEA	ID_EQ_ATLANTIC	ID_GAO	ID_MALI	ID_SANHAJA
+SetNeighbours::	ID_SANHAJA	ID_ATLANTIC_COAST	ID_CANARY_SEA	ID_GAO	ID_GHANA	ID_HOGGAR	ID_SIJILMASA
+SetNeighbours::	ID_SIJILMASA	ID_ALGERIA	ID_ATLANTIC_COAST	ID_HOGGAR	ID_MOROCCO	ID_SANHAJA
+SetNeighbours::	ID_HOGGAR	ID_ALGERIA	ID_FEZZAN	ID_GAO	ID_HAUSA	ID_KANEM	ID_SANHAJA	ID_SIJILMASA	ID_TUNISIA
+SetNeighbours::	ID_FEZZAN	ID_DARFUR	ID_EGYPT	ID_HOGGAR	ID_KANEM	ID_LIBYA	ID_NUBIA	ID_TUNISIA	ID_UPPER_EGYPT
+SetNeighbours::	ID_CONGO	ID_DARFUR	ID_GULF_GUINEA	ID_KANEM	ID_KITARA	ID_LUBA	ID_SE_ATLANTIC	ID_SOUTHERN_AFRICA	ID_YORUBA
+SetNeighbours::	ID_LUBA	ID_CONGO	ID_KITARA	ID_SOUTHERN_AFRICA	ID_SWAHILI	ID_ZIMBABWE
+SetNeighbours::	ID_ZIMBABWE	ID_LUBA	ID_MOZAMBIQUE	ID_SOUTHERN_AFRICA	ID_SWAHILI
+SetNeighbours::	ID_SOUTHERN_AFRICA	ID_CONGO	ID_LUBA	ID_MOZAMBIQUE	ID_SE_ATLANTIC	ID_ZIMBABWE
+SetNeighbours::	ID_MADAGASCAR	ID_MOZAMBIQUE	ID_W_INDIAN
+SetNeighbours::	ID_GREENLAND	ID_GREENLAND_SEA	ID_LABRADOR_SEA
+SetNeighbours::	ID_VINLAND	ID_GREAT_LAKES	ID_HUDSON_BAY	ID_LABRADOR_SEA	ID_W_ATLANTIC
+SetNeighbours::	ID_HUDSON	ID_ARCTIC_OCEAN	ID_DENE	ID_GREAT_LAKES	ID_HUDSON_BAY	ID_LABRADOR_SEA	ID_PLAINS
+SetNeighbours::	ID_DENE	ID_ALASKA	ID_ARCTIC_OCEAN	ID_CALIFORNIA	ID_GULF_ALASKA	ID_HUDSON	ID_NE_PACIFIC	ID_PLAINS
+SetNeighbours::	ID_ALASKA	ID_ARCTIC_OCEAN	ID_BERING_SEA	ID_CHUKOTKA	ID_DENE	ID_GULF_ALASKA
+SetNeighbours::	ID_CALIFORNIA	ID_CHACO	ID_DENE	ID_NE_PACIFIC	ID_PLAINS
+SetNeighbours::	ID_CHACO	ID_CALIFORNIA	ID_E_PACIFIC	ID_NE_PACIFIC	ID_PLAINS	ID_TOLLAN
+SetNeighbours::	ID_PLAINS	ID_CALIFORNIA	ID_CHACO	ID_DENE	ID_GREAT_LAKES	ID_GULF_MEXICO	ID_HUDSON	ID_MISSISSIPPI	ID_TOLLAN
+SetNeighbours::	ID_GREAT_LAKES	ID_APPALACHIA	ID_HUDSON	ID_HUDSON_BAY	ID_MISSISSIPPI	ID_PLAINS	ID_VINLAND	ID_W_ATLANTIC
+SetNeighbours::	ID_MISSISSIPPI	ID_APPALACHIA	ID_GREAT_LAKES	ID_GULF_MEXICO	ID_PLAINS
+SetNeighbours::	ID_APPALACHIA	ID_CARIBBEAN_SEA	ID_GREAT_LAKES	ID_GULF_MEXICO	ID_MISSISSIPPI	ID_W_ATLANTIC
+SetNeighbours::	ID_TOLLAN	ID_CHACO	ID_E_PACIFIC	ID_GULF_MEXICO	ID_MAYA	ID_PLAINS
+SetNeighbours::	ID_MAYA	ID_CENTRAL_AMERICA	ID_E_PACIFIC	ID_GULF_MEXICO	ID_TOLLAN
+SetNeighbours::	ID_CENTRAL_AMERICA	ID_CARIBBEAN_SEA	ID_E_PACIFIC	ID_GULF_MEXICO	ID_MAYA	ID_MUISCA
+SetNeighbours::	ID_CARIBBEAN	ID_CARIBBEAN_SEA	ID_GULF_MEXICO	ID_SARGASSO_SEA
+SetNeighbours::	ID_MUISCA	ID_AMAZONIA	ID_CARIBBEAN_SEA	ID_CENTRAL_AMERICA	ID_CHIMU	ID_E_PACIFIC
+SetNeighbours::	ID_AMAZONIA	ID_BRAZIL	ID_CARIBBEAN_SEA	ID_CHIMU	ID_CUZCO	ID_EQ_ATLANTIC	ID_MUISCA	ID_TIWANAKU
+SetNeighbours::	ID_BRAZIL	ID_AMAZONIA	ID_EQ_ATLANTIC	ID_PAMPAS	ID_SW_ATLANTIC	ID_S_ATLANTIC	ID_TIWANAKU
+SetNeighbours::	ID_CHIMU	ID_AMAZONIA	ID_CUZCO	ID_E_PACIFIC	ID_MUISCA	ID_SE_PACIFIC
+SetNeighbours::	ID_CUZCO	ID_AMAZONIA	ID_CHIMU	ID_SE_PACIFIC	ID_TIWANAKU
+SetNeighbours::	ID_TIWANAKU	ID_AMAZONIA	ID_BRAZIL	ID_CHILE	ID_CUZCO	ID_PAMPAS	ID_SE_PACIFIC
+SetNeighbours::	ID_PAMPAS	ID_BRAZIL	ID_CHILE	ID_PATAGONIA	ID_SW_ATLANTIC	ID_TIWANAKU
+SetNeighbours::	ID_CHILE	ID_PAMPAS	ID_PATAGONIA	ID_SE_PACIFIC	ID_TIWANAKU
+SetNeighbours::	ID_PATAGONIA	ID_CHILE	ID_PAMPAS	ID_SE_PACIFIC	ID_SW_ATLANTIC
+SetNeighbours::	ID_NORTH_ATLANTIC	ID_ATLANTIC_OCEAN	ID_GREENLAND_SEA	ID_ICELAND	ID_IRELAND	ID_IRISH_SEA	ID_NORTH_SEA	ID_NORWEGIAN_SEA	ID_SCOTLAND
+SetNeighbours::	ID_IRISH_SEA	ID_ATLANTIC_OCEAN	ID_ENGLISH_CHANNEL	ID_IRELAND	ID_MERCIA	ID_NORTH_ATLANTIC	ID_NORTH_UMBRIA	ID_SCOTLAND	ID_WALES	ID_WESSEX
+SetNeighbours::	ID_NORWEGIAN_SEA	ID_BARENTS_SEA	ID_GREENLAND_SEA	ID_LAPLAND	ID_NORTH_ATLANTIC	ID_NORTH_SEA	ID_NORWAY	ID_SKAGERRAK	ID_SWEDEN
+SetNeighbours::	ID_SKAGERRAK	ID_BALTIC_SEA	ID_DENMARK	ID_NORTH_SEA	ID_NORWAY	ID_NORWEGIAN_SEA	ID_POMERANIA	ID_SAXONY	ID_SCANIA	ID_SWEDEN
+SetNeighbours::	ID_BALTIC_SEA	ID_DENMARK	ID_ESTONIA	ID_FINLAND	ID_LAPLAND	ID_LITHUANIA	ID_LIVONIA	ID_NOVGOROD	ID_POMERANIA	ID_PRUSSIA	ID_SAXONY	ID_SCANIA	ID_SKAGERRAK	ID_SWEDEN
+SetNeighbours::	ID_NORTH_SEA	ID_DENMARK	ID_ENGLISH_CHANNEL	ID_FLANDERS	ID_FREISLAND	ID_MERCIA	ID_NORTH_ATLANTIC	ID_NORTH_UMBRIA	ID_NORWAY	ID_NORWEGIAN_SEA	ID_SAXONY	ID_SCOTLAND	ID_SKAGERRAK
+SetNeighbours::	ID_ENGLISH_CHANNEL	ID_ATLANTIC_OCEAN	ID_BAY_OF_BISCAY	ID_BRITTANY	ID_COSTA_VERDE	ID_FLANDERS	ID_FREISLAND	ID_IRISH_SEA	ID_MERCIA	ID_NORMANDY	ID_NORTH_SEA	ID_WESSEX
+SetNeighbours::	ID_ATLANTIC_OCEAN	ID_ATLANTIC_COAST	ID_BAY_OF_BISCAY	ID_CANARY_SEA	ID_COSTA_VERDE	ID_ENGLISH_CHANNEL	ID_GREENLAND_SEA	ID_GULF_CADIZ	ID_IRELAND	ID_IRISH_SEA	ID_MID_ATLANTIC	ID_NORTH_ATLANTIC	ID_SPANISH_COAST	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_BAY_OF_BISCAY	ID_AQUITAINE	ID_ATLANTIC_OCEAN	ID_BRITTANY	ID_COSTA_VERDE	ID_ENGLISH_CHANNEL	ID_NAVARRE
+SetNeighbours::	ID_COSTA_VERDE	ID_ATLANTIC_OCEAN	ID_BAY_OF_BISCAY	ID_CASTILE	ID_ENGLISH_CHANNEL	ID_LEON	ID_NAVARRE	ID_SPANISH_COAST
+SetNeighbours::	ID_SPANISH_COAST	ID_ALGARVE	ID_ATLANTIC_OCEAN	ID_COSTA_VERDE	ID_GULF_CADIZ	ID_LEON	ID_PORTUGAL
+SetNeighbours::	ID_GULF_CADIZ	ID_ALGARVE	ID_ATLANTIC_COAST	ID_ATLANTIC_OCEAN	ID_CORDOBA	ID_MOROCCO	ID_SPANISH_COAST	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_STRAITS_GIBRALTAR	ID_ALGERIA	ID_ATLANTIC_COAST	ID_ATLANTIC_OCEAN	ID_CORDOBA	ID_GRANADA	ID_GULF_CADIZ	ID_MOROCCO	ID_MURCIA	ID_WESTERN_MED
+SetNeighbours::	ID_WESTERN_MED	ID_ALGERIA	ID_GULF_LIONS	ID_MURCIA	ID_SARDINIA	ID_STRAITS_GIBRALTAR	ID_STRAITS_SICILY	ID_TUNISIA	ID_TYRRHENIAN_SEA	ID_VALENCIA
+SetNeighbours::	ID_GULF_LIONS	ID_ARAGON	ID_CORSICA	ID_GENOA	ID_PROVENCE	ID_SARDINIA	ID_TOULOUSE	ID_TUSCANY	ID_TYRRHENIAN_SEA	ID_VALENCIA	ID_WESTERN_MED
+SetNeighbours::	ID_TYRRHENIAN_SEA	ID_CORSICA	ID_GULF_LIONS	ID_NAPLES	ID_ROME	ID_SARDINIA	ID_STRAITS_SICILY	ID_TUSCANY	ID_WESTERN_MED
+SetNeighbours::	ID_STRAITS_SICILY	ID_IONIAN_SEA	ID_LIBYA	ID_MALTA	ID_NAPLES	ID_SICILY	ID_TUNISIA	ID_TYRRHENIAN_SEA	ID_WESTERN_MED
+SetNeighbours::	ID_ADRIATIC_OCEAN	ID_CROATIA	ID_GREECE	ID_IONIAN_SEA	ID_NAPLES	ID_PAPAL_STATES	ID_SERBIA	ID_VENICE
+SetNeighbours::	ID_IONIAN_SEA	ID_ADRIATIC_OCEAN	ID_AEGEAN_SEA	ID_EASTERN_MED	ID_GREECE	ID_LIBYA	ID_NAPLES	ID_STRAITS_SICILY
+SetNeighbours::	ID_AEGEAN_SEA	ID_ANATOLIA	ID_BLACK_SEA	ID_CONSTANTINOPLE	ID_CRETE	ID_EASTERN_MED	ID_GREECE	ID_IONIAN_SEA	ID_NICAEA	ID_RHODES
+SetNeighbours::	ID_BLACK_SEA	ID_AEGEAN_SEA	ID_BULGARIA	ID_CONSTANTINOPLE	ID_CRIMEA	ID_GEORGIA	ID_LESSER_KHAZAR	ID_LEVIDIA	ID_MOLDAVIA	ID_NICAEA	ID_TREBIZOND
+SetNeighbours::	ID_EASTERN_MED	ID_AEGEAN_SEA	ID_ANATOLIA	ID_ANTIOCH	ID_CYPRUS	ID_EGYPT	ID_IONIAN_SEA	ID_JERUSALEM	ID_LESSER_ARMENIA	ID_LIBYA	ID_NICAEA	ID_SINAI	ID_TRIPOLI
+SetNeighbours::	ID_ATLANTIC_COAST	ID_ATLANTIC_OCEAN	ID_CANARY_SEA	ID_GULF_CADIZ	ID_MOROCCO	ID_SANHAJA	ID_SIJILMASA	ID_STRAITS_GIBRALTAR
+SetNeighbours::	ID_CASPIAN_SEA	ID_AZERBAIJAN	ID_KHAZAR	ID_KHWAREZM	ID_KIPCHAK	ID_OGHUZ	ID_SHIRVAN	ID_TABARISTAN
+SetNeighbours::	ID_GREENLAND_SEA	ID_ATLANTIC_OCEAN	ID_GREENLAND	ID_ICELAND	ID_LABRADOR_SEA	ID_MID_ATLANTIC	ID_NORTH_ATLANTIC	ID_NORWEGIAN_SEA
+SetNeighbours::	ID_LABRADOR_SEA	ID_GREENLAND	ID_GREENLAND_SEA	ID_HUDSON	ID_HUDSON_BAY	ID_MID_ATLANTIC	ID_VINLAND	ID_W_ATLANTIC
+SetNeighbours::	ID_HUDSON_BAY	ID_ARCTIC_OCEAN	ID_GREAT_LAKES	ID_HUDSON	ID_LABRADOR_SEA	ID_VINLAND
+SetNeighbours::	ID_BARENTS_SEA	ID_BIARMIA	ID_LAPLAND	ID_NORWEGIAN_SEA	ID_PERM	ID_SIBIR	ID_WHITE_SEA	ID_YENISEI
+SetNeighbours::	ID_WHITE_SEA	ID_BARENTS_SEA	ID_BIARMIA	ID_LAPLAND	ID_NOVGOROD
+SetNeighbours::	ID_ARCTIC_OCEAN	ID_ALASKA	ID_BERING_SEA	ID_CHUKOTKA	ID_DENE	ID_HUDSON	ID_HUDSON_BAY	ID_YAKUTIA
+SetNeighbours::	ID_BERING_SEA	ID_ALASKA	ID_ARCTIC_OCEAN	ID_CHUKOTKA	ID_GULF_ALASKA	ID_N_PACIFIC	ID_OKHOTSK
+SetNeighbours::	ID_GULF_ALASKA	ID_ALASKA	ID_BERING_SEA	ID_DENE	ID_NE_PACIFIC	ID_N_PACIFIC
+SetNeighbours::	ID_NE_PACIFIC	ID_CALIFORNIA	ID_CHACO	ID_DENE	ID_EQ_PACIFIC	ID_E_PACIFIC	ID_GULF_ALASKA	ID_N_PACIFIC
+SetNeighbours::	ID_N_PACIFIC	ID_BERING_SEA	ID_EQ_PACIFIC	ID_GULF_ALASKA	ID_NE_PACIFIC	ID_NW_PACIFIC	ID_OKHOTSK
+SetNeighbours::	ID_NW_PACIFIC	ID_EAST_CHINA_SEA	ID_EQ_PACIFIC	ID_KINAI	ID_N_PACIFIC	ID_OKHOTSK	ID_PHILIPPINE_SEA	ID_SEA_JAPAN	ID_TOHOKU
+SetNeighbours::	ID_OKHOTSK	ID_AMUR	ID_BERING_SEA	ID_CHUKOTKA	ID_NW_PACIFIC	ID_N_PACIFIC	ID_SEA_JAPAN	ID_TOHOKU	ID_YAKUTIA
+SetNeighbours::	ID_SEA_JAPAN	ID_AMUR	ID_KINAI	ID_KOREA	ID_KYUSHU	ID_MANCHURIA	ID_NW_PACIFIC	ID_OKHOTSK	ID_TOHOKU	ID_YELLOW_SEA
+SetNeighbours::	ID_YELLOW_SEA	ID_EAST_CHINA_SEA	ID_JIANGNAN	ID_KAIFENG	ID_KOREA	ID_KYUSHU	ID_LIAO	ID_SEA_JAPAN
+SetNeighbours::	ID_EAST_CHINA_SEA	ID_FUJIAN	ID_JIANGNAN	ID_KINAI	ID_KYUSHU	ID_NW_PACIFIC	ID_PHILIPPINE_SEA	ID_SOUTH_CHINA_SEA	ID_YELLOW_SEA
+SetNeighbours::	ID_PHILIPPINE_SEA	ID_BANDA_SEA	ID_CORAL_SEA	ID_EAST_CHINA_SEA	ID_EQ_PACIFIC	ID_NEW_GUINEA	ID_NW_PACIFIC	ID_PHILIPPINES	ID_SOUTH_CHINA_SEA
+SetNeighbours::	ID_SOUTH_CHINA_SEA	ID_BANDA_SEA	ID_BORNEO	ID_CHAMPA	ID_DAI_VIET	ID_EAST_CHINA_SEA	ID_FUJIAN	ID_JAVA_SEA	ID_KHMER	ID_LINGNAN	ID_MALACCA	ID_PHILIPPINES	ID_PHILIPPINE_SEA	ID_SRIVIJAYA
+SetNeighbours::	ID_JAVA_SEA	ID_BANDA_SEA	ID_BORNEO	ID_C_INDIAN	ID_JAVA	ID_MALACCA	ID_MOLUCCAS	ID_SOUTHERN_OCEAN	ID_SOUTH_CHINA_SEA	ID_SRIVIJAYA	ID_S_INDIAN	ID_TIMOR_SEA
+SetNeighbours::	ID_MALACCA	ID_ANDAMAN_SEA	ID_C_INDIAN	ID_JAVA_SEA	ID_SOUTH_CHINA_SEA	ID_SRIVIJAYA
+SetNeighbours::	ID_ANDAMAN_SEA	ID_BAGAN	ID_BAY_BENGAL	ID_C_INDIAN	ID_KHMER	ID_MALACCA	ID_SRIVIJAYA
+SetNeighbours::	ID_BAY_BENGAL	ID_ANDAMAN_SEA	ID_ARABIAN_SEA	ID_BAGAN	ID_BENGAL	ID_CEYLON	ID_CHOLA	ID_C_INDIAN	ID_KALINGA
+SetNeighbours::	ID_BANDA_SEA	ID_BORNEO	ID_CORAL_SEA	ID_JAVA	ID_JAVA_SEA	ID_MOLUCCAS	ID_NEW_GUINEA	ID_PHILIPPINES	ID_PHILIPPINE_SEA	ID_SOUTH_CHINA_SEA	ID_TIMOR_SEA
+SetNeighbours::	ID_TIMOR_SEA	ID_BANDA_SEA	ID_CORAL_SEA	ID_JAVA_SEA	ID_MOLUCCAS	ID_NEW_GUINEA	ID_NORTH_AUSTRALIA	ID_SOUTHERN_OCEAN	ID_WEST_AUSTRALIA
+SetNeighbours::	ID_CORAL_SEA	ID_BANDA_SEA	ID_EAST_AUSTRALIA	ID_EQ_PACIFIC	ID_NEW_GUINEA	ID_NORTH_AUSTRALIA	ID_PHILIPPINE_SEA	ID_S_PACIFIC	ID_TASMAN_SEA	ID_TIMOR_SEA
+SetNeighbours::	ID_TASMAN_SEA	ID_CORAL_SEA	ID_EAST_AUSTRALIA	ID_NEW_ZEALAND	ID_SOUTHERN_OCEAN	ID_S_PACIFIC
+SetNeighbours::	ID_SOUTHERN_OCEAN	ID_EAST_AUSTRALIA	ID_JAVA_SEA	ID_S_INDIAN	ID_TASMAN_SEA	ID_TIMOR_SEA	ID_WEST_AUSTRALIA
+SetNeighbours::	ID_S_INDIAN	ID_C_INDIAN	ID_JAVA_SEA	ID_MOZAMBIQUE	ID_SOUTHERN_OCEAN	ID_W_INDIAN
+SetNeighbours::	ID_C_INDIAN	ID_ANDAMAN_SEA	ID_ARABIAN_SEA	ID_BAY_BENGAL	ID_CEYLON	ID_CHOLA	ID_JAVA_SEA	ID_MALACCA	ID_S_INDIAN	ID_W_INDIAN
+SetNeighbours::	ID_W_INDIAN	ID_ARABIAN_SEA	ID_C_INDIAN	ID_GULF_ADEN	ID_MADAGASCAR	ID_MOZAMBIQUE	ID_SOMALIA	ID_SWAHILI	ID_S_INDIAN
+SetNeighbours::	ID_ARABIAN_SEA	ID_BAY_BENGAL	ID_CHOLA	ID_C_INDIAN	ID_DECCAN	ID_GUJARAT	ID_GULF_ADEN	ID_OMAN	ID_PERSIAN_GULF	ID_SIND	ID_W_INDIAN
+SetNeighbours::	ID_GULF_ADEN	ID_ARABIAN_SEA	ID_OMAN	ID_RED_SEA	ID_SOMALIA	ID_W_INDIAN	ID_YEMEN
+SetNeighbours::	ID_RED_SEA	ID_ARABIA	ID_EGYPT	ID_ETHIOPIA	ID_GULF_ADEN	ID_JERUSALEM	ID_NUBIA	ID_SINAI	ID_SOMALIA	ID_UPPER_EGYPT	ID_YEMEN
+SetNeighbours::	ID_PERSIAN_GULF	ID_AFRICA	ID_ARABIAN_SEA	ID_FARS	ID_KERMAN	ID_NAJD	ID_OMAN	ID_SIND	ID_SISTAN
+SetNeighbours::	ID_MOZAMBIQUE	ID_MADAGASCAR	ID_SE_ATLANTIC	ID_SOUTHERN_AFRICA	ID_SWAHILI	ID_S_INDIAN	ID_W_INDIAN	ID_ZIMBABWE
+SetNeighbours::	ID_E_PACIFIC	ID_CENTRAL_AMERICA	ID_CHACO	ID_CHIMU	ID_EQ_PACIFIC	ID_MAYA	ID_MUISCA	ID_NE_PACIFIC	ID_SE_PACIFIC	ID_TOLLAN
+SetNeighbours::	ID_EQ_PACIFIC	ID_CORAL_SEA	ID_E_PACIFIC	ID_NE_PACIFIC	ID_NW_PACIFIC	ID_N_PACIFIC	ID_PHILIPPINE_SEA	ID_SE_PACIFIC	ID_S_PACIFIC
+SetNeighbours::	ID_SE_PACIFIC	ID_CHILE	ID_CHIMU	ID_CUZCO	ID_EQ_PACIFIC	ID_E_PACIFIC	ID_PATAGONIA	ID_SW_ATLANTIC	ID_S_PACIFIC	ID_TIWANAKU
+SetNeighbours::	ID_S_PACIFIC	ID_CORAL_SEA	ID_EQ_PACIFIC	ID_NEW_ZEALAND	ID_SE_PACIFIC	ID_TASMAN_SEA
+SetNeighbours::	ID_GULF_MEXICO	ID_APPALACHIA	ID_CARIBBEAN	ID_CARIBBEAN_SEA	ID_CENTRAL_AMERICA	ID_MAYA	ID_MISSISSIPPI	ID_PLAINS	ID_TOLLAN	ID_W_ATLANTIC
+SetNeighbours::	ID_CARIBBEAN_SEA	ID_AMAZONIA	ID_APPALACHIA	ID_CARIBBEAN	ID_CENTRAL_AMERICA	ID_EQ_ATLANTIC	ID_GULF_MEXICO	ID_MUISCA	ID_SARGASSO_SEA	ID_W_ATLANTIC
+SetNeighbours::	ID_W_ATLANTIC	ID_APPALACHIA	ID_CARIBBEAN_SEA	ID_GREAT_LAKES	ID_GULF_MEXICO	ID_LABRADOR_SEA	ID_MID_ATLANTIC	ID_SARGASSO_SEA	ID_VINLAND
+SetNeighbours::	ID_SARGASSO_SEA	ID_CARIBBEAN	ID_CARIBBEAN_SEA	ID_EQ_ATLANTIC	ID_MID_ATLANTIC	ID_W_ATLANTIC
+SetNeighbours::	ID_MID_ATLANTIC	ID_ATLANTIC_OCEAN	ID_CANARY_SEA	ID_EQ_ATLANTIC	ID_GREENLAND_SEA	ID_LABRADOR_SEA	ID_SARGASSO_SEA	ID_W_ATLANTIC
+SetNeighbours::	ID_CANARY_SEA	ID_ATLANTIC_COAST	ID_ATLANTIC_OCEAN	ID_EQ_ATLANTIC	ID_GHANA	ID_GULF_GUINEA	ID_MALI	ID_MID_ATLANTIC	ID_SANHAJA
+SetNeighbours::	ID_EQ_ATLANTIC	ID_AMAZONIA	ID_BRAZIL	ID_CANARY_SEA	ID_CARIBBEAN_SEA	ID_GHANA	ID_GULF_GUINEA	ID_MID_ATLANTIC	ID_SARGASSO_SEA	ID_S_ATLANTIC
+SetNeighbours::	ID_GULF_GUINEA	ID_AKAN	ID_CANARY_SEA	ID_CONGO	ID_EQ_ATLANTIC	ID_MALI	ID_SE_ATLANTIC	ID_S_ATLANTIC	ID_YORUBA
+SetNeighbours::	ID_S_ATLANTIC	ID_BRAZIL	ID_EQ_ATLANTIC	ID_GULF_GUINEA	ID_SE_ATLANTIC	ID_SW_ATLANTIC
+SetNeighbours::	ID_SE_ATLANTIC	ID_CONGO	ID_GULF_GUINEA	ID_MOZAMBIQUE	ID_SOUTHERN_AFRICA	ID_SW_ATLANTIC	ID_S_ATLANTIC
+SetNeighbours::	ID_SW_ATLANTIC	ID_BRAZIL	ID_PAMPAS	ID_PATAGONIA	ID_SE_ATLANTIC	ID_SE_PACIFIC	ID_S_ATLANTIC

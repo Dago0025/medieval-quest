@@ -1,0 +1,85 @@
+//========================================
+// Startpos di prova per il trasporto via mare (spec. fase 3 par.9, test_sim_transport.gd e
+// test_ui_transport.gd). Stessa sintassi di EARLY_XL.TXT, tabelle di sim_unit_prod / sim_build_prod.
+// Mondo: 5 regioni di terra, 4 zone di mare, 3 fazioni piu' i ribelli.
+//   Terra:  ID_PORTA (ALPHA, porto e edificio PORT)   - ID_ENTRO (ALPHA, interna, confina con PORTA)
+//           ID_SENZAPORTO (ALPHA, costiera, edificio PORT ma senza SetPort)
+//           ID_FARO (BETA, porto, castello livello 2)  - ID_LONTANA (ribelli, costiera)
+//   Mare:   ID_MARE_UNO (confina con PORTA e SENZAPORTO; poi MARE_DUE e MARE_TRE, in questo ordine)
+//           ID_MARE_DUE (UNO, QUATTRO, FARO)  ID_MARE_TRE (UNO, QUATTRO)  ID_MARE_QUATTRO (DUE, TRE, FARO, LONTANA)
+//   Catene da PORTA, tutte le zone libere: FARO = UNO > DUE; LONTANA = UNO > DUE > QUATTRO (DUE prima di TRE
+//   nell'ordine dei vicini); con DUE interrotta: FARO = UNO > TRE > QUATTRO.
+//========================================
+SetStartDate::	1000
+SetPeriod:: EARLY
+SetEarlyPeriodStartDate::	1000
+SetHighPeriodStartDate::	1205
+SetLatePeriodStartDate::	1321
+Prodfiles::		UNITPROD	"sim_unit_prod.txt"		BUILDINGPROD	"sim_build_prod.txt"
+
+DeclareFaction::	"FN_REBEL"
+DeclareFaction::	"FN_ALPHA"
+DeclareFaction::	"FN_BETA"
+DeclareFaction::	"FN_GAMMA"
+
+DeclareLandRegion::	"ID_PORTA"
+DeclareLandRegion::	"ID_ENTRO"
+DeclareLandRegion::	"ID_SENZAPORTO"
+DeclareLandRegion::	"ID_FARO"
+DeclareLandRegion::	"ID_LONTANA"
+DeclareSeaRegion::	"ID_MARE_UNO"
+DeclareSeaRegion::	"ID_MARE_DUE"
+DeclareSeaRegion::	"ID_MARE_TRE"
+DeclareSeaRegion::	"ID_MARE_QUATTRO"
+
+DeclareTradegoods:: "FISH"		20
+DeclareTradegoods:: "GRAIN"		80
+
+SetNeighbours:: ID_PORTA		ID_ENTRO	ID_MARE_UNO
+SetNeighbours:: ID_ENTRO		ID_PORTA
+SetNeighbours:: ID_SENZAPORTO	ID_MARE_UNO
+SetNeighbours:: ID_FARO			ID_MARE_DUE	ID_MARE_QUATTRO
+SetNeighbours:: ID_LONTANA		ID_MARE_QUATTRO
+SetNeighbours:: ID_MARE_UNO		ID_PORTA	ID_SENZAPORTO	ID_MARE_DUE	ID_MARE_TRE
+SetNeighbours:: ID_MARE_DUE		ID_MARE_UNO	ID_MARE_QUATTRO	ID_FARO
+SetNeighbours:: ID_MARE_TRE		ID_MARE_UNO	ID_MARE_QUATTRO
+SetNeighbours:: ID_MARE_QUATTRO	ID_MARE_DUE	ID_MARE_TRE	ID_FARO	ID_LONTANA
+
+SetAttributes::	ID_PORTA		"Porta"			0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	400	"Porta Castle_xzy"		COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_ENTRO		"Entro"			0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	300	"Entro Castle_xzy"		INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_SENZAPORTO	"Senzaporto"	0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	200	"Senzaporto Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_FARO			"Faro"			0	MUSLIM_CULTURE		ARID		AT_ISLAMIC			-1	200	"Faro Castle_xzy"		COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_LONTANA		"Lontana"		0	PAGAN_CULTURE		TEMPERATE	AT_WESTERN_EUROPEAN	-1	100	"Lontana Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+
+SetRegionOwner:: ID_PORTA		FN_ALPHA
+SetRegionOwner:: ID_ENTRO		FN_ALPHA
+SetRegionOwner:: ID_SENZAPORTO	FN_ALPHA
+SetRegionOwner:: ID_FARO		FN_BETA
+SetRegionOwner:: ID_LONTANA		FN_REBEL
+
+SetPort::	ID_PORTA	100	100	2
+SetPort::	ID_FARO		300	300	2
+SetTradableGoods::	ID_PORTA	FISH	GRAIN
+SetTradableGoods::	ID_FARO		GRAIN
+
+MakeBuilding:: ID_PORTA			Castle2
+MakeBuilding:: ID_PORTA			Port
+MakeBuilding:: ID_SENZAPORTO	Port
+MakeBuilding:: ID_FARO			Castle2
+MakeBuilding:: ID_FARO			Port
+
+MakeUnit:: ID_PORTA			Spearmen	100
+MakeUnit:: ID_PORTA			Galley		1
+MakeUnit:: ID_ENTRO			Spearmen	50
+MakeUnit:: ID_SENZAPORTO	Spearmen	40
+MakeUnit:: ID_FARO			Nizari		60
+MakeUnit:: ID_LONTANA		Spearmen	30
+
+SetActiveFaction:: FN_ALPHA		FT_MAJOR
+SetActiveFaction:: FN_BETA		FT_MAJOR
+SetReligion:: FN_ALPHA		REL_CATHOLIC
+SetReligion:: FN_BETA		REL_ISLAMIC
+SetCulture:: FN_ALPHA		CATHOLIC_CULTURE
+SetCulture:: FN_BETA		MUSLIM_CULTURE
+SetTreasury:: FN_ALPHA		5000	4000	3000	2000
+SetTreasury:: FN_BETA		2000	1500	1000	500

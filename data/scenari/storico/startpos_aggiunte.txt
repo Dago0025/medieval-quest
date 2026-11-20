@@ -1,0 +1,52 @@
+// Scenario storico (ADR-068): righe della XL 3.0 originale (installer VH_MTW_XL3_Full.exe) che lo startpos
+// dell'installazione, tolta la mod Auror, non ha piu'. Generato da tools/scenario_storico.py: non modificare a mano.
+SetTradableGoods::	ID_DENMARK			FISH		FURS
+SetTradableGoods::	ID_NORWAY			FISH		WOOD		WHALEBONE
+SetTradableGoods::	ID_SCANIA			FISH		WOOD
+SetResources::		ID_SWEDEN			COPPER		IRON
+SetTradableGoods::	ID_SWEDEN			FURS		FISH		WOOD
+SetTreasury:: FN_DANISH			10000	8000	6000	4000
+SetFactionCol:: FN_DANISH			255 255 255		255 0 0
+SetRegionOwner:: ID_DENMARK           		FN_DANISH
+SetRegionOwner:: ID_SCANIA           		FN_DANISH
+SetRegionOwner:: ID_NORWAY              	FN_NORWEGIAN
+SetRegionOwner:: ID_SWEDEN            		FN_SWEDISH
+SetStartLeader::  FN_DANISH		0	7	2 3 1 1 2 0 1
+MakeBuilding:: ID_DENMARK			Castle6
+MakeBuilding:: ID_DENMARK			Port
+MakeBuilding:: ID_DENMARK			Town_watch
+MakeBuilding:: ID_DENMARK  		 	Spearmaker2
+MakeBuilding:: ID_DENMARK	  	 	Swordsmith
+MakeBuilding:: ID_DENMARK			Royal_palace
+MakeBuilding:: ID_DENMARK			Bowyer
+MakeBuilding:: ID_DENMARK			Improved_Farmland2
+MakeBuilding:: ID_DENMARK			Watch_towers
+MakeBuilding:: ID_DENMARK			Shipyard
+MakeBuilding:: ID_DENMARK			Horse_breeder2
+MakeBuilding:: ID_DENMARK			Royal_court
+MakeBuilding:: ID_NORWAY			Castle6
+MakeBuilding:: ID_NORWAY			Town_watch
+MakeBuilding:: ID_NORWAY			Bowyer
+MakeBuilding:: ID_NORWAY  		 	Spearmaker2
+MakeBuilding:: ID_NORWAY	  	 	Swordsmith
+MakeBuilding:: ID_NORWAY			Royal_palace
+MakeBuilding:: ID_NORWAY			Port
+MakeBuilding:: ID_NORWAY			Improved_Farmland2
+MakeBuilding:: ID_NORWAY			Watch_towers
+MakeBuilding:: ID_NORWAY	 		Shipyard
+MakeBuilding:: ID_NORWAY			Horse_breeder2
+MakeBuilding:: ID_NORWAY			Royal_court
+MakeBuilding:: ID_SCANIA			Castle2
+MakeBuilding:: ID_SCANIA			Improved_Farmland
+MakeBuilding:: ID_SWEDEN			Castle6
+MakeBuilding:: ID_SWEDEN			Town_watch
+MakeBuilding:: ID_SWEDEN			Spearmaker2
+MakeBuilding:: ID_SWEDEN	  	 	Swordsmith
+MakeBuilding:: ID_SWEDEN			Royal_palace
+MakeBuilding:: ID_SWEDEN			Bowyer
+MakeBuilding:: ID_SWEDEN			Port
+MakeBuilding:: ID_SWEDEN			Improved_Farmland2
+MakeBuilding:: ID_SWEDEN			Watch_towers
+MakeBuilding:: ID_SWEDEN 			Shipyard
+MakeBuilding:: ID_SWEDEN			Horse_breeder2
+MakeBuilding:: ID_SWEDEN			Royal_court

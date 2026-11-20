@@ -1,0 +1,15 @@
+Name/Identifier	Unit type	Cost	Support Cost	Production time																																															
+DATA START																																																			
+Spearmen	INFANTRY	100	3	1			100												ALL_PERIODS									ALL_FACTIONS																							
+Halberdiers	INFANTRY	200	4	1			80									"{CASTLE2}"			ALL_PERIODS									ALL_FACTIONS																							
+Chevaliers	CAVALRY	400	10	2			40									"{CASTLE3}"			ALL_PERIODS									ALL_FACTIONS																							
+Nizari	INFANTRY	250	4	1			60												ALL_PERIODS									FN_BETA																							
+Templars	CAVALRY	500	12	3			40									"{CHAPTER_HOUSE}"			ALL_PERIODS									ALL_FACTIONS																							
+Hospitallers	CAVALRY	450	11	3			40									"{CHAPTER_HOUSE}"			ALL_PERIODS									"FN_ALPHA, FN_GAMMA"																							
+Catapult	ARTILLERY	900	20	3			6									"{CASTLE3}"			ALL_PERIODS									ALL_FACTIONS																							
+Emissary	EMISSARY	0	0	1			1												ALL_PERIODS									ALL_FACTIONS																							
+Princess	PRINCESS	0	0	1			1												ALL_PERIODS									ALL_FACTIONS																							
+Bishop	BISHOP	100	0	1			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Priest	PRIEST	100	0	1			1									"{CHURCH}"			ALL_PERIODS									ALL_FACTIONS																							
+Crusade	CRUSADE	1000	0	4			1									"{CHAPTER_HOUSE}"			ALL_PERIODS									ALL_FACTIONS																							
+Jihad	JIHAD	500	0	2			1									"{RIBAT}"			ALL_PERIODS									FN_BETA																							

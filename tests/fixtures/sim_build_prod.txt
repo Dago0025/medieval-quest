@@ -1,0 +1,15 @@
+Number of upgrades	Name/Identifier	Localised name	Building type	Cost  including upgrades	Time to build including upgrades	Building conditions																					
+DATA START																											
+3	CASTLE	Castle	"CASTLE, TROOP_PRODUCER"	"400,1000,2000,4000"	"4,8,12,16"	"{},{CASTLE},{CASTLE2},{CASTLE3}"																					
+1	BOWYER	Bowyer	TROOP_PRODUCER	"200,400"	"2,4"	"{CASTLE},{CASTLE2,BOWYER}"																					
+3	IMPROVED_FARMLAND	Improved_Farmland	FARM_INCOME	"600,1000,1500,2000"	"2,4,6,8"	"{},{IMPROVED_FARMLAND},{IMPROVED_FARMLAND2},{IMPROVED_FARMLAND3}"																"120,140,160,180"					
+3	MERCHANT	Merchant	TRADING_POST	"800,1000,1200,1400"	"2,4,6,8"	"{CASTLE},{CASTLE2,MERCHANT},{CASTLE3,MERCHANT2},{CASTLE4,MERCHANT3}"																					
+0	PORT	Port	PORT	750	4	"{}"																					
+1	SHIPYARD	Shipyard	SHIP_PRODUCER	"400,600"	"2,3"	"{PORT},{PORT,SHIPYARD}"																					
+1	GOLD_MINE	Gold_Mine	LEV1_INCOME	"1000,1800"	"2,4"	"{},{GOLD_MINE}"												"{ GOLD }"				"200, 400"					
+1	SALT_MINE	Salt_Mine	LEV1_INCOME	"250,400"	"2,4"	"{},{SALT_MINE}"												"{ SALT }"				"50,100"					
+0	CHURCH	Church	AGENT_PRODUCER	200	2	"{}"								"CATHOLIC, ORTHODOX"													
+0	MOSQUE	Mosque	AGENT_PRODUCER	200	2	"{}"								MUSLIM													
+0	GUNSMITH	Gunsmith	TROOP_PRODUCER	400	3	"{CASTLE}"													"{FN_BETA}"								
+0	ARMOURER	Armourer	NON_PRODUCER	400	3	"{{CASTLE2,BOWYER},{CASTLE4}}"																					
+0	UNIVERSITY	University	NON_PRODUCER	1000	8	"{CASTLE3}"																					

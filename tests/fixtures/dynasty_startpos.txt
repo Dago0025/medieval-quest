@@ -1,0 +1,96 @@
+//========================================
+// Startpos di prova per i test dei personaggi e delle dinastie (fase 4a): come sim_startpos.txt piu' capi,
+// eredi, titoli e cariche (stessa sintassi di EARLY_XL.TXT).
+// Mondo piccolo: 4 regioni di terra, 2 zone di mare, 3 fazioni piu' i ribelli.
+//   ID_ALTA (ALPHA, porto) - ID_BASSA (ALPHA, oro e sale) - ID_MEZZA (BETA, porto) - ID_SOLA (ribelli)
+//   ID_MARE_NORD (confina con ALTA) - ID_MARE_SUD (confina con MEZZA)
+//========================================
+SetStartDate::	1000
+SetPeriod:: EARLY
+SetEarlyPeriodStartDate::	1000
+SetHighPeriodStartDate::	1205
+SetLatePeriodStartDate::	1321
+Prodfiles::		UNITPROD	"sim_unit_prod.txt"		BUILDINGPROD	"sim_build_prod.txt"
+
+DeclareFaction::	"FN_REBEL"
+DeclareFaction::	"FN_ALPHA"
+DeclareFaction::	"FN_BETA"
+DeclareFaction::	"FN_GAMMA"
+
+DeclareLandRegion::	"ID_ALTA"
+DeclareLandRegion::	"ID_BASSA"
+DeclareLandRegion::	"ID_MEZZA"
+DeclareLandRegion::	"ID_SOLA"
+DeclareSeaRegion::	"ID_MARE_NORD"
+DeclareSeaRegion::	"ID_MARE_SUD"
+
+DeclareTradegoods:: "FISH"		20
+DeclareTradegoods:: "GRAIN"		80
+DeclareTradegoods:: "SPICES"	80
+
+SetNeighbours:: ID_ALTA		ID_BASSA	ID_MARE_NORD
+SetNeighbours:: ID_BASSA	ID_ALTA		ID_MEZZA
+SetNeighbours:: ID_MEZZA	ID_BASSA	ID_SOLA		ID_MARE_SUD
+SetNeighbours:: ID_SOLA		ID_MEZZA
+SetNeighbours:: ID_MARE_NORD	ID_ALTA		ID_MARE_SUD
+SetNeighbours:: ID_MARE_SUD	ID_MARE_NORD	ID_MEZZA
+
+SetAttributes::	ID_ALTA		"Alta"		0	CATHOLIC_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	400	"Alta Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_BASSA	"Bassa"		0	ORTHODOX_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	300	"Bassa Castle_xzy"	INLAND	HILLY	NO_RIVER	TRUE
+SetAttributes::	ID_MEZZA	"Mezza"		0	MUSLIM_CULTURE	ARID	AT_ISLAMIC	-1	200	"Mezza Castle_xzy"	COAST	FLAT	NO_RIVER	TRUE
+SetAttributes::	ID_SOLA		"Sola"		0	PAGAN_CULTURE	TEMPERATE	AT_WESTERN_EUROPEAN	-1	100	"Sola Castle_xzy"	INLAND	FLAT	NO_RIVER	TRUE
+
+SetRegionOwner:: ID_ALTA	FN_ALPHA
+SetRegionOwner:: ID_BASSA	FN_ALPHA
+SetRegionOwner:: ID_MEZZA	FN_BETA
+SetRegionOwner:: ID_SOLA	FN_REBEL
+
+SetPort::	ID_ALTA		100	100	2
+SetPort::	ID_MEZZA	300	300	2
+SetTradableGoods::	ID_ALTA		FISH	GRAIN
+SetTradableGoods::	ID_BASSA	GRAIN
+SetTradableGoods::	ID_MEZZA	SPICES
+SetResources::	ID_BASSA	GOLD	SALT
+
+MakeBuilding:: ID_ALTA		Castle3
+MakeBuilding:: ID_ALTA		PORT
+MakeBuilding:: ID_ALTA		Improved_Farmland2
+MakeBuilding:: ID_ALTA		Merchant2
+MakeBuilding:: ID_BASSA		Castle
+MakeBuilding:: ID_BASSA		Gold_Mine2
+MakeBuilding:: ID_BASSA		Salt_Mine
+MakeBuilding:: ID_BASSA		Improved_Farmland
+MakeBuilding:: ID_MEZZA		Castle2
+MakeBuilding:: ID_MEZZA		Port
+
+MakeUnit:: ID_ALTA		Spearmen	100
+MakeUnit:: ID_ALTA		Archers		60
+MakeUnit:: ID_ALTA		Galley		1
+MakeUnit:: ID_BASSA		Spearmen	80
+MakeUnit:: ID_BASSA		Emissary	985
+MakeUnit:: ID_MEZZA		Nizari		60
+MakeUnit:: ID_MEZZA		Princess	990
+MakeUnit:: ID_SOLA		Spearmen	50
+
+SetActiveFaction:: FN_ALPHA		FT_MAJOR
+SetActiveFaction:: FN_BETA		FT_MAJOR
+SetReligion:: FN_ALPHA		REL_CATHOLIC
+SetReligion:: FN_BETA		REL_ISLAMIC
+SetCulture:: FN_ALPHA		CATHOLIC_CULTURE
+SetCulture:: FN_BETA		MUSLIM_CULTURE
+SetTreasury:: FN_ALPHA		5000	4000	3000	2000
+SetTreasury:: FN_BETA		2000	1500	1000	500
+
+// --- personaggi (fase 4a) ---
+SetNameData:: campmap\names\DYNASTY_HEROES.TXT
+PlaceLeader:: ID_ALTA		FN_ALPHA
+SetStartLeader:: FN_ALPHA	0		3	0	1	0
+AddHeir:: FN_ALPHA	1 20
+AddHeir:: FN_ALPHA	1 10
+AddHeir:: FN_ALPHA	0 8
+PlaceLeader:: ID_MEZZA		FN_BETA
+SetStartLeader:: FN_BETA	0		2	1	0
+AddHeir:: FN_BETA	1 5
+AddTitle:: ID_BASSA	"Duca di Bassa"	1 2 0 1 0 0 0
+AddTitle:: ID_ALTA	""	0 0 0 0 0 0 0
+AddOffice:: FN_ALPHA	castle	"Gran Maresciallo"	1 0 0 2 0 0 0

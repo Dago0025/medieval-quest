@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scenes/campaign_map.gd" id="1_map"]
+
+[node name="CampaignMap" type="Node2D"]
+script = ExtResource("1_map")
+
+[node name="World" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Map" type="Sprite2D" parent="World"]
+centered = false
+
+[node name="Camera" type="Camera2D" parent="World"]
+
+[node name="Backdrop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="View" type="ColorRect" parent="Backdrop"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ui" type="CanvasLayer" parent="."]

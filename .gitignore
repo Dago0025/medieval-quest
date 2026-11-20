@@ -1,0 +1,17 @@
+# Cache e importazioni di Godot 4
+.godot/
+*.tmp
+# Esportazioni
+build/
+export/
+# File locali dei test
+godot_path.txt
+tests/esito_test.txt
+tests/esito_economia.txt
+# Cache di Python degli strumenti
+__pycache__/
+# Dati del gioco originale copiati dall'installazione (non redistribuibili): tools/copia_originale.py
+originale/
+
+# Installer: cartella di lavoro e file prodotti (installer/prepara_installer.py)
+installer/build/

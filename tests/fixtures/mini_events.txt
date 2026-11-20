@@ -1,0 +1,33 @@
+SetShowTransOn  // Do not translate.
+
+//
+// Estratto sintetico di prova nello stile di Events.txt (nessun testo originale)
+//
+["floodregmes_xzy"]
+{"Prova di inondazione in %s."}	// segnaposto %s
+["famineregmes_xzy"]
+{"Prova di carestia in %s."}
+["quakeregmes_xzy"] {"Prova di terremoto in %s."}
+["taifunregmes_xzy"]
+{"Prova di tempesta in %s."}
+["black_plagueregmes_xzy"]
+{"Prova di Peste Nera ovunque, anche in %s."}
+
+@["plagueregmes_xzy"]
+@{"Prima malattia in %s."}
+@{"Seconda malattia in %s."}
+@{"Terza malattia in %s."}
+
+["floodms_xzy"] {"Inondazione"}
+["black_plaguems_xzy"] {"La Peste Nera"}
+
+@["Historical_event_titles"]
+@{"Titolo zero"}
+@{"Titolo uno"}		//	@{"commento con un altro elemento"}
+@{"Titolo due"}
+
+@["Historical_event_text"]
+@{"Testo zero
+ su due righe."}
+@{"Testo uno."}
+@{"Testo due."}

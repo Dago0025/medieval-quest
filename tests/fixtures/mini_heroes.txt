@@ -1,0 +1,67 @@
+// Estratto di prova di MTW_XL_EARLY_HEROES.TXT: righe reali ridotte, non e' il file completo.
+// FAMOUS_*, SET_* e le liste dei nomi sono copiate dal file reale con i numeri dichiarati
+// ricalcolati. Adattamento: la lista 2 (Tarkhan) e FN_GOLDEN_HORDE con 8 nomi reali servono
+// a provare il caso 'nomi reali piu' dei nomi della lista'; SET_PRINCESS FN_ENGLISH usa la lista 1.
+
+// SET_REBELS::
+// The format is region	forename surname
+
+SET_FORENAMES::	FN_ENGLISH	1	8
+SET_FORENAMES::	FN_GOLDEN_HORDE	2	8
+SET_SURNAMES::	FN_ENGLISH	1
+SET_PRINCESS::	FN_ENGLISH	1
+SET_REBELS::	ID_SCOTLAND			14	13
+SET_REBELS::	ID_MERCIA			1	1
+
+FAMOUS_KINGS::	FN_ENGLISH	4
+//name	no.	c	d	p	a	portrait			vnv
+4,		2,	3,	7,	3,	4,	-1,			tyrant2
+0,		1,	2,	4,	4,	7,	-1,			lawman1
+7,		1,	3,	4,	3,	4,	-1,			vaccilator1
+0,		2,	3,	6,	4,	6,	-1,			anger1
+
+FAMOUS_HEROES::	FN_REBEL	2																					
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"El",			"Cid",					1054,	4,	5,	4,	3,	3,	attacker2,				GENERAL,	ID_VALENCIA,			 1		//El Cid!
+"Fra",			"Dolcino",				1200,	2,	5,	6,	2,	7,	zealot4,				GENERAL,	ID_MILAN,			-1		//Leader of the Dolcinists'"crusade" against Church corruption
+
+FAMOUS_HEROES::	FN_ENGLISH	3																		
+//hero name							date,	c,	d,	p,	a,	l,	v,					TYPE		ID_REGION			PORTRAIT
+"Odon",			"de Bayeux",				1036,	2,	3,	3,	4,	5,	no_v,					BISHOP,		ID_LIMBO,			-1		//William's half-brother; commissioned Bayeux tapestry
+"Strongbow",		"FitzGilbert",				1115,	5,	6,	4,	5,	5,	moneygrabber2,				GENERAL,	ID_LIMBO,			-1		//Richard FitzGilbert of Clare, English adventurer, cause of Henry II's Irish mission
+"Thomas",		"Beckett",				1118,	1,	1,	6,	3,	2,	pious1,					BISHOP,		ID_LIMBO,			-1		//"Will no one rid me of this troublesome priest?"
+
+// Name list, these must match an entry in names.txt
+
+// 1:	english_forenames
+ADD_FORENAMES::
+"Henry"
+"Edward"
+"Richard"
+"John"
+"William"
+"Alfred"
+"Edmund"
+"Stephen"
+
+
+// 2:	khazar_forenames
+ADD_FORENAMES::
+"Tarkhan"	// means commander or general
+
+// 1:	english_surnames
+ADD_SURNAMES::
+"Plantagenet"
+"Howard"
+"Cromwell"
+"Pole"
+"Talbot"
+"Stanley"
+
+// 1:	French_princesses
+ADD_PRINCESS::	
+"Herleva"
+"Arlette"
+"Matilda"
+"Maud"
+"Adelaide"

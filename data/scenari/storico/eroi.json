@@ -1,0 +1,114 @@
+{
+ "file": "MTW_XL_EARLY_HEROES.TXT",
+ "fonte": "VH_MTW_XL3_Full.exe",
+ "righe": [
+  [
+   "SET_FORENAMES::\tFN_DANISH\t2\t1",
+   "SET_FORENAMES::\tFN_DANISH\t2\t8"
+  ],
+  [
+   "0,\t\t1,\t7,\t9,\t9,\t9,\t-1,\t\t\tfearsome1",
+   "2,\t\t1,\t3,\t4,\t3,\t4,\t-1,\t\t\tfearsome1"
+  ],
+  [
+   "0,\t\t2,\t7,\t9,\t9,\t9,\t-1,\t\t\tfearsome1",
+   "3,\t\t1,\t4,\t4,\t4,\t4,\t-1,\t\t\tfearsome1"
+  ],
+  [
+   "0,\t\t3,\t7,\t9,\t9,\t9,\t-1,\t\t\tdefender3",
+   "3,\t\t2,\t3,\t6,\t3,\t3,\t-1,\t\t\tsecret_paranoiac4"
+  ],
+  [
+   "0,\t\t4,\t7,\t9,\t9,\t9,\t-1,\t\t\tattacker2",
+   "1,\t\t3,\t2,\t6,\t3,\t3,\t-1,\t\t\tenvy"
+  ],
+  [
+   "0,\t\t5,\t7,\t9,\t9,\t9,\t-1,\t\t\tmightywarrior2",
+   "5,\t\t1,\t4,\t5,\t3,\t4,\t-1,\t\t\tmightywarrior2"
+  ],
+  [
+   "0,\t\t6,\t7,\t9,\t9,\t9,\t-1,\t\t\tattacker2",
+   "5,\t\t2,\t4,\t4,\t3,\t3,\t-1,\t\t\tattacker2"
+  ],
+  [
+   "0,\t\t7,\t7,\t9,\t9,\t9,\t-1,\t\t\tattacker2",
+   "3,\t\t5,\t2,\t3,\t3,\t3,\t-1,\t\t\tenvy"
+  ],
+  [
+   "0,\t\t8,\t7,\t9,\t9,\t9,\t-1,\t\t\tmightywarrior2",
+   "7,\t\t2,\t3,\t4,\t3,\t3,\t-1,\t\t\ttyrant1"
+  ],
+  [
+   "\"Skjalm\", \t\t\"Hvide\", \t\t\t\t1062,\t7,\t9,\t9,\t9,\t9, \tfarmer1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Skjalm Hvide (b1062, d1113): Powerful nobleman from Zealand, founder of the Hvide clan. He stood high in the favour of royal power, being entrusted to manage the possessions of the king. Prince Knud Lavard was raised by him.",
+   "\"Skjalm\", \t\t\"Hvide\", \t\t\t\t1062, \t3, \t3, \t4, \t4, \t6, \tfarmer1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Skjalm Hvide (b1062, d1113): Powerful nobleman from Zealand, founder of the Hvide clan. He stood high in the favour of royal power, being entrusted to manage the possessions of the king. Prince Knud Lavard was raised by him."
+  ],
+  [
+   "\"Asser\", \t\t\"Rig\", \t\t\t\t\t1080,\t7,\t9,\t9,\t9,\t9, \tpious1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Asser Rig (b1080, d1151): Powerful nobleman from Zealand, son of Skjalm Hvide. King Valdemar I was raised at his court together with Asser's son Absalon. He founded the monastery of Sorø, near Copenhagen.",
+   "\"Asser\", \t\t\"Rig\", \t\t\t\t\t1080, \t3, \t2, \t4, \t4, \t6, \tpious1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Asser Rig (b1080, d1151): Powerful nobleman from Zealand, son of Skjalm Hvide. King Valdemar I was raised at his court together with Asser's son Absalon. He founded the monastery of Sorø, near Copenhagen."
+  ],
+  [
+   "\"Knud\", \t\t\"Lavard\", \t\t\t\t1096,\t7,\t9,\t9,\t9,\t9, \tcharismatic1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Knud Lavard (\"the Protector\"; b1096, d1131): Popular prince, son of King Erik I and father of King Valdemar I. He was employed as King Niels's jarl in South Jutland. His success against the Wends (Slavs) on the south coast of the Baltic won him great popularity but also the ill will of the king and his supporters, in particular Niels's son Magnus the Strong, who killed him in 1131, causing a civil war.",
+   "\"Knud\", \t\t\"Lavard\", \t\t\t\t1096, \t4, \t2, \t4, \t3, \t5, \tcharismatic1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Knud Lavard (\"the Protector\"; b1096, d1131): Popular prince, son of King Erik I and father of King Valdemar I. He was employed as King Niels's jarl in South Jutland. His success against the Wends (Slavs) on the south coast of the Baltic won him great popularity but also the ill will of the king and his supporters, in particular Niels's son Magnus the Strong, who killed him in 1131, causing a civil war."
+  ],
+  [
+   "\"Magnus\", \t\t\"den Stærke\", \t\t\t\t1106,\t7,\t9,\t9,\t9,\t9, \tenvy1, \t\t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Magnus den Stærke (\"the Strong\"; b1106, d1134): Ambitious prince, son of King Niels. He viewed his cousin Knud Lavard as a likely contender for the Danish throne and killed him in 1131. A civil war ensued, and he was killed by Knud's half-brother, King Erik II, at Fodevig (Scania, 1134).",
+   "\"Magnus\", \t\t\"den Stærke\", \t\t\t\t1106, \t3, \t5, \t2, \t2, \t5, \tenvy1, \t\t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Magnus den Stærke (\"the Strong\"; b1106, d1134): Ambitious prince, son of King Niels. He viewed his cousin Knud Lavard as a likely contender for the Danish throne and killed him in 1131. A civil war ensued, and he was killed by Knud's half-brother, King Erik II, at Fodevig (Scania, 1134)."
+  ],
+  [
+   "\"Esbern\", \t\t\"Snare\", \t\t\t\t1127,\t7,\t9,\t9,\t9,\t9, \tbuilder1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Esbern Snare (b1127, d1204): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his brother Absalon. He built a castle at Kalundborg. Around this grew up the town of same name.",
+   "\"Esbern\", \t\t\"Snare\", \t\t\t\t1127, \t3, \t3, \t3, \t3, \t5, \tbuilder1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Esbern Snare (b1127, d1204): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his brother Absalon. He built a castle at Kalundborg. Around this grew up the town of same name."
+  ],
+  [
+   "\"Archbishop\", \t\t\"Absalon\", \t\t\t\t1128,\t7,\t9,\t9,\t9,\t9, \tmightywarrior3, \t\t\tGENERAL, \tID_DENMARK, \t\t\t-1 \t\t//Archbishop Absalon (b1128, d1201): Danish hero, equally great as churchman, statesman and general. He was bishop of Roskilde from 1158, archbishop of Lund from 1178, and chief counsellor of Valdemar I and Knud VI. He waged war against the Wends (Slavs) on the south coast of the Baltic, and in 1184 won a great victory over a Pomeranian fleet. In 1167 he was in charge of fortifying Copenhagen.",
+   "\"Archbishop\", \t\t\"Absalon\", \t\t\t\t1128, \t4, \t3, \t4, \t4, \t6, \tmightywarrior3, \t\t\tGENERAL, \tID_DENMARK, \t\t\t-1 \t\t//Archbishop Absalon (b1128, d1201): Danish hero, equally great as churchman, statesman and general. He was bishop of Roskilde from 1158, archbishop of Lund from 1178, and chief counsellor of Valdemar I and Knud VI. He waged war against the Wends (Slavs) on the south coast of the Baltic, and in 1184 won a great victory over a Pomeranian fleet. In 1167 he was in charge of fortifying Copenhagen."
+  ],
+  [
+   "\"Sune\", \t\t\"Ebbesen\", \t\t\t\t1130,\t7,\t9,\t9,\t9,\t9, \tloyal1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Sune Ebbesen (b?, d1186): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his cousins Absalon and Esbern Snare.",
+   "\"Sune\", \t\t\"Ebbesen\", \t\t\t\t1130, \t3, \t3, \t3, \t3, \t5, \tloyal1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Sune Ebbesen (b?, d1186): Nobleman and warrior, member of the Hvide clan. He participated in the military campaigns of King Valdemar I together with his cousins Absalon and Esbern Snare."
+  ],
+  [
+   "\"Sven\", \t\t\"Aggesen\", \t\t\t\t1140,\t7,\t9,\t9,\t9,\t9, \teducated2, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Sven Aggesen (b1140/50, d?): Danish historian, housecarl in service of both King Valdemar I and King Knud VI. He was on many war-expeditions, of which he mentions details in his work \"Brevis Historia Regnum Daciae\".",
+   "\"Sven\", \t\t\"Aggesen\", \t\t\t\t1140, \t1, \t1, \t3, \t4, \t6, \teducated2, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Sven Aggesen (b1140/50, d?): Danish historian, housecarl in service of both King Valdemar I and King Knud VI. He was on many war-expeditions, of which he mentions details in his work \"Brevis Historia Regnum Daciae\"."
+  ],
+  [
+   "\"Snorri\",\t\t\"Sturluson\",\t\t\t\t1178,\t7,\t9,\t9,\t9,\t9,\teducated1,\t\t\t\tGENERAL,\tID_LIMBO,\t\t\t-1\t\t//Icelander, but worth including?",
+   "\"Snorri\",\t\t\"Sturluson\",\t\t\t\t1178,\t3,\t1,\t3,\t3,\t6,\teducated1,\t\t\t\tGENERAL,\tID_LIMBO,\t\t\t-1\t\t//Icelander, but worth including?"
+  ],
+  [
+   "\"Marsk\", \t\t\"Stig\", \t\t\t\t1230,\t7,\t9,\t9,\t9,\t9, \tattacker2, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Stig Andersen, alias Marsk Stig (b?, d1293): Outstanding Danish magnate, he held the office of \"Marsk\" (leading general and \"minister of war\"). At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind King Erik V's death. He then settled at the island of Hjelm from which he ravaged the Danish coasts. He died on his island without having obtained rehabilitation from the Danish court.",
+   "\"Marsk\", \t\t\"Stig\", \t\t\t\t1230, \t4, \t5, \t3, \t3, \t3, \tattacker2, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Stig Andersen, alias Marsk Stig (b?, d1293): Outstanding Danish magnate, he held the office of \"Marsk\" (leading general and \"minister of war\"). At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind King Erik V's death. He then settled at the island of Hjelm from which he ravaged the Danish coasts. He died on his island without having obtained rehabilitation from the Danish court."
+  ],
+  [
+   "\"Rane\", \t\t\"Jonsen\", \t\t\t\t1240,\t7,\t9,\t9,\t9,\t9, \tsecret_paranoiac3, \t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Rane Jonsen (b?, d1294): Nobleman from Zealand. He was \"Kammermester\" (Chamberlain) of King Erik V. At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind the king's death. He fled to Norway, but was captured and executed at Roskilde in 1294.",
+   "\"Rane\", \t\t\"Jonsen\", \t\t\t\t1240, \t2, \t4, \t3, \t4, \t3, \tsecret_paranoiac3, \t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Rane Jonsen (b?, d1294): Nobleman from Zealand. He was \"Kammermester\" (Chamberlain) of King Erik V. At the regicide November 1286, he and many other noblemen were in spite of their protests outlawed as the men behind the king's death. He fled to Norway, but was captured and executed at Roskilde in 1294."
+  ],
+  [
+   "\"Grev\", \t\t\"Jakob\", \t\t\t\t1250,\t7,\t9,\t9,\t9,\t9, \tenvy1, \t\t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Count Jakob of Halland (b?, d1310): Grev (\"Count\") of Halland (Scania) from 1283. He was hostile toward the growing power of King Erik V, and was one of the noblemen outlawed at the regicide November 1286. He struggled together with the group of outlaw noblemen and since 1305 took refuge at the Norwegian court.",
+   "\"Grev\", \t\t\"Jakob\", \t\t\t\t1250, \t3, \t5, \t3, \t3, \t2, \tenvy1, \t\t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Count Jakob of Halland (b?, d1310): Grev (\"Count\") of Halland (Scania) from 1283. He was hostile toward the growing power of King Erik V, and was one of the noblemen outlawed at the regicide November 1286. He struggled together with the group of outlaw noblemen and since 1305 took refuge at the Norwegian court."
+  ],
+  [
+   "\"Grev\", \t\t\"Gerhard\", \t\t\t\t1292,\t7,\t9,\t9,\t9,\t9, \ttyrant3, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Count Gerhard III of Holstein (b1292, d1340): Energetic, brutal and deeply religious German magnate, who provided financial support to Danish kings and became a main factor of Danish politics. In 1326 he dethroned King Christoffer II and placed his minor nephew, Valdemar III, on the throne. He acted as regent of Denmark until Christoffer II was restored in 1329. After Christoffer's death he was the real ruler of most of the dissolved country being the lord of both Jutland and Fyn (1332-40).",
+   "\"Grev\", \t\t\"Gerhard\", \t\t\t\t1292, \t3, \t5, \t4, \t4, \t1, \ttyrant3, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Count Gerhard III of Holstein (b1292, d1340): Energetic, brutal and deeply religious German magnate, who provided financial support to Danish kings and became a main factor of Danish politics. In 1326 he dethroned King Christoffer II and placed his minor nephew, Valdemar III, on the throne. He acted as regent of Denmark until Christoffer II was restored in 1329. After Christoffer's death he was the real ruler of most of the dissolved country being the lord of both Jutland and Fyn (1332-40)."
+  ],
+  [
+   "\"Johan\", \t\t\"den Milde\", \t\t\t\t1300,\t7,\t9,\t9,\t9,\t9, \tavarice1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Johan den Milde (\"the Mild\"; b?, d1359): German magnate who funded Danish kings. He played a main role in the restoration of King Christoffer II (1329) but later on had to accept Count Gerhard III as his superior. From 1332 to 1340 he was the lord of eastern Denmark, but he lost Scania which submitted to the Swedish king. After the collapse of Holstein rule he at first cooperated with King Valdemar IV but during the next years he was deprived from his Danish possessions.",
+   "\"Johan\", \t\t\"den Milde\", \t\t\t\t1300, \t2, \t3, \t3, \t3, \t3, \tavarice1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Johan den Milde (\"the Mild\"; b?, d1359): German magnate who funded Danish kings. He played a main role in the restoration of King Christoffer II (1329) but later on had to accept Count Gerhard III as his superior. From 1332 to 1340 he was the lord of eastern Denmark, but he lost Scania which submitted to the Swedish king. After the collapse of Holstein rule he at first cooperated with King Valdemar IV but during the next years he was deprived from his Danish possessions."
+  ],
+  [
+   "\"Niels\", \t\t\"Ebbesen\", \t\t\t\t1310,\t7,\t9,\t9,\t9,\t9, \tmightywarrior2, \t\t\tGENERAL, \tID_DENMARK, \t\t\t-1 \t\t//Niels Ebbesen (b?, d1340): Danish hero, known for his killing of Count Gerhard III. He turned against the Holstein occupants and when Count Gerhard campaigned in Jutland 1340 he supported the Danish guerrilla. The night of April 1st he and some of his warriors got into the Count's headquarter in Randers, killed him and managed to escape. During the following rebellion he played a main role in the resistance but he was killed the same year during a fight against the Germans.",
+   "\"Niels\", \t\t\"Ebbesen\", \t\t\t\t1310, \t2, \t4, \t4, \t3, \t5, \tmightywarrior2, \t\t\tGENERAL, \tID_DENMARK, \t\t\t-1 \t\t//Niels Ebbesen (b?, d1340): Danish hero, known for his killing of Count Gerhard III. He turned against the Holstein occupants and when Count Gerhard campaigned in Jutland 1340 he supported the Danish guerrilla. The night of April 1st he and some of his warriors got into the Count's headquarter in Randers, killed him and managed to escape. During the following rebellion he played a main role in the resistance but he was killed the same year during a fight against the Germans."
+  ],
+  [
+   "\"Bo\",\t\t\t\"Jonsson Grip\",\t\t\t\t1315,\t7,\t9,\t9,\t9,\t9,\tlawman1,\t\t\t\tGENERAL,\tID_LIMBO,\t\t\t-1\t\t//politician, financier, Swedish noble and power-broker",
+   "\"Bo\",\t\t\t\"Jonsson Grip\",\t\t\t\t1315,\t1,\t2,\t3,\t7,\t5,\tlawman1,\t\t\t\tGENERAL,\tID_LIMBO,\t\t\t-1\t\t//politician, financier, Swedish noble and power-broker"
+  ],
+  [
+   "\"Henning\", \t\t\"Podebusk\", \t\t\t\t1320,\t7,\t9,\t9,\t9,\t9, \tsmarttalker1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Henning Podebusk (b?, d1388): Danish statesman from the island of Rügen. He was taken into Danish service in 1350 and became the most important and loyal official of King Valdemar IV. In 1365 he was appointed \"Drost\" (prime minister) and he soon showed his ability during the war 1367-70 against the Hanseatic League and its allies. After Valdemar's death in 1375 he protected the royal interest and was the political mentor of Queen Margrete I.",
+   "\"Henning\", \t\t\"Podebusk\", \t\t\t\t1320, \t2, \t2, \t4, \t4, \t7, \tsmarttalker1, \t\t\t\tGENERAL, \tID_LIMBO, \t\t\t-1 \t\t//Henning Podebusk (b?, d1388): Danish statesman from the island of Rügen. He was taken into Danish service in 1350 and became the most important and loyal official of King Valdemar IV. In 1365 he was appointed \"Drost\" (prime minister) and he soon showed his ability during the war 1367-70 against the Hanseatic League and its allies. After Valdemar's death in 1375 he protected the royal interest and was the political mentor of Queen Margrete I."
+  ],
+  [
+   "\"Darkos\"",
+   "\"Sweyn\""
+  ]
+ ]
+}
