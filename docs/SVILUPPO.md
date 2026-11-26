@@ -5,11 +5,7 @@ Note per chi vuole aprire, modificare o ricompilare Medieval Quest. Il progetto 
 ## Requisiti
 
 - **Godot 4.7** (versione standard, non .NET): <https://godotengine.org/download>.
-- **Cartella `originale/`** accanto a `project.godot`, con i pochi suoni e immagini del gioco originale ancora in uso. Non è nel repository perché è contenuto protetto del gioco originale. Si crea in due modi:
-  - da un'installazione di Medieval: Total War Gold, con `python tools/copia_originale.py "<cartella del gioco>"` (legge l'esportazione PNG `_ASSET_EXPORT` e la cartella `Sounds`);
-  - oppure copiando la cartella `originale` di un gioco installato con l'installer.
-
-  Senza questa cartella il gioco parte lo stesso, senza audio e senza quelle immagini.
+- Il gioco non usa file del gioco originale: immagini e audio sono tutti in `assets/`. Una cartella `originale/` accanto a `project.godot` (fuori dal repository, creata con `python tools/copia_originale.py "<cartella di Medieval: Total War Gold>"`) serve solo ad alcuni test e strumenti di confronto, che senza di essa vengono saltati.
 - Python 3 solo per gli script di `tools/` e per l'installer.
 
 ## Avvio

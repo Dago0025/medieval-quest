@@ -2,11 +2,12 @@
 
 Uso:
     python installer/prepara_installer.py --versione 2026.11.20 [--exe "build/Medieval Quest.exe"]
-        [--originale originale] [--makensis makensis]
+        [--makensis makensis]
 
 Crea installer/build/payload/ con:
   - Medieval Quest.exe (pck incorporato, da esporta.bat);
-  - originale/ (immagini del gioco originale ancora usate: vedi tools/copia_originale.py; l'audio e' tutto del progetto dal 25/11/2026);
+  (dal 26/11/2026 niente cartella originale/: immagini e audio sono tutti del progetto, quindi l'installer non contiene
+  file del gioco originale);
   - Guida di gioco.html e Crediti e diritti.html (da docs/GUIDA_DI_GIOCO.md e CREDITI_E_DIRITTI.md);
   - LEGGIMI.txt, LICENSE.txt, LICENZE_TERZE_PARTI.txt (Godot Engine e caratteri);
 poi compila installer/build/MedievalQuest-Setup-<versione>.exe.
@@ -83,9 +84,6 @@ def licenze_terze_parti():
     parti = [GODOT_LICENZA]
     for nome in ("OFL-Alegreya.txt", "OFL-Fondamento.txt"):
         parti.append("=" * 78 + "\n" + leggi(os.path.join("assets", "fonts", nome)))
-    parti.append("=" * 78 + "\nMedieval: Total War\n\nI file nella cartella \"originale\" vengono dal gioco "
-                 "Medieval: Total War (The Creative Assembly / SEGA; pubblicato da Activision, 2002) e restano dei "
-                 "loro titolari. Non sono coperti dalla licenza MIT e non vanno ridistribuiti.\n")
     return "\n\n".join(parti)
 
 
@@ -93,22 +91,18 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--versione", required=True, help="versione nel formato A.B.C (es. 2026.11.20)")
     ap.add_argument("--exe", default=os.path.join(PROGETTO, "build", NOME + ".exe"))
-    ap.add_argument("--originale", default=os.path.join(PROGETTO, "originale"))
     ap.add_argument("--makensis", default="makensis")
     a = ap.parse_args()
     if not re.fullmatch(r"\d+\.\d+\.\d+", a.versione):
         sys.exit("Versione non valida: serve A.B.C")
-    for p in (a.exe, a.originale):
-        if not os.path.exists(p):
-            sys.exit("Non trovato: %s" % p)
+    if not os.path.exists(a.exe):
+        sys.exit("Non trovato: %s" % a.exe)
 
     build = os.path.join(QUI, "build")
     payload = os.path.join(build, "payload")
     shutil.rmtree(payload, ignore_errors=True)
     os.makedirs(payload)
     shutil.copy2(a.exe, os.path.join(payload, NOME + ".exe"))
-    shutil.copytree(a.originale, os.path.join(payload, "originale"),
-                    ignore=shutil.ignore_patterns(".gdignore", "*.import"))
     scrivi(os.path.join(payload, "Guida di gioco.html"), html("Medieval Quest - Guida di gioco", leggi("docs/GUIDA_DI_GIOCO.md")))
     scrivi(os.path.join(payload, "Crediti e diritti.html"), html("Medieval Quest - Crediti e diritti", leggi("CREDITI_E_DIRITTI.md")))
     scrivi(os.path.join(payload, "LEGGIMI.txt"), leggi("README.md"), bom=True)

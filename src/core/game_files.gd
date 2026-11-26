@@ -1,7 +1,7 @@
 class_name GameFiles
 extends RefCounted
-## Trova i file del gioco originale che il remake usa ancora: dal 18/11/2026 solo musica e suoni (data/ui/audio.cfg) e
-## poche immagini esportate (tavole degli eventi, schermate di fine partita, pedine di riserva: tools/originale_necessari.txt).
+## Trova i file del gioco originale. Dal 26/11/2026 il gioco non ne usa piu' (audio, tavole e fine partita sono tutti in
+## assets/, e prendono il posto di questi ovunque): restano come riserva per editor, test e strumenti di confronto.
 ## Dati della campagna (`data/campagna`), testi (`data/testi`), icone e pergamene (`assets/rifatti`) sono del progetto.
 ##
 ## I file stanno nella cartella `originale/` del progetto, con i percorsi relativi del gioco. Ha un `.gdignore` (Godot non la

@@ -24,7 +24,7 @@ La guida completa, con comandi e regole principali, è in [docs/GUIDA_DI_GIOCO.m
 
 ## Diritti e crediti
 
-*Medieval: Total War* e *Total War* sono marchi e opere dei rispettivi titolari (The Creative Assembly / SEGA; il gioco originale è stato pubblicato da Activision nel 2002). Medieval Quest è un progetto di fan **non ufficiale**, senza scopo di lucro, non affiliato né approvato da loro. L'installer contiene ancora alcuni suoni e immagini del gioco originale, che restano dei loro titolari e non sono coperti dalla licenza MIT.
+*Medieval: Total War* e *Total War* sono marchi e opere dei rispettivi titolari (The Creative Assembly / SEGA; il gioco originale è stato pubblicato da Activision nel 2002). Medieval Quest è un progetto di fan **non ufficiale**, senza scopo di lucro, non affiliato né approvato da loro. Il gioco non contiene file dell'originale: immagini, musiche ed effetti sono nuovi o da librerie libere. I dati della campagna (province, fazioni, unità, edifici, nomi) derivano da quelli dell'originale e della mod XL.
 
 Dettagli, crediti di caratteri, motore e immagini in [CREDITI_E_DIRITTI.md](CREDITI_E_DIRITTI.md).
 
@@ -34,4 +34,4 @@ Codice, dati e strumenti sono in questo repository. Come aprire il progetto, ese
 
 ---
 
-*English summary:* Medieval Quest is a free, unofficial, single-player turn-based strategy game (1000–1700, world map) inspired by the campaign of Medieval: Total War, rebuilt from scratch in Godot. Code is MIT-licensed; the installer still bundles a few sounds and images from the original game, which belong to their owners. Provided as is, with **no support**. Not affiliated with The Creative Assembly, SEGA or Activision.
+*English summary:* Medieval Quest is a free, unofficial, single-player turn-based strategy game (1000–1700, world map) inspired by the campaign of Medieval: Total War, rebuilt from scratch in Godot. Code is MIT-licensed; it contains no files from the original game (images, music and sounds are new or from free libraries), while campaign data is derived from the original game and the XL mod. Provided as is, with **no support**. Not affiliated with The Creative Assembly, SEGA or Activision.

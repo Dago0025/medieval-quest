@@ -12,9 +12,8 @@ Medieval Quest è un progetto di fan **non ufficiale e senza scopo di lucro**. N
 
 *Medieval: Total War* (2002) e l'espansione *Viking Invasion* sono stati sviluppati da **The Creative Assembly** e pubblicati da **Activision**; oggi la serie è di **SEGA** / The Creative Assembly. *Total War* e *Medieval: Total War* sono marchi dei rispettivi titolari. La colonna sonora originale è di Jeff van Dyck.
 
-Medieval Quest ne riprende idee, regole e struttura della campagna. Il motore e il codice sono scritti da zero, ma alcuni contenuti vengono ancora dall'originale:
+Medieval Quest ne riprende idee, regole e struttura della campagna. Il motore e il codice sono scritti da zero e dal 26/11/2026 il gioco **non contiene file del gioco originale** (immagini, musiche ed effetti sono nuovi o da librerie libere). Restano invece contenuti derivati:
 
-- **nell'installer**: circa 100 immagini (tavole degli eventi, schermate di fine partita, poche icone) del gioco originale, nella cartella `originale` accanto all'eseguibile. Restano **di proprietà dei loro titolari**, non sono coperti dalla licenza MIT e sono inclusi solo per uso personale e non commerciale, in attesa di essere sostituiti. Non vanno ridistribuiti separatamente;
 - **nei dati** (`data/campagna`, `data/testi`, nomi di province, unità ed edifici): valori e testi ricavati dai file del gioco originale e della mod XL, in parte riscritti;
 - **nelle immagini**: alcune icone di unità, edifici e mappa sono rielaborazioni, generate con l'IA, delle icone originali.
 

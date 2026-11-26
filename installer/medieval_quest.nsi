@@ -1,6 +1,6 @@
 ; Installer di Medieval Quest (NSIS 3, Modern UI 2).
 ; Non si compila a mano: lo prepara e lo compila installer/prepara_installer.py, che crea la cartella payload/
-; (eseguibile, cartella originale, guida e licenze) e passa versione e percorsi con /D.
+; (eseguibile, guida e licenze) e passa versione e percorsi con /D.
 ;   makensis /DVERSIONE=2026.11.20 /DPAYLOAD=<cartella> /DUSCITA=<file.exe> /DICONA=<file.ico> /DAVVISO=<file.txt> medieval_quest.nsi
 
 Unicode true
@@ -54,6 +54,8 @@ VIAddVersionKey /LANG=0 "CompanyName" "${EDITORE}"
 Section "!${NOME}" SecGioco
   SectionIn RO
   SetOutPath "$INSTDIR"
+  ; dal 26/11/2026 il gioco non usa piu' file dell'originale: si toglie la cartella delle versioni precedenti
+  RMDir /r "$INSTDIR\originale"
   File /r "${PAYLOAD}\*.*"
 
   WriteRegStr HKCU "Software\MedievalQuest" "Cartella" "$INSTDIR"

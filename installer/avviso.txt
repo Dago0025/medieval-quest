@@ -6,13 +6,13 @@ PROGETTO APERTO, SENZA SUPPORTO
 Il codice del gioco è distribuito con licenza MIT. Il software è fornito "così com'è", senza garanzie di alcun tipo e SENZA SUPPORTO: niente assistenza, aggiornamenti programmati o risposte garantite a segnalazioni e richieste. Lo usi a tuo rischio.
 
 CONTENUTI DI TERZI
-Il gioco installa anche alcuni suoni, musiche e immagini del gioco originale Medieval: Total War (cartella "originale"). Restano di proprietà dei loro titolari, non sono coperti dalla licenza MIT, sono inclusi solo per uso personale e non commerciale e non vanno ridistribuiti. Caratteri (SIL Open Font License 1.1) e Godot Engine (MIT) seguono le loro licenze: vedi "Crediti e diritti" e LICENZE_TERZE_PARTI.txt nella cartella del gioco.
+Il gioco non contiene file del gioco originale Medieval: Total War: immagini, musiche ed effetti sono nuovi o presi da librerie libere. I dati della campagna (province, fazioni, unità, edifici, nomi) derivano da quelli dell'originale e della mod XL e restano dei loro titolari. Caratteri (SIL Open Font License 1.1) e Godot Engine (MIT) seguono le loro licenze: vedi "Crediti e diritti" e LICENZE_TERZE_PARTI.txt nella cartella del gioco.
 
 Salvataggi e impostazioni: %APPDATA%\Godot\app_userdata\MTW Remake (la disinstallazione non li cancella).
 
 ---
 
-Medieval Quest is an UNOFFICIAL, free, non-commercial fan project inspired by the campaign of Medieval: Total War, not affiliated with or endorsed by The Creative Assembly, SEGA or Activision. The code is MIT-licensed and provided "as is", without warranty and WITHOUT SUPPORT. The game also installs a few sounds, music tracks and images from the original game ("originale" folder): they belong to their owners, are not covered by the MIT license, are included for personal non-commercial use only and must not be redistributed.
+Medieval Quest is an UNOFFICIAL, free, non-commercial fan project inspired by the campaign of Medieval: Total War, not affiliated with or endorsed by The Creative Assembly, SEGA or Activision. The code is MIT-licensed and provided "as is", without warranty and WITHOUT SUPPORT. It contains no files from the original game: images, music and sounds are new or from free libraries. Campaign data (provinces, factions, units, buildings, names) is derived from the original game and the XL mod and belongs to their owners.
 
 Premendo "Accetto" confermi di aver letto queste avvertenze.
 By clicking "I Agree" you confirm you have read this notice.
