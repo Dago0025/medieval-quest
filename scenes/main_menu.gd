@@ -256,7 +256,7 @@ func _toggle_auror() -> void:
 	Scenario.set_auror(not Scenario.auror)
 	_data = null   # fazioni, nomi e stemmi si rileggono per lo scenario nuovo
 	if Scenario.auror:
-		_message.text = Lang.t("Modalità Auror attivata: gli Auror prendono il posto dei Danesi.")
+		_message.text = Lang.t("Modalità Auror attivata: gli Auror entrano in gioco con tutti i loro poteri.")
 		GameAudio.play_sfx("evento_cristiano")
 	else:
 		_message.text = Lang.t("Modalità Auror disattivata: Danesi, Norvegesi e Svedesi come nell'originale.")

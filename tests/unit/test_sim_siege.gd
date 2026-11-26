@@ -426,7 +426,7 @@ func test_i_rinforzi_nascono_nel_castello_assediato(t: TestContext) -> void:
 	var s2 := _siege_world(80, 60, 7)
 	# pile da un uomo: la guarnigione si riempie senza superare la soglia di sortita
 	# (con pile da 10 uomini esce in sortita, rompe l'assedio e il test non misura piu' nulla)
-	for i in 15:
+	while s2.army(4).stack_count() < s2.rules.max_stacks:   # esercito pieno: la recluta non vi si aggiunge
 		s2.army(4).stacks.append(UnitStack.new("Nizari", 1, 0))
 	GameCommands.queue_unit(s2, "FN_BETA", "ID_MEZZA", "Nizari")
 	var armies_before := s2.armies.size()

@@ -78,24 +78,24 @@ func test_musica_e_suoni(t: TestContext) -> void:
 	t.assert_eq(GameAudio.map_music_key("MUSLIM"), "mappa_islamica")
 	t.assert_eq(GameAudio.map_music_key("CATHOLIC"), "mappa_cristiana")
 	t.assert_eq(GameAudio.map_music_key(""), "mappa_cristiana")
+	# ADR-138: tema gotico come musica base di menu e mappa
+	var base := ConfigFile.new()
+	base.load(GameAudio.TABLE)
+	t.assert_eq(base.get_value("musica", "menu"), ["Gotico Menu.ogg"])
+	for f in base.get_value("musica", "mappa_cristiana"):
+		t.assert_true(str(f).begins_with("Gotico "), "brano gotico in mappa: %s" % f)
 	var cfg := ConfigFile.new()
 	t.assert_eq(cfg.load(GameAudio.TABLE), OK, "tabella dell'audio leggibile")
 	for key in ["menu", "mappa_cristiana", "mappa_islamica", "vittoria_cristiana", "sconfitta_islamica"]:
 		t.assert_true((cfg.get_value("musica", key, []) as Array).size() > 0, "playlist %s" % key)
-	if not GameFiles.is_available():
-		t.skip("installazione non trovata")
-		return
-	t.assert_true(GameAudio.find_file(GameAudio.MUSIC_DIR, "xl tension 1.wav") != "", "maiuscole indifferenti")
+	# dal 25/11/2026 tutto l'audio e' del progetto (assets/audio, librerie CC0): nessun file dell'originale
 	for key in cfg.get_section_keys("musica"):
 		for f in cfg.get_value("musica", key):
-			t.assert_true(GameAudio.find_file(GameAudio.MUSIC_DIR, str(f)) != "", "%s: %s nei dati" % [key, f])
+			t.assert_true(GameAudio.project_path("musica", str(f)) != "", "%s: %s in assets/audio/musica" % [key, f])
 	for key in cfg.get_section_keys("suoni"):
 		var v: Variant = cfg.get_value("suoni", key)
 		for f in (v if v is Array else [v]):
-			var found := false
-			for d in GameAudio.SFX_DIRS:
-				found = found or GameAudio.find_file(d, str(f)) != ""
-			t.assert_true(found, "suono %s: %s nei dati" % [key, f])
+			t.assert_true(GameAudio.project_path("suoni", str(f)) != "", "suono %s: %s in assets/audio/suoni" % [key, f])
 
 
 func test_traduzioni_italiane(t: TestContext) -> void:

@@ -20,7 +20,8 @@ const SAMPLE := "SetTreasury:: FN_A\t99999\t// MOD Auror\n" + \
 	"MakeUnit::\tID_DENMARK\tTeutonicKnights\t40\t//FN_DANISH\n" + \
 	"// MOD Auror: flotta 1 (ID_DENMARK)\n" + \
 	"MakeUnit::\tID_DENMARK\tCarrack\t1\t//FN_DANISH\n" + \
-	"MakeUnit:: ID_SWEDEN\tArchers\t60\n"
+	"MakeUnit:: ID_SWEDEN\tArchers\t60\n" + \
+	"//MakeUnit:: ID_SCANIA\tHousecarle\t60\t// MOD Auror: truppe tolte, solo le armate d'elite\n"
 
 
 func test_filtro_dello_startpos(t: TestContext) -> void:
@@ -35,6 +36,7 @@ func test_filtro_dello_startpos(t: TestContext) -> void:
 	t.assert_true(lines.has("PlaceLeader:: ID_SWEDEN\t\tFN_S"), "capitale spostata dalla mod rimessa dov'era")
 	t.assert_false(out.contains("TeutonicKnights") or out.contains("Carrack"), "eserciti e flotte della mod tolti")
 	t.assert_true(lines.has("MakeUnit:: ID_DENMARK\tHousecarle\t60") and lines.has("MakeUnit:: ID_SWEDEN\tArchers\t60"), "unita' originali")
+	t.assert_true(lines.has("MakeUnit:: ID_SCANIA\tHousecarle\t60"), "truppe della XL tolte dalla mod di nuovo presenti (ADR-126)")
 	t.assert_eq(lines[lines.size() - 1], "SetTreasury:: FN_A\t10000", "aggiunte in fondo")
 
 

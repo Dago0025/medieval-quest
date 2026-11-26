@@ -336,7 +336,7 @@ func test_il_trasporto_via_mare_interrotto_lascia_l_agente_dov_e(t: TestContext)
 	var traveller := W.add_agent(s, W.A, W.ALTA, "EMISSARY", 2)
 	GameCommands.order_agent_move(s, W.A, traveller.id, PackedStringArray([W.MEZZA]))
 	s.declare_war(W.A, W.B)
-	W.fleet(s, W.B, W.SUD)
+	W.fleet(s, W.B, W.SUD).stacks.append(UnitStack.new("Galley", 1, 0))   # piu' navi della flotta propria: blocca
 	_end_year(t, s)
 	t.assert_eq(traveller.region, W.ALTA, "non si e' mosso")
 	t.assert_true(traveller.path.is_empty() and traveller.sea_route.is_empty(), "ordine perso")

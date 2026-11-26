@@ -17,6 +17,10 @@ static var _cache := {}          ## percorso -> AudioStreamWAV (solo suoni brevi
 static var _cfg: ConfigFile = null
 static var _rng := RandomNumberGenerator.new()
 static var enabled := true       ## i test e le catture lo spengono
+static var _fade: Tween = null   ## dissolvenza in uscita al cambio di playlist
+const AudioMonitorScript := preload("res://src/core/audio_monitor.gd")
+static var _monitor: Node = null   ## diagnostica in godot.log (25/11/2026)
+const FADE_OUT := 0.8            ## secondi
 
 
 ## Musica di un momento (sezione [musica] della tabella: "menu", "mappa_cristiana", "mappa_islamica", "vittoria"...).
@@ -31,7 +35,15 @@ static func play_music(key: String) -> void:
 	_playlist_key = key
 	_track = -1
 	if _playlist.is_empty():
+		_stop_fade()
 		_music.stop()
+		return
+	if _music.playing and _music.is_inside_tree():
+		# niente tagli netti tra menu, mappa e fine partita: il brano in corso sfuma, poi parte la nuova playlist
+		_stop_fade()
+		_fade = _music.create_tween()
+		_fade.tween_property(_music, "volume_db", -60.0, FADE_OUT)
+		_fade.tween_callback(_next_track)
 		return
 	_next_track()
 
@@ -45,6 +57,7 @@ static func map_music_key(religion: String) -> String:
 
 
 static func stop_music() -> void:
+	_stop_fade()
 	if _music != null:
 		_music.stop()
 	_playlist_key = ""
@@ -139,6 +152,10 @@ static func _ensure_players() -> bool:
 	_music.name = "Musica"
 	_music.finished.connect(_next_track)
 	tree.root.add_child.call_deferred(_music)
+	_monitor = AudioMonitorScript.new()
+	_monitor.name = "DiagnosticaAudio"
+	_monitor.set("player", _music)
+	tree.root.add_child.call_deferred(_monitor)
 	_sfx.clear()
 	for i in 4:
 		var p := AudioStreamPlayer.new()
@@ -148,7 +165,14 @@ static func _ensure_players() -> bool:
 	return true
 
 
+static func _stop_fade() -> void:
+	if _fade != null and _fade.is_valid():
+		_fade.kill()
+	_fade = null
+
+
 static func _next_track() -> void:
+	_stop_fade()   # se il brano finisce durante la dissolvenza si parte una volta sola
 	if _playlist.is_empty() or _music == null:
 		return
 	# ordine casuale senza ripetere subito lo stesso brano
@@ -165,6 +189,8 @@ static func _next_track() -> void:
 	if stream == null:
 		return
 	_music.stream = stream
+	if _monitor != null and is_instance_valid(_monitor):
+		_monitor.call("track_started", _playlist[pick])
 	apply_volumes()
 	if _music.is_inside_tree():
 		_music.play()

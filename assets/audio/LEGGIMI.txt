@@ -1,5 +1,5 @@
 Audio proprio di Medieval Quest (dal 18/11/2026).
 musica/ e suoni/: un file con lo stesso nome (senza estensione) di quelli elencati in data/ui/audio.cfg
 prende il posto del WAV del gioco originale. Formati: ogg (consigliato per la musica), wav, mp3.
-Esempi: musica/Euro Strat Summer 1.ogg, suoni/SELECT.wav.
+Esempi: musica/Gotico Menu.ogg, suoni/SELECT.wav.
 Elenco completo e descrizione di ogni brano: doc del progetto claude.ai "specifiche/audio_da_creare.md".

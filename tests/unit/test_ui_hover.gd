@@ -43,8 +43,15 @@ func test_acque_neutrali_vostre_nemiche_e_blocco(t: TestContext) -> void:
 	t.assert_true(empty.contains("Acque neutrali"), empty)
 	var own := CampaignUiHover.region_text(s, "FN_ALPHA", "ID_MARE_NORD")
 	t.assert_true(own.contains("Acque vostre"), own)
-	_fleet(s, "FN_BETA", "ID_MARE_NORD")
+	var beta := _fleet(s, "FN_BETA", "ID_MARE_NORD")
 	s.rules.combat.neutral_blockade = true
+	var mine := s.army(2).stacks.size()
+	if mine >= 1:
+		var even := CampaignUiHover.region_text(s, "FN_ALPHA", "ID_MARE_NORD")
+		if mine == 1:
+			t.assert_true(even.contains("Nessun blocco navale") and not even.contains("Blocco navale"), "navi pari: nessun blocco\n" + even)
+	while beta.stacks.size() <= mine:
+		beta.stacks.append(UnitStack.new(beta.stacks[0].unit_id, 4, 0))   # Beta ha piu' navi: blocco (22/11/2026)
 	var blocked := CampaignUiHover.region_text(s, "FN_ALPHA", "ID_MARE_NORD")
 	t.assert_true(blocked.contains("Blocco navale") and blocked.contains("Beta"), blocked)
 	s.declare_war("FN_ALPHA", "FN_BETA")

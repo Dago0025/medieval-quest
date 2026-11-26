@@ -14,8 +14,11 @@ const HERETIC := "HERETIC"
 ## Culto Imperiale degli Auror (richiesta di Federico del 16/11/2026): religione propria, per ora con edifici e agenti dei
 ## cattolici (`GameCommands.religion_base`). In coda all'ordine: le parita' e i salvataggi precedenti non cambiano.
 const IMPERIAL := "IMPERIAL"
+## Dharma dei popoli asiatici (richiesta di Federico del 22/11/2026): religione propria con edifici e agenti suoi
+## (Dharma, data/religione_dharma.cfg). In coda all'ordine, come il Culto Imperiale.
+const DHARMA := "DHARMA"
 ## Ordine fisso delle religioni (salvataggi, ripartizioni, parita').
-const RELIGIONS := ["CATHOLIC", "ORTHODOX", "MUSLIM", "PAGAN", "HERETIC", "IMPERIAL"]
+const RELIGIONS := ["CATHOLIC", "ORTHODOX", "MUSLIM", "PAGAN", "HERETIC", "IMPERIAL", "DHARMA"]
 ## Passo delle percentuali (in punti): 400 passi fanno 100.
 const RELIGION_UNIT := 0.25
 const UNITS_TOTAL := 400
@@ -36,6 +39,9 @@ var loyalty_owner := ""
 ## Fase 4b: ultima fazione che possedeva la provincia prima che passasse ai ribelli ("" se mai); una fazione estinta
 ## puo' riemergere solo in una provincia ribelle che possedeva.
 var former_owner := ""
+## Prima fazione che ha conquistato la provincia con le armi o con le spie (WarProcessor._conquer), "" se mai. Serve alla
+## grafica delle regioni dei ribelli all'inizio della partita (RegionStyle, ADR-136: gli Auror primi conquistatori).
+var first_conqueror := ""
 ## Fase 4b: contatori: "anni_sotto_soglia" (anni consecutivi con lealta' sotto la soglia di rivolta), "rivolte".
 var counters := {}
 ## Fase 4b: dettaglio dell'ultimo calcolo della lealta' (vedi `ProvinceProcessor.loyalty_terms`) con l'obiettivo e
@@ -43,7 +49,7 @@ var counters := {}
 var last_loyalty := {}
 ## Fase 5b: religione -> percentuale (somma 100, multipli di `RELIGION_UNIT`). Predefinito: tutta pagana; la partita nuova
 ## e i salvataggi precedenti la impostano con `ReligionProcessor.init_religions`.
-var religions := {"CATHOLIC": 0.0, "ORTHODOX": 0.0, "MUSLIM": 0.0, "PAGAN": 100.0, "HERETIC": 0.0, "IMPERIAL": 0.0}
+var religions := {"CATHOLIC": 0.0, "ORTHODOX": 0.0, "MUSLIM": 0.0, "PAGAN": 100.0, "HERETIC": 0.0, "IMPERIAL": 0.0, "DHARMA": 0.0}
 ## Fase 5b: zelo (0-100) della religione del proprietario.
 var zeal := 50
 ## Fase 6a: effetti di durata un anno (disastri, Peste Nera), letti dal reddito (`Economy.province_income`) e azzerati a fine
@@ -204,6 +210,8 @@ func to_dict() -> Dictionary:
 		d["merci_extra"] = Array(extra_goods)
 	if repeat_faction != "":
 		d["coda_ripetuta"] = repeat_faction
+	if first_conqueror != "":
+		d["primo_conquistatore"] = first_conqueror
 	if not repeat_pending.is_empty():
 		d["ripeti_in_attesa"] = Array(repeat_pending)
 	return d
@@ -246,6 +254,7 @@ static func from_dict(d: Dictionary) -> ProvinceState:
 			p.temp_effects[str(key)] = float(td[key])
 	p.extra_goods = SimUtil.strings_from(d.get("merci_extra", []))
 	p.repeat_faction = str(d.get("coda_ripetuta", ""))
+	p.first_conqueror = str(d.get("primo_conquistatore", ""))
 	p.repeat_pending = SimUtil.strings_from(d.get("ripeti_in_attesa", []))
 	return p
 

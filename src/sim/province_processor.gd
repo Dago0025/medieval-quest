@@ -10,6 +10,7 @@ extends RefCounted
 ##   2. rivolte (un sorteggio per provincia sotto la soglia)  3. propagazione alle province confinanti
 ##   4. lealta' dei generali (nessun sorteggio)  5. guerre civili (un sorteggio per fazione con l'innesco)
 ##   6. riemersione delle fazioni estinte (un sorteggio per fazione con una provincia adatta).
+##   7. insurrezioni lealiste delle fazioni estinte (ADR-114: un sorteggio per fazione nella finestra di anni, se c'e' un luogo).
 ## Prima del passo 1 (ADR-070, nessun sorteggio): le province prese dai ribelli lealisti passano alla fazione a cui sono
 ## fedeli (o la fanno riemergere se era estinta).
 ##
@@ -58,6 +59,7 @@ static func process_year(state: GameState) -> void:
 	_general_loyalty(state)
 	_civil_wars(state, new_year)
 	_reemergence(state, new_year)
+	_loyalist_uprisings(state, new_year)
 	_destroy_empty_factions(state, new_year)
 
 
@@ -416,6 +418,8 @@ static func loyalist_units(state: GameState, faction_id: String, region: Campaig
 			continue
 		if not u.allows_region(region.id) or u.required_tokens().has(order_building):
 			continue
+		if not HistoricalLimits.unit_allowed(state, faction_id, u, region.id):
+			continue   # ADR-114: niente armi da fuoco prima della polvere da sparo, niente cavalli nelle Americhe prima degli europei
 		var key := "fanteria"
 		if u.is_cavalry():
 			key = "cavalleria"
@@ -895,10 +899,121 @@ static func _reemerge(state: GameState, f: FactionState, site: ProvinceState, ne
 		"regione": site.id,
 		"provincia": site.id,
 		"capo": leader.id,
+		"nome_capo": leader.full_name(),
 		"eserciti": army_ids,
 		"uomini": created,
 		"testo": Lang.t("%s riemerge a %s con %s e %d eserciti.") % [
 			SimUtil.faction_label(f.id), WarProcessor.region_label(state, site.id), leader.full_name(), army_ids.size()],
+	})
+
+
+# --- 7. insurrezioni lealiste (ADR-114) -----------------------------------------------------------
+
+
+## Le fazioni estinte tornano a farsi vedere (richiesta di Federico del 21/11/2026; regola del Papato, ADR-072, estesa a
+## tutte): per ogni fazione estinta, non del giocatore e con una dinastia, gli anni da estinta crescono di uno; nella
+## finestra di `[insurrezioni]` (`ProvinceRules.uprising_chance`, un sorteggio all'anno e solo se c'e' un luogo) insorge.
+## Luogo (`uprising_site`): una provincia ribelle sua (d'inizio o persa ai ribelli) -> riemerge subito (`_reemerge`);
+## altrimenti una sua provincia in mano ad altri -> armata di ribelli lealisti a lei fedeli (`_uprising`): se la prende,
+## l'anno dopo la consegna alla fazione, che riemerge (`_loyalist_handover`). Ogni tentativo riazzera l'attesa.
+static func _loyalist_uprisings(state: GameState, new_year: int) -> void:
+	var pr := state.rules.province
+	var fresh := {}
+	var fresh_ready := false
+	for f in state.factions:
+		if f.alive or f.id == GameState.REBEL or f.id == GameState.PAPAL or f.is_player:
+			f.dead_years = 0
+			continue
+		if not state.has_dynasty(f.id):
+			continue
+		if not fresh_ready:
+			fresh = _fresh_extinctions(state)
+			fresh_ready = true
+		if fresh.has(f.id):
+			continue
+		f.dead_years += 1
+		var chance := pr.uprising_chance(f.dead_years)
+		if chance <= 0.0:
+			continue
+		var site := uprising_site(state, f.id)
+		if site == null:
+			continue
+		if chance < 1.0 and state.rng.randf() >= chance:
+			continue
+		f.dead_years = 0
+		if site.owner == GameState.REBEL:
+			_reemerge(state, f, site, new_year)
+		else:
+			_uprising(state, f, site)
+
+
+## Dove insorge la fazione estinta (ADR-114), nell'ordine delle province: una ribelle sua all'inizio o persa ai ribelli;
+## la sua provincia d'inizio in mano a un'altra fazione viva con la lealta' piu' bassa; l'ultima provincia che ha perso
+## (`proprietario_precedente`) in mano a un'altra fazione viva, con la lealta' piu' bassa. Mai una provincia dove i suoi
+## lealisti sono gia' in armi. null se non ce n'e'.
+static func uprising_site(state: GameState, faction_id: String) -> ProvinceState:
+	for p in state.provinces:
+		if p.owner == GameState.REBEL and (origin_owner(state, p) == faction_id or p.former_owner == faction_id):
+			return p
+	var best: ProvinceState = null
+	for pass_index in 2:
+		for p in state.provinces:
+			if p.owner == "" or p.owner == GameState.REBEL or p.owner == faction_id:
+				continue
+			var owner := state.faction(p.owner)
+			if owner == null or not owner.alive:
+				continue
+			var ours := origin_owner(state, p) == faction_id if pass_index == 0 else str(p.counters.get(PRIOR_OWNER_KEY, "")) == faction_id
+			if not ours or _has_loyalists(state, p.id, faction_id):
+				continue
+			if best == null or p.loyalty < best.loyalty:
+				best = p
+		if best != null:
+			return best
+	return null
+
+
+static func _has_loyalists(state: GameState, region_id: String, faction_id: String) -> bool:
+	for a in state.armies:
+		if a.faction == GameState.REBEL and a.region == region_id and a.loyal_to == faction_id and not a.stacks.is_empty():
+			return true
+	return false
+
+
+## Armata di ribelli lealisti della fazione estinta `f` nella provincia `site` di un'altra fazione (ADR-114): truppe dei
+## lealisti (`loyalist_units`, altrimenti la truppa dei ribelli), `pile` + `pile_in_piu` per ogni tentativo gia' fatto,
+## entro il limite degli eserciti. EV_REBELLION con «lealisti_di» e «insurrezione» vero.
+static func _uprising(state: GameState, f: FactionState, site: ProvinceState) -> void:
+	var pr := state.rules.province
+	var region := state.campaign.region(site.id)
+	var mix := loyalist_units(state, f.id, region)
+	if mix.is_empty():
+		var unit := rebel_unit(state, region)
+		if unit != null:
+			mix.append(unit)
+	if mix.is_empty():
+		return
+	var stacks := clampi(pr.uprising_stacks + pr.uprising_growth * f.uprisings, 1, state.rules.max_stacks)
+	var army := state.create_army(GameState.REBEL, site.id, false)
+	army.loyal_to = f.id
+	for i in stacks:
+		var u: UnitType = mix[i % mix.size()]
+		army.stacks.append(state.new_stack(GameState.REBEL, u.id, u.men))
+	f.uprisings += 1
+	WarProcessor.refresh_sieges(state)
+	state.add_event(GameState.EV_REBELLION, {
+		"fazione": site.owner,
+		"regione": site.id,
+		"provincia": site.id,
+		"lealta": site.loyalty,
+		"tipo_ribelli": REBEL_LOYALISTS,
+		"lealisti_di": f.id,
+		"insurrezione": true,
+		"esercito": army.id,
+		"pile": stacks,
+		"uomini": army.men_total(),
+		"testo": Lang.t("I lealisti di %s insorgono a %s contro %s con un'armata di %d pile.") % [
+			SimUtil.faction_label(f.id), WarProcessor.region_label(state, site.id), SimUtil.faction_label(site.owner), stacks],
 	})
 
 

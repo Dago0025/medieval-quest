@@ -1,7 +1,7 @@
 extends RefCounted
 ## Fazioni nuove della mappa del mondo e nomi propri (ADR-079), sui file reali dell'installazione: Giapponesi, Cinesi,
-## Aztechi, Inca, Kanem e Cahokia (e, ADR-088, Coreani, Mongoli, Chola e Khmer) nelle loro regioni in tutte e due le modalita', con unita' ed edifici della
-## fazione modello e nomi da data/nomi_personaggi.cfg; gli Auror con i loro nomi (non piu' quelli dei Danesi) solo in
+## Aztechi, Inca, Kanem e Cahokia (e, ADR-088, Coreani, Mongoli, Chola e Khmer) nelle loro regioni in tutte e due le modalita', con agenti ed edifici della
+## fazione modello (truppe proprie, ADR-116) e nomi da data/nomi_personaggi.cfg; gli Auror con i loro nomi (non piu' quelli dei Danesi) solo in
 ## modalita' Auror. Senza installazione o senza mappa del mondo i test si saltano. Ogni test rimette la modalita' Auror.
 
 const NEW := {"FN_JAPANESE": "ID_KINAI", "FN_CHINESE": "ID_KAIFENG", "FN_AZTECS": "ID_TOLLAN", "FN_INCA": "ID_CUZCO",
@@ -49,7 +49,7 @@ func test_fazioni_nuove_nelle_loro_regioni(t: TestContext) -> void:
 			t.assert_eq(c.region(NEW[fid]).owner, fid, "capitale di %s" % fid)
 	var c2: CampaignData = _load(true)["campaign"]
 	t.assert_eq(c2.faction("FN_KANEM").religion, "REL_ISLAMIC")
-	t.assert_eq(c2.faction("FN_JAPANESE").religion, "REL_PAGAN")
+	t.assert_eq(c2.faction("FN_JAPANESE").religion, Dharma.TOKEN, "ADR-118: i giapponesi seguono il Dharma")
 	for r in ["ID_KYUSHU", "ID_TOHOKU"]:
 		t.assert_eq(c2.region(r).owner, "FN_JAPANESE", r)
 	t.assert_eq(c2.region("ID_LINGNAN").owner, "FN_CHINESE")
@@ -71,12 +71,19 @@ func test_unita_ed_edifici_della_fazione_modello(t: TestContext) -> void:
 		for u in units.land_for(fid):
 			mine[u.id] = true
 		t.assert_true(mine.size() > 5, "%s arruola: %d unita'" % [fid, mine.size()])
-		for u in units.land_for(model):
-			t.assert_true(mine.has(u.id), "%s arruola %s come %s" % [fid, u.id, model])
+		# ADR-116: truppe proprie; dal modello solo gli agenti (ADR-118: tranne quelli che il Dharma sostituisce)
+		var dharma := Dharma.factions().has(fid)
+		for u in units.agents():
+			if dharma and Dharma.removed_agents().has(u.id):
+				t.assert_false(u.factions.has(fid), "%s non recluta %s (Dharma)" % [fid, u.id])
+				continue
+			if not u.all_factions and u.factions.has(model):
+				t.assert_true(u.factions.has(fid), "%s recluta %s come %s" % [fid, u.id, model])
 	var kanem := {}
 	for u in units.land_for("FN_KANEM"):
 		kanem[u.id] = true
-	t.assert_true(kanem.has("NegroSpearmen") and kanem.has("SaharanCavalry"), "il Kanem arruola come gli Almohadi")
+	t.assert_true(kanem.has("KanLancieri") and kanem.has("KanLifidi") and not kanem.has("NegroSpearmen"), "il Kanem arruola le sue unita'")
+	t.assert_true(units.get_unit("Mullah").allows_faction("FN_KANEM"), "e i mullah come gli Almohadi")
 	var buildings: BuildingProdLoader.BuildingTable = d["buildings"]
 	var shared := 0
 	for fam in buildings.families:
@@ -160,7 +167,8 @@ func test_giapponesi_navali(t: TestContext) -> void:
 	var plan := AiPlan.create(ctx, "FN_JAPANESE", "ORTHODOX_EXPANSIONIST")
 	t.assert_true(plan.flag("navale"), "piano navale per i Giapponesi")
 	t.assert_false(AiPlan.create(ctx, "FN_RUSSIAN", "ORTHODOX_EXPANSIONIST").flag("navale"), "il profilo resta non navale per gli altri")
-	t.assert_true(bool(GameCommands.can_queue_unit(s, "FN_JAPANESE", "ID_KINAI", "Dhow")["ok"]), "Kinai arma i dhow")
+	t.assert_true(bool(GameCommands.can_queue_unit(s, "FN_JAPANESE", "ID_KINAI", "JapKobaya")["ok"]), "Kinai arma le kobaya")
+	t.assert_false(bool(GameCommands.can_queue_unit(s, "FN_JAPANESE", "ID_KINAI", "Dhow")["ok"]), "e non piu' i dhow (ADR-116)")
 
 
 ## Senza sbarchi possibili, la flotta giapponese si sposta dove si affacciano bersagli: con i Cinesi alleati il Mar Cinese

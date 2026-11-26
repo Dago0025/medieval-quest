@@ -113,7 +113,7 @@ Ogni provincia ha un castello, edifici, una popolazione con la sua religione, un
 - **Movimento**: trascina l'esercito su una regione. Mentre trascini, le regioni raggiungibili quest'anno si colorano (verde a piedi o in mare, azzurro via mare, rosso attacco) e il resto si scurisce.
 - **Unire e separare**: trascina un esercito su un altro tuo per unirli. Per separarli scegli le carte nella barra in basso e trascinale sulla mappa.
 - **Attaccare**: trascina l'esercito su uno straniero. Se l'attacco apre una guerra nuova (pace, alleanza, tregua) il gioco chiede conferma.
-- **Castelli**: trascina un esercito sul tuo castello per barricarlo (entrano le unità che ci stanno). Su un castello nemico inizia l'assedio; con l'assedio in corso, lo stesso gesto ordina l'assalto.
+- **Castelli**: trascina un esercito sul tuo castello per barricarlo (entrano le unità che ci stanno: 16 posti, la cavalleria ne occupa due; in una fortezza entra un'intera armata di 20 unità). Su un castello nemico inizia l'assedio; con l'assedio in corso, lo stesso gesto ordina l'assalto.
 - **Comandi nella barra in basso**: annulla ordini, barricati, assalta, riaddestra, comandante, **Ripristina** (rimette in forze tutte le unità non piene, pagando subito) e **Congeda** (le unità lasciano l'esercito senza rimborso e diventano mercenari).
 - **Comandanti**: re, principi e generali guidano gli eserciti. Clic destro sulla carta del comandante apre la sua scheda con ritratto, stelle e tratti.
 - **Flotte**: ogni flotta ha un ammiraglio che migliora vincendo. Le navi percorrono ogni anno tante zone di mare quanto il loro raggio. Le flotte non alleate, anche neutrali, bloccano il passaggio delle truppe via mare (blocco navale). Le tempeste possono affondare le navi più fragili.
@@ -165,7 +165,7 @@ La scheda **Agenti** della finestra spie e messaggi elenca tutti i tuoi agenti; 
 ## 11. Problemi comuni
 
 - **Schermo nero o il gioco non parte**: aggiorna i driver della scheda video.
-- **Niente musica o mancano alcune immagini degli eventi**: manca la cartella `originale` accanto a `Medieval Quest.exe`. Reinstalla il gioco.
+- **Mancano alcune immagini degli eventi**: manca la cartella `originale` accanto a `Medieval Quest.exe`. Reinstalla il gioco.
 - **Avviso di Windows SmartScreen**: l'installer non è firmato. «Ulteriori informazioni» → «Esegui comunque».
 
 Il progetto **non prevede supporto**: questa guida e il codice sorgente sono tutta la documentazione disponibile.

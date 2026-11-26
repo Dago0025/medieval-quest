@@ -30,7 +30,11 @@ func test_la_pila_del_comandante(t: TestContext) -> void:
 	t.assert_eq(CampaignUiText.commander_pennant(s, a), "campmap/is_heir_mon.BIF", "l'insegna dei principi")
 	var u := s.units.get_unit("Spearmen")
 	u.general_candidate = "PREFERRED"
-	t.assert_eq(CampaignUiText.commander_stack(s, a), 0, "la colonna 9 PREFERRED vince sul costo")
+	t.assert_eq(CampaignUiText.commander_stack(s, a), 1, "ADR-114: la cavalleria (la guardia) viene prima anche di PREFERRED")
+	var a2 := _army(s, [["Archers", 60, 0], ["Spearmen", 100, 0]])
+	c.army = a2.id
+	t.assert_eq(CampaignUiText.commander_stack(s, a2), 1, "senza cavalleria la colonna 9 PREFERRED vince sul costo")
+	c.army = a.id
 	u.general_candidate = ""
 	var fleet := s.create_army(W.A, W.NORD, true)
 	fleet.stacks.append(UnitStack.new("Galley", 1, 0))

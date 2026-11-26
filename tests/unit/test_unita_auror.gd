@@ -7,7 +7,8 @@ extends RefCounted
 
 ## ADR-078: sulla mappa del mondo le unita' esclusive si arruolano nei cinque territori di Atlantide
 const HOME := ["ID_ATLANTIS", "ID_GADEIRA", "ID_AMPHERIA", "ID_MNESEIA", "ID_DIAPREPIA"]
-const GUARD := "AurorDragonCuirassiers"
+## guardia del re: Ankalagon dal 23/11/2026 (prima i Corazzieri del Drago, che restano arruolabili)
+const GUARD := "AurorAnkalagon"
 const FRIGATE := "AurorDragonFrigate"
 
 var _campaign: CampaignData
@@ -45,7 +46,7 @@ func test_nove_unita_lette_dal_file_con_i_loro_valori(t: TestContext) -> void:
 		return
 	var cfg := ConfigFile.new()
 	cfg.load(AurorUnits.FILE)
-	t.assert_eq(AurorUnits.ids().size(), 11, "nove truppe, la Fregata del Drago e i cappellani (18/11/2026)")
+	t.assert_eq(AurorUnits.ids().size(), 12, "nove truppe, la Fregata del Drago, i cappellani (18/11/2026) e Ankalagon (23/11/2026)")
 	t.assert_true(_units.errors.is_empty(), str(_units.errors))
 	for uid in AurorUnits.ids():
 		var u := _units.get_unit(uid)
@@ -70,11 +71,12 @@ func test_nove_unita_lette_dal_file_con_i_loro_valori(t: TestContext) -> void:
 		t.assert_eq(u.melee_bonus, int(cfg.get_value(uid, "mischia")), uid)
 		t.assert_eq(u.defence_bonus, int(cfg.get_value(uid, "difesa")), uid)
 		t.assert_eq(u.armour_level, int(cfg.get_value(uid, "armatura")), uid)
-		t.assert_eq(u.moral_bonus, 12, "%s non rompe mai le righe" % uid)
+		t.assert_eq(u.moral_bonus, 30 if u.unique else 12, "%s non rompe mai le righe" % uid)
 		t.assert_true(u.requires.is_empty(), uid)
 		t.assert_true(u.strength_multiplier > 1.0, uid)
-	t.assert_eq(UnitTexts.plural_name(GUARD), "Corazzieri del Drago")
-	t.assert_eq(_units.get_unit(GUARD).general_candidate, "PREFERRED")
+	t.assert_eq(UnitTexts.plural_name("AurorDragonCuirassiers"), "Corazzieri del Drago")
+	t.assert_eq(_units.get_unit(GUARD).general_candidate, "PREFERRED", "Ankalagon, la guardia del re")
+	t.assert_eq(AurorUnits.guard_unit(), GUARD)
 	t.assert_eq(_units.get_unit("AurorDragonBombard").type_name, UnitType.ARTILLERY)
 	t.assert_eq(_units.get_unit("AurorSilentSisters").projectile, "ARBALEST")
 
@@ -122,8 +124,9 @@ func test_caracca_di_nuovo_come_nella_xl_originale(t: TestContext) -> void:
 			else:
 				other_longboats += 1
 	t.assert_eq(carracks, 0, "nessuna caracca nelle flotte di partenza")
-	# 48 caracche e 4 navi lunghe della mod (richiesta di Federico del 16/11/2026: niente navi lunghe nelle flotte Auror)
-	t.assert_eq(frigates, 52, "le flotte degli Auror sono di Fregate del Drago")
+	# 96 caracche e 4 navi lunghe (richiesta di Federico del 16/11/2026: niente navi lunghe nelle flotte Auror): cinque flotte
+	# da 20 (ADR-126, 23/11/2026; prima tre flotte, 48 caracche)
+	t.assert_eq(frigates, 100, "le flotte degli Auror sono di Fregate del Drago")
 	t.assert_eq(auror_longboats, 0, "nessuna nave lunga degli Auror")
 	t.assert_true(other_longboats > 0, "le navi lunghe delle altre fazioni restano")
 
@@ -170,6 +173,8 @@ func test_solo_gli_auror_e_solo_nelle_quattro_province_d_origine(t: TestContext)
 			break
 	var french := s.provinces_of("FN_FRENCH")[0].id
 	for uid in AurorUnits.ids():
+		if s.units.get_unit(uid).unique:
+			continue   # Ankalagon non si arruola (test_ankalagon)
 		for rid in HOME:
 			var ok := GameCommands.can_queue_unit(s, "FN_DANISH", rid, uid)
 			t.assert_true(bool(ok["ok"]), "%s in %s: %s" % [uid, rid, ok.get("errore", ok)])
@@ -244,7 +249,7 @@ static func _has_guard(army: Army) -> bool:
 	return false
 
 
-func test_darkos_comincia_con_i_corazzieri_del_drago(t: TestContext) -> void:
+func test_darkos_comincia_con_ankalagon(t: TestContext) -> void:
 	var s := _game(t)
 	if s == null:
 		return
@@ -253,19 +258,45 @@ func test_darkos_comincia_con_i_corazzieri_del_drago(t: TestContext) -> void:
 	var army := s.army(king.army)
 	t.assert_true(_has_guard(army), "esercito del re con la guardia")
 	t.assert_true(army.stacks.size() <= s.rules.max_stacks)
-	t.assert_eq(army.stacks[CampaignUiText.commander_stack(s, army)].unit_id, GUARD, "la carta del re e' quella dei Corazzieri")
+	t.assert_eq(army.stacks[CampaignUiText.commander_stack(s, army)].unit_id, GUARD, "la carta del re e' quella di Ankalagon")
 	t.assert_eq(army.stacks.size(), s.rules.max_stacks, "armata completa")
 	for st in army.stacks:
 		t.assert_true(AurorUnits.is_auror_unit(st.unit_id), "solo unita' esclusive: %s" % st.unit_id)
 		t.assert_eq(st.value, 9, st.unit_id)
-	var others := 0
 	for a in s.armies:
 		if a != army:
 			t.assert_false(_has_guard(a), "una sola guardia")
-			if a.faction == "FN_DANISH" and not a.is_fleet and a.region == army.region:
-				others += 1
-				t.assert_true(s.commander_of(a.id) != null, "le truppe che il re comandava hanno un generale")
-	t.assert_true(others >= 1, "le truppe dello startpos restano nella regione del re")
+
+
+## ADR-126 (richiesta di Federico del 23/11/2026): alla partenza gli Auror hanno solo tre armate d'elite complete (quella di
+## Darkos e due con un generale nelle altre province) e cinque flotte complete di Fregate del Drago.
+func test_alla_partenza_tre_armate_d_elite_e_cinque_flotte(t: TestContext) -> void:
+	var s := _game(t)
+	if s == null:
+		return
+	var king := s.leader_of("FN_DANISH")
+	var land: Array[Army] = []
+	var fleets: Array[Army] = []
+	for a in s.armies_of("FN_DANISH"):
+		if a.is_fleet:
+			fleets.append(a)
+		else:
+			land.append(a)
+	t.assert_eq(land.size(), 3, "tre armate")
+	var regions := {}
+	for a in land:
+		t.assert_eq(a.stacks.size(), s.rules.max_stacks, "armata completa")
+		for st in a.stacks:
+			t.assert_true(AurorUnits.is_auror_unit(st.unit_id), "solo unita' esclusive: %s" % st.unit_id)
+		t.assert_true(s.commander_of(a.id) != null, "ogni armata ha un comandante")
+		regions[a.region] = true
+	t.assert_true(land.any(func(a: Army) -> bool: return a.id == king.army), "una e' quella di Darkos")
+	t.assert_eq(regions.size(), 3, "una per provincia")
+	t.assert_eq(fleets.size(), 5, "cinque flotte")
+	for f in fleets:
+		t.assert_eq(f.stacks.size(), s.rules.max_stacks, "flotta completa")
+		for st in f.stacks:
+			t.assert_eq(st.unit_id, FRIGATE)
 
 
 func test_le_unita_esclusive_vengono_prima_nell_arruolamento(t: TestContext) -> void:

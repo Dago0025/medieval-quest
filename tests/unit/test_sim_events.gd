@@ -502,6 +502,28 @@ func test_fregate_del_drago_resistono_alle_tempeste(t: TestContext) -> void:
 	t.assert_eq(fleet.stacks.size(), 2)
 
 
+## Richiesta di Federico del 23/11/2026: le navi degli Auror non affondano nelle tempeste (`flotte_immuni_tempeste`).
+func test_flotte_auror_immuni_alle_tempeste(t: TestContext) -> void:
+	var s := E.world()
+	s.rules.events.storm_chance = 1.0
+	s.rules.storm_immune_factions = PackedStringArray(["FN_ALPHA"])
+	var fleet := s.create_army("FN_ALPHA", "ID_NORD1", true)
+	fleet.stacks.append(UnitStack.new("Spearmen", 30, 0))
+	fleet.stacks.append(UnitStack.new("AurorDragonFrigate", 25, 0))
+	var other := s.create_army("FN_BETA", "ID_NORD1", true)
+	other.stacks.append(UnitStack.new("Spearmen", 30, 0))
+	other.stacks.append(UnitStack.new("Spearmen", 20, 0))
+	E.run_year(s)
+	t.assert_eq(fleet.stacks.size(), 2, "nessuna nave degli Auror perduta")
+	t.assert_eq(other.stacks.size(), 1, "le altre fazioni perdono una pila come sempre")
+	for e in E.events_of(s, GameState.EV_STORM):
+		t.assert_true(str(e["fazione"]) != "FN_ALPHA", "nessuna tempesta registrata per gli Auror")
+	t.assert_true(Rules.load_file().storm_immune_factions.has("FN_DANISH"), "auror.cfg: gli Auror")
+	var historic := Rules.load_file()
+	historic.remove_faction_powers()
+	t.assert_true(historic.storm_immune_factions.is_empty(), "nello scenario storico nessuna fazione e' immune")
+
+
 func test_peste_toglie_il_dieci_per_cento_e_il_conto_torna(t: TestContext) -> void:
 	var s := E.world()
 	s.rules.events.plague_chance = 1.0

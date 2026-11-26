@@ -6,7 +6,7 @@ Uso:
 
 Crea installer/build/payload/ con:
   - Medieval Quest.exe (pck incorporato, da esporta.bat);
-  - originale/ (suoni e immagini del gioco originale ancora usati: vedi tools/copia_originale.py);
+  - originale/ (immagini del gioco originale ancora usate: vedi tools/copia_originale.py; l'audio e' tutto del progetto dal 25/11/2026);
   - Guida di gioco.html e Crediti e diritti.html (da docs/GUIDA_DI_GIOCO.md e CREDITI_E_DIRITTI.md);
   - LEGGIMI.txt, LICENSE.txt, LICENZE_TERZE_PARTI.txt (Godot Engine e caratteri);
 poi compila installer/build/MedievalQuest-Setup-<versione>.exe.

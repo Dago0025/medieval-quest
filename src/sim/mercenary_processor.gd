@@ -46,6 +46,10 @@ static func candidates(state: GameState, province_id: String) -> Array[UnitType]
 			continue
 		if not u.allows_region(region.id) or not u.allows_culture(GameCommands.culture_key(region.culture)):
 			continue
+		if state.rules.mercenaries.local_only(region.id) and not u.regions.has(region.id):
+			continue   # ADR-116: lontano dall'Europa solo i mercenari del posto (ronin, wako, tuareg...)
+		if not HistoricalLimits.unit_allowed(state, "", u, region.id):
+			continue   # ADR-114: invenzioni e cavalli nelle Americhe
 		out.append(u)
 	return out
 

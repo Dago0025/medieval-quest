@@ -13,6 +13,10 @@ var move_chance := 0.3
 var hire_factor := 1.5
 var upkeep_factor := 2.0
 var disbanded_join := true   ## le truppe congedate diventano compagnie di mercenari nella provincia (manuale p26 e p70; ADR-031)
+## Regioni della mappa del mondo dove compaiono solo i mercenari del posto, cioe' le unita' che elencano la regione (ADR-116:
+## niente compagnie europee della XL in Asia orientale, India del sud, Africa nera, Americhe, Oceania). Elenco della mappa,
+## vuoto sulla mappa d'Europa e quindi fuori da `to_dict`.
+var local_only_regions := PackedStringArray()
 
 var errors := PackedStringArray()
 
@@ -33,9 +37,16 @@ static func load_file(path: String = DEFAULT_PATH) -> MercenaryRules:
 	r.hire_factor = float(cfg.get_value("costi", "fattore_ingaggio", r.hire_factor))
 	r.upkeep_factor = float(cfg.get_value("costi", "fattore_mantenimento", r.upkeep_factor))
 	r.disbanded_join = bool(cfg.get_value("congedo", "diventano_mercenari", r.disbanded_join))
+	for rid in cfg.get_value("mondo", "solo_mercenari_locali", []):
+		r.local_only_regions.append(str(rid).strip_edges().to_upper())
 	if r.new_per_year < 0 or r.max_per_province < 1 or r.max_age < 1 or r.move_chance < 0.0 or r.move_chance > 1.0:
 		r.errors.append("Regole dei mercenari fuori scala in %s" % path)
 	return r
+
+
+## Vero se nella regione possono comparire solo i mercenari che la elencano (ADR-116).
+func local_only(region_id: String) -> bool:
+	return not local_only_regions.is_empty() and local_only_regions.has(region_id.strip_edges().to_upper())
 
 
 ## Costo di ingaggio di un'unita' di costo `unit_cost`.

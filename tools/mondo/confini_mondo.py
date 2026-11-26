@@ -1,22 +1,70 @@
 """Confini vettoriali precalcolati della mappa del mondo (ADR-077): stesso algoritmo di src/map/border_extractor.gd
-(spigoli tra pixel di regioni diverse, concatenati per coppia, Douglas-Peucker 0,9 e Chaikin x2), ma in Python: sulla
-bitmap a 16 bit da 13.000x5.400 pixel GDScript impiegherebbe troppo.
+(spigoli tra pixel di regioni diverse, concatenati per coppia, Douglas-Peucker e Chaikin), ma in Python: sulla bitmap a 16
+bit da 13.000x5.400 pixel GDScript impiegherebbe troppo.
+
+Levigatura (23/11/2026, richiesta di Federico: confini meno frastagliati): i confini interni (terra-terra e mare-mare)
+nascono dalla LukMap ingrandita e dalla crescita a mezza risoluzione, quindi a scalini di 2-4 pixel: Douglas-Peucker
+TOL_INTERNI = 4 li toglie; le coste seguono Natural Earth e la plancia dipinta, quindi restano strette (TOL_COSTE = 1,5).
+Poi Chaikin x CHAIKIN_ITER (3). Prima erano 0,9 per tutti e Chaikin x2.
 
 Formato (little endian): "MQB1" magic u32 0x4D514231, versione u32 = 1, larghezza u32, altezza u32, numero u32, poi per
 ogni polilinea: gruppo_a u16, gruppo_b u16, tipo u8, chiusa u8, punti u32, punti x (x, y) float32.
 Gruppo = indice della regione (terra 1.., mare SEA_FIRST..); 0 = nessuna regione.
 
-Uso: python3 confini_mondo.py <regioni.npy> <uscita.bin> [sea_first]
+Uso: python3 confini_mondo.py <regioni.npy | regioni.png> <uscita.bin> [sea_first]
+(regioni.png = la bitmap di data/mappa_mondo, indice = R + 256 G)
 """
 import struct
 import sys
 from collections import defaultdict
 
 import numpy as np
-from shapely.geometry import LineString
 
 KIND_LAND_LAND, KIND_COAST, KIND_SEA_SEA, KIND_LAND_NONE, KIND_SEA_NONE = range(5)
 MAGIC = 0x4D514231
+TOL_INTERNI = 4.0   # pixel della bitmap: terra-terra e mare-mare
+TOL_COSTE = 1.5     # terra-mare e confini con "nessuna regione": restano sulla costa dipinta
+CHAIKIN_ITER = 3
+
+
+def simplify(pts, tol):
+    """Douglas-Peucker (come shapely simplify con preserve_topology=False): gli estremi restano fermi."""
+    n = len(pts)
+    if n < 3 or tol <= 0:
+        return pts
+    keep = np.zeros(n, bool)
+    keep[0] = keep[-1] = True
+    stack = [(0, n - 1)]
+    tol2 = tol * tol
+    while stack:
+        lo, hi = stack.pop()
+        if hi <= lo + 1:
+            continue
+        a, b = pts[lo], pts[hi]
+        seg = pts[lo + 1:hi]
+        ab = b - a
+        ll = float((ab ** 2).sum())
+        if ll == 0.0:
+            d = ((seg - a) ** 2).sum(1)
+        else:
+            t = np.clip(((seg - a) @ ab) / ll, 0.0, 1.0)
+            d = ((seg - (a + t[:, None] * ab)) ** 2).sum(1)
+        i = int(d.argmax())
+        if d[i] > tol2:
+            j = lo + 1 + i
+            keep[j] = True
+            stack.append((lo, j))
+            stack.append((j, hi))
+    return pts[keep]
+
+
+def load_labels(src):
+    if src.lower().endswith('.png'):
+        from PIL import Image
+        Image.MAX_IMAGE_PIXELS = None
+        rgb = np.asarray(Image.open(src).convert('RGB')).astype(np.int64)
+        return rgb[..., 0] + 256 * rgb[..., 1]
+    return np.load(src).astype(np.int64)
 
 
 def class_of(g, sea_first):
@@ -129,8 +177,8 @@ def chaikin(pts, closed, iterations=2):
     return cur
 
 
-def main(src, dst, sea_first=1024):
-    lab = np.load(src).astype(np.int64)
+def main(src, dst, sea_first=1024, tol_interni=TOL_INTERNI, tol_coste=TOL_COSTE, iterations=CHAIKIN_ITER):
+    lab = load_labels(src)
     h, w = lab.shape
     key, v0, v1, stride = edges(lab)
     order = np.argsort(key, kind='stable')
@@ -150,18 +198,19 @@ def main(src, dst, sea_first=1024):
             if closed and kind in (KIND_COAST, KIND_LAND_NONE, KIND_SEA_NONE) and np.ptp(pts, axis=0).max() < 6:
                 continue
             if len(pts) >= 3:
-                simple = np.asarray(LineString(pts).simplify(0.9, preserve_topology=False).coords)
+                tol = tol_interni if kind in (KIND_LAND_LAND, KIND_SEA_SEA) else tol_coste
+                simple = simplify(pts, tol)
                 if closed and len(simple) < 4:
                     simple = pts
                 pts = simple
-            pts = chaikin(pts, closed)
+            pts = chaikin(pts, closed, iterations)
             out.append((ga, gb, kind, closed, pts.astype(np.float32)))
     with open(dst, 'wb') as f:
         f.write(struct.pack('<IIIII', MAGIC, 1, w, h, len(out)))
         for ga, gb, kind, closed, pts in out:
             f.write(struct.pack('<HHBBI', ga, gb, kind, 1 if closed else 0, len(pts)))
             f.write(pts.astype('<f4').tobytes())
-    print('polilinee', len(out), 'spigoli', len(key))
+    print('polilinee', len(out), 'spigoli', len(key), 'punti', sum(len(o[4]) for o in out))
 
 
 if __name__ == '__main__':

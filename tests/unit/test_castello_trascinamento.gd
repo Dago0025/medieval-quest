@@ -512,3 +512,32 @@ func test_le_dimensioni_delle_pedine(t: TestContext) -> void:
 	# agenti non piu' grandi delle figure degli eserciti: la cornice degli agenti rifatti e' meno alta (268 contro 460 px) ma la
 	# base e' quasi uguale (148 e 150 px), quindi a schermo la base dell'agente resta entro il 10% di quella dell'esercito
 	t.assert_true(ArmyLayerScript.AGENT_PIECE_HEIGHT / 268.0 * 148.0 <= ArmyLayerScript.PIECE_HEIGHT / 460.0 * 150.0 * 1.1, "agenti non piu' grandi delle figure degli eserciti")
+
+
+# --- fortezze: un'intera armata (richiesta di Federico del 26/11/2026) ---------------------------------------------
+
+
+func test_nella_fortezza_entra_un_intera_armata_anche_di_cavalleria(t: TestContext) -> void:
+	var s := _world()
+	var c := s.rules.combat
+	t.assert_false(Combat.is_fortress(s, "ID_BASSA"), "il Castle non e' una fortezza")
+	t.assert_eq(Combat.garrison_capacity(s, "ID_BASSA"), c.garrison_max)
+	# grado Fortress = primo livello del grado fortress_tier
+	s.province("ID_BASSA").set_level(c.castle_family, c.fortress_tier * c.castle_levels_per_tier + 1)
+	t.assert_true(Combat.is_fortress(s, "ID_BASSA"))
+	t.assert_eq(Combat.garrison_capacity(s, "ID_BASSA"), 20)
+	for a in s.armies_in("ID_BASSA"):
+		a.in_castle = false
+	# armata piena: 12 cavalieri e 8 fanti (fuori dalle fortezze peserebbe 32)
+	var a := _army(s, "FN_ALPHA", "ID_BASSA", 8, 12)
+	t.assert_eq(a.stacks.size(), s.rules.max_stacks, "armata piena")
+	t.assert_eq(Combat.garrison_weight(s, a), 20, "nella fortezza la cavalleria conta uno")
+	var r := GameCommands.garrison_castle(s, "FN_ALPHA", a.id)
+	t.assert_true(bool(r["ok"]), str(r.get("errore", "")))
+	t.assert_eq(int(r["dentro"]), 20)
+	t.assert_eq(int(r["fuori"]), 0, "nessuna pila resta fuori")
+	# piena: un'altra pila non entra, con il messaggio della fortezza
+	var b := _army(s, "FN_ALPHA", "ID_BASSA", 1, 0)
+	var no := GameCommands.enter_castle(s, "FN_ALPHA", b.id)
+	t.assert_false(bool(no["ok"]))
+	t.assert_true(str(no["errore"]).contains("20"), str(no["errore"]))

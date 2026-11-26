@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bwpth8sgkw74v"
+path="res://.godot/imported/Gotico Fantasy Choir 1.ogg-6fe390783b2068a9bdb65e9304f7dddc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/musica/Gotico Fantasy Choir 1.ogg"
+dest_files=["res://.godot/imported/Gotico Fantasy Choir 1.ogg-6fe390783b2068a9bdb65e9304f7dddc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

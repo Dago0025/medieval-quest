@@ -3720,8 +3720,8 @@ MakeUnit:: ID_CROATIA			HorseArchers			40
 
 MakeUnit:: ID_CYPRUS			RoundShieldSpearmen		100
 
-MakeUnit:: ID_DENMARK			RoundShieldSpearmen		100
-MakeUnit:: ID_DENMARK			Housecarle			60
+//MakeUnit:: ID_DENMARK			RoundShieldSpearmen		100		// MOD Auror: truppe tolte, solo le armate d'elite
+//MakeUnit:: ID_DENMARK			Housecarle			60		// MOD Auror: truppe tolte, solo le armate d'elite
 MakeUnit:: ID_DENMARK			Longboat			1
 
 MakeUnit:: ID_EDESSA			RoundShieldSpearmen		100
@@ -3876,8 +3876,8 @@ MakeUnit:: ID_NORMANDY			Archers				60
 MakeUnit:: ID_NORTH_UMBRIA		Spearmen			100
 MakeUnit:: ID_NORTH_UMBRIA		Archers				60
 
-MakeUnit:: ID_NORWAY			RoundShieldSpearmen		100
-MakeUnit:: ID_NORWAY			Housecarle			60
+//MakeUnit:: ID_NORWAY			RoundShieldSpearmen		100		// MOD Auror: truppe tolte, solo le armate d'elite
+//MakeUnit:: ID_NORWAY			Housecarle			60		// MOD Auror: truppe tolte, solo le armate d'elite
 MakeUnit:: ID_NORWAY			Longboat			1
 MakeUnit:: ID_NORWAY			Longboat			1
 
@@ -3932,8 +3932,8 @@ MakeUnit:: ID_SAXONY			Spearmen			100
 MakeUnit:: ID_SAXONY			Housecarle			60
 MakeUnit:: ID_SAXONY			Housecarle			60
 
-MakeUnit:: ID_SCANIA			RoundShieldSpearmen		100
-MakeUnit:: ID_SCANIA			Housecarle			60
+//MakeUnit:: ID_SCANIA			RoundShieldSpearmen		100		// MOD Auror: truppe tolte, solo le armate d'elite
+//MakeUnit:: ID_SCANIA			Housecarle			60		// MOD Auror: truppe tolte, solo le armate d'elite
 
 MakeUnit:: ID_SCOTLAND			RoundShieldSpearmen		100
 MakeUnit:: ID_SCOTLAND			HighlandClansman		60
@@ -3961,8 +3961,8 @@ MakeUnit:: ID_SWABIA			Spearmen			100
 MakeUnit:: ID_SWABIA			Spearmen			100
 MakeUnit:: ID_SWABIA			UrbanMilitia			60
 
-MakeUnit:: ID_SWEDEN			Archers				60
-MakeUnit:: ID_SWEDEN			Housecarle			60
+//MakeUnit:: ID_SWEDEN			Archers				60		// MOD Auror: truppe tolte, solo le armate d'elite
+//MakeUnit:: ID_SWEDEN			Housecarle			60		// MOD Auror: truppe tolte, solo le armate d'elite
 MakeUnit:: ID_SWEDEN			Longboat			1
 
 MakeUnit:: ID_SWITZERLAND		Archers				60
@@ -4023,211 +4023,10 @@ MakeUnit:: ID_WALLACHIA			RoundShieldSpearmen		100		PAGAN_CULTURE
 MakeUnit:: ID_WESSEX			Spearmen			100
 MakeUnit:: ID_WESSEX			Archers				60
 MakeUnit:: ID_WESSEX			Barque				1
-// MOD Auror: esercito 1 (ID_DENMARK)
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_DENMARK			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 2 (ID_DENMARK)
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_DENMARK			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 3 (ID_DENMARK)
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_DENMARK			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_DENMARK			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 1 (ID_SWEDEN)
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SWEDEN			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 2 (ID_SWEDEN)
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SWEDEN			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 3 (ID_SWEDEN)
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SWEDEN			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SWEDEN			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 1 (ID_NORWAY)
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_NORWAY			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 2 (ID_NORWAY)
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_NORWAY			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 3 (ID_NORWAY)
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_NORWAY			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_NORWAY			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 1 (ID_SCANIA)
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SCANIA			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 2 (ID_SCANIA)
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SCANIA			SiegecannonCrew		20		//FN_DANISH
-// MOD Auror: esercito 3 (ID_SCANIA)
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			TeutonicKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			KnightsTemplar		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			FeudalKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			OrderFootsoldiers		100		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			HospitallerFootKnights		40		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			Arquebusier		60		//FN_DANISH
-MakeUnit::	ID_SCANIA			CulverinCrew		14		//FN_DANISH
-MakeUnit::	ID_SCANIA			SiegecannonCrew		20		//FN_DANISH
 // MOD Auror: flotta 1 (ID_DENMARK)
+MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
+MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
+MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
 MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
 MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
 MakeUnit::	ID_DENMARK			Carrack		1		//FN_DANISH
@@ -4261,7 +4060,54 @@ MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
 MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
 MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
 MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
 // MOD Auror: flotta 3 (ID_NORWAY)
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+// MOD Auror: flotta 4 (ID_SWEDEN)
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+MakeUnit::	ID_SWEDEN			Carrack		1		//FN_DANISH
+// MOD Auror: flotta 5 (ID_NORWAY)
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
+MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
 MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
 MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH
 MakeUnit::	ID_NORWAY			Carrack		1		//FN_DANISH

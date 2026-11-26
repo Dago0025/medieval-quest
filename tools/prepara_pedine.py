@@ -217,6 +217,15 @@ def process(entry, result_path, campmap):
     frame.paste(small, (round(P[0] - acx * r), round(P[1] - abot * r)))
     a = np.array(frame.convert('RGBA'))
     a[a[..., 3] < 8] = 0
+    # maschera facoltativa <risultato>_protetto.png (bianco = figura davanti allo stendardo, es. drago e cavaliere della
+    # pedina di Ankalagon): li' i rossi restano colori dipinti e non diventano rosso chiave (colore della fazione)
+    prot = np.zeros((H, W), bool)
+    prot_p = os.path.splitext(result_path)[0] + '_protetto.png'
+    if os.path.isfile(prot_p):
+        pm = Image.open(prot_p).convert('L').resize((max(1, round(1024 * r)), max(1, round(1024 * r))), Image.BILINEAR)
+        pf = Image.new('L', (W, H), 0)
+        pf.paste(pm, (round(P[0] - acx * r), round(P[1] - abot * r)))
+        prot = np.asarray(pf) > 60
     # originale -> IA (sagome: scala dall'altezza, piede allineato) -> rifatta
     # allineamento sulla base (la sagoma dell'IA puo' avere residui ai lati che sposterebbero il centro)
     ox0, oy0, ox1, oy1 = bbox(orig[..., 3] > 0)
@@ -264,16 +273,16 @@ def process(entry, result_path, campmap):
             bandz[max(0, btop.min() - 40):, :] = True
             # attorno alla base solo l'ombra (grigio medio): un cavallo chiaro che esce dalla sagoma dell'originale resta
             a[bandz & empty & grey & (rgb.mean(-1) < 165)] = 0
-    a[zone & empty & grey] = 0
+    a[zone & empty & grey & ~prot] = 0
     if red.any() and banner:
         # chiazze chiare dipinte dall'IA dentro lo stendardo dell'originale: tornano stendardo (rosso chiave con la loro luce)
         inside = np.asarray(Image.fromarray((up(red) * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(5))) > 0
-        pale = inside & (satx < 0.25) & (mxx > 120) & (a[..., 3] > 40)
+        pale = inside & (satx < 0.25) & (mxx > 120) & (a[..., 3] > 40) & ~prot
         a[pale, 0] = (mxx[pale] * 0.85).astype(np.uint8)
         a[pale, 1] = 0
         a[pale, 2] = 0
     if red.any() and banner:   # gli agenti non hanno stendardo: il rosso delle vesti (cardinale, papa) resta com'e'
-        m = rekey(a, dilate(up(red), 16), 'rosso')
+        m = rekey(a, dilate(up(red), 16) & ~prot, 'rosso')
         layout['stendardo'] = rect_of(m)
         # striscia chiara che l'IA dipinge tra il bordo destro dello stendardo e l'asta: riga per riga, i pixel chiari e
         # poco saturi subito a destra del rosso (fino a 30 px, l'asta e' dorata quindi resta) diventano trasparenti
@@ -366,7 +375,8 @@ def main():
         if not os.path.isfile(res):
             continue
         a, layout = process(e, res, args.campmap)
-        rel = os.path.splitext(e['sorgente'])[0].lower() + '.png'   # come AssetLibrary.remade_path: senza .bif
+        # `destinazione`: pedina nuova disegnata sulla sagoma di un'altra (le asiatiche del Dharma sulle pagane, 22/11/2026)
+        rel = os.path.splitext(e.get('destinazione', e['sorgente']))[0].lower() + '.png'   # come AssetLibrary.remade_path: senza .bif
         dst = os.path.join(OUT, rel)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         Image.fromarray(a).save(dst)

@@ -152,6 +152,10 @@ const EV_CRUSADE_SUCCEEDED := "crociata_riuscita"
 const EV_CRUSADE_FAILED := "crociata_fallita"
 const EV_PAPAL_GIFT := "dono_papale"
 const EV_PAPACY_REEMERGED := "papato_riemerso"
+## ADR-114: primo approdo di una fazione straniera nelle Americhe ("fazione", "regione", "provincia").
+const EV_AMERICAS_CONTACT := "contatto_americhe"
+## ADR-114: il capo riceve la guardia ("fazione", "regione", "personaggio", "unita", "esercito", "uomini" creati).
+const EV_ROYAL_GUARD := "guardia_del_capo"
 
 ## Eventi della fase 6a (spec. fase 6 §6a). Hanno "tipo", "anno", "fazione", "regione" ("" se non c'e') e "testo" (italiano,
 ## leggibile), piu' i dettagli propri. Testo e titolo originali di un evento storico si leggono da Events.txt con `EventTexts`.
@@ -250,6 +254,8 @@ var papal_warnings := {}
 var papal_leader := 0
 ## Fase 5c: anni consecutivi in cui il Papato e' distrutto e riemersioni gia' avvenute (esercito piu' grande a ogni volta).
 var papacy_dead_years := 0
+## ADR-114: anno dell'arrivo degli europei nelle Americhe (0 = non ancora; da allora Aztechi, Inca e Cahokia hanno i cavalli).
+var americas_contact_year := 0
 var papacy_reemergences := 0
 ## Fase 5c (non salvato): esercito crociato -> {"fazione", "tipo"} all'inizio del fine anno, per riconoscere quelli distrutti.
 var crusade_roster := {}

@@ -114,7 +114,10 @@ func test_nasce_l_esercito_crociato(t: TestContext) -> void:
 	t.assert_eq(army.region, W.NORD1)
 	t.assert_eq(army.crusade_kind(), CRUSADE)
 	t.assert_eq(int(army.crusade["zelo"]), 80)
-	t.assert_eq(army.crusade_target(), "")
+	# bersaglio scelto alla partenza (Federico, 22/11/2026: l'avviso dice anche dove e' diretta)
+	t.assert_eq(army.crusade_target(), PapacyProcessor.initial_target(s, army), "bersaglio alla partenza")
+	t.assert_true(army.crusade_target() != "", "c'e' un bersaglio valido vicino")
+	t.assert_eq(str(army.crusade["annunciato"]), army.crusade_target(), "annunciato con la partenza, non di nuovo")
 	t.assert_eq(army.crusade["anno"], 1003)
 	t.assert_eq(_units_of(army), ["TEMPLARS", "HOSPITALLERS", "CHEVALIERS", "HALBERDIERS"], "le quattro migliori truppe reclutabili, senza artiglieria")
 	var events := W.events_of(s, GameState.EV_CRUSADE_LAUNCHED)
@@ -125,7 +128,13 @@ func test_nasce_l_esercito_crociato(t: TestContext) -> void:
 	t.assert_eq(events[0]["pile"], 4)
 	t.assert_eq(events[0]["zelo"], 80)
 	t.assert_eq(events[0]["provincia"], W.NORD1)
+	t.assert_eq(events[0]["bersaglio"], army.crusade_target())
+	t.assert_true(str(events[0]["testo"]).contains(", diretta a "), str(events[0]["testo"]))
+	t.assert_eq(W.events_of(s, GameState.EV_CRUSADE_TARGET).size(), 0, "nessun secondo annuncio del bersaglio")
 	W.check_state(t, s, "dopo la partenza")
+	# raggio 0: nessun bersaglio alla partenza (regola di prima)
+	s.rules.papacy.initial_target_radius = 0
+	t.assert_eq(PapacyProcessor.initial_target(s, army), "")
 	var info := GameCommands.papal_status(s, W.A)
 	t.assert_eq(info["crociata"], army.id)
 
@@ -557,12 +566,12 @@ func test_il_reclutamento_per_zelo_ha_le_sue_condizioni(t: TestContext) -> void:
 func test_la_crociata_supera_il_limite_degli_eserciti_normali(t: TestContext) -> void:
 	# ADR-072 (Federico, dal gioco originale): passando in terre della sua religione assorbe molte piu' unita'
 	var s := W.world()
-	var army := W.add_crusade(s, W.A, W.NORD1, CRUSADE, W.SUD1, 14)
+	var army := W.add_crusade(s, W.A, W.NORD1, CRUSADE, W.SUD1, 18)
 	s.province(W.NORD1).zeal = 100
 	PapacyProcessor.process_year(s)
-	t.assert_eq(army.stacks.size(), 18, "zelo 100: +4, oltre le 16 pile")
+	t.assert_eq(army.stacks.size(), 22, "zelo 100: +4, oltre le 20 pile")
 	t.assert_eq(W.events_of(s, GameState.EV_CRUSADE_RECRUITED)[0]["pile"], 4)
-	t.assert_true(s.rules.max_stacks < army.stacks.size(), "gli eserciti normali restano a 16")
+	t.assert_true(s.rules.max_stacks < army.stacks.size(), "gli eserciti normali restano a 20")
 	W.check_state(t, s, "crociata grande")
 
 

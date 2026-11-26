@@ -130,12 +130,12 @@ func test_normalizzazione_a_cento(t: TestContext) -> void:
 	t.assert_eq(n["MUSLIM"], 33.25)
 	t.assert_eq(n["PAGAN"], 0.0)
 	t.assert_eq(n["HERETIC"], 0.0)
-	t.assert_eq(ProvinceState.normalize_religions({}), {"CATHOLIC": 0.0, "ORTHODOX": 0.0, "MUSLIM": 0.0, "PAGAN": 100.0, "HERETIC": 0.0, "IMPERIAL": 0.0}, "somma zero: tutta pagana")
+	t.assert_eq(ProvinceState.normalize_religions({}), {"CATHOLIC": 0.0, "ORTHODOX": 0.0, "MUSLIM": 0.0, "PAGAN": 100.0, "HERETIC": 0.0, "IMPERIAL": 0.0, "DHARMA": 0.0}, "somma zero: tutta pagana")
 	t.assert_eq(ProvinceState.normalize_religions({"CATHOLIC": -5, "PAGAN": "x"})["PAGAN"], 100.0, "negativi e testo valgono zero")
 	var half := ProvinceState.normalize_religions({"CATHOLIC": 30, "PAGAN": 30})
 	t.assert_eq(half["CATHOLIC"], 50.0)
 	t.assert_eq(half["PAGAN"], 50.0)
-	var exact := {"CATHOLIC": 25.0, "ORTHODOX": 75.0, "MUSLIM": 0.0, "PAGAN": 0.0, "HERETIC": 0.0, "IMPERIAL": 0.0}
+	var exact := {"CATHOLIC": 25.0, "ORTHODOX": 75.0, "MUSLIM": 0.0, "PAGAN": 0.0, "HERETIC": 0.0, "IMPERIAL": 0.0, "DHARMA": 0.0}
 	t.assert_eq(ProvinceState.normalize_religions(exact), exact, "una composizione valida non cambia")
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 5

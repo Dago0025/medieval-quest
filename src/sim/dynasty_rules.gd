@@ -69,7 +69,7 @@ var fixed := {
 	"FN_DANISH": {"command": 9, "loyalty": 9, "influence": 9, "immortal_king": true, "invulnerable_king": true,
 		"king_refuge": "ID_ATLANTIS", "leader_name": "Darkos", "leader_title": "Imperatore Dio",
 		"longevity_min": 100, "longevity_max": 150,
-		"remarry_min": 20, "remarry_max": 30, "remarry_fertile": 10},
+		"remarry_min": 20, "remarry_max": 30, "remarry_fertile": 10, "same_sex_max": 2},
 }
 
 ## Errori di lettura dei file (chiave con tipo sbagliato e simili).
@@ -190,6 +190,14 @@ func remarriage(faction_id: String) -> Dictionary:
 	if low <= 0:
 		return {}
 	return {"min": low, "max": maxi(int(d.get("remarry_max", low)), low), "fertile": maxi(int(d.get("remarry_fertile", 10)), 0)}
+
+
+## Figli dello stesso sesso di fila al massimo per il capo della fazione (`nascite_stesso_sesso_max`, Auror), 0 = nessun limite.
+func same_sex_max(faction_id: String) -> int:
+	var entry: Variant = fixed.get(faction_id.strip_edges().to_upper())
+	if typeof(entry) != TYPE_DICTIONARY:
+		return 0
+	return maxi(int((entry as Dictionary).get("same_sex_max", 0)), 0)
 
 
 ## Anni fino alle nozze successive del capo, tra `min` e `max` di `remarriage`: stabile per personaggio e anno (dall'id,
@@ -320,6 +328,9 @@ func _read_fixed(auror_path: String) -> void:
 			entry["remarry_max"] = maxi(int(most), int(v)) if typeof(most) == TYPE_INT or typeof(most) == TYPE_FLOAT else int(v)
 			var fertile: Variant = cfg.get_value(section, "nozze_capo_anni_fertili", 10)
 			entry["remarry_fertile"] = int(fertile) if typeof(fertile) == TYPE_INT or typeof(fertile) == TYPE_FLOAT else 10
+		v = cfg.get_value(section, "nascite_stesso_sesso_max", null)
+		if typeof(v) == TYPE_INT or typeof(v) == TYPE_FLOAT:
+			entry["same_sex_max"] = int(v)
 		v = cfg.get_value(section, "titolo_capo", null)
 		if typeof(v) == TYPE_STRING and str(v).strip_edges() != "":
 			entry["leader_title"] = str(v).strip_edges()

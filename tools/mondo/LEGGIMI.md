@@ -18,6 +18,11 @@ Ordine (cartella di lavoro `out`):
 7. `dipingi.py geo out 1`, poi `alberi.py geo out` (plancia), `dipingi.py geo out 1 atlantide` e
    `alberi.py geo out plancia_auror_base.jpg plancia_auror.jpg` (plancia con l'isola).
 8. `confini_mondo.py out/finale/regioni.npy confini.bin` (e `regioni_auror.npy` -> `confini_auror.bin`).
+   Dal 23/11/2026 accetta anche `regioni.png` come ingresso e non usa piu' shapely (levigatura: interni 4 px, coste 1,5 px,
+   Chaikin x3).
+8b. `regioni_vista.py regioni.png confini.bin regioni_vista.png` (e `regioni_auror.png confini_auror.bin
+   regioni_vista_auror.png`): bitmap con i confini interni allineati alle linee levigate, letta solo dallo shader della
+   mappa (fasce dei proprietari, provincia scelta). Va rifatta ogni volta che cambiano la bitmap o i confini.
 9. `etichette.py out` - punto del nome di ogni regione di terra (`label` in `mondo.json`, usato da NameLayer); poi
    `mondo.json` va ridotto alle chiavi id, index, sea, origin, label, pixels, auror prima di copiarlo in `data/mappa_mondo/`.
 

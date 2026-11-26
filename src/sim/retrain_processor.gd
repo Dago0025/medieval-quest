@@ -104,6 +104,8 @@ static func recruit_problem(state: GameState, faction_id: String, province: Prov
 	var faction := state.faction(faction_id)
 	if faction == null:
 		return Lang.t("Fazione sconosciuta: %s") % faction_id
+	if unit.unique:
+		return Lang.t("%s e' unico: non si arruola") % unit.id   # Ankalagon
 	var free := state.rules.lifts_unit_limits(faction.id, unit)   # gli Auror: nessun limite di fazione, epoca, regione, cultura
 	if not free and not unit.recruitable_by(faction.id):
 		return Lang.t("%s non e' reclutabile da %s") % [unit.id, faction.id]

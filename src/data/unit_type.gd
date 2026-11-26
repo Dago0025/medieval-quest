@@ -63,6 +63,10 @@ var weapon_type := ""                   ## col. 48
 var mercenary := false                  ## col. 49
 var elite := false                      ## unita' esclusiva degli Auror (AurorUnits, ADR-074): limiti di fazione e regione sempre validi
 var strength_multiplier := 1.0          ## moltiplica la forza nella risoluzione automatica (AurorUnits `moltiplicatore_forza`)
+var unique := false                     ## unita' unica (AurorUnits `unica`): non si arruola ne' si riaddestra (Ankalagon)
+var invulnerable := false               ## non perde mai uomini (AurorUnits `invulnerabile`)
+var piece := ""                         ## pedina propria dell'armata che la porta (AurorUnits `pedina`), "" = quella normale
+var excluded_factions := PackedStringArray()   ## fazioni escluse anche se ALL_FACTIONS (ADR-116: fazioni nuove con unita' proprie)
 var raw := PackedStringArray()          ## tutti i campi originali
 
 
@@ -118,6 +122,8 @@ func stat_int(key: String, fallback: int = 0) -> int:
 ## Vero se la fazione è nell'elenco (o l'elenco è ALL_FACTIONS). Un elenco vuoto
 ## senza ALL_FACTIONS NON ammette nessuno: il significato nel gioco è incerto.
 func allows_faction(faction_id: String) -> bool:
+	if not excluded_factions.is_empty() and excluded_factions.has(faction_id.strip_edges().to_upper()):
+		return false
 	if all_factions or factions.has(faction_id.strip_edges().to_upper()):
 		return true
 	# Crusade e Jihad hanno la colonna 28 vuota nei dati: le decide la cultura (col. 32: CATHOLIC, MUSLIM) e l'edificio

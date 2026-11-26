@@ -738,7 +738,9 @@ func _load_map() -> bool:
 	_table_texture = ImageTexture.create_from_image(_table_image)
 	var map_material := ShaderMaterial.new()
 	map_material.shader = load(SHADER_PATH) as Shader
-	map_material.set_shader_parameter("index_tex", ImageTexture.create_from_image(lbm.to_image()))
+	# sulla mappa del mondo lo shader legge la bitmap con i confini levigati (solo grafica, 23/11/2026)
+	var index_image: Image = (lbm as WorldMap).view_image() if lbm is WorldMap else lbm.to_image()
+	map_material.set_shader_parameter("index_tex", ImageTexture.create_from_image(index_image))
 	map_material.set_shader_parameter("table_tex", _table_texture)
 	map_material.set_shader_parameter("index_groups", world)
 	_sprite.material = map_material
@@ -1721,17 +1723,20 @@ func _add_castles() -> Dictionary:
 		if tier < 0:
 			continue
 		# stendardo pieno per la parte occupata della guarnigione (come le bandiere degli eserciti)
-		var fill := float(Combat.garrison_load(_state, p.id)) / float(maxi(1, c.garrison_max))
+		var fill := float(Combat.garrison_load(_state, p.id)) / float(maxi(1, Combat.garrison_capacity(_state, p.id)))
 		if p.owner != _player_id and not _seen.has(p.id):
 			fill = 0.0   # nebbia di guerra: la guarnigione altrui fuori vista non si conosce
 		var special := FortressArt.map_original(p.id)   # ADR-076: la fortezza bianca nella regione natia degli Auror
+		var fortress := special != ""
+		if not fortress:
+			special = CastleStyle.map_original(RegionStyle.castle_faction(_state, p.id), tier)   # castelli della fazione d'origine della regione (22/11/2026)
 		var tex := PieceArt.castle_piece(_data, p.owner, tier, fill, special)
 		if tex == null:
 			continue
-		var scale := FortressArt.MAP_SCALE if special != "" else 1.0
+		var scale := FortressArt.MAP_SCALE if fortress else 1.0
 		_army_layer.add_castle(p.id, _anchors[p.id], tex, scale)
 		# ingombro per le pedine: piu' alto con la scala, piu' largo se l'immagine e' piu' larga di un castello comune (~0,86)
-		_castle_widen[p.id] = scale * maxf(1.0, float(tex.get_width()) / float(maxi(1, tex.get_height())) / 0.86) if special != "" else 1.0
+		_castle_widen[p.id] = scale * maxf(1.0, float(tex.get_width()) / float(maxi(1, tex.get_height())) / 0.86) if fortress else 1.0
 		out[p.id] = true
 	return out
 
@@ -1747,6 +1752,9 @@ func _piece_kind(army: Army) -> String:
 		return "fleet"
 	if army.is_crusade():
 		return "jihad" if army.crusade_kind() == PapacyProcessor.KIND_JIHAD else "crusade"
+	var special := PieceArt.special_kind(_state.units, army)   # Ankalagon: la pedina del drago
+	if special != "":
+		return special
 	var commander := _state.commander_of(army.id)
 	# solo il re ha la pedina del re; eredi e principi quella normale (richiesta di Federico, 2026-11-10)
 	if commander != null and commander.role == Character.ROLE_LEADER:
@@ -3236,13 +3244,13 @@ func _refresh_review() -> void:
 			elif army.is_fleet and i == Admirals.flagship(_state, army):
 				hint += Lang.t(" dell'ammiraglio, con il ritratto")
 			var upgrades := TroopUpgrades.describe(st)
-			var entry := {"immagine": card, "misura": Vector2(38, 38), "didascalia": str(st.men), "scelta": mine and _card_pick.has(i),
+			var entry := {"immagine": card, "misura": OriginalHud.ARMY_CARD, "didascalia": str(st.men), "scelta": mine and _card_pick.has(i),
 				"armi": st.weapon, "armatura": st.armour,
 				"suggerimento": Lang.t("%s\n%d uomini · valore %d%s\n%s") % [CampaignUiText.unit_name(st.unit_id), st.men, st.value,
 					("\n" + upgrades) if upgrades != "" else "", hint]}
 			_add_commander_badge(entry, army, i)
 			items.append(entry)
-		_hud.show_review(title, items, lines, ARMY_PANEL)
+		_hud.show_review(title, items, lines, ARMY_PANEL, {}, OriginalHud.ARMY_COLUMNS)   # 10 carte per fila, 2 file (22/11/2026)
 		var dismiss := CampaignUiDismiss.button_state(_state, _player_id, army, PackedInt32Array(_card_pick))
 		_hud.set_dismiss(bool(dismiss["visibile"]), bool(dismiss["attivo"]), str(dismiss["testo"]), str(dismiss["suggerimento"]))
 		_refresh_army_actions(army)
@@ -3268,7 +3276,7 @@ func _refresh_review() -> void:
 				continue
 			var card := PieceArt.unit_card(_data, str(c["fazione"]), str(c["unita"])) if AssetLibrary.is_available() else null
 			var owner_army := _state.army(int(c["esercito"]))
-			var card_item := {"immagine": card, "misura": Vector2(34, 34), "didascalia": str(c["uomini"]),
+			var card_item := {"immagine": card, "misura": OriginalHud.CASTLE_CARD, "didascalia": str(c["uomini"]),
 				"armi": int(c.get("armi", 0)), "armatura": int(c.get("armatura", 0)),
 				"suggerimento": Lang.t("%s\n%d uomini · valore %d\n%s\nClic: scheda dell'unità") % [CampaignUiText.unit_name(str(c["unita"])), int(c["uomini"]), int(c["valore"]),
 					CampaignUiText.army_title(owner_army) if owner_army != null else ""]}
@@ -3310,7 +3318,7 @@ func _refresh_review() -> void:
 						items.append({"intestazione": Lang.t("In coda"), "evidenzia": true})
 						_review_tabs.append(-1)
 					for q in queued:
-						items.append(_queue_review_item(q))
+						items.append(_queue_review_item(q, province.id))
 						_review_tabs.append(0 if str(q["tipo"]) == QueueItem.KIND_BUILDING else 1)
 					var summary := CampaignUiQueues.summary(province)
 					if summary != "":
@@ -3322,7 +3330,7 @@ func _refresh_review() -> void:
 				keys.sort()
 				for key in keys:
 					var level := province.level_of(str(key))
-					items.append({"immagine": _building_icon(str(key), level), "misura": Vector2(54, 40),
+					items.append({"immagine": _building_icon(str(key), level, province.id), "misura": Vector2(54, 40),
 						"suggerimento": Lang.t("%s\nClic: la scheda dell'edificio") % CampaignUiText.building_name(_state, str(key), level)})
 					_review_tabs.append({"edificio": str(key), "livello": level})
 				if items.is_empty():
@@ -3341,14 +3349,14 @@ func _refresh_review() -> void:
 
 
 ## Voce in coda per il pannello di rassegna: icona dell'edificio o carta dell'unita', con gli anni che mancano.
-func _queue_review_item(q: Dictionary) -> Dictionary:
+func _queue_review_item(q: Dictionary, province_id: String = "") -> Dictionary:
 	var building := str(q["tipo"]) == QueueItem.KIND_BUILDING
 	var key := str(q["chiave"])
 	var years := int(q["anni"])
 	var tex: Texture2D = null
 	var name_text := ""
 	if building:
-		tex = _building_icon(key, int(q["livello"]))
+		tex = _building_icon(key, int(q["livello"]), province_id)
 		name_text = CampaignUiText.building_name(_state, key, int(q["livello"]))
 	else:
 		tex = PieceArt.unit_card(_data, _player_id, key) if AssetLibrary.is_available() else null
@@ -3373,7 +3381,7 @@ func _refresh_hud_cards() -> void:
 		train_tip = Lang.t("Addestramento a %s (%d in coda)") % [CampaignUiText.region_name(_state, province.id), province.unit_queue_load()]
 		if not province.building_queue.is_empty():
 			var b := province.building_queue[0]
-			var icon := _building_icon(b.key, b.level)
+			var icon := _building_icon(b.key, b.level, province.id)
 			if icon != null:
 				build_tex = icon
 			build_tip += Lang.t("\nIn corso: %s, %d anni") % [CampaignUiText.building_name(_state, b.key, b.level), b.years_left]
@@ -3787,7 +3795,11 @@ func _add_castle_section(province: ProvinceState) -> void:
 		return
 	var content := _add_section(Lang.t("Castello: %s") % CampaignUiText.building_name(_state, c.castle_family, level), "castello", garrison.size())
 	var load_line := Label.new()
-	load_line.text = Lang.t("Guarnigione: %d posti su %d (la cavalleria conta doppio).") % [Combat.garrison_load(_state, province.id), c.garrison_max]
+	var room := Combat.garrison_capacity(_state, province.id)
+	if Combat.is_fortress(_state, province.id):
+		load_line.text = Lang.t("Guarnigione: %d posti su %d (fortezza: ci entra un'intera armata).") % [Combat.garrison_load(_state, province.id), room]
+	else:
+		load_line.text = Lang.t("Guarnigione: %d posti su %d (la cavalleria conta doppio).") % [Combat.garrison_load(_state, province.id), room]
 	load_line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	load_line.custom_minimum_size = Vector2(PANEL_WIDTH - 90.0, 0.0)
 	content.add_child(load_line)
@@ -5046,17 +5058,33 @@ func _add_built_section(province: ProvinceState) -> void:
 		flow.add_child(pic)
 
 
-## `province_id`: provincia dell'edificio costruito, per il castello della fortezza degli Auror (ADR-076).
+## `province_id`: provincia dell'edificio (fortezza degli Auror, ADR-076; grafica per la cultura d'origine della regione,
+## RegionStyle, 22/11/2026). Vuoto = la regione selezionata; senza regione resta la grafica della fazione del giocatore.
 func _building_icon(family_id: String, level: int, province_id: String = "") -> Texture2D:
 	if not AssetLibrary.is_available() or _buildings == null:
 		return null
+	if province_id == "" and _selected != null and not _selected.is_sea:
+		province_id = _selected.id
+	var prov := _state.province(province_id) if province_id != "" else null
+	if prov == null:
+		province_id = ""
 	if province_id != "" and family_id == _state.rules.combat.castle_family:
 		var fortress := FortressArt.icon(province_id)
 		if fortress != null:
 			return fortress
+	var owner_id := prov.owner if prov != null and prov.owner != "" else _player_id
+	if family_id == _state.rules.combat.castle_family:
+		# castelli della fazione che possedeva la regione all'inizio, anche dopo la conquista (Federico, 22/11/2026)
+		var style_faction := RegionStyle.castle_faction(_state, province_id) if province_id != "" else _player_id
+		var styled := CastleStyle.icon(style_faction, _state.rules.combat.castle_tier(maxi(1, level)))
+		if styled != null:
+			return styled
 	var fam: BuildingType = _buildings.get_family(family_id)
 	var lv: BuildingType.Level = fam.get_level(maxi(1, level)) if fam != null else null
-	return BuildingArt.icon(lv.label if lv != null else family_id, family_id, _player_religion())
+	var religion := _player_religion()
+	if province_id != "":
+		religion = RegionStyle.building_religion(_state, province_id, fam, owner_id, religion)
+	return BuildingArt.icon(lv.label if lv != null else family_id, family_id, religion)
 
 
 ## Pulsanti che aprono la finestra della provincia sulla scheda della costruzione o dell'arruolamento (richiesta di Federico:
@@ -5216,6 +5244,8 @@ func _unit_entries(province: ProvinceState) -> Array[Dictionary]:
 		if CampaignUiAgents.is_recruitable_agent(u) or CampaignUiPapacy.unit_kind(u) != "":
 			candidates.append(u)
 	for u in candidates:
+		if u.unique:
+			continue   # Ankalagon non si arruola
 		var free := _state.rules.lifts_unit_limits(_player_id, u)   # gli Auror vedono ogni truppa e nave
 		if not free and (not u.recruitable_by(_player_id) or not u.available_in_period(_state.era)):
 			continue
@@ -5251,7 +5281,8 @@ func _unit_entries(province: ProvinceState) -> Array[Dictionary]:
 			tip += Lang.t("\nUomini: %d · mantenimento: %d") % [u.men, u.support_cost]
 		var short_name := CampaignUiText.agent_unit_name(u.id) if (is_agent_unit or crusade_kind != "") else CampaignUiText.unit_name(u.id)
 		entries.append({"ok": ok, "unit": u.id, "name": short_name, "cost": cost, "years": years, "text": text,
-			"tip": "%s\n%s" % [short_name, tip], "agente": is_agent_unit or crusade_kind != "", "nave": u.is_ship()})
+			"tip": "%s\n%s" % [short_name, tip], "agente": is_agent_unit or crusade_kind != "", "nave": u.is_ship(),
+			"uomini": u.men if not (u.is_ship() or u.is_agent() or is_agent_unit or crusade_kind != "") else 0})
 	return entries
 
 
@@ -6545,7 +6576,7 @@ func _refresh_queues_panel() -> void:
 			idle.modulate = Color(1, 1, 1, 0.6)
 			row.add_child(idle)
 		for q in voci:
-			var item := _queue_review_item(q)
+			var item := _queue_review_item(q, region_id)
 			var building := str(q["tipo"]) == QueueItem.KIND_BUILDING
 			var holder := Control.new()
 			var size: Vector2 = item["misura"]
@@ -6659,7 +6690,9 @@ func _modal_flow(box: VBoxContainer) -> HFlowContainer:
 ## Tessera cliccabile: immagine (o nome se manca), didascalia breve sotto, dettagli nel suggerimento; spenta se non si puo'.
 ## Tessera della finestra della provincia: immagine, nome intero in grassetto che va a capo (richiesta di Federico,
 ## 2026-11-10: i nomi tagliati si leggevano male) e, dopo il primo a capo di `caption`, i dettagli (costo, anni, uomini).
-func _modal_tile(tex: Texture2D, size: Vector2, caption: String, tip: String, enabled: bool) -> Button:
+## `bold_lead` (richiesta di Federico del 25/11/2026: gli uomini dell'unita' in grassetto) apre la riga dei dettagli in
+## grassetto, seguito da « · » e dal resto della didascalia.
+func _modal_tile(tex: Texture2D, size: Vector2, caption: String, tip: String, enabled: bool, bold_lead: String = "") -> Button:
 	var b := Button.new()
 	b.focus_mode = Control.FOCUS_NONE
 	b.theme_type_variation = "Tile"
@@ -6706,7 +6739,26 @@ func _modal_tile(tex: Texture2D, size: Vector2, caption: String, tip: String, en
 		info.add_theme_font_size_override("font_size", 11)
 		info.add_theme_color_override("font_color", UiTheme.INK_FAINT)
 		info.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		col.add_child(info)
+		if bold_lead == "":
+			col.add_child(info)
+		else:
+			var row := HBoxContainer.new()
+			row.alignment = BoxContainer.ALIGNMENT_CENTER
+			row.add_theme_constant_override("separation", 0)
+			row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var lead := Label.new()
+			lead.text = bold_lead
+			lead.add_theme_font_size_override("font_size", 11)
+			lead.add_theme_color_override("font_color", UiTheme.INK if enabled else UiTheme.INK_FAINT)
+			if bold != null:
+				lead.add_theme_font_override("font", bold)
+			lead.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			row.add_child(lead)
+			info.text = " · " + details
+			info.autowrap_mode = TextServer.AUTOWRAP_OFF
+			info.custom_minimum_size = Vector2.ZERO
+			row.add_child(info)
+			col.add_child(row)
 	return b
 
 
@@ -6735,7 +6787,7 @@ func _fill_build_tab(province: ProvinceState) -> void:
 		var q_family := str(q["famiglia"])
 		var q_level := int(q["livello"])
 		var q_text := CampaignUiQueues.building_tile_text(q, CampaignUiText.building_name(_state, q_family, q_level))
-		var q_tile := _modal_tile(_building_icon(q_family, q_level), MODAL_ICON_SIZE,
+		var q_tile := _modal_tile(_building_icon(q_family, q_level, province.id), MODAL_ICON_SIZE,
 			"%s\n%s" % [_building_caption(q_family, q_level), str(q_text["didascalia"])], str(q_text["suggerimento"]), true)
 		q_tile.pressed.connect(_on_cancel_queue.bind(GameCommands.QUEUE_BUILDING, int(q["indice"])))
 		queue_flow.add_child(q_tile)
@@ -6749,7 +6801,7 @@ func _fill_build_tab(province: ProvinceState) -> void:
 			if bool(e["ok"]) != wanted_ok:
 				continue
 			var caption := Lang.t("%s\n%d f · %d a") % [_building_caption(str(e["family"]), int(e["level"])), int(e["cost"]), int(e["years"])]
-			var tex := BuildingArt.icon(str(e["label"]), str(e["family"]), _player_religion()) if AssetLibrary.is_available() else null
+			var tex := _building_icon(str(e["family"]), int(e["level"]), province.id) if AssetLibrary.is_available() else null
 			var tile := _modal_tile(tex, MODAL_ICON_SIZE, caption, str(e["tip"]) + Lang.t("\nClic destro: scheda dell'edificio"), wanted_ok)
 			tile.pressed.connect(_on_queue_building.bind(str(e["family"])))
 			tile.gui_input.connect(_on_building_tile_input.bind(str(e["family"]), int(e["level"])))
@@ -6812,7 +6864,9 @@ func _fill_recruit_tab(province: ProvinceState) -> void:
 				continue
 			var tex := PieceArt.unit_card(_data, _player_id, str(e["unit"])) if AssetLibrary.is_available() else null
 			var caption := Lang.t("%s\n%d f · %d a") % [str(e["name"]), int(e["cost"]), int(e["years"])]
-			var tile := _modal_tile(tex, MODAL_CARD_SIZE, caption, str(e["tip"]) + Lang.t("\nClic destro: scheda dell'unità"), wanted_ok)
+			# richiesta di Federico (25/11/2026): gli uomini dell'unita' prima del costo, in grassetto
+			var men_text := Lang.t("%d uomini") % int(e["uomini"]) if int(e.get("uomini", 0)) > 0 else ""
+			var tile := _modal_tile(tex, MODAL_CARD_SIZE, caption, str(e["tip"]) + Lang.t("\nClic destro: scheda dell'unità"), wanted_ok, men_text)
 			tile.pressed.connect(_on_queue_unit.bind(str(e["unit"])))
 			tile.gui_input.connect(_on_recruit_tile_input.bind(str(e["unit"])))
 			flow.add_child(tile)

@@ -54,6 +54,10 @@ var castle_multipliers := PackedFloat64Array([1.5, 2.0, 2.5, 3.0, 4.0])
 var starve_years := PackedInt32Array([1, 2, 3, 4, 5])
 var garrison_max := 16
 var cavalry_garrison_weight := 2
+## Fortezze (26/11/2026, Federico): dal grado `fortress_tier` la guarnigione tiene `fortress_garrison_max` unita' e la
+## cavalleria conta uno, cosi' ci entra un'intera armata (20 pile).
+var fortress_tier := 4
+var fortress_garrison_max := 20
 var assault_annihilates := true
 
 var sally_threshold := 2.0
@@ -68,6 +72,10 @@ var compass_bonus := 1
 var coast_limit := true
 ## Blocco navale: anche le flotte delle fazioni neutrali (non alleate) chiudono le zone ai trasporti (vero), o solo le nemiche.
 var neutral_blockade := true
+## Il blocco vale solo se chi blocca ha piu' navi (richiesta di Federico del 22/11/2026: «se io ho piu' navi di un avversario
+## o di un neutrale, non ha senso che ci sia il blocco»): una fazione chiude la zona solo con piu' navi di quelle proprie
+## presenti; a parita' resta aperta. false = basta una flotta (regola di prima).
+var blockade_needs_more_ships := true
 ## Emissari, principesse e gli altri agenti viaggiano via mare anche senza flotte proprie nelle zone (richiesta di Federico
 ## dell'11/11/2026, ADR-034); li ferma solo una flotta nemica. false = regola di prima: serve la catena di flotte.
 var agents_free_sea := true
@@ -130,6 +138,8 @@ static func load_file(path: String = DEFAULT_PATH, auror_path: String = AUROR_PA
 	rules.starve_years = _ints(cfg, "castello", "anni_fame", rules.starve_years)
 	rules.garrison_max = _int(cfg, "castello", "guarnigione_max", rules.garrison_max)
 	rules.cavalry_garrison_weight = _int(cfg, "castello", "peso_cavalleria", rules.cavalry_garrison_weight)
+	rules.fortress_tier = _int(cfg, "castello", "grado_fortezza", rules.fortress_tier)
+	rules.fortress_garrison_max = _int(cfg, "castello", "guarnigione_max_fortezza", rules.fortress_garrison_max)
 	rules.assault_annihilates = _bool(cfg, "castello", "assalto_annienta", rules.assault_annihilates)
 	rules.sally_threshold = _float(cfg, "assedio", "soglia_sortita", rules.sally_threshold)
 	rules.fleet_min_range = _int(cfg, "flotte", "raggio_minimo", rules.fleet_min_range)
@@ -141,6 +151,9 @@ static func load_file(path: String = DEFAULT_PATH, auror_path: String = AUROR_PA
 	var nb: Variant = cfg.get_value("flotte", "blocco_neutrali", rules.neutral_blockade)
 	if typeof(nb) == TYPE_BOOL:
 		rules.neutral_blockade = nb
+	var bm: Variant = cfg.get_value("flotte", "blocco_solo_se_piu_navi", rules.blockade_needs_more_ships)
+	if typeof(bm) == TYPE_BOOL:
+		rules.blockade_needs_more_ships = bm
 	var fs: Variant = cfg.get_value("flotte", "agenti_senza_navi", rules.agents_free_sea)
 	if typeof(fs) == TYPE_BOOL:
 		rules.agents_free_sea = fs
@@ -234,12 +247,15 @@ func to_dict() -> Dictionary:
 		"starve_years": Array(starve_years),
 		"garrison_max": garrison_max,
 		"cavalry_garrison_weight": cavalry_garrison_weight,
+		"fortress_tier": fortress_tier,
+		"fortress_garrison_max": fortress_garrison_max,
 		"assault_annihilates": assault_annihilates,
 		"sally_threshold": sally_threshold,
 		"fleet_min_range": fleet_min_range,
 		"compass_bonus": compass_bonus,
 		"compass_event": compass_event,
 		"neutral_blockade": neutral_blockade,
+		"blockade_needs_more_ships": blockade_needs_more_ships,
 		"agents_free_sea": agents_free_sea,
 		"agents_any_port": agents_any_port,
 		"oceans": oceans.keys(),

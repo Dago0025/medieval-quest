@@ -25,6 +25,10 @@ var treasury_mark := -1
 ## dell'evento (0 = mai) e `excommunication_leader` l'id del capo al momento (0 = nessuno): la scomunica cade alla morte
 ## del capo scomunicato o del Papa.
 var excommunicated := false
+## ADR-114: anni consecutivi da fazione estinta (insurrezione lealista nella finestra di province.cfg [insurrezioni]) e
+## insurrezioni gia' tentate (l'armata seguente e' piu' grande). Zero per le fazioni vive.
+var dead_years := 0
+var uprisings := 0
 var excommunication_year := 0
 var excommunication_leader := 0
 ## Piano del commercio navale dell'IA (ADR-053, `AiTrade`): zone di mare da presidiare con una nave ciascuna e anno in cui
@@ -82,6 +86,10 @@ func to_dict() -> Dictionary:
 		d["rotte_ia"] = {"anno": ai_trade_year, "zone": Array(ai_trade_zones)}
 	if not intel.is_empty():
 		d["spionaggio"] = intel.duplicate()
+	if dead_years > 0:
+		d["anni_estinta"] = dead_years
+	if uprisings > 0:
+		d["insurrezioni"] = uprisings
 	return d
 
 
@@ -97,6 +105,8 @@ static func from_dict(d: Dictionary) -> FactionState:
 	# salvataggi precedenti: il primo saldo parte dal tesoro al caricamento (le spese da li' in poi sono registrate)
 	f.treasury_mark = int(d.get("tesoro_chiusura", f.treasury))
 	f.excommunicated = bool(d.get("scomunicata", false))
+	f.dead_years = int(d.get("anni_estinta", 0))
+	f.uprisings = int(d.get("insurrezioni", 0))
 	if f.excommunicated:
 		f.excommunication_year = int(d.get("anno_scomunica", 0))
 		f.excommunication_leader = int(d.get("capo_scomunica", 0))

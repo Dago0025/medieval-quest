@@ -12,7 +12,7 @@ const CRUSADE := "CRUSADE"
 const JIHAD := "JIHAD"
 ## Religiosi e inquisitori (fase 5b): convertono le province (`ReligionProcessor`), gli inquisitori bruciano gli eretici e
 ## fanno processi (`AgentMissions.TRIAL`); si reclutano, si muovono e si possono catturare o assassinare come gli altri.
-const RELIGIOUS_TYPES := ["BISHOP", "CARDINAL", "PRIEST", "SHAMAN", "ORTHODOX_BISHOP", "MULLAH", "ULAMA", "INQUISITOR", "GRAND_INQUISITOR"]
+const RELIGIOUS_TYPES := ["BISHOP", "CARDINAL", "PRIEST", "SHAMAN", "MONK", "ORTHODOX_BISHOP", "MULLAH", "ULAMA", "INQUISITOR", "GRAND_INQUISITOR"]
 
 var id := 0
 var faction := ""

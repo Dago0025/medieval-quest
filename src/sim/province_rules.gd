@@ -39,7 +39,7 @@ var regional_rebels := {
 ## Religione di ogni cultura delle regioni (le fazioni hanno la religione in `SetReligion`).
 var culture_religion := {
 	"CATHOLIC_CULTURE": "REL_CATHOLIC", "ORTHODOX_CULTURE": "REL_ORTHODOX",
-	"MUSLIM_CULTURE": "REL_ISLAMIC", "PAGAN_CULTURE": "REL_PAGAN",
+	"MUSLIM_CULTURE": "REL_ISLAMIC", "PAGAN_CULTURE": "REL_PAGAN", "DHARMA_CULTURE": "REL_DHARMA",
 }
 
 # --- rivolta e propagazione ---
@@ -61,6 +61,13 @@ var reemerge_threshold := 120        ## una fazione estinta puo' riemergere sott
 var reemerge_chance := 0.1           ## PROVVISORIA: probabilita' annua per fazione estinta (0,02 fino al 15/11)
 var reemerge_stacks := 3             ## PROVVISORIA: pile dell'esercito nuovo se non ci sono ribelli da arruolare
 var reemerge_treasury := 1000        ## PROVVISORIA: tesoro minimo della fazione riemersa
+## ADR-114, insurrezioni lealiste (PROVVISORIE): una fazione estinta (non del giocatore) ritenta di tornare dopo un numero di
+## anni a caso tra `uprising_years_min` e `uprising_years_max` (come il Papato, ADR-072), con un'armata di
+## `uprising_stacks` pile + `uprising_growth` per ogni insurrezione gia' tentata. 0 anni massimi = spente.
+var uprising_years_min := 20
+var uprising_years_max := 40
+var uprising_stacks := 6
+var uprising_growth := 2
 
 # --- guerra civile (manuale p33, catalogo "Guerra civile") ---
 var disloyal_loyalty := 3            ## lealta' massima di un generale sleale (manuale: <= 3)
@@ -123,6 +130,10 @@ static func load_file(path: String = DEFAULT_PATH) -> ProvinceRules:
 	r.reemerge_chance = _float(cfg, "riemersione", "p_riemersione", r.reemerge_chance)
 	r.reemerge_stacks = _int(cfg, "riemersione", "pile", r.reemerge_stacks)
 	r.reemerge_treasury = _int(cfg, "riemersione", "tesoro", r.reemerge_treasury)
+	r.uprising_years_min = _int(cfg, "insurrezioni", "anni_min", r.uprising_years_min)
+	r.uprising_years_max = _int(cfg, "insurrezioni", "anni_max", r.uprising_years_max)
+	r.uprising_stacks = _int(cfg, "insurrezioni", "pile", r.uprising_stacks)
+	r.uprising_growth = _int(cfg, "insurrezioni", "pile_in_piu", r.uprising_growth)
 	r.disloyal_loyalty = _int(cfg, "guerra_civile", "lealta_sleale", r.disloyal_loyalty)
 	r.civil_share = _float(cfg, "guerra_civile", "quota_sleali", r.civil_share)
 	r.civil_min = _int(cfg, "guerra_civile", "sleali_min", r.civil_min)
@@ -160,6 +171,16 @@ func religion_of_culture(culture: String) -> String:
 	return str(culture_religion[key]).to_upper()
 
 
+## ADR-114: probabilita' dell'insurrezione lealista di una fazione estinta da `dead_years` anni: 0 prima di `anni_min`, poi
+## uniforme sulla finestra (1 / anni rimasti), 1 da `anni_max` (come `PapacyRules.reemerge_chance`). 0 se spente.
+func uprising_chance(dead_years: int) -> float:
+	if uprising_years_max <= 0 or dead_years < uprising_years_min:
+		return 0.0
+	if dead_years >= uprising_years_max:
+		return 1.0
+	return 1.0 / float(uprising_years_max - dead_years + 1)
+
+
 ## Probabilita' annua di rivolta: 0 dalla soglia in su, poi `k_rivolta` per ogni punto mancante, al massimo `p_massima`.
 func revolt_chance(loyalty: int) -> float:
 	if loyalty >= revolt_threshold:
@@ -173,6 +194,7 @@ func calm() -> void:
 	revolt_k = 0.0
 	spread_chance = 0.0
 	reemerge_chance = 0.0
+	uprising_years_max = 0
 	civil_chance = 0.0
 
 
@@ -210,6 +232,10 @@ func to_dict() -> Dictionary:
 		"reemerge_chance": reemerge_chance,
 		"reemerge_stacks": reemerge_stacks,
 		"reemerge_treasury": reemerge_treasury,
+		"uprising_years_min": uprising_years_min,
+		"uprising_years_max": uprising_years_max,
+		"uprising_stacks": uprising_stacks,
+		"uprising_growth": uprising_growth,
 		"disloyal_loyalty": disloyal_loyalty,
 		"civil_share": civil_share,
 		"civil_min": civil_min,

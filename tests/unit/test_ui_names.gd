@@ -86,3 +86,31 @@ func test_articoli_e_accordo_delle_fazioni(t: TestContext) -> void:
 	t.assert_eq(CampaignUiText.fnames(PackedStringArray(["FN_ENGLISH", "FN_FRENCH", "FN_GERMAN_HRE"]), "a"), "agli Inglesi, ai Francesi e al Sacro Romano Impero")
 	t.assert_eq(CampaignUiText.fverbs(PackedStringArray(["FN_GERMAN_HRE", "FN_PAPIST"]), "dichiara", "dichiarano"), "dichiarano")
 	t.assert_eq(CampaignUiText.fsubj("FN_DANISH"), "Gli Auror")
+
+
+## ADR-115 (richiesta di Federico del 21/11/2026): gli Auror hanno titoli di corte propri, non quelli dei Danesi.
+func test_cariche_di_corte_degli_auror(t: TestContext) -> void:
+	if not GameFiles.is_available():
+		t.skip("installazione di MTW non trovata")
+		return
+	Scenario.set_auror(true)
+	RegionNames.reset()
+	var d := Scenario.load_startpos()
+	var expected := {
+		"royal_palace": "Gran Ciambellano del Trono del Drago",
+		"constables_palace": "Maestro dei Destrieri del Drago",
+		"marshals_palace": "Maresciallo delle Legioni del Drago",
+		"chancellery": "Gran Cancelliere dell'Impero",
+		"admiralty": "Grande Ammiraglio della Flotta del Drago",
+		"cathedral": "Sommo sacerdote del Culto Imperiale",
+	}
+	var seen := 0
+	for o in d.offices_of("FN_DANISH"):
+		var it := RegionNames.translate_office(d, o.display_name)
+		t.assert_false(it.to_lower().contains("dan") or it.contains("Lund") or it.contains("Nord"), it)
+		if expected.has(o.building):
+			t.assert_eq(it, expected[o.building], o.building)
+			seen += 1
+	t.assert_eq(seen, expected.size(), "tutte le cariche degli Auror")
+	t.assert_eq(RegionNames.translate_office(d, "Chancellor of Denmark"), "Cancelliere di Danimarca", "i Danesi restano danesi")
+	RegionNames.reset()

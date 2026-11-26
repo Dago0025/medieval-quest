@@ -140,11 +140,16 @@ static func apply_famous_king(state: GameState, c: Character) -> bool:
 
 ## Generale generato (PROVVISORIA: attributi casuali bassi). Sorteggi, in ordine: nome, cognome,
 ## eta', comando, terrore, pieta', acume, lealta', soglia di vecchiaia.
-static func make_general(state: GameState, faction_id: String, region_id: String, at_year: int, rng: RandomNumberGenerator) -> Character:
+## `origin`: fazione da cui prendere nome e cognome (e il ritratto, `Character.origin`), "" = la propria.
+static func make_general(state: GameState, faction_id: String, region_id: String, at_year: int, rng: RandomNumberGenerator, origin: String = "") -> Character:
 	var d := state.rules.dynasty
-	var forenames := forenames_of(state, faction_id)
-	var surnames := surnames_of(state, faction_id)
+	origin = SimUtil.norm(origin)
+	if origin == SimUtil.norm(faction_id):
+		origin = ""
+	var forenames := forenames_of(state, origin if origin != "" else faction_id)
+	var surnames := surnames_of(state, origin if origin != "" else faction_id)
 	var c := state.create_character(faction_id)
+	c.origin = origin
 	c.role = Character.ROLE_GENERAL
 	c.forename = forenames[rng.randi_range(0, forenames.size() - 1)]
 	c.surname = surnames[rng.randi_range(0, surnames.size() - 1)]
@@ -157,6 +162,50 @@ static func make_general(state: GameState, faction_id: String, region_id: String
 	c.old_age = roll_old_age(state, false, rng)
 	c.region = region_id
 	return c
+
+
+## Fazione «d'origine» del generale che nasce nell'esercito (richiesta di Federico del 22/11/2026: gli Auror arruolano
+## truppe di ogni fazione; una truppa giapponese che diventa generale deve essere un giapponese con nome e ritratto).
+## Solo per le fazioni di `generali_dalle_unita` (Rules.generals_from_units_factions). L'unita' da cui nasce il generale
+## e' la prima con la candidatura migliore della col. 9 del prod (PREFERRED, poi OK, poi le altre), come nell'originale.
+## "" se il generale resta della propria fazione: unita' esclusive, unita' di tutte le fazioni o della fazione stessa.
+## Tra piu' fazioni dell'unita' si sceglie stabilmente con l'id dell'esercito.
+static func unit_origin(state: GameState, army: Army) -> String:
+	if state == null or army == null or state.units == null or state.campaign == null:
+		return ""
+	var owner := SimUtil.norm(army.faction)
+	if not state.rules.generals_from_units_factions.has(owner):
+		return ""
+	var best: UnitType = null
+	var best_rank := 99
+	for s in army.stacks:
+		var u := state.units.get_unit(s.unit_id)
+		if u == null:
+			continue
+		var rank: int = {"PREFERRED": 0, "OK": 1}.get(u.general_candidate.strip_edges().to_upper(), 2)
+		if rank < best_rank:
+			best = u
+			best_rank = rank
+	if best == null or best.elite or best.all_factions:
+		return ""
+	var candidates := PackedStringArray()
+	if not best.factions.is_empty():
+		if best.factions.has(owner):
+			return ""
+		for f in best.factions:
+			var fid := SimUtil.norm(f)
+			if fid != GameState.REBEL and state.campaign.faction(fid) != null:
+				candidates.append(fid)
+	elif not best.cultures.is_empty():
+		var own := state.campaign.faction(owner)
+		if own != null and best.cultures.has(GameCommands.culture_key(own.culture)):
+			return ""
+		for cf in state.campaign.factions:
+			if cf.id != GameState.REBEL and cf.id != owner and best.cultures.has(GameCommands.culture_key(cf.culture)):
+				candidates.append(cf.id)
+	if candidates.is_empty():
+		return ""
+	return candidates[absi(army.id) % candidates.size()]
 
 
 ## Capo iniziale di una fazione da `SetStartLeader` (formato in testa a campaign_data.gd): sceglie il

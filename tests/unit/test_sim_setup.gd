@@ -47,7 +47,7 @@ func test_regole_valori_della_specifica(t: TestContext) -> void:
 	var r := Rules.new()
 	t.assert_eq(r.annual_scale, 0.52)
 	t.assert_eq(r.final_year, 1700)
-	t.assert_eq(r.max_stacks, 16)
+	t.assert_eq(r.max_stacks, 20, "20 unita' per esercito (Federico, 22/11/2026; 16 nell'originale)")
 	t.assert_eq(r.max_building_queue, 4)
 	t.assert_eq(r.max_unit_queue, 5)
 	t.assert_eq(r.default_tax, 2)
@@ -241,15 +241,15 @@ func test_limite_di_pile_per_esercito(t: TestContext) -> void:
 	t.assert_eq(s.armies_in("ID_ALTA").size(), 2)
 	for a in s.armies:
 		t.assert_true(a.stack_count() <= 1)
-	# 18 unita' in una regione con il limite normale: 16 + 2
+	# 22 unita' in una regione con il limite normale: 20 + 2 (piu' quella gia' in SOLA)
 	var lines := ""
-	for i in 18:
+	for i in 22:
 		lines += "MakeUnit:: ID_SOLA Spearmen %d\n" % (10 + i)
 	var text := FileAccess.get_file_as_string(STARTPOS) + "\n" + lines
 	var s2 := GameSetup.new_game(StartposLoader.load_text(text), UnitProdLoader.load_file(UNITS), BuildingProdLoader.load_file(BUILDINGS), Rules.new(), 1)
 	var sola := s2.armies_in("ID_SOLA")
-	t.assert_eq(sola.size(), 2, "19 unita' = 16 + 3")
-	t.assert_eq(sola[0].stack_count(), 16)
+	t.assert_eq(sola.size(), 2, "23 unita' = 20 + 3")
+	t.assert_eq(sola[0].stack_count(), 20)
 	t.assert_eq(sola[1].stack_count(), 3)
 
 

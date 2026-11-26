@@ -15,7 +15,9 @@ func _world() -> GameState:
 	var campaign := StartposLoader.load_file(STARTPOS)
 	var units := UnitProdLoader.load_file(UNITS)
 	var buildings := BuildingProdLoader.load_file(BUILDINGS)
-	return GameSetup.new_game(campaign, units, buildings, Rules.new(), 1)
+	var s := GameSetup.new_game(campaign, units, buildings, Rules.new(), 1)
+	s.rules.combat.blockade_needs_more_ships = false   # regola di base del blocco (la superiorita' di navi ha i suoi test)
+	return s
 
 
 func _fleet(s: GameState, faction_id: String, zone: String) -> Army:

@@ -22,7 +22,7 @@ const GROUP_TYPES := {
 	"emissari": ["EMISSARY"],
 	"spie": ["SPY"],
 	"assassini": ["ASSASSIN"],
-	"religiosi": ["BISHOP", "CARDINAL", "PRIEST", "SHAMAN", "ORTHODOX_BISHOP", "MULLAH", "ULAMA"],
+	"religiosi": ["BISHOP", "CARDINAL", "PRIEST", "SHAMAN", "MONK", "ORTHODOX_BISHOP", "MULLAH", "ULAMA"],
 	"inquisitori": ["INQUISITOR", "GRAND_INQUISITOR"],
 }
 

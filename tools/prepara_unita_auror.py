@@ -12,7 +12,11 @@ import configparser
 import os
 import sys
 
-from PIL import Image
+import tempfile
+
+import numpy as np
+from PIL import Image, ImageFilter
+from scipy import ndimage
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import prepara_unita as pu  # noqa: E402
@@ -29,7 +33,36 @@ def sections():
         cp.read_file(f)
     for s in cp.sections():
         if s != "comune":
-            yield s, cp[s]["immagine"].strip().strip('"')
+            yield s, cp[s].get("immagine", "").strip().strip('"')   # i cappellani non hanno immagine propria
+
+
+def flatten_bg(src):
+    """Fondi con vignettatura (piu' chiari dietro la figura): le zone grigie lisce collegate al bordo diventano grigio
+    piatto prima del ritaglio, altrimenti pu.cut (che stima il fondo con un piano) ne lascia una chiazza grigia."""
+    a = np.asarray(Image.open(src).convert("RGB")).astype(float)
+    lum = a.mean(axis=2)
+    sat = a.max(axis=2) - a.min(axis=2)
+    m = ndimage.uniform_filter(lum, 7)
+    std = np.sqrt(np.maximum(ndimage.uniform_filter(lum ** 2, 7) - m ** 2, 0))
+    flat = (sat < 12) & (std < 3.5)
+    lab, _ = ndimage.label(flat)
+    edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+    bgm = np.isin(lab, edge[edge > 0])
+    grey = np.median(a[bgm], axis=0)
+    a[bgm] = grey
+    tmp = tempfile.NamedTemporaryFile(suffix=".png", delete=False).name
+    Image.fromarray(a.astype(np.uint8)).save(tmp)
+    return tmp
+
+
+def sharpen(img, radius, percent):
+    """Le immagini di ERNIE-Image (Pro 3 Image) hanno dettagli fini e morbidi: rimpicciolite a carta sembravano a
+    risoluzione piu' bassa delle carte fatte col modello precedente. Una maschera di contrasto leggera dopo il
+    ridimensionamento le riporta alla stessa nitidezza; l'alfa resta quello del ritaglio."""
+    alpha = img.getchannel("A")
+    out = img.convert("RGB").filter(ImageFilter.UnsharpMask(radius=radius, percent=percent, threshold=2)).convert("RGBA")
+    out.putalpha(alpha)
+    return out
 
 
 def main():
@@ -45,9 +78,11 @@ def main():
         src = os.path.join(media, name) if name else ""
         if not name or not os.path.isfile(src):
             print("manca", uid, name); continue
-        art = pu.cut(src)
-        card = pu.card_from(art)
-        for sub, img in (("review_panel/units", card), ("info_pics/units", pu.sheet(art))):
+        flat = flatten_bg(src)
+        art = pu.cut(flat)
+        os.remove(flat)
+        card = sharpen(pu.card_from(art), 1.0, 120)
+        for sub, img in (("review_panel/units", card), ("info_pics/units", sharpen(pu.sheet(art), 1.2, 80))):
             d = os.path.join(OUT, sub, uid.lower() + ".png")
             os.makedirs(os.path.dirname(d), exist_ok=True)
             img.save(d, optimize=True)

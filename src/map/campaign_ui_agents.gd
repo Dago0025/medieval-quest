@@ -21,6 +21,7 @@ const TYPE_LABELS := {
 	"CARDINAL": "Cardinale",
 	"PRIEST": "Sacerdote",
 	"SHAMAN": "Sciamano",
+	"MONK": "Monaco",
 	"ORTHODOX_BISHOP": "Vescovo ortodosso",
 	"MULLAH": "Ulema",      ## nomi della versione italiana dell'originale (Loc/Italian/names.txt): Mullah = Ulema,
 	"ULAMA": "Imam",        ## Ulama = Imam
@@ -33,6 +34,7 @@ const TYPE_LABELS := {
 ## unita' (aggiunto dalla XL), ma nel gioco si chiama Sciamano.
 const UNIT_LABELS := {
 	"SHAMAN": "Sciamano",
+	"MONK": "Monaco",
 }
 
 const MISSION_NAMES := {
@@ -55,6 +57,7 @@ const RELIGION_NAMES := {
 	"MUSLIM": "Musulmana",
 	"PAGAN": "Pagana",
 	"IMPERIAL": "Culto Imperiale",
+	"DHARMA": "Dharma",
 }
 
 ## Azioni delle voci del menu (campo "azione").

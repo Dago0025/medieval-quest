@@ -247,6 +247,8 @@ static func _disasters(state: GameState, rules: EventRules, black_death_now: boo
 		for a in state.armies.duplicate():
 			if not a.is_fleet or a.stacks.is_empty():
 				continue
+			if state.rules.storm_immune_factions.has(SimUtil.norm(a.faction)):
+				continue   # flotte_immuni_tempeste (auror.cfg): gli Auror non affondano nelle tempeste (23/11/2026)
 			if state.rng.randf() < rules.storm_chance * storm_factor(state, a):
 				if _storm(state, a):
 					removed = true
@@ -391,6 +393,8 @@ static func _hurt_army(state: GameState, a: Army, fraction: float) -> bool:
 	var kept: Array[UnitStack] = []
 	for s in a.stacks:
 		var cap := s.men - 1 if keep else s.men
+		if Combat.is_invulnerable(state.units, s):
+			cap = 0   # Ankalagon non perde il suo unico membro
 		var loss := clampi(roundi(float(s.men) * fraction), 0, maxi(0, cap))
 		s.men -= loss
 		if s.men > 0:

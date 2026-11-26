@@ -28,15 +28,50 @@ const PORT_IMAGE := "campmap/ships/port.BIF"
 const CASTLE_SHADOW := Color(0.0, 0.0, 0.0, 0.32)
 
 static var _cache := {}
+## Culture grafiche proprie di alcune fazioni (data/culture_grafiche.cfg: Aztechi, Inca, Kanem), caricate alla prima richiesta.
+const CULTURES_FILE := "res://data/culture_grafiche.cfg"
+static var _faction_cultures := {}
+static var _cultures_loaded := false
 
 
 static func reset() -> void:
 	_cache.clear()
+	_faction_cultures.clear()
+	_cultures_loaded = false
 
 
-## Cartella della cultura delle figure: Christian (cattolici e ortodossi), Muslim, Pagan.
+## Cultura propria della fazione da data/culture_grafiche.cfg ("" se non ne ha una).
+static func own_culture(faction_id: String) -> String:
+	if not _cultures_loaded:
+		_cultures_loaded = true
+		var cfg := ConfigFile.new()
+		if cfg.load(CULTURES_FILE) == OK and cfg.has_section("fazioni"):
+			for k in cfg.get_section_keys("fazioni"):
+				_faction_cultures[str(k).strip_edges().to_upper()] = str(cfg.get_value("fazioni", k, "")).strip_edges()
+	return str(_faction_cultures.get(faction_id.to_upper(), ""))
+
+
+## Cartella delle figure della fazione: la sua cultura propria se ne ha una, altrimenti quella della religione.
+static func faction_culture(f: CampaignData.Faction) -> String:
+	if f == null:
+		return "Christian"
+	var own := own_culture(f.id)
+	return own if own != "" else culture_folder(f.religion)
+
+
+## Se `original` sta nella cartella della cultura propria `own` e l'immagine non c'e' ancora, la stessa della cartella `fallback`.
+static func _or_fallback(original: String, own: String, fallback: String) -> String:
+	if own == "" or not original.contains("/%s/" % own) or AssetLibrary.has(original) or AssetLibrary.is_remade(original):
+		return original
+	return original.replace("/%s/" % own, "/%s/" % fallback)
+
+
+## Cartella della cultura delle figure: Christian (cattolici e ortodossi), Muslim, Pagan, Asian (Dharma: pedine, carte e
+## figure degli agenti rifatte per i popoli asiatici, 22/11/2026).
 static func culture_folder(religion: String) -> String:
 	var r := religion.to_upper()
+	if r.contains("DHARMA"):
+		return "Asian"
 	if r.contains("MUSLIM"):
 		return "Muslim"
 	if r.contains("PAGAN"):
@@ -44,9 +79,11 @@ static func culture_folder(religion: String) -> String:
 	return "Christian"
 
 
-## Cartella delle navi: Catholic, Orthodox, Muslim.
+## Cartella delle navi: Catholic, Orthodox, Muslim, Asian (giunche del Dharma).
 static func ship_folder(religion: String) -> String:
 	var r := religion.to_upper()
+	if r.contains("DHARMA"):
+		return "Asian"
 	if r.contains("MUSLIM"):
 		return "Muslim"
 	if r.contains("ORTHODOX"):
@@ -57,24 +94,50 @@ static func ship_folder(religion: String) -> String:
 ## Pedina di un esercito: `kind` = "army", "leader" (con un capo o un generale), "fleet", "crusade" o "jihad";
 ## `moving` = ha un percorso; `fill` = quanto e' piena l'armata (pile / massimo): lo stendardo e' colorato dal basso per quella
 ## parte e pallido sopra. Null se l'immagine manca (si torna ai segnalini disegnati).
+## `kind` = "unica:<pedina>": pedina propria dell'armata che porta un'unita' unica (`UnitType.piece`, `special_kind`).
+const SPECIAL := "unica:"
+
+
+## Tipo di pedina speciale per l'esercito: "unica:<pedina>" se porta un'unita' con la pedina propria, altrimenti "".
+static func special_kind(units: UnitProdLoader.UnitTable, army: Army) -> String:
+	if units == null or army == null or army.is_fleet:
+		return ""
+	for st in army.stacks:
+		var u := units.get_unit(st.unit_id)
+		if u != null and u.piece != "":
+			return SPECIAL + u.piece
+	return ""
+
+
 static func army_piece(campaign: CampaignData, faction_id: String, kind: String, moving: bool, fill: float = 1.0) -> Texture2D:
 	var state_name := "moving" if moving else "awaiting"
 	var f := campaign.faction(faction_id) if campaign != null else null
 	var religion := f.religion if f != null else ""
+	var own := own_culture(faction_id) if f != null else ""
+	var units_folder := own if own != "" else culture_folder(religion)
 	var original := ""
 	var shield_rect := SHIELD_ARMY
+	if kind.begins_with(SPECIAL):
+		# pedina propria di un'unita' unica (Ankalagon, 23/11/2026); senza immagine quella del capo
+		var special := "%s/Units/Auror/%s_held_%s.BIF" % [BASE, kind.substr(SPECIAL.length()), state_name]
+		if AssetLibrary.is_remade(special) or AssetLibrary.has(special):
+			return _piece(campaign, faction_id, special, SHIELD_LEADER, fill)
+		kind = "leader"
 	match kind:
 		"fleet":
-			original = "%s/Ships/%s/fleet_held_%s.BIF" % [BASE, ship_folder(religion), state_name]
+			original = "%s/Ships/%s/fleet_held_%s.BIF" % [BASE, own if own != "" else ship_folder(religion), state_name]
 		"crusade":
 			original = "%s/Agents/Crusade_held_%s.Bif" % [BASE, state_name]
 		"jihad":
 			original = "%s/Agents/Jihad_held_%s.BIF" % [BASE, state_name]
 		"leader":
-			original = "%s/Units/%s/army_leader_held_%s.BIF" % [BASE, culture_folder(religion), state_name]
+			original = "%s/Units/%s/army_leader_held_%s.BIF" % [BASE, units_folder, state_name]
 			shield_rect = SHIELD_LEADER
 		_:
-			original = "%s/Units/%s/army_held_%s.BIF" % [BASE, culture_folder(religion), state_name]
+			original = "%s/Units/%s/army_held_%s.BIF" % [BASE, units_folder, state_name]
+	original = _or_fallback(original, own, ship_folder(religion) if kind == "fleet" else culture_folder(religion))
+	if original.contains("/Asian/") and not AssetLibrary.has(original) and not AssetLibrary.is_remade(original):
+		original = original.replace("/Asian/", "/Catholic/" if kind == "fleet" else "/Pagan/")   # pedine asiatiche non ancora pronte
 	var with_shield := kind == "army" or kind == "leader"
 	return _piece(campaign, faction_id, original, shield_rect if with_shield else Rect2(), fill)
 
@@ -86,7 +149,9 @@ static func unit_card(campaign: CampaignData, faction_id: String, unit_id: Strin
 		return _cache[key]
 	var tex: Texture2D = null
 	var f := campaign.faction(faction_id) if campaign != null else null
-	var culture := culture_folder(f.religion) if f != null else ""   # carte d'agente per cultura, come le pedine
+	var culture := faction_culture(f) if f != null else ""   # carte d'agente per cultura, come le pedine
+	if f != null and culture != culture_folder(f.religion) and not AssetLibrary.is_remade("campmap/review_panel/Agents/%s/%s.BIF" % [culture, unit_id]):
+		culture = culture_folder(f.religion)   # cultura propria senza quella carta: la carta della religione
 	var source := AssetLibrary.unit_card(unit_id, culture)
 	if source != null and AssetLibrary.is_remade(AssetLibrary.unit_card_path(unit_id, culture)):
 		tex = source   # carta dipinta (ADR-043): non ha i colori chiave dell'originale da ricolorare
@@ -116,10 +181,13 @@ static func agent_piece(campaign: CampaignData, faction_id: String, type_name: S
 	var state_name := "moving" if moving else "awaiting"
 	# figure della cultura della fazione (Agents/Muslim, Agents/Pagan: assassini, emissari, spie, sciamani), poi le comuni
 	var f := campaign.faction(faction_id) if campaign != null else null
-	var culture := culture_folder(f.religion) if f != null else "Christian"
+	var culture := faction_culture(f) if f != null else "Christian"
 	var folders: Array[String] = []
 	if culture != "Christian":
 		folders.append("%s/Agents/%s/" % [BASE, culture])
+	var by_religion := culture_folder(f.religion) if f != null else "Christian"
+	if by_religion != culture and by_religion != "Christian":
+		folders.append("%s/Agents/%s/" % [BASE, by_religion])   # cultura propria senza quella figura: la cartella della religione
 	folders.append("%s/Agents/" % BASE)
 	for folder in folders:
 		for state in [state_name, "awaiting"]:

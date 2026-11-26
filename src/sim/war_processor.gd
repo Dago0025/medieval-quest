@@ -203,7 +203,6 @@ static func _retreat(state: GameState, army: Army, region: CampaignData.Region, 
 	if army.is_fleet:
 		_retreat_fleet(state, army, region, result)
 		return
-	var c := state.rules.combat
 	var province := state.province(region.id)
 	# ADR-073: prima della ritirata una parte dei sopravvissuti resta prigioniera (manuale p56); chi poi non ha vie e' catturato tutto
 	if _retreat_route(state, army, region) != "":
@@ -213,7 +212,7 @@ static func _retreat(state: GameState, army: Army, region: CampaignData.Region, 
 				"testo": Lang.t("%d uomini dell'esercito %d di %s sono fatti prigionieri a %s.") % [taken, army.id, SimUtil.faction_label(army.faction), region_label(state, region.id)]})
 	# 1. difensore nella propria provincia con castello e posto in guarnigione
 	if province != null and province.owner == army.faction and Combat.castle_level(state, region.id) > 0:
-		if Combat.garrison_load(state, region.id) + Combat.garrison_weight(state, army) <= c.garrison_max:
+		if Combat.garrison_load(state, region.id) + Combat.garrison_weight(state, army, region.id) <= Combat.garrison_capacity(state, region.id):
 			army.in_castle = true
 			army.path = PackedStringArray()
 			army.sea_route = PackedStringArray()
@@ -243,10 +242,9 @@ static func _retreat(state: GameState, army: Army, region: CampaignData.Region, 
 
 ## Dove si ritirerebbe l'esercito di terra sconfitto ("" = catturato): stesse regole e stesso ordine di `_retreat`.
 static func _retreat_route(state: GameState, army: Army, region: CampaignData.Region) -> String:
-	var c := state.rules.combat
 	var province := state.province(region.id)
 	if province != null and province.owner == army.faction and Combat.castle_level(state, region.id) > 0:
-		if Combat.garrison_load(state, region.id) + Combat.garrison_weight(state, army) <= c.garrison_max:
+		if Combat.garrison_load(state, region.id) + Combat.garrison_weight(state, army, region.id) <= Combat.garrison_capacity(state, region.id):
 			return region.id
 	for n in region.neighbours:
 		var neighbour := state.campaign.region(n)
@@ -626,6 +624,8 @@ static func _conquer(state: GameState, province: ProvinceState, conqueror: Strin
 	var siege := state.siege_in(province.id)
 	var damage := ConquestDamage.apply(state, province, conqueror, means)   # 15/11: edifici persi nella conquista
 	province.owner = conqueror
+	if province.first_conqueror == "" and conqueror != GameState.REBEL:
+		province.first_conqueror = conqueror
 	state.mark_war_turn(conqueror, previous)
 	province.building_queue.clear()
 	province.unit_queue.clear()

@@ -2,7 +2,7 @@
 cartella `originale/` del progetto (non entra nel repository: e' contenuto del gioco originale).
 
 Dal 18/11/2026 dati della campagna, testi, icone e pergamene sono del progetto (data/campagna, data/testi,
-assets/rifatti); dall'originale restano solo la musica e i suoni elencati in data/ui/audio.cfg e le immagini elencate in
+assets/rifatti); dall'originale restano solo i suoni di data/ui/audio.cfg non ancora in assets/audio (dal 25/11/2026 nessuno) e le immagini elencate in
 tools/originale_necessari.txt (tavole degli eventi, schermate di fine partita, pedine di riserva, poche icone), prese
 dall'esportazione PNG `<gioco>/_ASSET_EXPORT`. Quando anche questi saranno rifatti, la cartella non servira' piu'.
 
@@ -45,6 +45,13 @@ def main(game):
             missing.append("_ASSET_EXPORT/" + rel)
     audio = open(os.path.join(PROJECT, "data/ui/audio.cfg"), encoding="utf-8", errors="replace").read()
     wanted = {n.lower() for n in re.findall(r'"([^"]+\.wav)"', audio, re.I)}
+    # dal 25/11/2026 tutto l'audio e' del progetto (assets/audio): si copia solo cio' che li' manca
+    own = set()
+    for kind in ("musica", "suoni"):
+        d = os.path.join(PROJECT, "assets", "audio", kind)
+        if os.path.isdir(d):
+            own |= {os.path.splitext(f)[0].lower() for f in os.listdir(d) if f.lower().endswith((".ogg", ".wav", ".mp3"))}
+    wanted = {n for n in wanted if os.path.splitext(n)[0] not in own}
     seen = set()
     for rel in [MUSIC_DIR] + SFX_DIRS:
         folder = os.path.join(game, rel)

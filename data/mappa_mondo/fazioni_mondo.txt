@@ -1,6 +1,7 @@
 // Fazioni nuove della mappa del mondo (ADR-079, richiesta di Federico del 16/11/2026; Coreani, Mongoli, Chola e Khmer da ADR-088): Giapponesi, Cinesi, Aztechi,
 // Inca, Kanem (Africa centrale) e Cahokia (nativi del Nord America, gia' Mississippiani). Scritto a mano: unita' ed edifici
-// arruolabili sono per ora quelli della fazione modello di data/fazioni_mondo.cfg, i ritratti quelli della religione.
+// costruibili e agenti sono quelli della fazione modello di data/fazioni_mondo.cfg; truppe e navi di partenza sono le
+// unita' proprie di data/unita_mondo.cfg (ADR-116, 21/11/2026); i ritratti quelli della cultura.
 // Si aggiunge in fondo allo startpos del mondo in tutte e due le modalita' (WorldMap.startpos_text).
 
 // ---- FN_JAPANESE
@@ -23,21 +24,22 @@ MakeBuilding::	ID_KINAI	Bowyer
 MakeBuilding::	ID_KINAI	Horse_breeder
 MakeBuilding::	ID_KINAI	Improved_farmland
 MakeBuilding::	ID_KINAI	Town_watch
+MakeBuilding::	ID_KINAI	Dharma_temple
 MakeBuilding::	ID_KINAI	Shipyard
 MakeBuilding::	ID_KINAI	Port
-MakeUnit::	ID_KINAI	SteppeHeavyCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_KINAI	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_KINAI	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_KINAI	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KINAI	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KINAI	CumanWarriors	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapKachiMusha	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapBushiKisha	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapBushiKisha	40	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapHyakusho	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapHyakusho	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapKachiYumi	60	PAGAN_CULTURE
 // flotta di partenza (18/11/2026): le isole hanno bisogno di navi per uscire
-MakeUnit::	ID_KINAI	Dhow	1
-MakeUnit::	ID_KINAI	Dhow	1
-MakeUnit::	ID_KYUSHU	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_KYUSHU	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_TOHOKU	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_TOHOKU	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KINAI	JapKobaya	1
+MakeUnit::	ID_KINAI	JapKobaya	1
+MakeUnit::	ID_KYUSHU	JapBushiKisha	40	PAGAN_CULTURE
+MakeUnit::	ID_KYUSHU	JapHyakusho	100	PAGAN_CULTURE
+MakeUnit::	ID_TOHOKU	JapBushiKisha	40	PAGAN_CULTURE
+MakeUnit::	ID_TOHOKU	JapHyakusho	100	PAGAN_CULTURE
 SetStartLeader::	FN_JAPANESE	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_KINAI	FN_JAPANESE
 AddHeir::	FN_JAPANESE	1	22
@@ -69,26 +71,27 @@ MakeBuilding::	ID_KAIFENG	Bowyer
 MakeBuilding::	ID_KAIFENG	Horse_breeder
 MakeBuilding::	ID_KAIFENG	Improved_farmland2
 MakeBuilding::	ID_KAIFENG	Town_watch
+MakeBuilding::	ID_KAIFENG	Dharma_temple
 MakeBuilding::	ID_KAIFENG	Watch_towers
-MakeUnit::	ID_KAIFENG	LithuanianCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KAIFENG	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_SHAANXI	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_SHAANXI	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_SICHUAN	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_SICHUAN	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_JIANGNAN	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_JIANGNAN	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_HUGUANG	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_HUGUANG	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_FUJIAN	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_FUJIAN	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_LINGNAN	Crossbows	60	PAGAN_CULTURE
-MakeUnit::	ID_LINGNAN	RoundShieldSpearmen	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnJiaqi	40	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnQingqi	40	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_KAIFENG	ChnGongshou	60	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_SHAANXI	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_SICHUAN	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_SICHUAN	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_JIANGNAN	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_HUGUANG	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_HUGUANG	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_FUJIAN	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_FUJIAN	ChnQiangbing	100	PAGAN_CULTURE
+MakeUnit::	ID_LINGNAN	ChnNushou	60	PAGAN_CULTURE
+MakeUnit::	ID_LINGNAN	ChnQiangbing	100	PAGAN_CULTURE
 SetStartLeader::	FN_CHINESE	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_KAIFENG	FN_CHINESE
 AddHeir::	FN_CHINESE	1	25
@@ -115,14 +118,14 @@ MakeBuilding::	ID_TOLLAN	Spearmaker
 MakeBuilding::	ID_TOLLAN	Bowyer
 MakeBuilding::	ID_TOLLAN	Improved_farmland
 MakeBuilding::	ID_TOLLAN	Town_watch
-MakeUnit::	ID_TOLLAN	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_TOLLAN	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_TOLLAN	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_TOLLAN	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_TOLLAN	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_TOLLAN	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_MAYA	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_MAYA	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTepoztopilli	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTepoztopilli	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTlamani	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTlamani	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTlahuitolli	60	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTlahuitolli	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	AztTepoztopilli	100	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	AztTlahuitolli	60	PAGAN_CULTURE
 SetStartLeader::	FN_AZTECS	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_TOLLAN	FN_AZTECS
 AddHeir::	FN_AZTECS	1	20
@@ -148,16 +151,16 @@ MakeBuilding::	ID_CUZCO	Spearmaker
 MakeBuilding::	ID_CUZCO	Bowyer
 MakeBuilding::	ID_CUZCO	Improved_farmland
 MakeBuilding::	ID_CUZCO	Town_watch
-MakeUnit::	ID_CUZCO	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CUZCO	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CUZCO	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_CUZCO	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CUZCO	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CUZCO	ArmouredSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_TIWANAKU	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_TIWANAKU	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CHIMU	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CHIMU	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncChuqui	100	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncChuqui	100	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncChampi	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncWaraka	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncWaraka	60	PAGAN_CULTURE
+MakeUnit::	ID_CUZCO	IncChanka	60	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	IncChuqui	100	PAGAN_CULTURE
+MakeUnit::	ID_TIWANAKU	IncWaraka	60	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	IncChuqui	100	PAGAN_CULTURE
+MakeUnit::	ID_CHIMU	IncWaraka	60	PAGAN_CULTURE
 SetStartLeader::	FN_INCA	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_CUZCO	FN_INCA
 AddHeir::	FN_INCA	1	21
@@ -184,16 +187,16 @@ MakeBuilding::	ID_KANEM	Bowyer
 MakeBuilding::	ID_KANEM	Horse_breeder
 MakeBuilding::	ID_KANEM	Improved_farmland
 MakeBuilding::	ID_KANEM	Town_watch
-MakeUnit::	ID_KANEM	SaharanCavalry	40	MUSLIM_CULTURE
-MakeUnit::	ID_KANEM	SaharanCavalry	40	MUSLIM_CULTURE
-MakeUnit::	ID_KANEM	BerberCamel	40	MUSLIM_CULTURE
-MakeUnit::	ID_KANEM	NegroSpearmen	100	MUSLIM_CULTURE
-MakeUnit::	ID_KANEM	NegroSpearmen	100	MUSLIM_CULTURE
-MakeUnit::	ID_KANEM	DesertArchers	60	MUSLIM_CULTURE
-MakeUnit::	ID_DARFUR	NegroSpearmen	100	MUSLIM_CULTURE
-MakeUnit::	ID_DARFUR	DesertArchers	60	MUSLIM_CULTURE
-MakeUnit::	ID_HAUSA	NegroSpearmen	100	MUSLIM_CULTURE
-MakeUnit::	ID_HAUSA	DesertArchers	60	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanCavLeggera	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanCavLeggera	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanCavLeggera	40	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanLancieri	100	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanLancieri	100	MUSLIM_CULTURE
+MakeUnit::	ID_KANEM	KanArcieri	60	MUSLIM_CULTURE
+MakeUnit::	ID_DARFUR	KanLancieri	100	MUSLIM_CULTURE
+MakeUnit::	ID_DARFUR	KanArcieri	60	MUSLIM_CULTURE
+MakeUnit::	ID_HAUSA	KanLancieri	100	MUSLIM_CULTURE
+MakeUnit::	ID_HAUSA	KanArcieri	60	MUSLIM_CULTURE
 SetStartLeader::	FN_KANEM	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_KANEM	FN_KANEM
 AddHeir::	FN_KANEM	1	23
@@ -220,16 +223,16 @@ MakeBuilding::	ID_MISSISSIPPI	Spearmaker
 MakeBuilding::	ID_MISSISSIPPI	Bowyer
 MakeBuilding::	ID_MISSISSIPPI	Improved_farmland
 MakeBuilding::	ID_MISSISSIPPI	Town_watch
-MakeUnit::	ID_MISSISSIPPI	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_MISSISSIPPI	RoundShieldSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_MISSISSIPPI	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_MISSISSIPPI	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_MISSISSIPPI	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_MISSISSIPPI	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_APPALACHIA	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_APPALACHIA	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_GREAT_LAKES	Woodsman	60	PAGAN_CULTURE
-MakeUnit::	ID_GREAT_LAKES	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahMazza	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahMazza	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_MISSISSIPPI	CahArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	CahMazza	60	PAGAN_CULTURE
+MakeUnit::	ID_APPALACHIA	CahArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	CahMazza	60	PAGAN_CULTURE
+MakeUnit::	ID_GREAT_LAKES	CahArcieri	60	PAGAN_CULTURE
 SetStartLeader::	FN_MISSISSIPPIANS	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_MISSISSIPPI	FN_MISSISSIPPIANS
 AddHeir::	FN_MISSISSIPPIANS	1	19
@@ -256,13 +259,13 @@ MakeBuilding::	ID_KOREA	Improved_farmland
 MakeBuilding::	ID_KOREA	Town_watch
 MakeBuilding::	ID_KOREA	Shipyard
 MakeBuilding::	ID_KOREA	Port
-MakeUnit::	ID_KOREA	KoreanGuardsmen	60	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	KoreanGuardsmen	60	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	KoreanSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	KoreanSpearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	KoreanSkirmishers	60	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	KoreanSkirmishers	60	PAGAN_CULTURE
-MakeUnit::	ID_KOREA	HorseArchers	40	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorGuardie	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorGuardie	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorSchermagliatori	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorSchermagliatori	60	PAGAN_CULTURE
+MakeUnit::	ID_KOREA	KorArcieriCavallo	40	PAGAN_CULTURE
 SetStartLeader::	FN_KOREANS	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_KOREA	FN_KOREANS
 AddHeir::	FN_KOREANS	1	21
@@ -286,13 +289,13 @@ MakeBuilding::	ID_MONGOLIA	Castle3
 MakeBuilding::	ID_MONGOLIA	Horse_breeder
 MakeBuilding::	ID_MONGOLIA	Bowyer
 MakeBuilding::	ID_MONGOLIA	Town_watch
-MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_EAST_MONGOLIA	HorseArchers	40	PAGAN_CULTURE
-MakeUnit::	ID_EAST_MONGOLIA	SteppeCavalry	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	MonArcieriCavallo	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	MonArcieriCavallo	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	MonArcieriCavallo	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	MonCavLeggera	40	PAGAN_CULTURE
+MakeUnit::	ID_MONGOLIA	MonCavLeggera	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	MonArcieriCavallo	40	PAGAN_CULTURE
+MakeUnit::	ID_EAST_MONGOLIA	MonCavLeggera	40	PAGAN_CULTURE
 SetStartLeader::	FN_MONGOLS	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_MONGOLIA	FN_MONGOLS
 AddHeir::	FN_MONGOLS	1	20
@@ -321,15 +324,15 @@ MakeBuilding::	ID_CHOLA	Improved_farmland
 MakeBuilding::	ID_CHOLA	Town_watch
 MakeBuilding::	ID_CHOLA	Shipyard
 MakeBuilding::	ID_CHOLA	Port
-MakeUnit::	ID_CHOLA	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CHOLA	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CHOLA	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CHOLA	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CHOLA	MediumCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_DECCAN	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_DECCAN	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_CEYLON	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_CEYLON	Archers	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	ChoLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	ChoLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	ChoArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	ChoArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_CHOLA	ChoCavalleria	40	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	ChoLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_DECCAN	ChoArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_CEYLON	ChoLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CEYLON	ChoArcieri	60	PAGAN_CULTURE
 SetStartLeader::	FN_CHOLA	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_CHOLA	FN_CHOLA
 AddHeir::	FN_CHOLA	1	24
@@ -355,12 +358,12 @@ MakeBuilding::	ID_KHMER	Bowyer
 MakeBuilding::	ID_KHMER	Horse_breeder
 MakeBuilding::	ID_KHMER	Improved_farmland
 MakeBuilding::	ID_KHMER	Town_watch
-MakeUnit::	ID_KHMER	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KHMER	Spearmen	100	PAGAN_CULTURE
-MakeUnit::	ID_KHMER	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_KHMER	Archers	60	PAGAN_CULTURE
-MakeUnit::	ID_KHMER	MediumCavalry	40	PAGAN_CULTURE
-MakeUnit::	ID_KHMER	Peasants	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmCavalleria	40	PAGAN_CULTURE
+MakeUnit::	ID_KHMER	KhmLeva	100	PAGAN_CULTURE
 SetStartLeader::	FN_KHMER	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_KHMER	FN_KHMER
 AddHeir::	FN_KHMER	1	22

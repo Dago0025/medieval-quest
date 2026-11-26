@@ -339,10 +339,11 @@ func test_sezione_della_fase_6(t: TestContext) -> void:
 	t.assert_eq(sections.size(), 1)
 	t.assert_eq(sections[0]["titolo"], "Eventi e storia")
 	var kinds: PackedStringArray = sections[0]["tipi"]
-	for kind in [GameState.EV_HISTORICAL, GameState.EV_FLOOD, GameState.EV_FAMINE, GameState.EV_QUAKE, GameState.EV_STORM, GameState.EV_PLAGUE,
-			GameState.EV_BLACK_DEATH, GameState.EV_HORDE_ARRIVES, GameState.EV_HORDE_GONE, GameState.EV_VICTORY, GameState.EV_DEFEAT, GameState.EV_CAMPAIGN_END]:
+	for kind in [GameState.EV_HISTORICAL, GameState.EV_AMERICAS_CONTACT, GameState.EV_FLOOD, GameState.EV_FAMINE, GameState.EV_QUAKE,
+			GameState.EV_STORM, GameState.EV_PLAGUE, GameState.EV_BLACK_DEATH, GameState.EV_HORDE_ARRIVES, GameState.EV_HORDE_GONE,
+			GameState.EV_VICTORY, GameState.EV_DEFEAT, GameState.EV_CAMPAIGN_END]:
 		t.assert_true(kinds.has(kind), "nel resoconto: %s" % kind)
-	t.assert_eq(kinds.size(), 12)
+	t.assert_eq(kinds.size(), 13)
 	var every := CampaignUiText.all_report_sections()
 	t.assert_eq(every[every.size() - 1]["titolo"], "Eventi e storia", "in fondo, dopo le sezioni della fase 5")
 	var always := CampaignUiText.always_reported_kinds()

@@ -108,6 +108,11 @@ static func load_text(text: String, overrides: Dictionary = {}) -> BuildingTable
 	return table
 
 
+## Famiglia da una riga gia' divisa in celle (edifici aggiunti dai dati, come quelli del Dharma); null se non valida.
+static func build_row(f: PackedStringArray, index: int, table: BuildingTable) -> BuildingType:
+	return _build_family(f, index, table)
+
+
 ## "CASTLE10" -> {family: "CASTLE", level: 10}; "SHIPYARD" e "SHIPYARD1" -> livello 1.
 static func split_token(token: String) -> Dictionary:
 	var t := token.strip_edges().to_upper()

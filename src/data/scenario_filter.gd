@@ -65,9 +65,11 @@ static func startpos(text: String, additions: String = "") -> String:
 
 
 ## Riga che la mod aveva commentato per disattivare una fazione rimasta senza territori (SetActiveFaction, SetStartLeader,
-## PlaceLeader con il commento «fazione disattivata» o «regione agli Auror»).
+## PlaceLeader con il commento «fazione disattivata» o «regione agli Auror») o le truppe della XL nelle regioni degli Auror
+## («truppe tolte»: gli Auror partono con le sole armate d'elite, richiesta di Federico del 23/11/2026, ADR-126).
 static func is_disabled_line(s: String) -> bool:
-	return s.begins_with("//") and s.contains(MARK) and (s.contains("fazione disattivata") or s.contains("regione agli Auror"))
+	return s.begins_with("//") and s.contains(MARK) and (s.contains("fazione disattivata") or s.contains("regione agli Auror") \
+		or s.contains("truppe tolte"))
 
 
 ## Riga commentata senza le barre iniziali e senza il commento della mod in coda.

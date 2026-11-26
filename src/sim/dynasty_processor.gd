@@ -516,12 +516,54 @@ static func _births(state: GameState, new_year: int) -> void:
 		if state.rng.randf() >= d.birth_chance:
 			continue
 		var male := state.rng.randf() < d.son_chance
+		male = _balanced_sex(state, leader, male)
 		var child := CharacterFactory.make_child(state, leader, male, new_year, state.character_region(leader), state.rng)
+		leader.counters[COUNTER_BIRTH_STREAK] = _next_streak(_birth_streak(state, leader), male)
 		var label := Lang.t("un figlio maschio") if male else Lang.t("una figlia")
 		_emit(state, GameState.EV_BIRTH, child, Lang.t("%s di %s ha %s: %s.") % [leader.full_name(), SimUtil.faction_label(f.id), label, child.full_name()], {
 			"padre": leader.id,
 			"maschio": male,
 		})
+
+
+## Serie dei figli del capo: +n = gli ultimi n figli sono maschi, -n = femmine (per `nascite_stesso_sesso_max`).
+const COUNTER_BIRTH_STREAK := "nascite_serie"
+
+
+## Sesso del nuovo figlio con il limite di `nascite_stesso_sesso_max` (Auror, 22/11/2026): oltre la serie, l'altro sesso.
+## Nessun sorteggio in piu' (l'ordine dei sorteggi non cambia).
+static func _balanced_sex(state: GameState, leader: Character, male: bool) -> bool:
+	var cap := state.rules.dynasty.same_sex_max(leader.faction)
+	if cap <= 0:
+		return male
+	var streak := _birth_streak(state, leader)
+	if male and streak >= cap:
+		return false
+	if not male and -streak >= cap:
+		return true
+	return male
+
+
+static func _next_streak(streak: int, male: bool) -> int:
+	if male:
+		return streak + 1 if streak > 0 else 1
+	return streak - 1 if streak < 0 else -1
+
+
+## Serie attuale dei figli del capo: dal contatore; nei salvataggi di prima, dai figli di sangue reale della fazione in
+## ordine di nascita (vale per il capo immortale, di cui sono tutti figli).
+static func _birth_streak(state: GameState, leader: Character) -> int:
+	if leader.counters.has(COUNTER_BIRTH_STREAK):
+		return int(leader.counters[COUNTER_BIRTH_STREAK])
+	var kids: Array[Character] = []
+	for c in state.characters:
+		if c.faction == leader.faction and c.royal_blood and c.id != leader.id and c.birth_year > leader.birth_year:
+			kids.append(c)
+	kids.sort_custom(func(a: Character, b: Character) -> bool: return a.birth_year < b.birth_year or (a.birth_year == b.birth_year and a.id < b.id))
+	var streak := 0
+	for c in kids:
+		streak = _next_streak(streak, c.male)
+	return streak
 
 
 ## Contatori del capo per le nuove nozze: anno delle ultime nozze e anno delle prossime.
@@ -650,7 +692,7 @@ static func ensure_commanders(state: GameState, rng: RandomNumberGenerator, at_y
 			continue
 		var pick := _free_character(state, a.faction, a.region, at_year)
 		if pick == null:
-			pick = CharacterFactory.make_general(state, a.faction, a.region, at_year, rng)
+			pick = CharacterFactory.make_general(state, a.faction, a.region, at_year, rng, CharacterFactory.unit_origin(state, a))
 		pick.army = a.id
 		pick.region = a.region
 		commanded[a.id] = true

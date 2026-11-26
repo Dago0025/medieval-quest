@@ -179,6 +179,8 @@ static func _build_unit(f: PackedStringArray, index: int, table: UnitTable) -> U
 	u.honour_handicap = int_cell(f, COL_HANDICAP, unit_id, table)
 	u.base_strength = int_cell(f, COL_STRENGTH, unit_id, table)
 	u.men = int_cell(f, COL_MEN, unit_id, table)
+	if u.men >= 90 and u.men < 100:
+		u.men = 100   # richiesta di Federico (25/11/2026): le unita' da 96 uomini (picchieri svizzeri) passano a 100
 	u.honour_step = int_cell(f, COL_HONOUR_STEP, unit_id, table)
 	u.general_candidate = cell(f, COL_GENERAL).to_upper()
 	u.ruler_advantage = cell(f, COL_RULER).to_upper()

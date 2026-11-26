@@ -400,8 +400,9 @@ func test_sezioni_del_resoconto(t: TestContext) -> void:
 		titles.append(str(sec["titolo"]))
 	t.assert_eq(titles, PackedStringArray(["Battaglie", "Conquiste", "Assedi", "Ritirate e catture", "Fazioni distrutte", "Guerre dichiarate", "Corte", "Province"]))
 	var court: PackedStringArray = CampaignUiText.phase4_sections()[0]["tipi"]
-	t.assert_eq(court.size(), 9, "con le cariche di Stato (EV_OFFICE_CHANGED)")
+	t.assert_eq(court.size(), 10, "con le cariche di Stato (EV_OFFICE_CHANGED) e la guardia del capo (EV_ROYAL_GUARD, ADR-114)")
 	t.assert_true(court.has(GameState.EV_BIRTH) and court.has(GameState.EV_STAR_CHANGED) and court.has(GameState.EV_OFFICE_CHANGED))
+	t.assert_true(court.has(GameState.EV_ROYAL_GUARD))
 	var provinces: PackedStringArray = CampaignUiText.phase4_sections()[1]["tipi"]
 	t.assert_true(provinces.has(GameState.EV_FACTION_EXTINCT))
 	t.assert_true(CampaignUiText.always_reported_kinds().has(GameState.EV_FACTION_EXTINCT))

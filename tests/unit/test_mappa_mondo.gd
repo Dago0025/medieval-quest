@@ -145,6 +145,38 @@ func test_confini_precalcolati(t: TestContext) -> void:
 	t.assert_true(BorderExtractor.load_world("res://non_esiste.bin").is_empty())
 
 
+## Bitmap «da vedere» (23/11/2026): stesse dimensioni, pochi pixel cambiati e mai tra terra e mare (coste intatte).
+func test_bitmap_da_vedere_levigata(t: TestContext) -> void:
+	if not WorldMap.available():
+		t.skip("dati della mappa del mondo assenti")
+		return
+	for auror in [false, true]:
+		var m := WorldMap.load_map(auror)
+		t.assert_true(FileAccess.file_exists(WorldMap.view_index_path(auror)), "manca %s" % WorldMap.view_index_path(auror))
+		var logic := m.to_image()
+		var view := m.view_image()
+		t.assert_true(view != null and view.get_format() == Image.FORMAT_RG8, "formato RG8")
+		t.assert_eq(view.get_size(), logic.get_size(), "stesse dimensioni")
+		var a := logic.get_data()
+		var b := view.get_data()
+		var checked := 0
+		var changed := 0
+		var crossed := 0
+		var i := 0
+		while i < a.size():
+			var la := a[i] | (a[i + 1] << 8)
+			var lb := b[i] | (b[i + 1] << 8)
+			checked += 1
+			if la != lb:
+				changed += 1
+				if (la >= m.sea_first) != (lb >= m.sea_first) or la == 0 or lb == 0:
+					crossed += 1
+			i += 2 * 101
+		t.assert_true(changed > 0, "qualche pixel riassegnato")
+		t.assert_true(changed * 100 < checked, "meno dell'1%% dei pixel: %d su %d" % [changed, checked])
+		t.assert_eq(crossed, 0, "nessun pixel tra terra e mare")
+
+
 func test_startpos_text_sostituisce_le_posizioni(t: TestContext) -> void:
 	if not WorldMap.available():
 		t.skip("dati della mappa del mondo assenti")

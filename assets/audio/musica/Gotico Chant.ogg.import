@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bh8dh6kvb17ef"
+path="res://.godot/imported/Gotico Chant.ogg-3a7ab0a813e375d773d8aab31c5dd408.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/musica/Gotico Chant.ogg"
+dest_files=["res://.godot/imported/Gotico Chant.ogg-3a7ab0a813e375d773d8aab31c5dd408.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -50,7 +50,10 @@ func test_file_della_campagna_presenti(t: TestContext) -> void:
 			var value: Variant = audio.get_value(section, key)
 			var names: Array = value if value is Array else [value]
 			for n in names:
-				var found := GameAudio.find_file(GameAudio.MUSIC_DIR, str(n)) if section == "musica" else ""
+				# prima l'audio proprio del progetto (25/11/2026: tutto sostituito), poi l'originale
+				var found := GameAudio.project_path("musica" if section == "musica" else "suoni", str(n))
+				if found == "" and section == "musica":
+					found = GameAudio.find_file(GameAudio.MUSIC_DIR, str(n))
 				if section == "suoni":
 					for d in GameAudio.SFX_DIRS:
 						if found == "":

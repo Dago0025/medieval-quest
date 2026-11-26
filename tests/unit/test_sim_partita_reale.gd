@@ -112,6 +112,10 @@ func test_partita_nuova_sui_dati_reali(t: TestContext) -> void:
 	var extra := 0
 	for f in _campaign.active_factions():
 		extra += s.rules.traits.int_value(f.id, "truppe_iniziali") + s.rules.traits.int_value(f.id, "navi_iniziali")
+	# ADR-114: piu' la guardia a cavallo dei capi che non ne avevano una
+	for e in s.events:
+		if str(e["tipo"]) == GameState.EV_ROYAL_GUARD:
+			extra += 1
 	t.assert_eq(stacks, military + extra, "tutte le unita' militari hanno una pila")
 	t.assert_eq(s.agents.size(), others, "emissari, principesse e simili sono agenti")
 	# la provincia ha i livelli degli edifici della startpos
@@ -389,8 +393,9 @@ func _men_balance(s: GameState) -> int:
 		elif kind == GameState.EV_PRISONERS and (str(e["esito"]) == PrisonerProcessor.OUTCOME_RELEASED or str(e["esito"]) == PrisonerProcessor.OUTCOME_RANSOMED):
 			# ADR-073: i prigionieri catturati sono gia' tolti (catture); liberati o riscattati tornano
 			balance += int(e.get("uomini", 0))
-		elif kind == GameState.EV_RETRAINED:
-			# riaddestramento: le pile decimate tornano all'organico pieno, gli uomini aggiunti li dichiara l'evento
+		elif kind == GameState.EV_RETRAINED or kind == GameState.EV_ROYAL_GUARD:
+			# riaddestramento: le pile decimate tornano all'organico pieno, gli uomini aggiunti li dichiara l'evento;
+			# ADR-114: la guardia del capo li crea
 			balance += int(e.get("uomini", 0))
 	return balance
 

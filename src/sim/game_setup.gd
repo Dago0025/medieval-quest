@@ -43,6 +43,8 @@ static func new_game(campaign: CampaignData, units: UnitProdLoader.UnitTable, bu
 	create_characters(state, heroes)
 	AurorUnits.setup_king_army(state)     # ADR-074: Darkos parte in un'armata completa di unita' esclusive
 	AurorUnits.ensure_king_guard(state)   # ADR-074: e ha sempre i Corazzieri del Drago
+	HistoricalLimits.update_contact(state)   # ADR-114: europei gia' nelle Americhe all'inizio (cavalli ai nativi)
+	RoyalGuard.ensure(state)   # ADR-114: guardia a cavallo dei capi
 	ReligionProcessor.init_religions(state)
 	ProvinceProcessor.init_loyalty(state)
 	return state

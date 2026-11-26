@@ -60,7 +60,8 @@ static func agent_unit_name(unit_id: String) -> String:
 
 ## Pila in cui combatte il comandante dell'esercito (la sua guardia), -1 se non ha comandante o pile. L'originale lega il
 ## generale a un'unita' precisa; qui la si ricava dai dati: la prima pila la cui unita' e' indicata come adatta a un
-## generale (colonna 9: PREFERRED, poi OK, poi le altre), a parita' la piu' costosa, poi la prima.
+## generale (colonna 9: PREFERRED, poi OK, poi le altre), a parita' la piu' costosa, poi la prima. Le unita' a cavallo vengono
+## prima di tutte (ADR-114: il capo combatte con la guardia a cavallo).
 static func commander_stack(state: GameState, army: Army) -> int:
 	if army == null or army.stacks.is_empty() or army.is_fleet or state.commander_of(army.id) == null:
 		return -1
@@ -79,6 +80,10 @@ static func commander_stack(state: GameState, army: Army) -> int:
 					rank = 2
 				"DISCOURAGED":
 					rank = 0
+		if unit != null and HistoricalLimits.is_mounted(unit):
+			rank += 10
+		if unit != null and unit.unique:
+			rank += 100   # Ankalagon: la carta di Darkos e' il suo drago
 		var score := rank * 1000000 + mini(cost, 999999)
 		if score > best_score:
 			best_score = score
@@ -401,6 +406,13 @@ static func format_event(state: GameState, e: Dictionary) -> String:
 	var kind := str(e.get("tipo", ""))
 	if kind == GameState.EV_PRISONERS:
 		return str(e.get("testo", ""))   # ADR-073: testo gia' composto da PrisonerProcessor
+	if kind == GameState.EV_AMERICAS_CONTACT:
+		# ADR-114: arrivo degli europei nelle Americhe
+		return Lang.t("Primo approdo straniero nelle Americhe: %s a %s. Da ora i popoli del Nuovo Mondo conoscono il cavallo.") % [
+			FactionStyle.with_article(str(e.get("fazione", ""))), region_name(state, str(e.get("regione", "")))]
+	if kind == GameState.EV_ROYAL_GUARD:
+		# ADR-114: guardia del capo (testo con il nome del personaggio gia' composto dalla simulazione)
+		return str(e.get("testo", ""))
 	if kind == GameState.EV_BUILT:
 		return Lang.t("Costruzione completata a %s: %s.") % [
 			region_name(state, str(e.get("provincia", ""))),
@@ -754,7 +766,7 @@ static func phase3_sections() -> Array[Dictionary]:
 ## non corrisponde a nessun evento e la sezione resta semplicemente vuota.
 static func phase4_sections() -> Array[Dictionary]:
 	var defs := [
-		[Lang.t("Corte"), ["EV_BIRTH", "EV_COMING_OF_AGE", "EV_DEATH", "EV_SUCCESSION", "EV_HERO_APPEARS", "EV_VNV_GAINED", "EV_TITLE_CHANGED", "EV_OFFICE_CHANGED", "EV_STAR_CHANGED"]],
+		[Lang.t("Corte"), ["EV_BIRTH", "EV_COMING_OF_AGE", "EV_DEATH", "EV_SUCCESSION", "EV_HERO_APPEARS", "EV_VNV_GAINED", "EV_TITLE_CHANGED", "EV_OFFICE_CHANGED", "EV_STAR_CHANGED", "EV_ROYAL_GUARD"]],
 		[Lang.t("Province"), ["EV_LOYALTY_LOW", "EV_REBELLION", "EV_REBELLION_SPREAD", "EV_LOYALISTS_RETURN", "EV_FACTION_REEMERGED", "EV_CIVIL_WAR", "EV_FACTION_EXTINCT"]],
 	]
 	return _sections_from(defs)
@@ -804,7 +816,7 @@ static func phase5c_sections() -> Array[Dictionary]:
 static func phase6_sections() -> Array[Dictionary]:
 	var defs := [
 		[Lang.t("Eventi e storia"), [
-			"EV_HISTORICAL", "EV_FLOOD", "EV_FAMINE", "EV_QUAKE", "EV_STORM", "EV_PLAGUE", "EV_BLACK_DEATH", "EV_HORDE_ARRIVES",
+			"EV_HISTORICAL", "EV_AMERICAS_CONTACT", "EV_FLOOD", "EV_FAMINE", "EV_QUAKE", "EV_STORM", "EV_PLAGUE", "EV_BLACK_DEATH", "EV_HORDE_ARRIVES",
 			"EV_HORDE_GONE", "EV_VICTORY", "EV_DEFEAT", "EV_CAMPAIGN_END"]],
 	]
 	return _sections_from(defs)
@@ -852,7 +864,7 @@ static func world_news_kinds() -> PackedStringArray:
 static func always_reported_kinds() -> PackedStringArray:
 	return PackedStringArray([
 		event_kind("EV_FACTION_DESTROYED"), event_kind("EV_FACTION_EXTINCT"), event_kind("EV_FACTION_REEMERGED"), event_kind("EV_PAPACY_REEMERGED"),
-		event_kind("EV_HISTORICAL"), event_kind("EV_BLACK_DEATH"), event_kind("EV_HORDE_ARRIVES"), event_kind("EV_HORDE_GONE"),
+		event_kind("EV_HISTORICAL"), event_kind("EV_AMERICAS_CONTACT"), event_kind("EV_BLACK_DEATH"), event_kind("EV_HORDE_ARRIVES"), event_kind("EV_HORDE_GONE"),
 		event_kind("EV_VICTORY"), event_kind("EV_DEFEAT"), event_kind("EV_CAMPAIGN_END")])
 
 
@@ -2160,6 +2172,22 @@ static func _cause_suffix(cause: String) -> String:
 	return " (%s)" % cause.replace("_", " ")
 
 
+## Nome di un personaggio da un campo d'evento: il numero del personaggio (anche come testo o decimale dei salvataggi
+## JSON) diventa il suo nome completo (segnalazione di Federico del 22/11/2026: per le fazioni riemerse usciva un numero);
+## un testo resta com'e'. "" se manca o il personaggio non c'e'.
+static func character_label(state: GameState, value: Variant) -> String:
+	var raw := text_of(value)
+	var id := -1
+	if typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT:
+		id = int(value)
+	elif raw.is_valid_int() or raw.is_valid_float():
+		id = int(float(raw))
+	if id < 0:
+		return raw
+	var c := state.character(id) if state != null else null
+	return c.full_name() if c != null else ""
+
+
 ## Testo di un evento della fase 4 (4a: personaggi; 4b: province); vuoto se `kind` non è uno dei loro tipi.
 ## Se mancano i campi essenziali ripiega sul campo "testo" dell'evento.
 static func _format_phase4(state: GameState, kind: String, e: Dictionary) -> String:
@@ -2330,7 +2358,7 @@ static func _format_phase4b(state: GameState, kind: String, e: Dictionary, fallb
 		var text := "%s %s" % [fsubj(_actor_id(e)), fverb(_actor_id(e), Lang.t("riemerge"), Lang.t("riemergono"))]
 		if where != "":
 			text += Lang.t(" a %s") % where
-		var leader := text_of(prop(e, ["capo", "nome"]))
+		var leader := character_label(state, prop(e, ["nome_capo", "capo", "nome"]))
 		if leader != "":
 			text += Lang.t(" con %s come capo") % leader
 		return text + "."

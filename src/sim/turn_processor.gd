@@ -79,6 +79,8 @@ static func end_year(state: GameState) -> Dictionary:
 	DiplomacyProcessor.expire_truces(state, state.year + 1)
 	Admirals.ensure(state)   # ADR-056: flotte nuove e Auror al massimo
 	AurorUnits.ensure_king_guard(state)   # ADR-074: il re degli Auror ha sempre i Corazzieri del Drago
+	HistoricalLimits.update_contact(state)   # ADR-114: arrivo degli europei nelle Americhe (cavalli ai popoli del Nuovo Mondo)
+	RoyalGuard.ensure(state)   # ADR-114: ogni capo combatte con un'unita' a cavallo (a piedi chi non ha cavalli)
 	for f in state.factions:
 		f.close_year()   # saldo reale dell'anno e spese per voce (2026-11-13)
 	state.year += 1
@@ -519,8 +521,8 @@ static func _spawn_unit(state: GameState, province: ProvinceState, item: QueueIt
 	# poi in campo; in una provincia assediata nascono comunque nel castello (altrimenti combatterebbero fuori)
 	var inside := false
 	if not fleet and Combat.castle_level(state, region_id) > 0:
-		var weight := state.rules.combat.cavalry_garrison_weight if unit.is_cavalry() else 1
-		inside = state.is_besieged(region_id) or Combat.garrison_load(state, region_id) + weight <= state.rules.combat.garrison_max
+		var weight := Combat.cavalry_weight(state, region_id) if unit.is_cavalry() else 1
+		inside = state.is_besieged(region_id) or Combat.garrison_load(state, region_id) + weight <= Combat.garrison_capacity(state, region_id)
 	var target: Army = null
 	for a in state.armies_in(region_id):
 		if a.faction == province.owner and a.is_fleet == fleet and a.in_castle == inside and a.path.is_empty() and a.crusade.is_empty() and not a.is_full(state.rules.max_stacks):

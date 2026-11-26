@@ -15,6 +15,7 @@ func _world() -> GameState:
 	var buildings := BuildingProdLoader.load_file(BUILDINGS)
 	var s := GameSetup.new_game(campaign, units, buildings, Rules.new(), 1)
 	s.faction("FN_ALPHA").is_player = true
+	s.rules.combat.blockade_needs_more_ships = false   # regola di base del blocco; la superiorita' di navi ha i suoi test
 	return s
 
 

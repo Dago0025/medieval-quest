@@ -41,6 +41,9 @@ var is_hero := false         ## eroe famoso (FAMOUS_HEROES): soglia di vecchiaia
 var male := true
 ## Indice del nome nell'elenco dei nomi reali della fazione (numerali dei re); -1 se non e' un nome reale.
 var name_index := -1
+## Fazione di nome e ritratto, se diversa dalla propria (generale degli Auror nato da una truppa straniera, 22/11/2026);
+## "" = la propria.
+var origin := ""
 
 var command := 0
 var dread := 0
@@ -187,7 +190,12 @@ func to_dict() -> Dictionary:
 		"soglia_vecchiaia": old_age,
 		"anno_morte": death_year,
 		"causa_morte": death_cause,
-	}
+	}.merged({"origine": origin} if origin != "" else {})
+
+
+## Fazione da cui vengono nome e ritratto: `origin` se c'e', altrimenti la propria.
+func look_faction() -> String:
+	return origin if origin != "" else faction
 
 
 static func from_dict(d: Dictionary) -> Character:
@@ -222,4 +230,5 @@ static func from_dict(d: Dictionary) -> Character:
 	c.old_age = int(d.get("soglia_vecchiaia", 40))
 	c.death_year = int(d.get("anno_morte", 0))
 	c.death_cause = str(d.get("causa_morte", ""))
+	c.origin = str(d.get("origine", ""))
 	return c

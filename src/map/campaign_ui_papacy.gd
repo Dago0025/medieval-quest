@@ -503,6 +503,15 @@ static func _format_crusade_event(state: GameState, kind: String, e: Dictionary,
 			text += Lang.t(" con %s") % armies_text(stacks)
 		if e.has("zelo"):
 			text += Lang.t(" (zelo %d)") % CampaignUiText.int_of(e.get("zelo"))
+		# destinazione (22/11/2026): il bersaglio scelto alla partenza, con il suo proprietario
+		var goal := CampaignUiText.text_of(e.get("bersaglio", ""))
+		if goal != "":
+			text += Lang.t(", diretta a %s") % CampaignUiText.region_name(state, goal) if genre != PapacyProcessor.KIND_JIHAD else Lang.t(", diretto a %s") % CampaignUiText.region_name(state, goal)
+			var goal_owner := SimUtil.norm(CampaignUiText.text_of(e.get("proprietario", "")))
+			if goal_owner != "":
+				text += " (%s)" % CampaignUiText.faction_name(goal_owner)
+		elif e.has("bersaglio"):
+			text += Lang.t(", ancora senza bersaglio")
 		return text + "."
 	if kind == GameState.EV_CRUSADE_TARGET:
 		if actor_id == "":

@@ -2,7 +2,8 @@ class_name SaveLoadPanel
 extends PanelContainer
 ## Finestra dei salvataggi con nome (fase 8c), usata dal menu iniziale e dalla mappa: elenco dal piu' recente con fazione e
 ## anno, campo del nome per salvare, Elimina. Emette `save_requested(nome)` o `load_requested(nome)`; chi la usa salva o carica
-## e la chiude.
+## e la chiude. Scelta multipla (Federico, 22/11/2026: cancellare piu' salvataggi alla volta): Ctrl/Maiusc + clic o «Tutti»;
+## con piu' di un salvataggio scelto Elimina chiede un secondo clic di conferma.
 
 signal save_requested(save_name: String)
 signal load_requested(save_name: String)
@@ -14,6 +15,8 @@ var _name_row: HBoxContainer
 var _name_edit: LineEdit
 var _confirm: Button
 var _delete: Button
+var _select_all: Button
+var _delete_armed := false   ## primo clic su Elimina con piu' salvataggi scelti: il secondo li cancella
 var _note: Label
 var _names: PackedStringArray = []
 
@@ -37,7 +40,9 @@ func _init() -> void:
 	box.add_child(UiTheme.divider())
 	_list = ItemList.new()
 	_list.custom_minimum_size = Vector2(560, 300)
+	_list.select_mode = ItemList.SELECT_MULTI
 	_list.item_selected.connect(_on_selected)
+	_list.multi_selected.connect(func(index: int, _selected: bool) -> void: _on_selected(index))
 	_list.item_activated.connect(func(_i: int) -> void: _on_confirm())
 	box.add_child(_list)
 	_name_row = HBoxContainer.new()
@@ -58,6 +63,16 @@ func _init() -> void:
 	buttons.add_theme_constant_override("separation", 10)
 	buttons.alignment = BoxContainer.ALIGNMENT_END
 	box.add_child(buttons)
+	var hint := Label.new()
+	hint.text = Lang.t("Ctrl o Maiusc + clic: piu' salvataggi")
+	hint.add_theme_font_size_override("font_size", 13)
+	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	buttons.add_child(hint)
+	_select_all = Button.new()
+	_select_all.text = Lang.t("Tutti")
+	_select_all.tooltip_text = Lang.t("Sceglie tutti i salvataggi dell'elenco")
+	_select_all.pressed.connect(select_all)
+	buttons.add_child(_select_all)
 	_delete = Button.new()
 	_delete.text = Lang.t("Elimina")
 	_delete.pressed.connect(_on_delete)
@@ -116,7 +131,10 @@ func _refresh() -> void:
 		_list.add_item(row_text(s))
 		_names.append(str(s["nome"]))
 	_note.visible = false
+	_disarm()
+	_delete.text = Lang.t("Elimina")
 	_delete.disabled = true
+	_select_all.disabled = _names.is_empty()
 	_confirm.disabled = not _saving
 	if _names.is_empty() and not _saving:
 		_note.text = Lang.t("Nessuna partita salvata.")
@@ -124,12 +142,39 @@ func _refresh() -> void:
 
 
 func _on_selected(index: int) -> void:
-	_delete.disabled = index < 0
-	if index < 0 or index >= _names.size():
+	_disarm()
+	var count := _list.get_selected_items().size()
+	_delete.disabled = count == 0
+	_delete.text = Lang.t("Elimina (%d)") % count if count > 1 else Lang.t("Elimina")
+	if index < 0 or index >= _names.size() or not _list.is_selected(index):
+		_confirm.disabled = not _saving and count == 0
 		return
 	_confirm.disabled = false
 	if _saving:
 		_name_edit.text = _names[index]
+
+
+## Sceglie tutti i salvataggi dell'elenco (per cancellarli insieme).
+func select_all() -> void:
+	for i in _list.item_count:
+		_list.select(i, false)
+	_on_selected(-1)
+
+
+## Nomi dei salvataggi scelti, nell'ordine dell'elenco.
+func selected_names() -> PackedStringArray:
+	var out := PackedStringArray()
+	var picked := _list.get_selected_items()
+	picked.sort()
+	for i in picked:
+		if i >= 0 and i < _names.size():
+			out.append(_names[i])
+	return out
+
+
+func _disarm() -> void:
+	_delete_armed = false
+	_note.visible = false
 
 
 func _on_confirm() -> void:
@@ -148,11 +193,26 @@ func _on_confirm() -> void:
 
 
 func _on_delete() -> void:
-	var picked := _list.get_selected_items()
-	if picked.is_empty():
+	var chosen := selected_names()
+	if chosen.is_empty():
 		return
-	SaveGame.delete_file(_names[picked[0]])
+	if chosen.size() > 1 and not _delete_armed:
+		_delete_armed = true
+		_delete.text = Lang.t("Conferma: elimina %d") % chosen.size()
+		_note.text = Lang.t("Clic di nuovo su «Conferma» per eliminare %d salvataggi.") % chosen.size()
+		_note.visible = true
+		return
+	delete_names(chosen)
 	_refresh()
+
+
+## Cancella i salvataggi indicati; restituisce quanti sono stati cancellati.
+static func delete_names(names: PackedStringArray) -> int:
+	var done := 0
+	for n in names:
+		if SaveGame.delete_file(n):
+			done += 1
+	return done
 
 
 static func _utc_offset() -> int:

@@ -83,19 +83,28 @@ void fragment() {
 			col = mix(col, vec3(0.93, 0.92, 0.96), selected_whiten);
 		}
 		if (owner.a > 0.0 && center_info.b > 0.9) {
-			// fascia del proprietario: c'e' una regione di un altro proprietario (o il mare) entro owner_band_px
+			// fascia del proprietario: c'e' una regione di terra di un altro proprietario entro owner_band_px.
+			// 16 direzioni su due raggi a mezzo pixel dello schermo dal bordo interno: il bordo della fascia e' sfumato
+			// su un pixel invece che a scalini (23/11/2026). Sulla mappa del mondo index_tex e' regioni_vista.png, con i
+			// confini gia' allineati alle linee levigate.
 			float band = 0.5 * owner_band_px * texels_per_px;
 			float hit = 0.0;
-			for (int j = 0; j < 8; j++) {
-				float a2 = float(j) * 0.7853982;
-				ivec2 oc = ivec2(floor(p + vec2(cos(a2), sin(a2)) * band));
-				int oi = index_at(oc);
-				vec4 other_owner = texelFetch(table_tex, ivec2(oi, 0), 0);
-				vec4 other_info2 = info_of(oi);
-				bool different = other_info2.b > 0.9 && distance(other_owner.rgb, owner.rgb) > 0.02;
-				if (different) {
-					hit = 1.0;
+			for (int r = 0; r < 2; r++) {
+				float radius_r = band + (float(r) - 0.5) * texels_per_px;
+				float found = 0.0;
+				for (int j = 0; j < 16; j++) {
+					float a2 = float(j) * 0.3926991;
+					int oi = index_at(ivec2(floor(p + vec2(cos(a2), sin(a2)) * radius_r)));
+					vec4 other_info2 = info_of(oi);
+					if (other_info2.b > 0.9) {
+						vec4 other_owner = texelFetch(table_tex, ivec2(oi, 0), 0);
+						if (distance(other_owner.rgb, owner.rgb) > 0.02) {
+							found = 1.0;
+							break;
+						}
+					}
 				}
+				hit += 0.5 * found;
 			}
 			col = mix(col, owner.rgb, hit * owner_band_alpha);
 		}

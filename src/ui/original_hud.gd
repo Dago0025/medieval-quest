@@ -121,6 +121,8 @@ const BAR_GAP := 8.0
 const BAR_RADIUS := 10
 const BADGE_SIZE := Vector2(11, 24)      ## pennacchio del comandante sulle carte (originale 14x31)
 const UPGRADE_ICON_SIZE := Vector2(12, 12)   ## scudo e spada dei potenziamenti sulle carte (assets/icone, SVG nitidi)
+const UPGRADE_EMBLEM_SIZE := Vector2(16, 16)  ## emblema unico dei potenziamenti: bordo dello scudo = armatura, spada = armi
+const UPGRADE_EMBLEM_SWORD_DOWN := true        ## spada con la punta in basso (false: punta in alto)
 const SMALL_BUTTON_FONT := 8                 ## comandi dell'esercito, «Congeda», «Dettagli», «Proposte» (10 prima)
 const UNIT_NUMBER_SIZE := 9                  ## numero dei soldati sulle carte delle unita' (11 prima: un 20% piu' piccolo)
 const SIDE_ICON := Vector2(76, 57)       ## icona a fianco della rassegna (le icone degli edifici sono 4:3)
@@ -148,6 +150,13 @@ var _review_title: Label
 var _review_flow: Container            ## gruppo di immagini in costruzione (l'ultimo aperto)
 var _review_side_flow: HFlowContainer   ## fila dei gruppi affiancati (le armate nel castello), creata al primo gruppo
 const SIDE_GROUP_ROW := 8               ## voci per riga in un gruppo affiancato, oltre va a capo
+## Carte del castello scelto (accanto alla sua icona) e delle armate nel pannello di rassegna, a griglia di
+## ARMY_COLUMNS colonne. Commenti ricostruiti il 25/11/2026 dalla build esportata: gli originali sono andati persi.
+const CASTLE_CARD := Vector2(30, 30)
+## Carte delle armate: piu' piccole delle 56x41 di prima, in una griglia di colonne fisse cosi' le righe restano
+## allineate.
+const ARMY_COLUMNS := 10
+const ARMY_CARD := Vector2(38, 38)
 var _review_box: VBoxContainer          ## i gruppi del pannello di rassegna, uno sotto l'altro
 var _review_scroll: ScrollContainer
 var _review_text: Label
@@ -266,7 +275,8 @@ func set_proposals(count: int) -> void:
 ## dagli edifici costruiti: richiesta di Federico del 2026-11-10). Gli indici dei clic restano quelli di `items`.
 ## `side` (richiesta di Federico dell'11/11/2026, il castello scelto): {"immagine", "nome", "nota", "suggerimento"} mette
 ## l'icona a sinistra, il nome in grassetto e la nota sopra le voci, che cosi' stanno accanto all'icona.
-func show_review(title: String, items: Array, lines: PackedStringArray, details: bool, side: Dictionary = {}) -> void:
+## `columns` > 0: la prima fila di voci e' una griglia di `columns` colonne invece di andare a capo da sola.
+func show_review(title: String, items: Array, lines: PackedStringArray, details: bool, side: Dictionary = {}, columns: int = 0) -> void:
 	_review_title.text = title
 	_review_title.visible = title != ""
 	var side_tex: Texture2D = side.get("immagine")
@@ -282,7 +292,8 @@ func show_review(title: String, items: Array, lines: PackedStringArray, details:
 	for c in _review_box.get_children():
 		c.queue_free()
 	_review_side_flow = null
-	_review_flow = _review_group("", false)
+	_review_flow = _review_group("", false, "", columns)
+	var first_flow := _review_flow
 	for i in items.size():
 		var item: Dictionary = items[i]
 		if item.has("intestazione"):
@@ -302,6 +313,8 @@ func show_review(title: String, items: Array, lines: PackedStringArray, details:
 				_review_flow = _review_group(str(item["intestazione"]), bool(item.get("evidenzia", false)), str(item.get("suggerimento", "")))
 			continue
 		_review_flow.add_child(_review_item(item, i))
+	# senza voci nella prima fila (solo gruppi con intestazione) la fila vuota non occupa spazio
+	first_flow.get_parent().visible = first_flow.get_child_count() > 0 or items.is_empty()
 	_review_scroll.visible = not items.is_empty()
 	_review_scroll.scroll_vertical = 0
 	_review_text.text = "\n".join(lines)
@@ -810,7 +823,7 @@ func _small_button(text: String) -> Button:
 
 
 ## Gruppo del pannello di rassegna: etichetta verticale a sinistra (se c'e') e le immagini; `highlight` = fondo scuro.
-func _review_group(label: String, highlight: bool, tip: String = "") -> HFlowContainer:
+func _review_group(label: String, highlight: bool, tip: String = "", columns: int = 0) -> Container:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 4)
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -840,6 +853,14 @@ func _review_group(label: String, highlight: bool, tip: String = "") -> HFlowCon
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE if tip == "" else Control.MOUSE_FILTER_STOP
 		l.tooltip_text = tip
 		row.add_child(l)
+	if columns > 0:
+		var grid := GridContainer.new()
+		grid.columns = columns
+		grid.add_theme_constant_override("h_separation", 3)
+		grid.add_theme_constant_override("v_separation", 2)
+		row.add_child(grid)
+		_review_box.add_child(holder)
+		return grid
 	var flow := HFlowContainer.new()
 	flow.add_theme_constant_override("h_separation", 3)
 	flow.add_theme_constant_override("v_separation", 2)
@@ -864,28 +885,18 @@ func _review_side_group(label: String, tip: String, count: int, item_width: floa
 	sb.border_color = Color(0.36, 0.22, 0.10, 0.40)
 	sb.set_border_width_all(1)
 	sb.set_corner_radius_all(4)
-	sb.set_content_margin_all(2)
+	sb.set_content_margin_all(1)
 	sb.content_margin_left = 4
 	sb.content_margin_right = 4
 	panel.add_theme_stylebox_override("panel", sb)
-	panel.tooltip_text = tip
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 0)
-	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.add_child(col)
-	var l := Label.new()
-	l.text = label
-	l.add_theme_font_size_override("font_size", 9)
-	l.add_theme_color_override("font_color", Color("5c1a10"))
-	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	col.add_child(l)
+	panel.tooltip_text = tip if tip.begins_with(label) else (label + ("\n" + tip if tip != "" else ""))
 	var flow := HFlowContainer.new()
 	flow.add_theme_constant_override("h_separation", 2)
 	flow.add_theme_constant_override("v_separation", 2)
-	var per_row := clampi(count, 1, SIDE_GROUP_ROW)
+	var per_row := clampi(ceili(float(count) / 2.0), 1, SIDE_GROUP_ROW)
 	flow.custom_minimum_size = Vector2(float(per_row) * item_width + float(per_row - 1) * 2.0, 0)
 	flow.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	col.add_child(flow)
+	panel.add_child(flow)
 	_review_side_flow.add_child(panel)
 	return flow
 
@@ -982,27 +993,17 @@ func _review_item(item: Dictionary, index: int) -> Control:
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		l.name = "Uomini"
 		holder.add_child(l)
-	# potenziamenti dagli edifici (richiesta di Federico, 2026-11-13): scudo dell'armatura sopra e spada delle armi sotto, nel
-	# colore del livello (ferro, bronzo, argento, oro), in basso a sinistra al posto del numero (che sta sul lato opposto)
+	# potenziamenti dagli edifici (richiesta di Federico, 2026-11-13), in basso a sinistra al posto del numero (che sta sul
+	# lato opposto). Un'icona sola che mostra i due valori (richiesta di Federico, 2026-11-26): uno scudo con il bordo nel
+	# metallo dell'armatura e, sul campo scuro, una spada nel metallo delle armi (ferro, bronzo, argento, oro). A livello 0
+	# il bordo e' di legno scuro e la spada non c'e'.
 	if unit_card:
-		var marks: Array[Texture2D] = []
-		for kind in ["armatura", "armi"]:
-			var icon := upgrade_icon(kind, int(item.get(kind, 0)))
-			if icon != null:
-				marks.append(icon)
-		var y := size.y - float(marks.size()) * UPGRADE_ICON_SIZE.y - 1.0
-		for icon in marks:
-			var mark := TextureRect.new()
-			mark.texture = icon
-			mark.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
-			mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			mark.size = UPGRADE_ICON_SIZE
-			mark.position = Vector2(1.0, y)
-			mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			mark.name = "Potenziamento_%d" % holder.get_child_count()
+		var emblem := upgrade_emblem(int(item.get("armatura", 0)), int(item.get("armi", 0)))
+		if emblem != null:
+			var mark := _upgrade_mark(emblem, UPGRADE_EMBLEM_SIZE)
+			mark.position = Vector2(1.0, size.y - UPGRADE_EMBLEM_SIZE.y - 1.0)
+			mark.name = "Potenziamenti"
 			holder.add_child(mark)
-			y += UPGRADE_ICON_SIZE.y
 	if bool(item.get("scelta", false)):
 		# voce scelta per essere separata: cornice dorata sotto l'immagine
 		var frame := Panel.new()
@@ -1334,6 +1335,67 @@ func _wood_arrow(pos: Vector2, size: Vector2, step: int) -> void:
 		tri.draw_colored_polygon(PackedVector2Array([mid + Vector2(-5, -3 * dir), mid + Vector2(5, -3 * dir), mid + Vector2(0, 5 * dir)]), BRASS))
 	b.add_child(tri)
 	_bar.add_child(b)
+
+
+## Icona di un potenziamento sulla carta, alla misura data, senza intercettare il mouse.
+static func _upgrade_mark(tex: Texture2D, mark_size: Vector2) -> TextureRect:
+	var mark := TextureRect.new()
+	mark.texture = tex
+	mark.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	mark.size = mark_size
+	mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return mark
+
+
+## Metalli dei livelli 1-4 (ferro, bronzo, argento, oro): chiaro, medio, scuro, come le icone in assets/icone.
+const UPGRADE_METALS := [
+	["#c3c8ce", "#8d949c", "#3d4248"],
+	["#e9a96a", "#b06a34", "#5c3214"],
+	["#ffffff", "#cfd5dd", "#6f7782"],
+	["#fff1a8", "#e0a91e", "#7a5207"],
+]
+const UPGRADE_NO_METAL := ["#6b5640", "#4a3a2a", "#2a1f15"]   ## bordo dello scudo senza potenziamento dell'armatura
+static var _upgrade_emblems := {}
+
+
+## Emblema dei potenziamenti (richiesta di Federico, 2026-11-26): scudo col bordo nel metallo dell'armatura e spada nel
+## metallo delle armi sul campo scuro. Disegnato dall'SVG in memoria (nitido a ogni scala); null se entrambi sono a 0.
+static func upgrade_emblem(armour: int, weapons: int) -> Texture2D:
+	armour = clampi(armour, 0, TroopUpgrades.MAX_LEVEL)
+	weapons = clampi(weapons, 0, TroopUpgrades.MAX_LEVEL)
+	if armour == 0 and weapons == 0:
+		return null
+	var key := "%d_%d" % [armour, weapons]
+	if not _upgrade_emblems.has(key):
+		var image := Image.new()
+		if image.load_svg_from_string(upgrade_emblem_svg(armour, weapons), 1.0) == OK:
+			image.generate_mipmaps()
+			_upgrade_emblems[key] = ImageTexture.create_from_image(image)
+		else:
+			_upgrade_emblems[key] = null
+	return _upgrade_emblems[key]
+
+
+## Sorgente SVG 64x64 dell'emblema (vedi upgrade_emblem).
+static func upgrade_emblem_svg(armour: int, weapons: int) -> String:
+	var rim: Array = UPGRADE_METALS[armour - 1] if armour > 0 else UPGRADE_NO_METAL
+	var svg := '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><defs>'
+	svg += '<linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%s"/><stop offset="0.55" stop-color="%s"/><stop offset="1" stop-color="%s"/></linearGradient>' % rim
+	if weapons > 0:
+		svg += '<linearGradient id="w" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="%s"/><stop offset="0.5" stop-color="%s"/><stop offset="1" stop-color="%s"/></linearGradient>' % UPGRADE_METALS[weapons - 1]
+	svg += '</defs>'
+	svg += '<path d="M32 3 L57 11 L57 30 C57 46 46 55 32 61 C18 55 7 46 7 30 L7 11 Z" fill="url(#a)" stroke="#120a04" stroke-width="3.5" stroke-linejoin="round"/>'
+	svg += '<path d="M32 11 L49 16.5 L49 30 C49 41 42 48 32 52.5 C22 48 15 41 15 30 L15 16.5 Z" fill="#2b1a0d" stroke="#120a04" stroke-width="1.5" stroke-linejoin="round"/>'
+	if weapons > 0:
+		var mid: String = UPGRADE_METALS[weapons - 1][1]
+		svg += '<g transform="rotate(%d 32 32)"><g stroke="#120a04" stroke-width="1.8" stroke-linejoin="round">' % (180 if UPGRADE_EMBLEM_SWORD_DOWN else 0)
+		svg += '<path d="M27.5 21 L32 11.5 L36.5 21 L36.5 39 L27.5 39 Z" fill="url(#w)"/>'
+		svg += '<rect x="20" y="38.5" width="24" height="6" rx="2" fill="%s"/>' % mid
+		svg += '<rect x="29.5" y="44.5" width="5" height="5.5" fill="#5a3418"/>'
+		svg += '<circle cx="32" cy="52.5" r="3.6" fill="%s"/></g></g>' % mid
+	return svg + '</svg>'
 
 
 static var _upgrade_icons := {}

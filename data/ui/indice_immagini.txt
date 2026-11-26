@@ -6740,3 +6740,94 @@
 04_Interfaccia_Campagna;campmap/pieces/Vikings/Units/ARMY_LEADER_AWAITING.BUF;04_Interfaccia_Campagna/campmap/pieces/Vikings/Units/ARMY_LEADER_AWAITING.BUF.png;129;224;1;buf-1fr
 04_Interfaccia_Campagna;campmap/pieces/Vikings/Units/ARMY_LEADER_MOVING.BUF;04_Interfaccia_Campagna/campmap/pieces/Vikings/Units/ARMY_LEADER_MOVING.BUF.png;129;224;1;buf-1fr
 04_Interfaccia_Campagna;campmap/pieces/Vikings/Units/ARMY_MOVING.BUF;04_Interfaccia_Campagna/campmap/pieces/Vikings/Units/ARMY_MOVING.BUF.png;136;224;1;buf-1fr
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Asian/Dharma Temple.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Asian/Dharma Temple.BIF.png;68;50;1;rifatta-dharma
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Asian/Dharma Monastery.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Asian/Dharma Monastery.BIF.png;68;50;1;rifatta-dharma
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Asian/Great Pagoda.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Asian/Great Pagoda.BIF.png;68;50;1;rifatta-dharma
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Admiralty.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Admiralty.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/BROTHEL1.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/BROTHEL1.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/BROTHEL2.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/BROTHEL2.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/BROTHEL3.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/BROTHEL3.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Bank.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Bank.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Baronial Court.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Baronial Court.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Baronial Estate.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Baronial Estate.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Bell Foundry.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Bell Foundry.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Border fort.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Border fort.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Cannon Foundry.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Cannon Foundry.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Cathedral.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Cathedral.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Chancellery.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Chancellery.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Chapter House.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Chapter House.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Church.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Church.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/College of Surgeons.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/College of Surgeons.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Constables Palace.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Constables Palace.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Copper Mine.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Copper Mine.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Copper Mine Complex.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Copper Mine Complex.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/County Militia.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/County Militia.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/FOREST CLEARING.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/FOREST CLEARING.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Gold Mine.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Gold Mine.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Gold Mine Complex.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Gold Mine Complex.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Horse Breeder.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Horse Breeder.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Horse Breeders Guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Horse Breeders Guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Horse Farmer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Horse Farmer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Hospital.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Hospital.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Inn.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Inn.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/MUSTER FIELD.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/MUSTER FIELD.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Marshals Palace.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Marshals Palace.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Master Foundry.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Master Foundry.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Master Horse Breeder.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Master Horse Breeder.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Master merchant.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Master merchant.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Merchant.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Merchant.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Merchants guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Merchants guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Military Academy.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Military Academy.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Monastery.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Monastery.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Port.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Port.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/ROYAL COURT.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/ROYAL COURT.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Reliquary.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Reliquary.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Royal Bank.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Royal Bank.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Royal Estate.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Royal Estate.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Royal Palace.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Royal Palace.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Salt Mine.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Salt Mine.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Salt Mine Complex.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Salt Mine Complex.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Shipyard1.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Shipyard1.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Shipyard2.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Shipyard2.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Shipyard3.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Shipyard3.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Shipyard4.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Shipyard4.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Silver Mine.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Silver Mine.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Silver Mine Complex.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Silver Mine Complex.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/TAVERN1.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/TAVERN1.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/TAVERN2.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/TAVERN2.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/TAVERN3.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/TAVERN3.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/TAVERN4.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/TAVERN4.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Town Guard.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Town Guard.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Town Militia.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Town Militia.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Town Watch.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Town Watch.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/Trading post.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/Trading post.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/University.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/University.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/armourer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/armourer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/armourers guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/armourers guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/armourers workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/armourers workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/bowyer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/bowyer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/bowyers guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/bowyers guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/bowyers workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/bowyers workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/gunsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/gunsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/gunsmiths guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/gunsmiths guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/gunsmiths workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/gunsmiths workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master armourer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master armourer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master bowyer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master bowyer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master gunsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master gunsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master metalsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master metalsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master siege engineer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master siege engineer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master spearmaker.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master spearmaker.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/master swordsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/master swordsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/metalsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/metalsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/metalsmiths guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/metalsmiths guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/metalsmiths workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/metalsmiths workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/siege engineer.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/siege engineer.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/siege engineers guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/siege engineers guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/siege engineers workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/siege engineers workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/spearmaker.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/spearmaker.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/spearmakers guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/spearmakers guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/spearmakers workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/spearmakers workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/swordsmith.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/swordsmith.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/swordsmiths guild.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/swordsmiths guild.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/swordsmiths workshop.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/swordsmiths workshop.BIF.png;68;50;1;rifatta-auror
+03_Illustrazioni_Info;campmap/review_panel/Buildings/Auror/watch towers.BIF;03_Illustrazioni_Info/campmap/review_panel/Buildings/Auror/watch towers.BIF.png;68;50;1;rifatta-auror

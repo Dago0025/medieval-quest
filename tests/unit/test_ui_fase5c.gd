@@ -502,6 +502,13 @@ func test_testi_di_crociata_e_jihad_secondo_il_genere(t: TestContext) -> void:
 		"La crociata di Alpha parte da Nord1 con 4 armate (zelo 80).")
 	t.assert_eq(_text(s, GameState.EV_CRUSADE_LAUNCHED, {"fazione": W.B, "genere": JIHAD, "provincia": W.SUD1, "esercito": 8, "pile": 4, "zelo": 80}),
 		"Il jihad di Beta parte da Sud1 con 4 armate (zelo 80).")
+	# destinazione nell'avviso di partenza (Federico, 22/11/2026)
+	t.assert_eq(_text(s, GameState.EV_CRUSADE_LAUNCHED, {"fazione": W.A, "genere": CRUSADE, "provincia": W.NORD1, "esercito": 7, "pile": 4, "zelo": 80, "bersaglio": W.SUD1, "proprietario": W.B}),
+		"La crociata di Alpha parte da Nord1 con 4 armate (zelo 80), diretta a Sud1 (Beta).")
+	t.assert_eq(_text(s, GameState.EV_CRUSADE_LAUNCHED, {"fazione": W.B, "genere": JIHAD, "provincia": W.SUD1, "esercito": 8, "pile": 4, "zelo": 80, "bersaglio": W.NORD1, "proprietario": W.A}),
+		"Il jihad di Beta parte da Sud1 con 4 armate (zelo 80), diretto a Nord1 (Alpha).")
+	t.assert_eq(_text(s, GameState.EV_CRUSADE_LAUNCHED, {"fazione": W.A, "genere": CRUSADE, "provincia": W.NORD1, "esercito": 7, "pile": 4, "zelo": 80, "bersaglio": ""}),
+		"La crociata di Alpha parte da Nord1 con 4 armate (zelo 80), ancora senza bersaglio.")
 	t.assert_eq(_text(s, GameState.EV_CRUSADE_TARGET, {"fazione": W.A, "genere": CRUSADE, "esercito": 7, "bersaglio": W.SUD1, "proprietario": W.B}),
 		"La crociata di Alpha (esercito 7) ha come bersaglio Sud1 (Beta).")
 	t.assert_eq(_text(s, GameState.EV_CRUSADE_TARGET, {"fazione": W.B, "genere": JIHAD, "esercito": 8, "bersaglio": W.NORD2, "proprietario": W.A}),

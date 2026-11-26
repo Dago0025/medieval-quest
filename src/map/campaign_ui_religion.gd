@@ -88,12 +88,14 @@ static func zeal_text(state: GameState, province: ProvinceState) -> String:
 
 
 ## Legenda della tinta religiosa: una voce per religione, nell'ordine fisso: [{"chiave", "nome", "colore"}]. Il Culto
-## Imperiale degli Auror compare solo in modalita' Auror.
+## Imperiale degli Auror compare solo in modalita' Auror, il Dharma solo con la mappa del mondo.
 static func legend_entries() -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	for key in ProvinceState.RELIGIONS:
 		var k: String = key
 		if k == ProvinceState.IMPERIAL and not Scenario.auror:
+			continue
+		if k == ProvinceState.DHARMA and not WorldMap.available():
 			continue
 		out.append({"chiave": k, "nome": religion_label(k), "colore": StateTint.religion_color(k)})
 	return out

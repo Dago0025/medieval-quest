@@ -213,14 +213,32 @@ static func castle_level(state: GameState, region_id: String) -> int:
 	return p.level_of(state.rules.combat.castle_family)
 
 
-## Peso di un esercito in guarnigione: una unita' per pila, la cavalleria conta doppio (catalogo r.103).
-static func garrison_weight(state: GameState, army: Army) -> int:
+## Vero se il castello della regione e' una fortezza (dal grado `fortress_tier`): ci entra un'intera armata.
+static func is_fortress(state: GameState, region_id: String) -> bool:
 	var c := state.rules.combat
+	return c.castle_tier(castle_level(state, region_id)) >= c.fortress_tier
+
+
+## Posti della guarnigione nel castello della regione: 16 (catalogo r.103), 20 nelle fortezze (26/11/2026).
+static func garrison_capacity(state: GameState, region_id: String) -> int:
+	var c := state.rules.combat
+	return c.fortress_garrison_max if is_fortress(state, region_id) else c.garrison_max
+
+
+## Posti occupati da una pila di cavalleria nel castello della regione: doppi, uno nelle fortezze.
+static func cavalry_weight(state: GameState, region_id: String) -> int:
+	return 1 if is_fortress(state, region_id) else state.rules.combat.cavalry_garrison_weight
+
+
+## Peso di un esercito in guarnigione: una unita' per pila, la cavalleria conta doppio (catalogo r.103) fuori dalle
+## fortezze. `region_id` vuoto = la regione dell'esercito.
+static func garrison_weight(state: GameState, army: Army, region_id := "") -> int:
+	var cav := cavalry_weight(state, army.region if region_id == "" else region_id)
 	var total := 0
 	for s in army.stacks:
 		var unit: UnitType = state.units.get_unit(s.unit_id)
 		if unit != null and unit.is_cavalry():
-			total += c.cavalry_garrison_weight
+			total += cav
 		else:
 			total += 1
 	return total
@@ -248,13 +266,16 @@ static func years_to_starve(state: GameState, siege: SiegeState) -> int:
 ## Toglie dagli eserciti una frazione degli uomini, distribuita sulle pile in proporzione agli uomini
 ## (resto maggiore: il totale perso e' round(uomini x frazione), senza mai superare gli uomini di una
 ## pila). Le pile rimaste senza uomini spariscono dall'esercito; gli eserciti vuoti restano nella lista
-## (li toglie il chiamante). Restituisce gli uomini persi.
-static func apply_losses(armies: Array[Army], fraction: float) -> int:
+## (li toglie il chiamante). Restituisce gli uomini persi. Con `units` le pile di unita' invulnerabili (Ankalagon,
+## AurorUnits `invulnerabile`) non perdono nessuno e non contano nel totale.
+static func apply_losses(armies: Array[Army], fraction: float, units: UnitProdLoader.UnitTable = null) -> int:
 	var frac := clampf(fraction, 0.0, 1.0)
 	var stacks: Array[UnitStack] = []
 	var total := 0
 	for a in armies:
 		for s in a.stacks:
+			if units != null and is_invulnerable(units, s):
+				continue
 			stacks.append(s)
 			total += s.men
 	if total <= 0 or frac <= 0.0:
@@ -288,6 +309,14 @@ static func apply_losses(armies: Array[Army], fraction: float) -> int:
 			if a.stacks[i].men < 1:
 				a.stacks.remove_at(i)
 	return assigned
+
+
+## Vero se la pila e' di un'unita' che non perde mai uomini (Ankalagon, 23/11/2026).
+static func is_invulnerable(units: UnitProdLoader.UnitTable, stack: UnitStack) -> bool:
+	if units == null or stack == null:
+		return false
+	var u := units.get_unit(stack.unit_id)
+	return u != null and u.invulnerable
 
 
 # --- battaglia ---------------------------------------------------------------------------
@@ -346,8 +375,8 @@ static func resolve(state: GameState, region_id: String, attackers: Array[Army],
 	else:
 		r.attacker_loss_fraction = loser_fraction
 		r.defender_loss_fraction = winner_fraction
-	r.attacker_losses = apply_losses(attackers, r.attacker_loss_fraction)
-	r.defender_losses = apply_losses(defenders, r.defender_loss_fraction)
+	r.attacker_losses = apply_losses(attackers, r.attacker_loss_fraction, state.units)
+	r.defender_losses = apply_losses(defenders, r.defender_loss_fraction, state.units)
 	# valore: un tiro per ogni pila sopravvissuta del vincitore, sempre (anche al massimo)
 	for a in winners:
 		for s in a.stacks:

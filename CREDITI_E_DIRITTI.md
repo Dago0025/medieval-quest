@@ -14,7 +14,7 @@ Medieval Quest è un progetto di fan **non ufficiale e senza scopo di lucro**. N
 
 Medieval Quest ne riprende idee, regole e struttura della campagna. Il motore e il codice sono scritti da zero, ma alcuni contenuti vengono ancora dall'originale:
 
-- **nell'installer**: 36 brani musicali ed effetti sonori e circa 100 immagini (tavole degli eventi, schermate di fine partita, poche icone) del gioco originale, nella cartella `originale` accanto all'eseguibile. Restano **di proprietà dei loro titolari**, non sono coperti dalla licenza MIT e sono inclusi solo per uso personale e non commerciale, in attesa di essere sostituiti. Non vanno ridistribuiti separatamente;
+- **nell'installer**: circa 100 immagini (tavole degli eventi, schermate di fine partita, poche icone) del gioco originale, nella cartella `originale` accanto all'eseguibile. Restano **di proprietà dei loro titolari**, non sono coperti dalla licenza MIT e sono inclusi solo per uso personale e non commerciale, in attesa di essere sostituiti. Non vanno ridistribuiti separatamente;
 - **nei dati** (`data/campagna`, `data/testi`, nomi di province, unità ed edifici): valori e testi ricavati dai file del gioco originale e della mod XL, in parte riscritti;
 - **nelle immagini**: alcune icone di unità, edifici e mappa sono rielaborazioni, generate con l'IA, delle icone originali.
 
@@ -43,6 +43,17 @@ Con licenza [SIL Open Font License 1.1](https://openfontlicense.org) (testi comp
 ## Immagini nuove
 
 Ritratti, scene degli eventi, stemmi, cornici e gran parte delle icone sono stati generati in locale con **Intel AI Playground** (modelli di diffusione aperti, tra cui la famiglia Flux) e rifiniti con gli script in `tools/`.
+
+## Audio nuovo
+
+Tutto l'audio del gioco viene da librerie gratuite, con licenza [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (pubblico dominio). Gli autori sono citati per cortesia, la licenza non lo richiede.
+
+- **Musiche** (tema gotico di menu e mappa), tutte da [OpenGameArt](https://opengameart.org), CC0: *Fantasy Choir 1, 2, 3* di **César da Rocha** (cesisco), *Laments of the War* di **Cethiel**, *Evil Approach* di **nene**, *Fantasy: Lament for a Warrior's Soul* di **RandomMind**, *Kokopelli's Graveyard Theme* di **Cleyton Kauffman**, *Cathedral* di **Umplix**, *Chant* (canto gregoriano) di **christislord**.
+- **Vittoria e sconfitta**: *Victory Theme* e *Defeat Theme* di **RandomMind** su [OpenGameArt](https://opengameart.org/users/randommind), CC0.
+- **Effetti brevi** (clic, pedine, pergamene, monete, costruzione, salvataggio): suoni dei pacchetti *RPG Audio*, *Impact Sounds* e *Casino Audio* di **Kenney** ([kenney.nl](https://kenney.nl)).
+- **Fanfare e segnali** da [Freesound](https://freesound.org): *Trumpet Fanfare* (bevibeldesign), *FanFare.wav* (DylanTheFish), *Trumpet call* (Jorgemaca), *Success Fanfare Trumpets* (FunWithSound), *TollBell* (daytripper), *Battle_horn_1* (kirmm), *war horn* (adharca).
+
+Tagli, volumi e conversioni con gli script in `tools/audio`.
 
 ## Autore
 

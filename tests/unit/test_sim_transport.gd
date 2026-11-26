@@ -23,7 +23,10 @@ func _world(seed_value: int = 1) -> GameState:
 	var campaign := StartposLoader.load_file(STARTPOS)
 	var units := UnitProdLoader.load_file(UNITS)
 	var buildings := BuildingProdLoader.load_file(BUILDINGS)
-	return GameSetup.new_game(campaign, units, buildings, Rules.new(), seed_value)
+	var s := GameSetup.new_game(campaign, units, buildings, Rules.new(), seed_value)
+	# regola di base del blocco (basta una flotta); il blocco solo in inferiorita' di navi (22/11/2026) ha i suoi test
+	s.rules.combat.blockade_needs_more_ships = false
+	return s
 
 
 func _fleet(s: GameState, faction_id: String, zone: String) -> Army:
@@ -514,6 +517,7 @@ func test_catene_sui_dati_reali(t: TestContext) -> void:
 	if not _load_real(t):
 		return
 	var s := GameSetup.new_game(_real_campaign, _real_units, _real_buildings, Rules.load_file(), 1)
+	s.rules.combat.blockade_needs_more_ships = false   # regola di base: una flotta nemica basta a chiudere la zona
 	var existing: Array[Army] = []
 	existing.assign(s.armies)
 	for a in existing:
@@ -549,3 +553,33 @@ func test_catene_sui_dati_reali(t: TestContext) -> void:
 	t.assert_true(bool(r["ok"]), str(r["errore"]))
 	t.assert_true(bool(r["via_mare"]), "SWEDEN non confina per terra con DENMARK")
 	t.assert_eq(army.sea_route, _chain(["ID_SKAGERRAK"]))
+
+
+## Richiesta di Federico del 22/11/2026: il blocco navale vale solo se chi blocca ha piu' navi di quelle proprie nella zona.
+func test_blocco_solo_in_inferiorita_di_navi(t: TestContext) -> void:
+	t.assert_true(Rules.load_file().combat.blockade_needs_more_ships, "attivo in scontri.cfg")
+	var s := _world()
+	s.rules.combat.blockade_needs_more_ships = true
+	_all_seas(s)   # una nave ALPHA in DUE, TRE e QUATTRO
+	var beta := _fleet(s, "FN_BETA", "ID_MARE_DUE")
+	t.assert_eq(GameCommands.sea_zone_status(s, "FN_ALPHA", "ID_MARE_DUE"), GameCommands.ZONE_PASSABLE, "navi pari: nessun blocco")
+	t.assert_eq(GameCommands.sea_route(s, "FN_ALPHA", "ID_PORTA", "ID_FARO"), _chain(["ID_MARE_UNO", "ID_MARE_DUE"]))
+	t.assert_true(GameCommands.zone_blockers(s, "FN_ALPHA", "ID_MARE_DUE").is_empty())
+	beta.stacks.append(UnitStack.new("Galley", 1, 0))
+	t.assert_eq(GameCommands.sea_zone_status(s, "FN_ALPHA", "ID_MARE_DUE"), GameCommands.ZONE_BLOCKED, "Beta ha piu' navi: blocco")
+	t.assert_eq(GameCommands.zone_blockers(s, "FN_ALPHA", "ID_MARE_DUE"), PackedStringArray(["FN_BETA"]))
+	t.assert_eq(GameCommands.sea_route(s, "FN_ALPHA", "ID_PORTA", "ID_FARO"), _chain(["ID_MARE_UNO", "ID_MARE_TRE", "ID_MARE_QUATTRO"]), "si gira attorno")
+	_fleet(s, "FN_ALPHA", "ID_MARE_DUE")
+	_fleet(s, "FN_ALPHA", "ID_MARE_DUE")
+	t.assert_eq(GameCommands.sea_zone_status(s, "FN_ALPHA", "ID_MARE_DUE"), GameCommands.ZONE_PASSABLE, "ora ALPHA ha piu' navi")
+	# la stessa regola per le flotte nemiche, contate per fazione
+	s.declare_war("FN_ALPHA", "FN_GAMMA")
+	var gamma := _fleet(s, "FN_GAMMA", "ID_MARE_TRE")
+	t.assert_eq(GameCommands.sea_zone_status(s, "FN_ALPHA", "ID_MARE_TRE"), GameCommands.ZONE_PASSABLE, "nemico con le stesse navi")
+	gamma.stacks.append(UnitStack.new("Galley", 1, 0))
+	t.assert_eq(GameCommands.sea_zone_status(s, "FN_ALPHA", "ID_MARE_TRE"), GameCommands.ZONE_BLOCKED, "nemico con piu' navi")
+	# senza navi proprie basta una flotta non alleata
+	var s2 := _world()
+	s2.rules.combat.blockade_needs_more_ships = true
+	_fleet(s2, "FN_BETA", "ID_MARE_DUE")
+	t.assert_eq(GameCommands.sea_zone_status(s2, "FN_ALPHA", "ID_MARE_DUE"), GameCommands.ZONE_BLOCKED, "nessuna nave propria")

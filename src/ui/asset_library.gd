@@ -206,7 +206,9 @@ static func unit_card_path(unit_id: String, culture: String = "") -> String:
 		return own
 	# ADR-076: finche' l'immagine non e' pronta, la carta del modello (la Fregata del Drago mostra la caracca)
 	var model := str(AurorUnits.value(unit_id, "modello", ""))
-	return unit_card_path(model) if model != "" and not AurorUnits.is_auror_unit(model) else ""
+	if model == "":
+		model = CultureUnits.card_model(unit_id)   # ADR-116: segnaposto finche' le unita' delle fazioni nuove non hanno carta
+	return unit_card_path(model) if model != "" and not AurorUnits.is_auror_unit(model) and not CultureUnits.is_culture_unit(model) else ""
 
 
 ## Vero se per il percorso originale c'e' un'immagine rifatta in assets/rifatti (ADR-043).
@@ -221,7 +223,9 @@ static func unit_picture(unit_id: String) -> Texture2D:
 		if has(original) or is_remade(original):   # ADR-074: unita' degli Auror senza originale
 			return texture(original)
 	var model := str(AurorUnits.value(unit_id, "modello", ""))
-	if model != "" and not AurorUnits.is_auror_unit(model):
+	if model == "":
+		model = CultureUnits.card_model(unit_id)   # ADR-116
+	if model != "" and not AurorUnits.is_auror_unit(model) and not CultureUnits.is_culture_unit(model):
 		return unit_picture(model)   # ADR-076: immagine non ancora pronta, quella del modello
 	_missing["illustrazione:" + unit_id] = true
 	return null

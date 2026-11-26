@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bur3uvspvrsur"
+path="res://.godot/imported/Gotico Laments of the War.ogg-3270b448b448dc51c8eba23a202aafd0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/musica/Gotico Laments of the War.ogg"
+dest_files=["res://.godot/imported/Gotico Laments of the War.ogg-3270b448b448dc51c8eba23a202aafd0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

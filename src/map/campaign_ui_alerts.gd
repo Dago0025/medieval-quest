@@ -19,7 +19,7 @@ const THEMES := [
 	"battaglia_vittoria", "battaglia_sconfitta", "battaglia_navale_vittoria", "battaglia_navale_sconfitta",
 	"assalto_vittoria", "assalto_sconfitta", "sortita", "assedio", "conquista", "provincia_persa", "guerra", "alleanza",
 	"alleanza_rotta", "tregua", "matrimonio", "nascita", "morte", "incoronazione", "assassinio", "rivolta", "scomunica",
-	"scomunica_revocata", "fazione_distrutta", "inondazione", "carestia", "terremoto", "tempesta", "peste", "peste_nera", "orda",
+	"scomunica_revocata", "fazione_distrutta", "fazione_riemersa", "commercio", "inondazione", "carestia", "terremoto", "tempesta", "peste", "peste_nera", "orda",
 ]
 
 ## Ruoli della famiglia la cui morte merita una finestra (i generali restano nel resoconto).
@@ -228,6 +228,13 @@ static func _other(state: GameState, kind: String, e: Dictionary, key: String) -
 			if actor == key or actor == "":
 				return {}
 			return _w(Lang.t("Notizia"), Lang.t("Caduta %s") % CampaignUiText.fprep("di", actor, "of"), text, "", "fazione_distrutta", "", ESITO_NONE)
+		GameState.EV_FACTION_REEMERGED, GameState.EV_PAPACY_REEMERGED:
+			# ADR-114: il ritorno di una fazione sconfitta (o del Papato) si annuncia come la sua caduta
+			if actor == key or actor == "":
+				return {}
+			return _w(Lang.t("Notizia"), Lang.t("Ritorno %s") % CampaignUiText.fprep("di", actor, "of"), text, "", "fazione_riemersa", region, ESITO_NONE)
+		GameState.EV_AMERICAS_CONTACT:
+			return _w(Lang.t("Notizia"), Lang.t("Il Nuovo Mondo"), text, "", "commercio", region, ESITO_NONE)
 		GameState.EV_FLOOD, GameState.EV_FAMINE, GameState.EV_QUAKE, GameState.EV_PLAGUE:
 			if not _owned_or_ours(state, region, SimUtil.norm(CampaignUiText.text_of(e.get("proprietario"))), key):
 				return {}

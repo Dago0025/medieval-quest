@@ -145,11 +145,12 @@ static func region_text(state: GameState, player_id: String, region_id: String, 
 	if not enemies.is_empty():
 		lines.append(paint(Lang.t("Acque nemiche: flotte %s") % CampaignUiText.fnames(enemies, "di"), "nemico", rich))
 	if status == GameCommands.ZONE_BLOCKED:
-		var blockers := enemies.duplicate()
-		blockers.append_array(neutrals)
+		var blockers := GameCommands.zone_blockers(state, me, region.id, true)   # solo chi ha piu' navi (22/11/2026)
 		lines.append(paint(Lang.t("Blocco navale: i vostri eserciti non passano per mare (%s)") % CampaignUiText.fnames(blockers), "nemico", rich))
 	elif status == GameCommands.ZONE_PASSABLE:
 		lines.append(Lang.t("Acque vostre: la vostra flotta apre la rotta ai trasporti"))
+		if not neutrals.is_empty() or not enemies.is_empty():
+			lines.append(Lang.t("Nessun blocco navale: le altre flotte non hanno più navi delle vostre"))
 	elif enemies.is_empty():
 		lines.append(paint(Lang.t("Acque neutrali"), "neutrale", rich))
 	if not neutrals.is_empty() and status != GameCommands.ZONE_BLOCKED:

@@ -12,6 +12,8 @@ extends LbmReader
 ##   (punto interno, ancora delle zone di mare).
 ## - `plancia.jpg`: la plancia dipinta, alla stessa risoluzione della bitmap.
 ## - `confini.bin`: confini vettoriali precalcolati (BorderExtractor.load_world).
+## - `regioni_vista.png`, `regioni_vista_auror.png`: la bitmap con i confini interni allineati alle polilinee levigate, solo
+##   per lo shader (fasce dei proprietari, provincia scelta, regioni raggiungibili); la logica legge `regioni.png`.
 ## - `startpos_mondo.txt`, `startpos_atlantide.txt`: righe dello startpos per la geometria del mondo (`startpos_text`).
 ## Tutto e' generato da tools/mondo/ (vedi tools/mondo/LEGGIMI.md).
 
@@ -56,6 +58,10 @@ static func index_path(auror: bool) -> String:
 
 static func texture_path(auror: bool) -> String:
 	return DIR + ("plancia_auror.jpg" if auror else "plancia.jpg")
+
+
+static func view_index_path(auror: bool) -> String:
+	return DIR + ("regioni_vista_auror.png" if auror else "regioni_vista.png")
 
 
 static func borders_path(auror: bool) -> String:
@@ -137,6 +143,16 @@ func to_image() -> Image:
 	if not is_valid():
 		return null
 	return Image.create_from_data(width, height, false, Image.FORMAT_RG8, _rg)
+
+
+## Bitmap per lo shader: `regioni_vista*.png` (confini levigati, tools/mondo/regioni_vista.py) se c'e' ed ha le stesse
+## dimensioni, altrimenti quella della logica. Solo grafica: clic e pedine usano sempre index_at.
+func view_image() -> Image:
+	var img := _read_image(view_index_path(auror_variant))
+	if img == null or img.get_width() != width or img.get_height() != height:
+		return to_image()
+	img.convert(Image.FORMAT_RG8)
+	return img
 
 
 ## Startpos per la geometria del mondo: toglie da `text` confinanti, castelli, origini, porti e punti di confine

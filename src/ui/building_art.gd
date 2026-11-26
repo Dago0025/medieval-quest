@@ -11,7 +11,9 @@ extends RefCounted
 const ROOT := "campmap/review_panel/buildings/"
 const INFO_ROOT := "campmap/info_pics/buildings/"   ## illustrazioni grandi per la scheda dell'edificio
 const ICON_SIZE := Vector2(68, 50)
-const VARIANT_FOLDERS := ["catholic", "christian", "orthodox", "muslim", "pagan"]   ## sottocartelle delle varianti
+const VARIANT_FOLDERS := ["catholic", "christian", "orthodox", "muslim", "pagan", "asian"]   ## sottocartelle delle varianti
+## Edifici degli Auror (25/11/2026, prompt/edifici_auror.md): solo per il Culto Imperiale, mai come ripiego di altre religioni.
+const AUROR_FOLDER := "auror"
 
 static var _by_name := {}     ## nome del file in minuscolo senza estensione -> Array dei percorsi originali (tessere)
 static var _info_by_name := {}   ## lo stesso per le illustrazioni di Info_Pics/Buildings
@@ -77,6 +79,10 @@ static func info_picture(label: String, family_id: String, religion: String = ""
 
 ## Cartelle delle varianti da provare per la religione, nell'ordine (in minuscolo). Senza religione: come i cattolici.
 static func religion_folders(religion: String) -> PackedStringArray:
+	if religion.to_upper().contains("DHARMA"):
+		return PackedStringArray(["asian", "pagan"])   # Dharma: icone proprie (asian), poi quelle dei pagani
+	if religion.to_upper().contains("IMPERIAL"):
+		return PackedStringArray([AUROR_FOLDER, "catholic", "christian"])   # Culto Imperiale: icone Auror, poi le cattoliche
 	var folder := PortraitArt.religion_folder(religion if religion != "" else "CATHOLIC").to_lower()
 	if folder == "catholic" or folder == "orthodox":
 		return PackedStringArray([folder, "christian"])
@@ -99,6 +105,9 @@ static func choose(paths: Array, religion: String, root: String = ROOT) -> Strin
 				return str(p)
 	for p in paths:
 		if str(p).trim_prefix(root).find("/") < 0:
+			return str(p)
+	for p in paths:
+		if not str(p).to_lower().contains("/%s/" % AUROR_FOLDER):
 			return str(p)
 	return str(paths[0])
 

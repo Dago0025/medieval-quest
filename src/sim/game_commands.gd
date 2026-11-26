@@ -75,14 +75,27 @@ static func can_queue_building(state: GameState, faction_id: String, province_id
 			return failure(Lang.t("%s richiede la risorsa %s nella regione") % [lv.token, res])
 	if family.has_type("PORT") and (region == null or not region.has_port):
 		return failure(Lang.t("%s richiede una regione costiera con porto") % family.id)
-	# PROVVISORIA (catalogo r.72): l'epoca non limita gli edifici (il file edifici non ha
-	# periodi) e le invenzioni arrivano in una fase successiva.
+	# PROVVISORIA (catalogo r.72): l'epoca non limita gli edifici (il file edifici non ha periodi). Le invenzioni (col. 26)
+	# si', dall'evento storico che le porta (ADR-114; gli Auror ne sono esenti).
+	var invention := HistoricalLimits.missing_invention(state, faction.id, lv)
+	if invention != "":
+		return failure(Lang.t("%s richiede un'invenzione non ancora arrivata: %s") % [lv.token, invention_label(invention)])
 	if not requirements_met(lv.requires, province, state.buildings):
 		return failure(Lang.t("Requisiti di %s non soddisfatti") % lv.token)
 	var cost := state.rules.traits.building_cost(faction.id, lv)   # ADR-089: tratti della fazione
 	if faction.treasury < cost:
 		return failure(Lang.t("Tesoro insufficiente: servono %d, ci sono %d") % [cost, faction.treasury])
 	return success({"livello": next_level, "costo": cost, "anni": state.rules.traits.building_years(faction.id, lv)})
+
+
+## Nome dell'invenzione per i messaggi (ADR-114).
+static func invention_label(invention: String) -> String:
+	match invention.strip_edges().to_upper():
+		"GUNPOWDER":
+			return Lang.t("polvere da sparo")
+		"COMPASS":
+			return Lang.t("bussola")
+	return invention.capitalize()
 
 
 ## Mette in coda il prossimo livello della famiglia. Il costo e' pagato subito.
@@ -183,6 +196,8 @@ static func can_queue_unit(state: GameState, faction_id: String, province_id: St
 		if unit.type_name == AgentState.PRINCESS:
 			return failure(Lang.t("%s non e' reclutabile: le principesse nascono con la dinastia") % unit.id)
 		return failure(Lang.t("%s non e' reclutabile (non e' una truppa, una nave o un agente)") % unit.id)
+	if unit.unique:
+		return failure(Lang.t("%s e' unico: non si arruola") % unit.id)   # Ankalagon
 	if province.unit_queue_load() >= state.rules.max_unit_queue:
 		return failure(Lang.t("Coda di reclutamento piena (%d)") % state.rules.max_unit_queue)
 	var faction := state.faction(faction_id)
@@ -206,6 +221,10 @@ static func can_queue_unit(state: GameState, faction_id: String, province_id: St
 			return failure(Lang.t("Le navi si costruiscono solo in regioni con porto"))
 	if not requirements_met(unit.requires, province, state.buildings):
 		return failure(Lang.t("Requisiti di %s non soddisfatti") % unit.id)
+	if not HistoricalLimits.unit_inventions_ok(state, faction.id, unit):
+		return failure(Lang.t("%s richiede un'invenzione non ancora arrivata") % unit.id)
+	if not free and HistoricalLimits.is_mounted(unit) and not HistoricalLimits.horses_allowed(state, faction.id):
+		return failure(Lang.t("%s non conosce ancora il cavallo: arrivera' con gli europei") % SimUtil.faction_label(faction.id))
 	var price := state.rules.traits.unit_cost(faction.id, unit)   # ADR-089: tratti della fazione
 	if faction.treasury < price:
 		var poor := failure(Lang.t("Tesoro insufficiente: servono %d, ci sono %d") % [price, faction.treasury])
@@ -471,7 +490,8 @@ static func embark_problem(state: GameState, faction_id: String, region_id: Stri
 
 
 ## Stato della zona di mare per i trasporti di `faction_id`: ZONE_BLOCKED se c'e' una flotta di una
-## fazione in guerra con lei o, con il blocco navale, di una fazione non alleata (anche se ci sono flotte proprie), altrimenti ZONE_PASSABLE se c'e'
+## fazione in guerra con lei o, con il blocco navale, di una fazione non alleata (anche se ci sono flotte proprie, ma con
+## `blocco_solo_se_piu_navi` solo se ha piu' navi di quelle proprie), altrimenti ZONE_PASSABLE se c'e'
 ## almeno una flotta propria, altrimenti ZONE_NO_FLEET. Le flotte alleate (fase 5a) non bloccano e non
 ## contano come proprie. Solo controllo, per l'interfaccia.
 ## `troops` falso per gli agenti: il blocco navale delle flotte neutrali vale solo per le truppe.
@@ -636,20 +656,57 @@ static func sea_status(state: GameState, faction_id: String, troops: bool = true
 ## Zona di mare -> stato (ZONE_*) per la fazione, da un solo giro sugli eserciti. Le zone senza
 ## flotte non compaiono (= ZONE_NO_FLEET). Bloccano le flotte delle fazioni in guerra con `key` e, con il blocco navale
 ## (`[flotte] blocco_neutrali` di scontri.cfg, richiesta di Federico del 2026-11-10), quelle di ogni fazione non alleata.
-## `troops` falso (agenti): bloccano solo le flotte nemiche, come nell'originale.
+## `troops` falso (agenti): bloccano solo le flotte nemiche, come nell'originale. Con `blocco_solo_se_piu_navi` (22/11/2026)
+## una fazione blocca solo se nella zona ha piu' navi di `key` (`zone_blockers`).
 static func _zone_status_map(state: GameState, key: String, troops: bool = true) -> Dictionary:
+	var counts := _zone_fleet_counts(state, key, troops)
+	var own: Dictionary = counts["proprie"]
+	var hostile: Dictionary = counts["altrui"]
 	var status := {}
+	for zone in own:
+		status[zone] = ZONE_PASSABLE
+	for zone in hostile:
+		if not _blockers_in(state, int(own.get(zone, 0)), hostile[zone]).is_empty():
+			status[zone] = ZONE_BLOCKED   # flotta nemica; per le truppe anche neutrale (blocco navale)
+	return status
+
+
+## Fazioni che chiudono la zona di mare ai trasporti di `faction_id` (vuoto = nessun blocco): non alleate (per gli agenti solo
+## in guerra) e, con `blocco_solo_se_piu_navi`, con piu' navi di quelle di `faction_id` nella zona.
+static func zone_blockers(state: GameState, faction_id: String, zone_id: String, troops: bool = true) -> PackedStringArray:
+	var key := SimUtil.norm(faction_id)
+	var zone := SimUtil.norm(zone_id)
+	var counts := _zone_fleet_counts(state, key, troops)
+	return _blockers_in(state, int((counts["proprie"] as Dictionary).get(zone, 0)), (counts["altrui"] as Dictionary).get(zone, {}))
+
+
+## Navi (unita' navali delle flotte) per zona: {"proprie": zona -> navi di `key`, "altrui": zona -> {fazione: navi}} delle
+## fazioni che possono bloccare `key` (non alleate; per gli agenti solo quelle in guerra).
+static func _zone_fleet_counts(state: GameState, key: String, troops: bool) -> Dictionary:
+	var own := {}
+	var hostile := {}
 	for a in state.armies:
 		if not a.is_fleet or a.stacks.is_empty():
 			continue
 		if a.faction == key:
-			if not status.has(a.region):
-				status[a.region] = ZONE_PASSABLE
+			own[a.region] = int(own.get(a.region, 0)) + a.stacks.size()
 		elif state.is_allied(key, a.faction):
 			continue   # fase 5a: la flotta di un alleato non blocca la zona (e non conta come flotta propria)
 		elif (troops and state.rules.combat.neutral_blockade) or state.at_war(key, a.faction):
-			status[a.region] = ZONE_BLOCKED   # flotta nemica; per le truppe anche neutrale (blocco navale)
-	return status
+			var per: Dictionary = hostile.get(a.region, {})
+			per[a.faction] = int(per.get(a.faction, 0)) + a.stacks.size()
+			hostile[a.region] = per
+	return {"proprie": own, "altrui": hostile}
+
+
+static func _blockers_in(state: GameState, own_ships: int, per_faction: Dictionary) -> PackedStringArray:
+	var out := PackedStringArray()
+	var keys := per_faction.keys()
+	keys.sort()
+	for fid in keys:
+		if not state.rules.combat.blockade_needs_more_ships or int(per_faction[fid]) > own_ships:
+			out.append(str(fid))
+	return out
 
 
 ## Ricerca in ampiezza sulle zone di mare percorribili a partire dalla provincia `from_id`
@@ -812,9 +869,9 @@ static func can_enter_castle(state: GameState, faction_id: String, army_id: int)
 	var level := Combat.castle_level(state, army.region)
 	if level <= 0:
 		return failure(Lang.t("La provincia non ha un castello"))
-	var c := state.rules.combat
-	if Combat.garrison_load(state, army.region) + Combat.garrison_weight(state, army) > c.garrison_max:
-		return failure(Lang.t("Nel castello non c'e' posto: al massimo %d (la cavalleria conta doppio)") % c.garrison_max)
+	var room := Combat.garrison_capacity(state, army.region)
+	if Combat.garrison_load(state, army.region) + Combat.garrison_weight(state, army) > room:
+		return failure(_no_room_text(state, army.region))
 	return success({"regione": army.region, "livello": level})
 
 
@@ -847,7 +904,7 @@ static func can_garrison_castle(state: GameState, faction_id: String, army_id: i
 	if not bool(check["ok"]) and not (str(check["errore"]).contains(Lang.t("Nel castello non c'e' posto")) and not keep.is_empty()):
 		return check
 	if keep.is_empty():
-		return failure(Lang.t("Nel castello non c'e' posto: al massimo %d (la cavalleria conta doppio)") % state.rules.combat.garrison_max)
+		return failure(_no_room_text(state, army.region))
 	var level := Combat.castle_level(state, army.region)
 	return success({"regione": army.region, "livello": level, "dentro": keep.size(), "fuori": (split["fuori"] as PackedInt32Array).size()})
 
@@ -881,12 +938,12 @@ static func garrison_castle(state: GameState, faction_id: String, army_id: int) 
 ## Indici delle pile dell'esercito che entrano nel castello della sua regione ("dentro") e di quelle che restano fuori
 ## ("fuori"), nell'ordine dell'esercito, con i posti ancora liberi.
 static func _garrison_split(state: GameState, army: Army) -> Dictionary:
-	var free := state.rules.combat.garrison_max - Combat.garrison_load(state, army.region)
+	var free := Combat.garrison_capacity(state, army.region) - Combat.garrison_load(state, army.region)
 	var keep := PackedInt32Array()
 	var leave := PackedInt32Array()
 	var used := 0
 	for i in army.stacks.size():
-		var w := _garrison_stack_weight(state, army.stacks[i])
+		var w := _garrison_stack_weight(state, army.stacks[i], army.region)
 		if used + w <= free:
 			keep.append(i)
 			used += w
@@ -895,9 +952,17 @@ static func _garrison_split(state: GameState, army: Army) -> Dictionary:
 	return {"dentro": keep, "fuori": leave}
 
 
-static func _garrison_stack_weight(state: GameState, stack: UnitStack) -> int:
+static func _garrison_stack_weight(state: GameState, stack: UnitStack, region_id: String) -> int:
 	var unit: UnitType = state.units.get_unit(stack.unit_id)
-	return state.rules.combat.cavalry_garrison_weight if unit != null and unit.is_cavalry() else 1
+	return Combat.cavalry_weight(state, region_id) if unit != null and unit.is_cavalry() else 1
+
+
+## Messaggio di castello pieno: nelle fortezze ogni unita' conta uno (26/11/2026).
+static func _no_room_text(state: GameState, region_id: String) -> String:
+	var room := Combat.garrison_capacity(state, region_id)
+	if Combat.is_fortress(state, region_id):
+		return Lang.t("Nel castello non c'e' posto: al massimo %d unita' nella fortezza") % room
+	return Lang.t("Nel castello non c'e' posto: al massimo %d (la cavalleria conta doppio)") % room
 
 
 ## Trascinamento sul castello di una propria provincia diversa da quella dell'esercito: ordine di movimento verso
@@ -1565,6 +1630,14 @@ static func _take_stacks(army: Army, desc_indices: PackedInt32Array) -> Array[Un
 	return taken
 
 
+## Ankalagon (23/11/2026): la guardia unica del re non si separa da Darkos ne' si congeda. "" se nessuna pila e' legata.
+static func _bound_problem(state: GameState, army: Army, order: PackedInt32Array) -> String:
+	for i in order:
+		if AurorUnits.is_bound_to_king(state, army, army.stacks[i]):
+			return Lang.t("%s e' una cosa sola con il suo cavaliere: non si separa dal suo esercito") % UnitTexts.plural_name(army.stacks[i].unit_id)
+	return ""
+
+
 ## Separa le pile `indices` dell'esercito in un esercito nuovo nella stessa regione (fermo, senza comandante, nel
 ## castello se lo era quello di partenza). Deve restare almeno una pila. Esito con "esercito" = id del nuovo.
 static func split_army(state: GameState, faction_id: String, army_id: int, indices: PackedInt32Array) -> Dictionary:
@@ -1577,6 +1650,9 @@ static func split_army(state: GameState, faction_id: String, army_id: int, indic
 		return failure(Lang.t("Scegli una o piu' pile valide dell'esercito %d") % army.id)
 	if order.size() >= army.stacks.size():
 		return failure(Lang.t("Deve restare almeno una pila nell'esercito di partenza"))
+	var bound := _bound_problem(state, army, order)
+	if bound != "":
+		return failure(bound)
 	var retrain := RetrainProcessor.cancel_army_orders(state, army.id)   # gli indici delle pile cambiano: ordini rimborsati
 	var moved := _take_stacks(army, order)
 	var fresh := state.create_army(army.faction, army.region, army.is_fleet)
@@ -1610,6 +1686,9 @@ static func transfer_stacks(state: GameState, faction_id: String, from_id: int, 
 	var order := _stack_indices(source, indices)
 	if order.is_empty():
 		return failure(Lang.t("Scegli una o piu' pile valide dell'esercito %d") % source.id)
+	var bound := _bound_problem(state, source, order)
+	if bound != "":
+		return failure(bound)
 	if target.stacks.size() + order.size() > state.rules.max_stacks:
 		return failure(Lang.t("Troppe pile: un esercito ne ha al massimo %d") % state.rules.max_stacks)
 	var retrain := RetrainProcessor.cancel_army_orders(state, source.id)   # gli indici delle pile cambiano: ordini rimborsati
@@ -1746,6 +1825,9 @@ static func disband_stacks(state: GameState, faction_id: String, army_id: int, i
 	var order := _stack_indices(army, indices)
 	if order.is_empty():
 		return failure(Lang.t("Scegli una o piu' pile valide dell'esercito %d") % army.id)
+	var bound := _bound_problem(state, army, order)
+	if bound != "":
+		return failure(bound)
 	var upkeep_before := Economy.faction_upkeep(state, army.faction)
 	var retrain := RetrainProcessor.cancel_army_orders(state, army.id)
 	var gone := _take_stacks(army, order)
@@ -1982,6 +2064,9 @@ static func can_hire_mercenary(state: GameState, faction_id: String, province_id
 	var unit := state.units.get_unit(str(c.get("unita", "")))
 	if unit == null:
 		return failure(Lang.t("Unita' sconosciuta: %s") % str(c.get("unita", "")))
+	if HistoricalLimits.is_mounted(unit) and not HistoricalLimits.horses_allowed(state, faction_id) \
+			and not state.rules.lifts_unit_limits(faction_id, unit):
+		return failure(Lang.t("%s non conosce ancora il cavallo: arrivera' con gli europei") % SimUtil.faction_label(faction_id))
 	var cost := state.rules.mercenaries.hire_cost(unit.cost)
 	var faction := state.faction(faction_id)
 	if faction == null or faction.treasury < cost:

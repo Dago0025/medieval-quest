@@ -16,6 +16,15 @@ run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7")
 config/icon="res://assets/icona.png"
 config/windows_native_icon="res://assets/icona.ico"
+; 26/11/2026: tetto a 60 fotogrammi (con la sincronia verticale il default e' la frequenza dello schermo): meno CPU
+; occupata dal disegno, piu' margine al thread dell'audio
+run/max_fps=60
+
+[audio]
+
+; vale solo se Windows non concede la modalita' a bassa latenza: con IAudioClient3 WASAPI usa il periodo minimo del
+; dispositivo (10 ms sul PC di Federico, misurato da AudioMonitor il 25/11/2026)
+driver/output_latency=60
 
 [display]
 
@@ -27,3 +36,9 @@ window/stretch/aspect="expand"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=2
+
+[threading]
+
+; al massimo 8 thread di lavoro (predefinito: tutti i core), per lasciare la CPU libera al thread dell'audio: con un
+; buffer da 10 ms la musica salta se quel thread aspetta (richiesta di Federico del 25/11/2026, prova)
+worker_pool/max_threads=8

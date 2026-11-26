@@ -30,6 +30,7 @@ var army_growth := 2                 ## PROVVISORIA (k_crescita_esercito): pile 
 # --- crociata e jihad ---
 var initial_stacks := 4              ## pile iniziali (le migliori unita' reclutabili nella provincia)
 var initial_zeal := 80
+var initial_target_radius := 6       ## PROVVISORIA (raggio_bersaglio_iniziale): passi di terra per il bersaglio alla partenza
 var zeal_decay_year := 5
 var zeal_decay_no_target := 10       ## in piu', ogni anno senza un bersaglio
 var recruit_stacks := 4              ## PROVVISORIA (ADR-072): al massimo queste pile per provincia attraversata
@@ -79,6 +80,7 @@ static func load_file(path: String = DEFAULT_PATH) -> PapacyRules:
 	r.reemerge_stacks = _int(cfg, "papato", "pile_riemersione", r.reemerge_stacks)
 	r.army_growth = _int(cfg, "papato", "k_crescita_esercito", r.army_growth)
 	r.initial_stacks = _int(cfg, "crociata", "pile_iniziali", r.initial_stacks)
+	r.initial_target_radius = _int(cfg, "crociata", "raggio_bersaglio_iniziale", r.initial_target_radius)
 	r.initial_zeal = _int(cfg, "crociata", "zelo_iniziale", r.initial_zeal)
 	r.zeal_decay_year = _int(cfg, "crociata", "calo_zelo_anno", r.zeal_decay_year)
 	r.zeal_decay_no_target = _int(cfg, "crociata", "calo_zelo_senza_bersaglio", r.zeal_decay_no_target)
@@ -150,6 +152,7 @@ func to_dict() -> Dictionary:
 		"army_growth": army_growth,
 		"initial_stacks": initial_stacks,
 		"initial_zeal": initial_zeal,
+		"initial_target_radius": initial_target_radius,
 		"zeal_decay_year": zeal_decay_year,
 		"zeal_decay_no_target": zeal_decay_no_target,
 		"recruit_stacks": recruit_stacks,

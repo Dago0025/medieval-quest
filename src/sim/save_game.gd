@@ -113,6 +113,7 @@ static func to_dict(state: GameState) -> Dictionary:
 		"avvertimenti": _plain(state.papal_warnings.duplicate(true)),
 		"papa": state.papal_leader,
 		"anni_senza_papato": state.papacy_dead_years,
+		"contatto_americhe": state.americas_contact_year,
 		"riemersioni_papato": state.papacy_reemergences,
 		"eventi_6a": _plain(EventProcessor.save_data(state)),
 		"vittoria": _plain(state.victory.to_dict()),
@@ -285,6 +286,7 @@ static func from_dict(data: Dictionary, campaign: CampaignData, units: UnitProdL
 				state.papal_warnings[str(key)] = {"anno": int(wd.get("anno", 0)), "scadenza": int(wd.get("scadenza", 0))}
 		state.papal_leader = int(d.get("papa", 0))
 		state.papacy_dead_years = int(d.get("anni_senza_papato", 0))
+		state.americas_contact_year = int(d.get("contatto_americhe", 0))
 		state.papacy_reemergences = int(d.get("riemersioni_papato", 0))
 	else:
 		for f in state.factions:

@@ -241,3 +241,69 @@ func test_carte_e_frecce_dipinte_nella_veste_nuova(t: TestContext) -> void:
 		t.assert_true((heads[0] as TextureRect).flip_v != (heads[1] as TextureRect).flip_v, "una in su e una in giu'")
 	hud.free()
 	OriginalHud.veste_nuova = before
+
+
+## Richiesta di Federico del 22/11/2026: nella barra le carte di armate e flotte stanno 10 per fila, al massimo 2 file.
+func test_carte_delle_armate_dieci_per_fila_due_file(t: TestContext) -> void:
+	var hud := OriginalHud.new()
+	hud._ready()
+	var items: Array = []
+	var rules := Rules.load_file()
+	t.assert_eq(rules.max_stacks, OriginalHud.ARMY_COLUMNS * 2, "20 unita': due file piene")
+	for i in rules.max_stacks:
+		items.append({"immagine": ImageTexture.create_from_image(Image.create(8, 8, false, Image.FORMAT_RGBA8)), "misura": OriginalHud.ARMY_CARD, "didascalia": "60", "armi": 0, "armatura": 0})
+	hud.show_review("Armata", items, PackedStringArray(), false, {}, OriginalHud.ARMY_COLUMNS)
+	var grid := hud._review_flow as GridContainer
+	t.assert_true(grid != null, "griglia a colonne fisse")
+	if grid != null:
+		t.assert_eq(grid.columns, 10)
+		t.assert_eq(grid.get_child_count(), 20)
+	# le dieci carte e le due file entrano nel pannello senza barra di scorrimento
+	var width := OriginalHud.BAR_W - OriginalHud.LEFT_W - OriginalHud.RIGHT_W - 6.0 - 28.0
+	t.assert_true(OriginalHud.ARMY_COLUMNS * OriginalHud.ARMY_CARD.x + (OriginalHud.ARMY_COLUMNS - 1) * 3.0 <= width, "10 carte in %d punti" % width)
+	hud.free()
+
+
+## Segnalazione di Federico del 23/11/2026: nel castello le armate a 10 per fila con l'etichetta sopra uscivano dal pannello
+## (gruppo 366x87 nello spazio 327x65 accanto all'icona e sotto il nome). Ora ogni armata sta su al massimo due file con le
+## voci divise a meta', carte da 30, senza etichetta: la guarnigione piena (16) entra tutta anche divisa in 2 o 3 armate.
+func test_armate_nel_castello_dentro_il_pannello(t: TestContext) -> void:
+	var width := OriginalHud.BAR_W - OriginalHud.LEFT_W - OriginalHud.RIGHT_W - 6.0 - 28.0 - OriginalHud.SIDE_ICON.x - 8.0
+	var height := 84.0 - 19.0   # sotto il nome del castello e la nota della guarnigione
+	var card := OriginalHud.CASTLE_CARD
+	t.assert_true(2.0 * card.y + 2.0 + 2.0 <= height, "due file di carte in %d punti" % height)
+	for split in [[16], [8, 8], [10, 6], [14, 1, 1], [6, 5, 5]]:
+		var total := 0.0
+		for n in split:
+			var per_row := clampi(ceili(float(n) / 2.0), 1, OriginalHud.SIDE_GROUP_ROW)
+			total += 8.0 + per_row * card.x + (per_row - 1) * 2.0
+		total += (split.size() - 1) * 5.0
+		t.assert_true(total <= width, "%s: %d punti su %d" % [str(split), total, width])
+	var hud := OriginalHud.new()
+	hud._ready()
+	var tex := ImageTexture.create_from_image(Image.create(8, 8, false, Image.FORMAT_RGBA8))
+	var items: Array = [{"intestazione": "Esercito 1", "suggerimento": "Esercito 1 · Drakon\n16 unità", "affianca": true}]
+	for i in 16:
+		items.append({"immagine": tex, "misura": card, "didascalia": "60", "armi": 0, "armatura": 0})
+	hud.show_review("Castello", items, PackedStringArray(), true, {"immagine": tex, "nome": "Fortezza", "nota": "Guarnigione 16/16"})
+	var group := hud._review_flow as HFlowContainer
+	t.assert_true(group != null)
+	if group != null:
+		t.assert_eq(group.get_child_count(), 16)
+		t.assert_eq(group.custom_minimum_size.x, 8 * card.x + 7 * 2.0, "8 per fila: due file")
+		t.assert_true((group.get_parent() as Control).tooltip_text.begins_with("Esercito 1"), "nome dell'armata nel suggerimento")
+	var live := hud._review_box.get_children().filter(func(c: Node) -> bool: return not c.is_queued_for_deletion())
+	t.assert_false((live[0] as Control).visible, "il primo gruppo vuoto non occupa spazio")
+	hud.free()
+
+
+# emblema unico dei potenziamenti (richiesta di Federico, 2026-11-26): bordo = armatura, spada = armi
+func test_emblema_dei_potenziamenti(t: TestContext) -> void:
+	t.assert_true(OriginalHud.upgrade_emblem(0, 0) == null, "senza potenziamenti niente emblema")
+	var gold_gold := OriginalHud.upgrade_emblem_svg(4, 4)
+	t.assert_true(gold_gold.count("#e0a91e") >= 2, "oro sul bordo e sulla spada")
+	t.assert_true(OriginalHud.upgrade_emblem_svg(3, 0).find("url(#w)") == -1, "armi a 0: niente spada")
+	t.assert_true(OriginalHud.upgrade_emblem_svg(0, 2).find("#6b5640") != -1, "armatura a 0: bordo di legno scuro")
+	var tex := OriginalHud.upgrade_emblem(2, 3)
+	t.assert_true(tex != null and tex.get_width() == 64, "SVG disegnato a 64x64")
+	t.assert_true(OriginalHud.upgrade_emblem(9, 9) == OriginalHud.upgrade_emblem(4, 4), "livelli oltre il massimo: oro")

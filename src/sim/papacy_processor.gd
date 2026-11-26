@@ -609,6 +609,8 @@ static func best_units(state: GameState, faction_id: String, province: ProvinceS
 			continue
 		if u.men <= 0 or not u.allows_faction(faction_id) or not u.available_in_period(state.era):
 			continue
+		if not HistoricalLimits.unit_allowed(state, faction_id, u):
+			continue   # ADR-114
 		if region != null and (not u.allows_region(region.id) or not u.allows_culture(GameCommands.culture_key(region.culture))):
 			continue
 		if not GameCommands.requirements_met(u.requires, province, state.buildings):
@@ -666,7 +668,17 @@ static func spawn_crusade(state: GameState, province: ProvinceState, unit: UnitT
 		var u: UnitType = pool[i % pool.size()]
 		army.stacks.append(state.new_stack(f.id, u.id, u.men))
 	army.crusade = new_crusade(state, kind)
+	# bersaglio alla partenza (22/11/2026): l'avviso dice dove e' diretta; annunciato qui, non di nuovo a fine anno
+	var target := initial_target(state, army)
+	var target_owner := ""
+	if target != "":
+		army.crusade["bersaglio"] = target
+		army.crusade["annunciato"] = target
+		target_owner = state.province(target).owner
 	var noun := Lang.t("La crociata") if kind == KIND_CRUSADE else Lang.t("Il jihad")
+	var text := Lang.t("%s di %s parte da %s con %d pile") % [noun, SimUtil.faction_label(f.id), WarProcessor.region_label(state, province.id), army.stacks.size()]
+	if target != "":
+		text += Lang.t(", diretta a %s") % WarProcessor.region_label(state, target) if kind == KIND_CRUSADE else Lang.t(", diretto a %s") % WarProcessor.region_label(state, target)
 	state.add_event(GameState.EV_CRUSADE_LAUNCHED, {
 		"fazione": f.id,
 		"regione": province.id,
@@ -676,8 +688,56 @@ static func spawn_crusade(state: GameState, province: ProvinceState, unit: UnitT
 		"pile": army.stacks.size(),
 		"uomini": army.men_total(),   # uomini creati
 		"zelo": pr.initial_zeal,
-		"testo": Lang.t("%s di %s parte da %s con %d pile.") % [noun, SimUtil.faction_label(f.id), WarProcessor.region_label(state, province.id), army.stacks.size()],
+		"bersaglio": target,
+		"proprietario": target_owner,
+		"testo": text + ".",
 	})
+
+
+## Bersaglio dell'esercito crociato alla partenza (PROVVISORIA, 22/11/2026): tra i bersagli validi entro
+## `raggio_bersaglio_iniziale` passi di terra, quello con il punteggio piu' alto: (rendita base + 50 x livello del castello
+## + 100) x rapporto di forze (0,25-3) / (1 + 0,5 x passi), come la scelta dell'IA. "" se non ce n'e' o con raggio 0.
+static func initial_target(state: GameState, army: Army) -> String:
+	var radius := state.rules.papacy.initial_target_radius
+	if radius <= 0 or army == null or not army.is_crusade():
+		return ""
+	var own := Combat.army_strength(state, army)
+	var depth := {army.region: 0}
+	var queue: Array[String] = [army.region]
+	var head := 0
+	var best := ""
+	var best_score := -1.0
+	while head < queue.size():
+		var current := queue[head]
+		head += 1
+		var steps := int(depth[current])
+		if current != army.region and target_problem(state, army, current) == "":
+			var region := state.campaign.region(current)
+			var worth := float(region.income if region != null else 0) + 50.0 * float(Combat.castle_level(state, current)) + 100.0
+			var defence := 0.0
+			for other in state.armies_in(current):
+				if other.faction != army.faction and not other.is_fleet:
+					defence += Combat.army_strength(state, other)
+			var ratio := clampf(own / maxf(defence, 1.0), 0.25, 3.0) if defence > 0.0 else 3.0
+			var score := worth * ratio / (1.0 + 0.5 * float(steps))
+			if score > best_score:
+				best_score = score
+				best = current
+		if steps >= radius:
+			continue
+		var r := state.campaign.region(current)
+		if r == null:
+			continue
+		for n in r.neighbours:
+			var key := SimUtil.norm(n)
+			if depth.has(key):
+				continue
+			var other_region := state.campaign.region(key)
+			if other_region == null or other_region.is_sea:
+				continue
+			depth[key] = steps + 1
+			queue.append(key)
+	return best
 
 
 # --- crociate e jihad: bersagli e movimento -----------------------------------------------------------------------------------
@@ -1066,6 +1126,8 @@ static func order_units(state: GameState, faction_id: String) -> Array[UnitType]
 			continue
 		if u.men <= 0 or not u.allows_faction(faction_id) or not u.available_in_period(state.era):
 			continue
+		if not HistoricalLimits.unit_allowed(state, faction_id, u):
+			continue   # ADR-114
 		var is_order := false
 		for token in u.required_tokens():
 			var lv := state.buildings.resolve(token)

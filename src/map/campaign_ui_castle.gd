@@ -82,8 +82,9 @@ static func review(state: GameState, region_id: String, player_id: String, seen:
 			var st := a.stacks[i]
 			cards.append({"esercito": a.id, "pila": i, "unita": st.unit_id, "uomini": st.men, "valore": st.value, "fazione": a.faction,
 				"armi": st.weapon, "armatura": st.armour})
-	out["nota"] = Lang.t("Guarnigione %d/%d") % [Combat.garrison_load(state, region_id), c.garrison_max]
-	lines.append(Lang.t("%s posti (la cavalleria conta doppio)") % str(out["nota"]).replace(Lang.t("Guarnigione "), Lang.t("Guarnigione: ")))
+	out["nota"] = Lang.t("Guarnigione %d/%d") % [Combat.garrison_load(state, region_id), Combat.garrison_capacity(state, region_id)]
+	var load_text := str(out["nota"]).replace(Lang.t("Guarnigione "), Lang.t("Guarnigione: "))
+	lines.append((Lang.t("%s posti (fortezza: ci entra un'intera armata)") if Combat.is_fortress(state, region_id) else Lang.t("%s posti (la cavalleria conta doppio)")) % load_text)
 	if cards.is_empty():
 		lines.append(Lang.t("Nessuna truppa nel castello.") + (Lang.t(" Trascina un tuo esercito sul castello per barricarlo.") if own else ""))
 	for siege_line in CampaignUiText.siege_lines(state, region_id):

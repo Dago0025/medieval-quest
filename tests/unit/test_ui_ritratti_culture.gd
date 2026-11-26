@@ -16,10 +16,14 @@ const SERIE := {
 		"religious": 1, "admiral": 1},
 	"mississippian": {"king": 10, "general": 10, "prince": 6, "princess": 6, "emissary": 1, "spy": 1, "assassin": 1,
 		"religious": 1, "admiral": 1},
-	"korean": {"princess": 1, "emissary": 1, "spy": 1, "assassin": 1, "religious": 1, "admiral": 1},
-	"mongol": {"princess": 1, "emissary": 1, "spy": 1, "assassin": 1, "religious": 2},
-	"indian": {"princess": 1, "emissary": 1, "spy": 1, "assassin": 1, "religious": 1},
-	"southeast_asian": {"princess": 1, "emissary": 1, "spy": 1, "assassin": 1, "religious": 1},
+	"korean": {"king": 4, "general": 4, "prince": 3, "princess": 3, "emissary": 1, "spy": 1, "assassin": 1,
+		"religious": 1, "admiral": 1},
+	"mongol": {"king": 4, "general": 4, "prince": 3, "princess": 3, "emissary": 1, "spy": 1, "assassin": 1,
+		"religious": 2, "admiral": 1},
+	"indian": {"king": 4, "general": 4, "prince": 3, "princess": 4, "emissary": 1, "spy": 1, "assassin": 1,
+		"religious": 1, "admiral": 1},
+	"southeast_asian": {"king": 4, "general": 4, "prince": 3, "princess": 4, "emissary": 1, "spy": 1,
+		"assassin": 1, "religious": 1, "admiral": 1},
 }
 
 const FAZIONI := {
@@ -28,8 +32,10 @@ const FAZIONI := {
 	"FN_MISSISSIPPIANS": ["mississippian", "REL_PAGAN"],
 }
 
-## ADR-088: fazioni create per usare le serie asiatiche (solo agenti e principesse, i Coreani anche l'ammiraglio). Re,
-## generali e principi restano alla serie della religione finche' i set dei reali non sono completati.
+## ADR-088: fazioni create per usare le serie asiatiche (agenti e principesse, i Coreani anche l'ammiraglio). Re,
+## generali e principi restano alla serie della religione finche' i set dei reali non sono completati: Coreani e
+## Mongoli li hanno dal 22/11/2026, Chola e Khmer dal 23/11/2026 (REALI_ASIATICI).
+const REALI_ASIATICI := ["korean", "mongol", "indian", "southeast_asian"]
 const ASIATICHE := {"FN_KOREANS": "korean", "FN_MONGOLS": "mongol", "FN_GOLDEN_HORDE": "mongol", "FN_CHOLA": "indian",
 	"FN_KHMER": "southeast_asian"}
 
@@ -118,8 +124,9 @@ func test_fazioni_dei_ritratti_asiatici(t: TestContext) -> void:
 		var c := Character.new(5)
 		c.faction = fid
 		c.role = Character.ROLE_LEADER
-		t.assert_true(PortraitArt.portrait_path(campaign, c).begins_with("res://assets/ritratti/pagan/king/"),
-			"%s: il re resta alla serie pagana" % fid)
+		var king_folder := cult if cult in REALI_ASIATICI else "pagan"
+		t.assert_true(PortraitArt.portrait_path(campaign, c).begins_with("res://assets/ritratti/%s/king/" % king_folder),
+			"%s: il re dalla serie %s" % [fid, king_folder])
 		c.role = Character.ROLE_PRINCESS
 		t.assert_true(PortraitArt.portrait_path(campaign, c).begins_with("res://assets/ritratti/%s/princess/" % cult), fid)
 		for role in [["SPY", "spy"], ["EMISSARY", "emissary"], ["ASSASSIN", "assassin"], ["SHAMAN", "religious"]]:
@@ -127,5 +134,6 @@ func test_fazioni_dei_ritratti_asiatici(t: TestContext) -> void:
 			t.assert_true(path.begins_with("res://assets/ritratti/%s/%s/" % [cult, role[1]]), "%s %s: %s" % [fid, role[0], path])
 	var korean := PortraitArt.admiral_portrait_path(campaign, Army.new(3, "FN_KOREANS", "", true))
 	t.assert_true(korean.begins_with("res://assets/ritratti/korean/admiral/"), korean)
-	var chola := PortraitArt.admiral_portrait_path(campaign, Army.new(3, "FN_CHOLA", "", true))
-	t.assert_false(chola.begins_with("res://assets/ritratti/indian/"), "Chola senza serie di ammiragli: %s" % chola)
+	for fid in ["FN_CHOLA", "FN_KHMER"]:
+		var adm := PortraitArt.admiral_portrait_path(campaign, Army.new(3, fid, "", true))
+		t.assert_true(adm.begins_with("res://assets/ritratti/%s/admiral/" % ASIATICHE[fid]), "%s: %s" % [fid, adm])

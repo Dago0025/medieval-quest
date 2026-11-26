@@ -64,11 +64,14 @@ static func load_startpos(path: String = "") -> CampaignData:
 	var data: CampaignData
 	if path == "" and WorldMap.available():
 		# ADR-077/078; in fondo le fazioni nuove del mondo (ADR-079)
-		data = StartposLoader.load_text(world_startpos_text(text) + "\n" + WorldFactions.startpos_text())
+		# Dharma dei popoli asiatici (22/11/2026): religione delle fazioni asiatiche e cultura delle loro terre
+		data = StartposLoader.load_text(Dharma.startpos_text(world_startpos_text(text) + "\n" + WorldFactions.startpos_text()))
+		CultureUnits.replace_start_units(data)   # ADR-116: guarnigioni del mondo delle fazioni nuove con le loro unita'
 	else:
 		data = StartposLoader.load_text(startpos_text(text))
 	if auror:
 		apply_faction_religions(data)
+		apply_office_names(data)   # ADR-115: titoli di corte propri degli Auror
 		apply_home_regions(data)
 		AurorUnits.replace_start_units(data)   # ADR-076: flotte degli Auror di Fregate del Drago
 	return data
@@ -112,6 +115,21 @@ static func apply_faction_religions(data: CampaignData) -> void:
 		var token := str(cfg.get_value(f.id, "religione", "")).strip_edges().to_upper()
 		if token != "":
 			f.religion = token
+
+
+## Titoli di corte propri delle fazioni di auror.cfg (`cariche`: edificio -> nome nella forma dei dati, ADR-115, richiesta di
+## Federico del 21/11/2026: gli Auror avevano ancora le cariche dei Danesi). Cambia solo il nome dell'AddOffice; edificio e
+## bonus restano. Solo in modalita' Auror; i salvataggi prendono i nomi nuovi al caricamento (si leggono dallo startpos).
+static func apply_office_names(data: CampaignData) -> void:
+	var cfg := _auror_rules()
+	for section in cfg.get_sections():
+		var names: Variant = cfg.get_value(section, "cariche", {})
+		if typeof(names) != TYPE_DICTIONARY:
+			continue
+		for o in data.offices_of(section.strip_edges().to_upper()):
+			var name := str((names as Dictionary).get(o.building, "")).strip_edges()
+			if name != "":
+				o.display_name = name
 
 
 ## Famiglia di un edificio di MakeBuilding ("Shipyard4" -> "shipyard", "Royal_palace" -> "royal_palace").
@@ -160,33 +178,115 @@ static func startpos_text(text: String) -> String:
 
 static func load_units(path: String) -> UnitProdLoader.UnitTable:
 	_ensure()
-	var table := UnitProdLoader.load_file(path, _restored_units() if auror else _units)
+	var table := UnitProdLoader.load_file(path, _auror_units() if auror else _units)
 	if auror:
+		_add_historical_requirements(table)   # ADR-114
 		AurorUnits.append_to(table)   # ADR-074: unita' esclusive degli Auror, solo in modalita' Auror
 	if atlantis():
 		AtlantisScenario.add_danes_to_units(table, UnitProdLoader.load_file(path, _units))   # ADR-078
 	if WorldMap.available():
-		WorldFactions.add_to_units(table)   # ADR-079: le fazioni nuove arruolano come la loro fazione modello
+		CultureUnits.append_to(table)       # ADR-116: unita' proprie delle fazioni nuove
+		WorldFactions.add_to_units(table)   # ADR-079: agenti (e navi, se mancano) della fazione modello
+		Dharma.append_units(table)          # il monaco del Dharma al posto dello sciamano
+	if auror:
+		_add_equivalent_requirements(table)  # tempio del Dharma e santuario pagano -> chiesa del Culto Imperiale
 	return table
 
 
-## Modalita' Auror: le righe della XL originale per le sole unita' di `ripristina_originali` (la caracca, ADR-076).
-static func _restored_units() -> Dictionary:
+## Edifici equivalenti per i requisiti delle unita' in modalita' Auror (`requisiti_equivalenti` di auror.cfg, edificio ->
+## edificio, maiuscolo). Vuoto se la chiave manca.
+static func auror_requirement_equivalents() -> Dictionary:
 	var out := {}
-	for uid in AurorUnits.restored_originals():
-		if _units.has(uid):
-			out[uid] = _units[uid]
+	var cfg := _auror_rules()
+	for section in cfg.get_sections():
+		var eq: Variant = cfg.get_value(section, "requisiti_equivalenti", {})
+		if typeof(eq) != TYPE_DICTIONARY:
+			continue
+		for k in eq:
+			out[str(k).strip_edges().to_upper()] = str(eq[k]).strip_edges().to_upper()
 	return out
+
+
+## Modalita' Auror (richiesta di Federico del 23/11/2026: nelle regioni degli Auror si arruola tutto tranne i contadini):
+## ogni gruppo di requisiti che chiede un edificio di un'altra religione (tempio del Dharma, santuario pagano) riceve
+## un'alternativa (OR) con l'edificio equivalente del Culto Imperiale. Le altre fazioni restano legate alle liste di
+## fazioni delle unita', quindi l'alternativa serve solo a chi arruola senza limiti (`tutte_le_unita`).
+static func _add_equivalent_requirements(table: UnitProdLoader.UnitTable) -> void:
+	var eq := auror_requirement_equivalents()
+	if eq.is_empty():
+		return
+	for u in table.units:
+		var extra: Array[PackedStringArray] = []
+		for group in u.requires:
+			var swapped := PackedStringArray()
+			var changed := false
+			for token in group:
+				var key := str(token).strip_edges().to_upper()
+				if eq.has(key):
+					swapped.append(str(eq[key]))
+					changed = true
+				else:
+					swapped.append(token)
+			if changed and not u.requires.has(swapped) and not extra.has(swapped):
+				extra.append(swapped)
+		for g in extra:
+			u.requires.append(g)
+
+
+## Modalita' Auror (ADR-114, richiesta di Federico del 21/11/2026: progressione storica delle unita', armi da fuoco solo
+## dopo la polvere da sparo, tranne che per gli Auror): le correzioni dello storico valgono per tutte le unita' (epoche,
+## fazioni, regioni, culture), cosi' le altre fazioni tornano alla XL originale; gli Auror non le sentono perche' arruolano
+## senza quei limiti (`tutte_le_unita`). Gli edifici richiesti (col. 16) restano quelli della mod, con quelli originali
+## aggiunti come alternativa (`_add_historical_requirements`), cosi' agli Auror non manca nulla. Le unita' di
+## `ripristina_originali` (la caracca, ADR-076) tornano per intero alla XL.
+static func _auror_units() -> Dictionary:
+	var out := {}
+	var restored := AurorUnits.restored_originals()
+	for uid in _units:
+		var cells: Dictionary = (_units[uid] as Dictionary).duplicate()
+		if not restored.has(uid):
+			cells.erase(UnitProdLoader.COL_REQUIRES)
+		out[uid] = cells
+	return out
+
+
+## Modalita' Auror: gli edifici richiesti della XL originale si aggiungono come alternativa (OR) a quelli della mod
+## (la moschea dei Ghazi accanto alla chiesa messa dalla mod).
+static func _add_historical_requirements(table: UnitProdLoader.UnitTable) -> void:
+	var restored := AurorUnits.restored_originals()
+	var col := UnitProdLoader.COL_REQUIRES
+	for uid in _units:
+		var cells: Dictionary = _units[uid]
+		if restored.has(uid) or not cells.has(col):
+			continue
+		var u := table.get_unit(str(uid))
+		if u == null:
+			continue
+		for group in UnitProdLoader.parse_condition(str(cells[col])):
+			if not u.requires.has(group):
+				u.requires.append(group)
 
 
 static func load_buildings(path: String) -> BuildingProdLoader.BuildingTable:
 	_ensure()
-	var table := BuildingProdLoader.load_file(path, {} if auror else _buildings)
+	var table := BuildingProdLoader.load_file(path, _auror_buildings() if auror else _buildings)
 	if atlantis():
 		AtlantisScenario.add_danes_to_buildings(table, BuildingProdLoader.load_file(path, _buildings))   # ADR-078
 	if WorldMap.available():
 		WorldFactions.add_to_buildings(table)   # ADR-079
+		Dharma.append_buildings(table)          # tempio, monastero e grande pagoda del Dharma
 	return table
+
+
+## Modalita' Auror (ADR-114): degli edifici dello storico tornano solo le invenzioni (col. 26: polvere da sparo per armaiolo
+## d'armi da fuoco e fonderia, bussola per il cantiere navale); le fazioni ammesse restano quelle della mod.
+static func _auror_buildings() -> Dictionary:
+	var out := {}
+	for family in _buildings:
+		var cells: Dictionary = _buildings[family]
+		if cells.has(BuildingProdLoader.COL_INVENTIONS):
+			out[family] = {BuildingProdLoader.COL_INVENTIONS: cells[BuildingProdLoader.COL_INVENTIONS]}
+	return out
 
 
 static func load_heroes(path: String) -> HeroesData:

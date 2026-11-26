@@ -32,7 +32,7 @@ var big_agent_types := PackedStringArray(["CARDINAL", "ULAMA", "ORTHODOX_BISHOP"
 ## Religione di un tipo di agente quando unit_prod non la dice; i tipi assenti (PRIEST) usano quella della fazione.
 var type_religion := {
 	"BISHOP": "CATHOLIC", "CARDINAL": "CATHOLIC", "INQUISITOR": "CATHOLIC", "GRAND_INQUISITOR": "CATHOLIC",
-	"ORTHODOX_BISHOP": "ORTHODOX", "MULLAH": "MUSLIM", "ULAMA": "MUSLIM", "SHAMAN": "PAGAN",
+	"ORTHODOX_BISHOP": "ORTHODOX", "MULLAH": "MUSLIM", "ULAMA": "MUSLIM", "SHAMAN": "PAGAN", "MONK": "DHARMA",
 }
 
 # --- zelo ---

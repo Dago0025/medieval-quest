@@ -102,6 +102,9 @@ static func append_to(table: UnitProdLoader.UnitTable) -> void:
 			continue
 		u.elite = true
 		u.strength_multiplier = float(cfg.get_value(s, "moltiplicatore_forza", 1.0))
+		u.unique = bool(cfg.get_value(s, "unica", false))            # Ankalagon (23/11/2026)
+		u.invulnerable = bool(cfg.get_value(s, "invulnerabile", false))
+		u.piece = str(cfg.get_value(s, "pedina", ""))
 		table.add(u)
 		index += 1
 
@@ -217,6 +220,9 @@ static func elite_first(units: Array[UnitType]) -> Array[UnitType]:
 ## Partita nuova (GameSetup.new_game): il re della fazione comanda un'armata completa di sole unita' esclusive
 ## (`armata_iniziale_re`, al massimo `max_pile`) nella sua regione; l'esercito che comandava nello startpos resta dov'e'
 ## e riceve un generale (`DynastyProcessor.ensure_commanders` con un generatore proprio: quello dello stato non si tocca).
+## ADR-126: `armate_iniziali_altre` armate di `armata_iniziale_altre` (senza la guardia del re, che resta solo sua; se
+## l'elenco manca, quello del re), ciascuna con un generale, nelle altre province della fazione nell'ordine dello startpos
+## (una per provincia, poi si ricomincia; nella regione del re se non ne ha altre).
 ## Nessun effetto senza le unita' (scenario storico), senza re o con l'elenco vuoto.
 static func setup_king_army(state: GameState) -> void:
 	var list := PackedStringArray(_ensure().get_value(COMMON, "armata_iniziale_re", []))
@@ -245,7 +251,21 @@ static func setup_king_army(state: GameState) -> void:
 	army.stacks = stacks
 	king.army = army.id
 	king.region = region
-	if old != null:
+	var extra := int(_ensure().get_value(COMMON, "armate_iniziali_altre", 0))
+	var others := PackedStringArray()
+	for p in state.provinces_of(fid):
+		if p.id != region:
+			others.append(p.id)
+	if others.is_empty():
+		others.append(region)
+	var other_list := PackedStringArray(_ensure().get_value(COMMON, "armata_iniziale_altre", list))
+	for i in extra:
+		var more := state.create_army(fid, others[i % others.size()], false)
+		for uid in other_list:
+			var u := state.units.get_unit(uid)
+			if u != null and more.stacks.size() < state.rules.max_stacks:
+				more.stacks.append(state.new_stack(fid, u.id, u.men))
+	if old != null or extra > 0:
 		var rng := RandomNumberGenerator.new()
 		rng.seed = state.seed_value + 7919 + 74
 		DynastyProcessor.ensure_commanders(state, rng, state.year)
@@ -283,14 +303,69 @@ static func ensure_king_guard(state: GameState) -> void:
 		army = state.create_army(fid, region, false)
 		king.army = army.id
 		king.region = region
+	if unit.unique:
+		_pull_unique(state, army, unit)   # Ankalagon: la stessa pila torna da Darkos, non se ne crea un'altra
+	_ensure_stack(state, army, unit)
+
+
+## Vero se la pila e' la guardia unica del re (Ankalagon, 23/11/2026): non si separa dall'esercito del re.
+static func is_bound_to_king(state: GameState, army: Army, stack: UnitStack) -> bool:
+	if state == null or army == null or stack == null or state.units == null:
+		return false
+	var u := state.units.get_unit(stack.unit_id)
+	if u == null or not u.unique or u.id.to_lower() != guard_unit().to_lower():
+		return false
+	var c := state.commander_of(army.id)
+	return c != null and c.role == Character.ROLE_LEADER and c.faction == faction()
+
+
+## Porta nell'esercito del re la pila dell'unita' unica che si trova in un altro esercito della fazione (un esercito che
+## resta vuoto sparisce e il suo comandante resta senza esercito).
+static func _pull_unique(state: GameState, army: Army, unit: UnitType) -> void:
 	for st in army.stacks:
-		if st.unit_id.to_lower() == guard.to_lower():
+		if st.unit_id.to_lower() == unit.id.to_lower():
 			return
+	for other: Army in state.armies.duplicate():
+		if other == army or other.faction != army.faction:
+			continue
+		for i in other.stacks.size():
+			if other.stacks[i].unit_id.to_lower() != unit.id.to_lower():
+				continue
+			var st: UnitStack = other.stacks[i]
+			other.stacks.remove_at(i)
+			if other.stacks.is_empty():
+				var c := state.commander_of(other.id)
+				if c != null:
+					c.army = 0
+				state.remove_army(other)
+			_make_room(state, army)
+			army.stacks.insert(0, st)
+			return
+
+
+## Aggiunge una pila di `unit` all'esercito se non ce l'ha; se e' pieno, la pila meno costosa (mai un'unita' unica) passa
+## a un esercito nuovo nella stessa regione.
+static func _ensure_stack(state: GameState, army: Army, unit: UnitType) -> void:
+	for st in army.stacks:
+		if st.unit_id.to_lower() == unit.id.to_lower():
+			return
+	_make_room(state, army)
+	if unit.unique:
+		army.stacks.insert(0, state.new_stack(army.faction, unit.id, unit.men))
+	else:
+		army.stacks.append(state.new_stack(army.faction, unit.id, unit.men))
+
+
+## Se l'esercito e' pieno, la pila meno costosa (mai un'unita' unica) passa a un esercito nuovo nella stessa regione.
+static func _make_room(state: GameState, army: Army) -> void:
+	var fid := army.faction
 	if army.is_full(state.rules.max_stacks):
 		var cheapest := -1
 		var cheapest_cost := 0
 		for i in army.stacks.size():
 			var u := state.units.get_unit(army.stacks[i].unit_id)
+			if u != null and u.unique:
+				continue
 			var cost := u.cost if u != null else 0
 			if cheapest < 0 or cost < cheapest_cost:
 				cheapest = i
@@ -300,4 +375,3 @@ static func ensure_king_guard(state: GameState) -> void:
 		var other := state.create_army(fid, army.region, false)
 		other.in_castle = army.in_castle
 		other.stacks.append(moved)
-	army.stacks.append(state.new_stack(fid, unit.id, unit.men))

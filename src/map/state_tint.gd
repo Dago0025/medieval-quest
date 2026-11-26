@@ -12,6 +12,7 @@ const RELIGION_COLORS := {
 	"PAGAN": Color(0.55, 0.35, 0.18),
 	"HERETIC": Color(0.80, 0.15, 0.15),
 	"IMPERIAL": Color(0.92, 0.92, 0.95),   # Culto Imperiale degli Auror: bianco argento, i colori della fazione
+	"DHARMA": Color(0.95, 0.55, 0.10),   # Dharma dei popoli asiatici: arancio zafferano, il colore delle vesti dei monaci
 }
 const UNKNOWN_RELIGION_COLOR := Color(0.5, 0.5, 0.5)
 

@@ -15,7 +15,7 @@ static func religion_folder(religion: String) -> String:
 		return "Muslim"
 	if r.contains("ORTHODOX"):
 		return "Orthodox"
-	if r.contains("PAGAN"):
+	if r.contains("PAGAN") or r.contains("DHARMA"):   # il Dharma non ha ritratti dell'originale: quelli pagani
 		return "Pagan"
 	return "Catholic"
 
@@ -67,7 +67,7 @@ static func reset() -> void:
 ## agenti e ammiragli da `assets/ritratti/<cultura>/<ruolo>/` (tools/prepara_ritratti_culture.py) prima che dalla serie
 ## della religione; gli agenti religiosi usano la serie «religious». Senza la serie del ruolo resta la religione.
 const CULTURE_TABLE := "res://data/ritratti_culture.cfg"
-const RELIGIOUS_ROLES := ["bishop", "cardinal", "priest", "shaman", "mullah", "ulama", "inquisitor", "grand_inquisitor"]
+const RELIGIOUS_ROLES := ["bishop", "cardinal", "priest", "shaman", "monk", "mullah", "ulama", "inquisitor", "grand_inquisitor"]
 static var _cultures := {}        ## fazione -> cultura
 static var _cultures_loaded := false
 
@@ -97,14 +97,15 @@ static func culture_pick(faction_id: String, role_dir: String, seed: int) -> Str
 ## Percorso del ritratto del personaggio: res:// della serie nuova se c'e', altrimenti il percorso originale
 ## dell'installazione; "" se non ce n'e' nessuno. I pagani senza la cartella del ruolo ripiegano sui cattolici.
 static func portrait_path(campaign: CampaignData, c: Character) -> String:
-	var f := campaign.faction(c.faction) if campaign != null else null
+	var look := c.look_faction()   # generale degli Auror nato da una truppa straniera: ritratto della fazione dell'unita'
+	var f := campaign.faction(look) if campaign != null else null
 	var religion := religion_folder(f.religion if f != null else "")
 	var role := role_folder(c.role)
 	if c.role == Character.ROLE_LEADER and SimUtil.norm(c.faction) == GameState.PAPAL:
 		var popes := series("Catholic", "Pope")   # ADR-059: il capo dello Stato Pontificio e' il Papa
 		if not popes.is_empty():
 			return popes[(c.id * 7919) % popes.size()]
-	var own := culture_pick(c.faction, role.to_lower(), c.id)
+	var own := culture_pick(look, role.to_lower(), c.id)
 	if own != "":
 		return own
 	var files := series(religion, role)
@@ -171,7 +172,7 @@ const OWNERS_TABLE := "res://data/ritratti_fazioni.cfg"
 const AUROR := "FN_DANISH"
 const AGENT_ROLES := {
 	"EMISSARY": "emissary", "SPY": "spy", "ASSASSIN": "assassin", "BISHOP": "bishop", "ORTHODOX_BISHOP": "bishop",
-	"CARDINAL": "cardinal", "PRIEST": "priest", "SHAMAN": "shaman", "MULLAH": "mullah", "ULAMA": "ulama",
+	"CARDINAL": "cardinal", "PRIEST": "priest", "SHAMAN": "shaman", "MONK": "monk", "MULLAH": "mullah", "ULAMA": "ulama",
 	"INQUISITOR": "inquisitor", "GRAND_INQUISITOR": "grand_inquisitor",
 }
 static var _owners := {}          ## "religione/ruolo" -> {"NN": PackedStringArray fazioni}

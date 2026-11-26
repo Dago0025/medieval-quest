@@ -64,7 +64,7 @@ var local_trade_without_port := true
 ## PROVVISORIA (catalogo r.43): moltiplicatore del mantenimento dei file.
 var upkeep_multiplier := 1.0
 
-var max_stacks := 16
+var max_stacks := 20   ## unita' per esercito o flotta (16 nell'originale, 20 dal 22/11/2026)
 
 ## Demolizione (manuale p37 «Distruggere strutture»: «ti verra' restituita una parte del prezzo di costruzione»; nella campagna
 ## vichinga «solo la meta' del suo valore»). PROVVISORIA: quota del costo del livello demolito restituita.
@@ -97,6 +97,12 @@ var all_units_factions := PackedStringArray(["FN_DANISH"])
 var max_agents_factions := PackedStringArray(["FN_DANISH"])
 ## Fazioni con gli ammiragli sempre al massimo delle stelle (`ammiragli_al_massimo` di auror.cfg, ADR-056: gli Auror).
 var max_admiral_factions := PackedStringArray(["FN_DANISH"])
+## Fazioni i cui generali nati da truppe di altre fazioni prendono nome e ritratto della fazione dell'unita'
+## (`generali_dalle_unita` di auror.cfg; richiesta di Federico del 22/11/2026: gli Auror).
+var generals_from_units_factions := PackedStringArray(["FN_DANISH"])
+## Fazioni le cui flotte non subiscono le tempeste (`flotte_immuni_tempeste` di auror.cfg; richiesta di Federico del
+## 23/11/2026: gli Auror).
+var storm_immune_factions := PackedStringArray(["FN_DANISH"])
 
 ## Regole degli scontri della fase 3 (data/regole/scontri.cfg), tutte PROVVISORIE.
 var combat := CombatRules.new()
@@ -127,6 +133,8 @@ var retrain := RetrainRules.new()
 var mercenaries := MercenaryRules.new()   ## fase 8d: data/regole/mercenari.cfg
 ## Tratti storici delle fazioni (data/regole/tratti_fazioni.cfg, ADR-089): bonus e malus per fazione. Vuoti con `Rules.new()`.
 var traits := FactionTraits.new()
+## Limiti storici (data/regole/storia.cfg, ADR-114): invenzioni, cavalli nelle Americhe, guardia del capo.
+var history := HistoryRules.new()
 
 ## Errori di lettura del file (chiave con tipo sbagliato e simili).
 var errors := PackedStringArray()
@@ -241,6 +249,11 @@ static func load_file(path: String = DEFAULT_PATH) -> Rules:
 	if FileAccess.file_exists(traits_path):
 		rules.traits = FactionTraits.load_file(traits_path)
 		rules.errors.append_array(rules.traits.errors)
+	# I limiti storici stanno in storia.cfg (assente = valori predefiniti, ADR-114).
+	var history_path := path.get_base_dir().path_join("storia.cfg")
+	if FileAccess.file_exists(history_path):
+		rules.history = HistoryRules.load_file(history_path, path.get_base_dir().path_join("auror.cfg"))
+		rules.errors.append_array(rules.history.errors)
 	return rules
 
 
@@ -264,12 +277,15 @@ func agent_valour_floor(faction_id: String) -> int:
 
 
 ## Scenario storico (ADR-068): nessuna fazione ha i poteri di auror.cfg (passaggi di reclutamento, ogni unita', agenti e
-## ammiragli al massimo, comando, valore, armi e armature, fedelta', influenza, re immortale, nome reale unico).
+## ammiragli al massimo, flotte immuni alle tempeste, comando, valore, armi e armature, fedelta', influenza, re immortale, nome reale unico).
 func remove_faction_powers() -> void:
 	recruit_rounds = {}
 	all_units_factions = PackedStringArray()
+	history.invention_free = PackedStringArray()   # ADR-114: nello storico anche i Danesi aspettano la polvere da sparo
 	max_agents_factions = PackedStringArray()
 	max_admiral_factions = PackedStringArray()
+	generals_from_units_factions = PackedStringArray()
+	storm_immune_factions = PackedStringArray()
 	combat.fixed_command = {}
 	combat.start_valour = {}
 	combat.start_upgrades = {}
@@ -288,6 +304,8 @@ func _read_recruit_rounds(auror_path: String) -> void:
 	var everything := PackedStringArray()
 	var top_agents := PackedStringArray()
 	var top_admirals := PackedStringArray()
+	var from_units := PackedStringArray()
+	var storm_immune := PackedStringArray()
 	for section in cfg.get_sections():
 		if not section.begins_with("FN_"):
 			continue
@@ -303,10 +321,16 @@ func _read_recruit_rounds(auror_path: String) -> void:
 			top_agents.append(section.to_upper())
 		if cfg.get_value(section, "ammiragli_al_massimo", false) == true:
 			top_admirals.append(section.to_upper())
+		if cfg.get_value(section, "generali_dalle_unita", false) == true:
+			from_units.append(section.to_upper())
+		if cfg.get_value(section, "flotte_immuni_tempeste", false) == true:
+			storm_immune.append(section.to_upper())
 	recruit_rounds = found
 	all_units_factions = everything
 	max_agents_factions = top_agents
 	max_admiral_factions = top_admirals
+	generals_from_units_factions = from_units
+	storm_immune_factions = storm_immune
 
 
 ## Livello di tassa valido (0 .. numero di moltiplicatori - 1).
@@ -360,6 +384,7 @@ func to_dict() -> Dictionary:
 		"all_units_factions": Array(all_units_factions),
 		"max_agents_factions": Array(max_agents_factions),
 		"max_admiral_factions": Array(max_admiral_factions),
+		"storm_immune_factions": Array(storm_immune_factions),
 		"combat": combat.to_dict(),
 		"dynasty": dynasty.to_dict(),
 		"vnv": vnv.to_dict(),

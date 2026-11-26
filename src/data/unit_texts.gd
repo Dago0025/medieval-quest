@@ -29,6 +29,8 @@ static func use_tables(names: LocLoader.LocTable, descriptions: LocLoader.LocTab
 ## In inglese (ADR-066): data/lingue/en/nomi_unita.cfg per le unita' che l'originale non ha, poi names.txt inglese (_INGLESE).
 static func plural_name(unit_id: String) -> String:
 	var own := AurorUnits.text(unit_id, "nome")   # ADR-074: unita' esclusive degli Auror, testi in data/unita_auror.cfg
+	if own == "":
+		own = CultureUnits.text(unit_id, "nome")   # ADR-116: unita' delle fazioni nuove
 	if own != "":
 		return own
 	var it := _italian_name("nomi", unit_id)
@@ -39,6 +41,8 @@ static func plural_name(unit_id: String) -> String:
 
 static func singular_name(unit_id: String) -> String:
 	var own := AurorUnits.text(unit_id, "singolare")
+	if own == "":
+		own = CultureUnits.text(unit_id, "singolare")   # ADR-116: unita' delle fazioni nuove
 	if own != "":
 		return own
 	var it := _italian_name("singolari", unit_id)
@@ -66,6 +70,8 @@ static func _italian_name(section: String, unit_id: String) -> String:
 ## Descrizione dell'originale, "" se manca.
 static func description(unit_id: String) -> String:
 	var own := AurorUnits.text(unit_id, "descrizione")
+	if own == "":
+		own = CultureUnits.text(unit_id, "descrizione")   # ADR-116: unita' delle fazioni nuove
 	if own != "":
 		return own
 	var it := ItalianTexts.text("descrizioni_unita", unit_id)   # testi propri (data/testi/<lingua>), 18/11/2026
