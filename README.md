@@ -8,6 +8,17 @@ Il gioco è scritto da zero con [Godot Engine 4.7](https://godotengine.org) (GDS
 
 > **Progetto amatoriale e open, senza supporto.** Il codice è sotto licenza MIT (vedi [LICENSE](LICENSE)). Non ci sono garanzie, assistenza, aggiornamenti programmati né tempi di risposta: issue e richieste possono restare senza risposta. Usalo così com'è.
 
+## Schermate
+
+![La mappa d'Europa nel 1029 con province, confini delle fazioni, eserciti, flotte e castelli](docs/schermate/mappa_europa.jpg)
+
+| | |
+|:---:|:---:|
+| ![El Dorado, uno dei luoghi leggendari](docs/schermate/luogo_el_dorado.jpg) | ![Morozane I, capo dei Giapponesi](docs/schermate/capo_giapponese.jpg) |
+| Luoghi leggendari: El Dorado, con i suoi bonus e un evento | Re e generali con ritratto, stelle e attributi |
+| ![Abdullah I, capo degli Almohadi, e la sua armata](docs/schermate/capo_almohade.jpg) | ![Una principessa veneziana](docs/schermate/principessa.jpg) |
+| Il capo degli Almohadi e le unità della sua armata | Agenti: una principessa pronta a combinare un matrimonio |
+
 ## Scaricare e installare
 
 1. Apri la pagina [Releases](../../releases) e scarica l'ultimo `MedievalQuest-Setup-<versione>.exe`.
@@ -45,6 +56,17 @@ Medieval Quest is a free, single-player, turn-based strategy game on the world m
 It is written from scratch with [Godot Engine 4.7](https://godotengine.org) (GDScript). The original game is not needed.
 
 > **Hobby project, open source, no support.** The code is MIT-licensed (see [LICENSE](LICENSE)). There are no warranties, no support, no update schedule and no response times: issues and requests may stay unanswered. Use it as is.
+
+### Screenshots
+
+![The map of Europe in 1029 with provinces, faction borders, armies, fleets and castles](docs/schermate/mappa_europa.jpg)
+
+| | |
+|:---:|:---:|
+| ![El Dorado, one of the legendary places](docs/schermate/luogo_el_dorado.jpg) | ![Morozane I, leader of the Japanese](docs/schermate/capo_giapponese.jpg) |
+| Legendary places: El Dorado, with its bonuses and an event | Kings and generals with portrait, stars and attributes |
+| ![Abdullah I, leader of the Almohads, and his army](docs/schermate/capo_almohade.jpg) | ![A Venetian princess](docs/schermate/principessa.jpg) |
+| The leader of the Almohads and the units of his army | Agents: a princess ready to arrange a marriage |
 
 ### Download and install
 
