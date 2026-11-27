@@ -75,8 +75,11 @@ func test_unione_mancata_se_il_bersaglio_parte(t: TestContext) -> void:
 func test_senza_posto_non_si_uniscono(t: TestContext) -> void:
 	var s := _world()
 	var target := W.land_army(s, W.A, W.ALTA)
+	var full := StackMerge.full_men(s, target.stacks[0])   # pile piene: l'accorpamento (ADR-146) non libera posto
+	for st in target.stacks:
+		st.men = maxi(st.men, StackMerge.full_men(s, st))
 	while target.stacks.size() < s.rules.max_stacks:
-		target.stacks.append(UnitStack.new(target.stacks[0].unit_id, 10, 0))
+		target.stacks.append(UnitStack.new(target.stacks[0].unit_id, full, 0))
 	var mover := W.land_army(s, W.A, W.BASSA)
 	var r := GameCommands.order_merge(s, W.A, mover.id, target.id)
 	t.assert_false(bool(r["ok"]))

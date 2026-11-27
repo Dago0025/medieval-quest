@@ -145,10 +145,15 @@ func test_unione_di_gruppo_su_un_esercito(t: TestContext) -> void:
 func test_unione_senza_posto_per_tutti(t: TestContext) -> void:
 	var s := _world()
 	var target := W.land_army(s, W.A, W.ALTA)
+	var full := StackMerge.full_men(s, target.stacks[0])   # pile piene: l'accorpamento (ADR-146) non libera posto
+	for st in target.stacks:
+		st.men = maxi(st.men, StackMerge.full_men(s, st))
 	while target.stacks.size() < s.rules.max_stacks - 1:
-		target.stacks.append(UnitStack.new(target.stacks[0].unit_id, 10, 0))
+		target.stacks.append(UnitStack.new(target.stacks[0].unit_id, full, 0))
 	var first := _extra_army(s, W.ALTA)
 	var second := _extra_army(s, W.ALTA)
+	first.stacks[0].men = full
+	second.stacks[0].men = full
 	var r := CampaignUiGroup.merge_all(s, W.A, [first.id, second.id] as Array[int], target.id)
 	t.assert_eq(r["subito"], [first.id])
 	t.assert_eq((r["falliti"] as Array).size(), 1, "il secondo non trova posto")

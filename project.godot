@@ -14,7 +14,7 @@ config/name="MTW Remake"
 config/description="Remake della campagna di Medieval: Total War con la XL 3.0 e la mod Auror, dal 1000 al 1700."
 ; ADR-144: versione del gioco, confrontata con il tag dell'ultima release su GitHub (UpdateCheck); aggiornarla a ogni
 ; rilascio, uguale a --versione di installer/prepara_installer.py (che la controlla)
-config/version="2026.11.27.1"
+config/version="2026.11.27.2"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.7")
 config/icon="res://assets/icona.png"

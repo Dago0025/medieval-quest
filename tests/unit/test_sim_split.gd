@@ -6,6 +6,7 @@ const W := preload("res://tests/unit/agent_world.gd")
 
 func _world() -> GameState:
 	var s := W.world()
+	s.rules.merge_same_units = false   # pile distinguibili dagli uomini; l'accorpamento (ADR-146) e' in test_accorpamento
 	for c in s.characters:
 		c.old_age = 500
 	return s

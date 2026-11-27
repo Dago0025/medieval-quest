@@ -460,6 +460,40 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_motion_all += 1
+	# ADR-148 (Federico: «spesso il trascinamento di un'unita' si blocca e resta sospesa, come se perdesse il focus»): la carta
+	# presa riceveva movimenti e rilascio solo finche' il suo controllo esisteva; se la barra si ridisegnava durante il
+	# trascinamento il controllo spariva, il rilascio non arrivava piu' e l'icona restava a mezz'aria. Ora movimento e
+	# rilascio si leggono qui, per tutta la finestra; clic destro o Esc annullano.
+	if _card_drag_army != 0:
+		if event is InputEventMouseMotion:
+			_on_card_drag_moved(-1)
+		elif event is InputEventMouseButton:
+			var mb := event as InputEventMouseButton
+			if mb.button_index == MOUSE_BUTTON_LEFT and not mb.pressed:
+				_on_card_drag_released(-1)
+			elif mb.button_index == MOUSE_BUTTON_RIGHT and mb.pressed:
+				_cancel_card_drag()
+				get_viewport().set_input_as_handled()
+		elif event is InputEventKey and (event as InputEventKey).pressed and (event as InputEventKey).keycode == KEY_ESCAPE:
+			_cancel_card_drag()
+			get_viewport().set_input_as_handled()
+
+
+func _notification(what: int) -> void:
+	# finestra che perde il focus (Alt+Tab, notifica) con una carta in mano: il rilascio non arriverebbe, si annulla
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+		_cancel_card_drag()
+
+
+## Annulla il trascinamento delle carte in corso: l'icona sparisce e le pile restano dove sono.
+func _cancel_card_drag() -> void:
+	if _card_drag_army == 0:
+		return
+	_card_drag_army = 0
+	if _card_drag_icon != null:
+		_card_drag_icon.visible = false
+	_end_piece_drag()
+	_refresh_review()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -592,7 +626,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				elif _court_panel.visible:
 					_court_panel.visible = false
 				elif _events_panel.visible:
-					_events_panel.visible = false
+					_hide_events()
 				elif _game_menu != null and _game_menu.visible:
 					_game_menu.visible = false
 				elif _agent_sheet != null and _agent_sheet.visible:
@@ -1339,15 +1373,15 @@ func _on_end_year() -> void:
 	_refresh_all()
 	var finished := CampaignUiVictory.finished_line(_state)
 	# finestre illustrate una dopo l'altra (avvisi degli eventi importanti con la mappa sul luogo, eventi storici, notizie),
-	# poi il resoconto dell'anno, prigionieri, proposte e la schermata di fine partita (richiesta di Federico del 2026-11-20)
+	# poi prigionieri, scelte dei luoghi leggendari e proposte, e solo quando sono tutte chiuse il resoconto dell'anno e la
+	# schermata di fine partita (richieste di Federico del 2026-11-20 e del 2026-11-27: «la schermata di recap si apra solo
+	# quando le altre sono chiuse»)
 	_history_queue = CampaignUiAlerts.windows(_state, _player_id, played_year)
 	_history_queue.append_array(CampaignUiEvents.historical_windows(_state))
 	_history_queue.append_array(CampaignUiEvents.news_windows(_state, _player_id))
 	_report_pending = {}
 	if sections.is_empty() and finished == "":
 		_toast_show(Lang.t("Anno %d concluso: nessun evento.") % played_year)
-	elif _history_queue.is_empty():
-		_show_events(played_year, sections, finished)
 	else:
 		_report_pending = {"anno": played_year, "sezioni": sections, "fine": finished}
 	_proposal_queue = CampaignUiProposals.queue_ids(_state, _player_id)
@@ -3127,8 +3161,9 @@ func _on_card_drag_started(index: int) -> void:
 	if army == null or army.faction != _player_id or army.is_crusade() or index < 0 or index >= army.stacks.size():
 		return
 	if not _card_pick.has(index):
+		# niente _refresh_review qui: ridisegnare la barra toglierebbe la carta premuta mentre la si trascina (ADR-148);
+		# la cornice di scelta si aggiorna al rilascio
 		_card_pick = [index] as Array[int]
-		_refresh_review()
 	_card_drag_army = army.id
 	_piece_drag_kind = "esercito"
 	_piece_drag_id = army.id
@@ -3195,7 +3230,11 @@ func _on_card_drag_released(_index: int) -> void:
 	if _card_drag_icon != null:
 		_card_drag_icon.visible = false
 	_end_piece_drag()
-	if army == null or _hud.covers(pos):
+	if army != null and _hud.covers(pos):
+		_fill_from_cards(army, _hud.review_card_at(pos))   # ADR-147: su un'altra carta uguale la riempie
+		_refresh_review()   # cornice delle carte scelte (non si ridisegna durante il trascinamento, ADR-148)
+		return
+	if army == null:
 		return
 	var picked := PackedInt32Array(_card_pick)
 	var target := _own_settled(_state.army(_army_layer.army_at(pos, army.id)))
@@ -3216,6 +3255,31 @@ func _on_card_drag_released(_index: int) -> void:
 	_toast_show(CampaignUiText.order_error_text(_state, text) if not bool(r["ok"]) else text)
 	if bool(r["ok"]):
 		_card_pick.clear()
+	_rebuild_markers()
+	_refresh_army_panel()
+
+
+## Carte lasciate sulla carta `to_index` dello stesso esercito (ADR-147, manuale p29): la riempiono con i loro uomini se sono
+## dello stesso identico tipo; altrove nella barra non succede nulla.
+func _fill_from_cards(army: Army, to_index: int) -> void:
+	if to_index < 0 or _card_pick.has(to_index) and _card_pick.size() == 1:
+		return
+	var r := GameCommands.fill_stack(_state, _player_id, army.id, PackedInt32Array(_card_pick), to_index)
+	if not bool(r["ok"]):
+		GameAudio.play_sfx("lascia_ostile")
+		_toast_show(str(r["errore"]))
+		return
+	GameAudio.play_sfx("unisci")
+	var name := UnitTexts.plural_name(army.stacks[int(r["pila"])].unit_id) if int(r["pila"]) >= 0 else ""
+	var text := Lang.t("%s: +%d uomini") % [name, int(r["uomini"])]
+	if bool(r["piena"]):
+		text += Lang.t(", unità al completo")
+	if int(r["pile_tolte"]) > 0:
+		text += Lang.t("; %d unità svuotate e sciolte") % int(r["pile_tolte"])
+	if int(r.get("pile_riaddestramento", 0)) > 0:
+		text += Lang.t("; riaddestramento annullato, %d denari restituiti") % int(r["rimborso_riaddestramento"])
+	_toast_show(text + ".")
+	_card_pick.clear()
 	_rebuild_markers()
 	_refresh_army_panel()
 
@@ -3256,7 +3320,7 @@ func _refresh_review() -> void:
 		for i in (army.stacks.size() if known else 0):
 			var st := army.stacks[i]
 			var card := PieceArt.unit_card(_data, army.faction, st.unit_id) if AssetLibrary.is_available() else null
-			var hint := Lang.t("Clic: scegli · trascina sulla mappa per separare · «Congeda» per scioglierla · clic destro: scheda") if mine else Lang.t("Clic: scheda dell'unità")
+			var hint := Lang.t("Clic: scegli · trascina sulla mappa per separare o su un'unità uguale per riempirla · «Congeda» per scioglierla · clic destro: scheda") if mine else Lang.t("Clic: scheda dell'unità")
 			if CampaignUiText.card_character(_state, army, i) > 0:
 				hint += Lang.t(" del comandante, con il ritratto")
 			elif army.is_fleet and i == Admirals.flagship(_state, army):
@@ -6190,19 +6254,18 @@ func _show_next_popup() -> void:
 		GameAudio.play_sfx("evento_islamico" if _is_islamic_player() else "evento_cristiano")
 		return
 	_end_alerts()
+	# una finestra alla volta: ognuna, chiudendosi, richiama questa funzione per la successiva
+	if _show_next_prisoners() or _show_next_site_choice() or _show_next_proposal():
+		return
 	if not _report_pending.is_empty():
 		var r := _report_pending
 		_report_pending = {}
 		var secs: Array[Dictionary] = []
 		secs.assign(r["sezioni"])
 		_show_events(int(r["anno"]), secs, str(r["fine"]))
-	if _show_next_prisoners():
-		pass
-	elif _show_next_site_choice():
-		pass
-	elif _show_next_proposal():
-		pass
-	elif _end_pending:
+		if _end_pending:
+			return   # la fine partita si apre alla chiusura del resoconto (_hide_events)
+	if _end_pending:
 		_end_pending = false
 		_show_end_screen()
 
@@ -6500,9 +6563,7 @@ func _on_proposal_later() -> void:
 	_proposal_current = 0
 	_proposal_queue.clear()
 	_refresh_proposals_button()
-	if _end_pending:
-		_end_pending = false
-		_show_end_screen()
+	_show_next_popup()   # poi il resoconto dell'anno e l'eventuale fine partita
 
 
 func _on_proposals_button() -> void:
@@ -8092,8 +8153,11 @@ func _on_reach_agent_pressed(agent_id: int) -> void:
 		_clamp_camera()
 
 
+## Chiude il resoconto dell'anno; se la partita e' finita, dopo il resoconto si apre la schermata di fine partita.
 func _hide_events() -> void:
 	_events_panel.visible = false
+	if _end_pending:
+		_show_next_popup()
 
 
 func _margin() -> MarginContainer:

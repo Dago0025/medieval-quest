@@ -41,7 +41,7 @@ static func consolidate(plan: AiPlan) -> void:
 				var big: Army = group[j]
 				if state.army(big.id) == null or state.army(small.id) == null:
 					continue
-				if big.stacks.size() + small.stacks.size() <= state.rules.max_stacks:
+				if StackMerge.size_after_join(state, big, small.stacks) <= state.rules.max_stacks:
 					plan.record(GameCommands.merge_armies(state, plan.id, small.id, big.id), "unione %d -> %d" % [small.id, big.id])
 					break
 

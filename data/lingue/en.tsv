@@ -385,6 +385,7 @@
 %s: %s a %s	%s: %s at %s
 %s: %s%d stella	%s: %s%d star
 %s: %s%d stelle	%s: %s%d stars
+%s: +%d uomini	%s: +%d men
 %s: attacco a %s (la guerra si dichiara a fine anno).	%s: attacking %s (war is declared at year end).
 %s: attacco alla flotta %s (%s); se si sposta entro il raggio delle navi, la insegue.	%s: attacking the fleet %s (%s); if it moves within the ships' range, it will give chase.
 %s: ha attaccato un altro alleato.	%s: it attacked another ally.
@@ -431,6 +432,7 @@
 , eroe	, hero
 , fuori dal castello	, outside the castle
 , sangue reale	, royal blood
+, unità al completo	, unit at full strength
 , via mare	, by sea
 - l'influenza del capo cala di %d (una volta);	- the leader's influence drops by %d (once);
 - la lealtà obiettivo delle province scende fino a %d, in proporzione ai cattolici;	- the target loyalty of provinces falls by up to %d, in proportion to Catholics;
@@ -453,6 +455,8 @@
 : la provincia passa ai ribelli	: the province goes over to the rebels
 : nasce un'alleanza	: an alliance is formed
 ; %d restano fuori per mancanza di posto	; %d remain outside for lack of room
+; %d unità svuotate e sciolte	; %d emptied units disbanded
+; riaddestramento annullato, %d denari restituiti	; retraining cancelled, %d denarii refunded
 A chi possiede la provincia	For the owner of the province
 A fine anno l'esercito assalta il castello invece di attendere.	At year end the army assaults the castle instead of waiting.
 AD %d	AD %d
@@ -639,7 +643,7 @@ Clic su un edificio	Click a building
 Clic sul castello	Click the castle
 Clic sulle carte nella barra	Click the cards in the bar
 Clic: mostra i medaglioni di tutti i luoghi scoperti	Click: show the medallions of every discovered place
-Clic: scegli · trascina sulla mappa per separare · «Congeda» per scioglierla · clic destro: scheda	Click: select · drag onto the map to split · “Disband” to dismiss it · right-click: card
+Clic: scegli · trascina sulla mappa per separare o su un'unità uguale per riempirla · «Congeda» per scioglierla · clic destro: scheda	Click: select · drag onto the map to split or onto an identical unit to fill it · “Disband” to dismiss it · right-click: card
 Clic: scheda del luogo	Click: place sheet
 Clic: scheda dell'unità	Click: unit card
 Clic: torna ai pallini	Click: back to the dots
@@ -1078,6 +1082,7 @@ L'esercito si chiude nel castello: se arriva il nemico lo assedia invece di comb
 L'esercito torna ad assediare: il castello cede per fame.	The army returns to besieging: the castle will fall to starvation.
 L'esercito torna in campo aperto.	The army returns to the open field.
 L'esercito è assediato e non può uscire.	The army is besieged and cannot leave.
+L'unità è già al completo	The unit is already at full strength
 La %s marcia contro di voi	The %s marches against you
 La Peste Nera	The Black Death
 La Peste Nera colpisce %s: %d uomini morti.	The Black Death strikes %s: %d men dead.
@@ -1525,6 +1530,7 @@ Scegli prima una o più unità nella barra in basso.	First choose one or more un
 Scegli una o piu' pile valide dell'esercito %d	Choose one or more valid units of army %d
 Scegli una o più %s, poi congedale: lasciano subito l'esercito, senza rimborso, e non costano più mantenimento.	Choose one or more %s, then disband them: they leave the army at once, with no refund, and cost no more upkeep.
 Scegli una partita salvata. F9: carica il salvataggio rapido.	Choose a saved game. F9: load the quick save.
+Scegli una pila valida dell'esercito %d	Choose a valid unit of army %d
 Sceglie tutti i salvataggi dell'elenco	Selects every save in the list
 Scelta inesistente: %d	No such choice: %d
 Scelta sconosciuta: %s	Unknown choice: %s
@@ -1566,6 +1572,7 @@ Servono %d denari	%d denarii needed
 Si continua a giocare: la vittoria per dominio è registrata.	Play continues: the domination victory is recorded.
 Si imbarca solo da una provincia di terra: %s	You can embark only from a land province: %s
 Si imbarca solo da una provincia propria: %s non appartiene a %s	You can embark only from one of your own provinces: %s does not belong to %s
+Si riempie solo un'unità dello stesso identico tipo	Only a unit of exactly the same type can be filled
 Si svolge a %s: l'agente ci va prima (un anno di cammino) e agisce a fine anno.	Takes place at %s: the agent goes there first (a year's journey) and acts at year end.
 Si svolge a fine anno, a %s.	Takes place at year end, at %s.
 Siamo nel %d: la campagna è finita.	It is %d: the campaign is over.

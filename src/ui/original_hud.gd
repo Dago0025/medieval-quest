@@ -26,6 +26,7 @@ signal card_info(index: int)             ## clic destro su una voce: la scheda
 signal card_drag_started(index: int)
 signal card_drag_moved(index: int)
 signal card_drag_released(index: int)
+const REVIEW_CARD_GROUP := "mq_carte_rassegna"   ## voci del pannello di rassegna (review_card_at)
 
 const CARD_DRAG_THRESHOLD := 6.0
 signal details_pressed
@@ -1124,6 +1125,8 @@ func _review_item(item: Dictionary, index: int) -> Control:
 		holder.add_child(frame)
 		holder.move_child(frame, 0)
 	holder.gui_input.connect(_on_card_gui_input.bind(index))
+	holder.set_meta("voce", index)
+	holder.add_to_group(REVIEW_CARD_GROUP)
 	return holder
 
 
@@ -1158,6 +1161,20 @@ func _on_card_gui_input(event: InputEvent, index: int) -> void:
 			card_drag_started.emit(index)
 		if _card_dragging:
 			card_drag_moved.emit(index)
+
+
+## Indice della voce del pannello di rassegna sotto il punto `point` (viewport), -1 se non ce n'e' (ADR-147: carta lasciata
+## su un'altra carta della stessa armata).
+func review_card_at(point: Vector2) -> int:
+	if not is_inside_tree():
+		return -1
+	for node in get_tree().get_nodes_in_group(REVIEW_CARD_GROUP):
+		var c := node as Control
+		if c == null or c.is_queued_for_deletion() or not c.is_visible_in_tree() or not is_ancestor_of(c):
+			continue
+		if c.get_global_rect().has_point(point):
+			return int(c.get_meta("voce", -1))
+	return -1
 
 
 ## Vero se il punto `point` (viewport) sta sulla barra in basso o sulla minimappa.

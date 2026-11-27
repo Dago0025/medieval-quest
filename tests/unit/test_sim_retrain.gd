@@ -504,6 +504,7 @@ func test_dividere_annulla_gli_ordini_di_quell_esercito(t: TestContext) -> void:
 
 func test_spostare_e_unire_annullano_gli_ordini_dell_esercito_di_partenza(t: TestContext) -> void:
 	var s := _world()
+	s.rules.merge_same_units = false   # qui conta solo l'esercito di partenza; l'accorpamento e' in test_accorpamento
 	var a := _army(s, W.BASSA, [["Spearmen", 40, 0], ["Spearmen", 60, 0]])
 	var b := _army(s, W.BASSA, [["Spearmen", 30, 0]])
 	var treasury := _treasury(s)

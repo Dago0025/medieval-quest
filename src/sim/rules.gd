@@ -65,6 +65,10 @@ var local_trade_without_port := true
 var upkeep_multiplier := 1.0
 
 var max_stacks := 20   ## unita' per esercito o flotta (16 nell'originale, 20 dal 22/11/2026)
+## ADR-146 (StackMerge, manuale p29): unendo eserciti o spostando pile, le pile uguali si riempiono con gli uomini delle piu'
+## deboli; dopo le battaglie si accorpano le pile uguali che hanno perso uomini (economia.cfg [eserciti]).
+var merge_same_units := true
+var merge_after_battle := true
 
 ## Demolizione (manuale p37 «Distruggere strutture»: «ti verra' restituita una parte del prezzo di costruzione»; nella campagna
 ## vichinga «solo la meta' del suo valore»). PROVVISORIA: quota del costo del livello demolito restituita.
@@ -173,6 +177,10 @@ static func load_file(path: String = DEFAULT_PATH) -> Rules:
 		rules.local_trade_without_port = bool(cfg.get_value("commercio", "locale_senza_porto", rules.local_trade_without_port))
 	rules.upkeep_multiplier = _float(cfg, "mantenimento", "moltiplicatore", rules.upkeep_multiplier)
 	rules.max_stacks = _int(cfg, "eserciti", "max_pile", rules.max_stacks)
+	if cfg.has_section_key("eserciti", "riempi_unita_uguali"):
+		rules.merge_same_units = bool(cfg.get_value("eserciti", "riempi_unita_uguali"))
+	if cfg.has_section_key("eserciti", "accorpa_dopo_battaglia"):
+		rules.merge_after_battle = bool(cfg.get_value("eserciti", "accorpa_dopo_battaglia"))
 	rules.demolish_refund = _float(cfg, "demolizione", "rimborso", rules.demolish_refund)
 	rules.conquest_building_chance = _float(cfg, "conquista", "probabilita_edificio", rules.conquest_building_chance)
 	rules.conquest_castle_protection = _float(cfg, "conquista", "protezione_per_livello_castello", rules.conquest_castle_protection)
@@ -383,6 +391,8 @@ func to_dict() -> Dictionary:
 		"local_trade_without_port": local_trade_without_port,
 		"upkeep_multiplier": upkeep_multiplier,
 		"max_stacks": max_stacks,
+		"merge_same_units": merge_same_units,
+		"merge_after_battle": merge_after_battle,
 		"max_building_queue": max_building_queue,
 		"max_unit_queue": max_unit_queue,
 		"recruit_rounds": recruit_rounds.duplicate(),

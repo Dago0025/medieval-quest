@@ -422,7 +422,7 @@ static func _merge_arrivals(state: GameState) -> void:
 			reason = Lang.t("l'esercito da raggiungere si e' spostato")
 		elif target.in_castle != a.in_castle:
 			reason = Lang.t("uno dei due e' nel castello")
-		elif target.stacks.size() + a.stacks.size() > state.rules.max_stacks:
+		elif StackMerge.size_after_join(state, target, a.stacks) > state.rules.max_stacks:
 			reason = Lang.t("insieme supererebbero %d pile") % state.rules.max_stacks
 		if reason != "":
 			state.add_event(GameState.EV_MERGE_FAILED, {"fazione": a.faction, "esercito": a.id, "bersaglio": target.id if target != null else 0, "regione": a.region, "motivo": reason})

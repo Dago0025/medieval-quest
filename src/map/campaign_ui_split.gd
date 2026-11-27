@@ -35,7 +35,10 @@ static func plan(state: GameState, player_id: String, army: Army, indices: Packe
 	if target != null and target.id != army.id and target.faction == army.faction:
 		if target.is_fleet != army.is_fleet:
 			return {"azione": NIENTE, "testo": Lang.t("Truppe e navi non si mescolano.")}
-		if target.stacks.size() + picked.size() > state.rules.max_stacks:
+		var incoming: Array[UnitStack] = []
+		for i in picked:
+			incoming.append(army.stacks[i])
+		if StackMerge.size_after_join(state, target, incoming) > state.rules.max_stacks:
 			return {"azione": NIENTE, "testo": Lang.t("Non c'è posto: un esercito ha al massimo %d unità.") % state.rules.max_stacks}
 		if target.region == army.region:
 			if target.in_castle != army.in_castle:

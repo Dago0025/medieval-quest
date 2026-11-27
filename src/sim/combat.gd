@@ -383,6 +383,10 @@ static func resolve(state: GameState, region_id: String, attackers: Array[Army],
 			var gain := state.rng.randf() < c.valour_chance
 			if gain and s.value < c.valour_max:
 				s.value += 1
+	if state.rules.merge_after_battle:
+		# ADR-146: dopo la battaglia le pile uguali che hanno perso uomini si accorpano (come nell'originale)
+		for a in attackers + defenders:
+			StackMerge.consolidate(state, a)
 	for a in losers:
 		if a.stacks.is_empty():
 			state.remove_army(a)

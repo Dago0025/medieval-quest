@@ -1689,12 +1689,24 @@ static func transfer_stacks(state: GameState, faction_id: String, from_id: int, 
 	var bound := _bound_problem(state, source, order)
 	if bound != "":
 		return failure(bound)
-	if target.stacks.size() + order.size() > state.rules.max_stacks:
+	var incoming: Array[UnitStack] = []
+	for i in order:
+		incoming.append(source.stacks[i])
+	if StackMerge.size_after_join(state, target, incoming) > state.rules.max_stacks:
 		return failure(Lang.t("Troppe pile: un esercito ne ha al massimo %d") % state.rules.max_stacks)
 	var retrain := RetrainProcessor.cancel_army_orders(state, source.id)   # gli indici delle pile cambiano: ordini rimborsati
 	var moved := _take_stacks(source, order)
+	var had := target.stacks.size()
 	for st in moved:
 		target.stacks.append(st)
+	var filled := 0
+	if state.rules.merge_same_units:
+		# ADR-146: le pile uguali si riempiono fino all'organico pieno (manuale p29); gli indici dell'esercito che riceve
+		# cambiano, quindi anche i suoi ordini di riaddestramento si annullano e si rimborsano
+		filled = StackMerge.consolidate(state, target, had)
+		if filled > 0:
+			var more := RetrainProcessor.cancel_army_orders(state, target.id)
+			retrain = {"pile": int(retrain.get("pile", 0)) + int(more.get("pile", 0)), "rimborso": int(retrain.get("rimborso", 0)) + int(more.get("rimborso", 0))}
 	var removed := source.stacks.is_empty()
 	if removed:
 		Admirals.merge_into(source, target)   # ADR-056: resta l'ammiraglio migliore
@@ -1702,7 +1714,47 @@ static func transfer_stacks(state: GameState, faction_id: String, from_id: int, 
 		if commander != null:
 			commander.army = 0
 		state.remove_army(source)
-	return success(_with_retrain_refund({"pile": moved.size(), "rimosso": removed}, retrain))
+	return success(_with_retrain_refund({"pile": moved.size(), "rimosso": removed, "uomini_accorpati": filled}, retrain))
+
+
+## Carta trascinata su un'altra carta dello stesso esercito (ADR-147, manuale p29: «Trascina un'unita' nel pannello di
+## rassegna su un'altra dello stesso identico tipo, che verra' rifornita di uomini, se ne ha pochi. Tutti gli uomini in
+## eccedenza rimarranno nell'unita' originale»). Le pile `from_indices` uguali a quella in `to_index` (stessa unita', stesso
+## stato di mercenario) le cedono uomini, una dopo l'altra, finche' non e' piena; quelle rimaste vuote spariscono. Se cambia
+## qualcosa gli ordini di riaddestramento dell'esercito si annullano e si rimborsano (gli indici cambiano). Esito: "uomini"
+## spostati, "pile_tolte", "piena" (vero se la pila di arrivo e' all'organico pieno), "pila" (nuovo indice della pila riempita).
+static func fill_stack(state: GameState, faction_id: String, army_id: int, from_indices: PackedInt32Array, to_index: int) -> Dictionary:
+	var army := state.army(army_id)
+	var problem := _own_army_problem(state, faction_id, army)
+	if problem != "":
+		return failure(problem)
+	if to_index < 0 or to_index >= army.stacks.size():
+		return failure(Lang.t("Scegli una pila valida dell'esercito %d") % army.id)
+	var target := army.stacks[to_index]
+	var full := StackMerge.full_men(state, target)
+	var donors: Array[UnitStack] = []
+	for i in from_indices:
+		if i == to_index or i < 0 or i >= army.stacks.size():
+			continue
+		var st := army.stacks[i]
+		if st.unit_id == target.unit_id and st.mercenary == target.mercenary and not donors.has(st):
+			donors.append(st)
+	if donors.is_empty():
+		return failure(Lang.t("Si riempie solo un'unità dello stesso identico tipo"))
+	if full <= 0 or target.men >= full:
+		return failure(Lang.t("L'unità è già al completo"))
+	var moved := 0
+	for st in donors:
+		moved += StackMerge.fill(target, st, full)
+		if target.men >= full:
+			break
+	var removed := 0
+	for n in range(army.stacks.size() - 1, -1, -1):
+		if army.stacks[n].men <= 0:
+			army.stacks.remove_at(n)
+			removed += 1
+	var retrain := RetrainProcessor.cancel_army_orders(state, army.id) if moved > 0 else {}
+	return success(_with_retrain_refund({"uomini": moved, "pile_tolte": removed, "piena": target.men >= full, "pila": army.stacks.find(target)}, retrain))
 
 
 ## Unisce tutto l'esercito `from_id` nell'esercito `to_id` (stesse condizioni di transfer_stacks); `from_id` sparisce.
@@ -1732,8 +1784,9 @@ static func order_merge(state: GameState, faction_id: String, army_id: int, targ
 		return failure(Lang.t("Scegli due eserciti diversi"))
 	if source.is_fleet != target.is_fleet:
 		return failure(Lang.t("Truppe e navi non si mescolano"))
-	if target.stacks.size() + source.stacks.size() > state.rules.max_stacks:
-		return failure(Lang.t("Non c'e' posto: insieme farebbero %d pile, al massimo %d") % [target.stacks.size() + source.stacks.size(), state.rules.max_stacks])
+	var together := StackMerge.size_after_join(state, target, source.stacks)
+	if together > state.rules.max_stacks:
+		return failure(Lang.t("Non c'e' posto: insieme farebbero %d pile, al massimo %d") % [together, state.rules.max_stacks])
 	if source.region == target.region:
 		var merged := merge_armies(state, faction_id, source.id, target.id)
 		if bool(merged["ok"]):
