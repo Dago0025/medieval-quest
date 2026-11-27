@@ -1,5 +1,7 @@
 # Medieval Quest
 
+🇮🇹 Italiano · 🇬🇧 [English](#english)
+
 Gioco di strategia a turni, per un solo giocatore, sulla mappa del mondo dal 1000 al 1700. È ispirato alla campagna di **Medieval: Total War** (con la mod XL 3.0): stessi meccanismi di dinastie, emissari, spie, crociate, Papato ed eventi storici, ma senza battaglie 3D. Scontri e assedi si risolvono in automatico e tutto si gioca sulla plancia.
 
 Il gioco è scritto da zero con [Godot Engine 4.7](https://godotengine.org) (GDScript). Non serve avere installato il gioco originale.
@@ -34,4 +36,36 @@ Codice, dati e strumenti sono in questo repository. Come aprire il progetto, ese
 
 ---
 
-*English summary:* Medieval Quest is a free, unofficial, single-player turn-based strategy game (1000–1700, world map) inspired by the campaign of Medieval: Total War, rebuilt from scratch in Godot. Code is MIT-licensed; it contains no files from the original game (images, music and sounds are new or from free libraries), while campaign data is derived from the original game and the XL mod. Provided as is, with **no support**. Not affiliated with The Creative Assembly, SEGA or Activision.
+## English
+
+Medieval Quest is a free, single-player, turn-based strategy game on the world map from 1000 to 1700. It is inspired by the campaign of **Medieval: Total War** (with the XL 3.0 mod): dynasties, emissaries, spies, crusades, the Papacy and historical events work the same way, but there are no 3D battles. Fights and sieges are resolved automatically and everything is played on the campaign map. The game can be played in English or Italian (language choice in the main menu).
+
+It is written from scratch with [Godot Engine 4.7](https://godotengine.org) (GDScript). The original game is not needed.
+
+> **Hobby project, open source, no support.** The code is MIT-licensed (see [LICENSE](LICENSE)). There are no warranties, no support, no update schedule and no response times: issues and requests may stay unanswered. Use it as is.
+
+### Download and install
+
+1. Open the [Releases](../../releases) page and download the latest `MedievalQuest-Setup-<version>.exe`.
+2. Run the installer. No administrator rights are needed: by default the game goes to `%LOCALAPPDATA%\Programs\Medieval Quest`.
+3. Start **Medieval Quest** from the Start menu or the desktop shortcut.
+
+Windows may show a SmartScreen warning because the installer is not signed: "More info" → "Run anyway".
+
+**Requirements:** 64-bit Windows 10 or 11, a graphics card supporting Vulkan or OpenGL 3.3 (a recent integrated GPU is fine), about 1 GB of free space.
+
+**Saves and settings** are stored in `%APPDATA%\Godot\app_userdata\MTW Remake`. Uninstalling does not delete them.
+
+### How to play
+
+The full guide, with controls and main rules, is in [docs/GUIDA_DI_GIOCO.md](docs/GUIDA_DI_GIOCO.md) (Italian); the installer also copies it to the game folder. In game, press **H** for the list of controls and keys.
+
+### Rights and credits
+
+*Medieval: Total War* and *Total War* are trademarks and works of their respective owners (The Creative Assembly / SEGA; the original game was published by Activision in 2002). Medieval Quest is an **unofficial**, non-profit fan project, not affiliated with or endorsed by them. The game contains no files from the original: images, music and sound effects are new or come from free libraries. Campaign data (provinces, factions, units, buildings, names) is derived from the original game and the XL mod.
+
+Details and credits for fonts, engine and images are in [CREDITI_E_DIRITTI.md](CREDITI_E_DIRITTI.md).
+
+### For modders
+
+Code, data and tools are in this repository. How to open the project, run the tests and rebuild the executable and the installer is explained in [docs/SVILUPPO.md](docs/SVILUPPO.md) (Italian).
