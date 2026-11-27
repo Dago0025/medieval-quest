@@ -138,6 +138,10 @@ func test_id_di_regione_nei_messaggi_diventano_nomi(t: TestContext) -> void:
 	t.assert_eq(CampaignUiText.humanize_ids(s, "ID_SCONOSCIUTA resta"), "ID_SCONOSCIUTA resta", "id sconosciuto invariato")
 	t.assert_eq(CampaignUiText.humanize_ids(s, "flotta ostile in ID_MARE_DUE, ID_FARO"), "flotta ostile in ID_MARE_DUE, Faro", "i mari senza nome restano con l'id")
 	t.assert_eq(CampaignUiText.chain_names(s, ["ID_MARE_UNO", "ID_MARE_DUE"]), "ID_MARE_UNO > ID_MARE_DUE")
+	# 27/11/2026: nemmeno gli id delle fazioni (FN_DANISH negli spostamenti via mare degli Auror)
+	t.assert_eq(CampaignUiText.humanize_ids(s, "L'esercito 3 non appartiene a FN_ALPHA"), "L'esercito 3 non appartiene a " + SimUtil.faction_label("FN_ALPHA"))
+	t.assert_false(CampaignUiText.humanize_ids(s, "Fazione FN_ALPHA").contains("FN_"), "nessun id di fazione")
+	t.assert_eq(CampaignUiText.humanize_ids(s, "FN_INVENTATA resta"), "FN_INVENTATA resta", "non e' una fazione")
 	t.assert_eq(CampaignUiText.chain_names(s, PackedStringArray(["ID_MARE_UNO"])), "ID_MARE_UNO")
 	t.assert_eq(CampaignUiText.chain_names(s, null), "")
 

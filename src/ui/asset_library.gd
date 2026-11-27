@@ -174,6 +174,9 @@ static func region(original: String, rect: Rect2, frame: int = 1) -> Texture2D:
 	return atlas
 
 
+static var _card_depth := 0   ## catena di `carta`/`modello` seguita (contro i giri)
+
+
 ## Carta dell'unita' (pannello dell'esercito): campmap/review_panel/Units/<id>.BIF, per le navi Ships, per gli agenti
 ## Agents. `culture` ("Muslim", "Pagan"; "" o "Christian" = comune) sceglie la variante di cultura delle carte degli agenti
 ## (Agents/MUSLIM, Agents/Pagan), come le pedine: lo sciamano c'e' solo in Agents/Pagan.
@@ -208,7 +211,13 @@ static func unit_card_path(unit_id: String, culture: String = "") -> String:
 	var model := str(AurorUnits.value(unit_id, "modello", ""))
 	if model == "":
 		model = CultureUnits.card_model(unit_id)   # ADR-116: segnaposto finche' le unita' delle fazioni nuove non hanno carta
-	return unit_card_path(model) if model != "" and not AurorUnits.is_auror_unit(model) and not CultureUnits.is_culture_unit(model) else ""
+	if model == "" or model == unit_id or AurorUnits.is_auror_unit(model) or _card_depth > 3:
+		return ""
+	# 27/11/2026: `carta` puo' indicare un'altra unita' delle fazioni nuove (i Maya usano le carte rifatte degli Aztechi)
+	_card_depth += 1
+	var found := unit_card_path(model)
+	_card_depth -= 1
+	return found
 
 
 ## Vero se per il percorso originale c'e' un'immagine rifatta in assets/rifatti (ADR-043).
@@ -225,8 +234,11 @@ static func unit_picture(unit_id: String) -> Texture2D:
 	var model := str(AurorUnits.value(unit_id, "modello", ""))
 	if model == "":
 		model = CultureUnits.card_model(unit_id)   # ADR-116
-	if model != "" and not AurorUnits.is_auror_unit(model) and not CultureUnits.is_culture_unit(model):
-		return unit_picture(model)   # ADR-076: immagine non ancora pronta, quella del modello
+	if model != "" and model != unit_id and not AurorUnits.is_auror_unit(model) and _card_depth <= 3:
+		_card_depth += 1   # anche un'altra unita' delle fazioni nuove (27/11/2026, Maya -> Aztechi)
+		var pic := unit_picture(model)   # ADR-076: immagine non ancora pronta, quella del modello
+		_card_depth -= 1
+		return pic
 	_missing["illustrazione:" + unit_id] = true
 	return null
 

@@ -48,7 +48,7 @@ func test_regole_valori_della_specifica(t: TestContext) -> void:
 	t.assert_eq(r.annual_scale, 0.52)
 	t.assert_eq(r.final_year, 1700)
 	t.assert_eq(r.max_stacks, 20, "20 unita' per esercito (Federico, 22/11/2026; 16 nell'originale)")
-	t.assert_eq(r.max_building_queue, 4)
+	t.assert_eq(r.max_building_queue, 5, "5 edifici in coda (Federico, 27/11/2026; 4 nell'originale)")
 	t.assert_eq(r.max_unit_queue, 5)
 	t.assert_eq(r.default_tax, 2)
 	t.assert_eq(r.tax_multiplier(0), 0.75)
@@ -85,7 +85,7 @@ func test_regole_file_parziale(t: TestContext) -> void:
 	t.assert_eq(r.tax_multiplier(4), 2.0)
 	t.assert_eq(r.max_unit_queue, 7)
 	t.assert_eq(r.mine_families, PackedStringArray(["GOLD_MINE"]), "maiuscolo")
-	t.assert_eq(r.max_building_queue, 4, "chiave assente = valore predefinito")
+	t.assert_eq(r.max_building_queue, 5, "chiave assente = valore predefinito")
 	t.assert_eq(r.farm_multiplier(2), 1.4)
 
 

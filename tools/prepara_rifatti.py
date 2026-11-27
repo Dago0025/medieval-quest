@@ -32,10 +32,22 @@ SEAL = 15
 UNIT_BOTTOM = 0.985
 
 
-def portrait(path):
+## Ritaglio stretto «dal petto in su» come i ritratti gia' in gioco (Federico 27/11/2026: le prove Auror con ERNIE mostravano tutto
+## il busto): si tiene la parte alta e centrale, larga ZOOM della larghezza, partendo da ZOOM_TOP dell'altezza.
+ZOOM = 0.76
+ZOOM_TOP = 0.03
+
+
+def portrait(path, zoom=False):
     img = Image.open(path).convert("RGB")
     ratio = PORTRAIT[0] / PORTRAIT[1]
     w, h = img.size
+    if zoom:
+        nw = round(w * ZOOM)
+        nh = min(round(nw / ratio), h - round(h * ZOOM_TOP))
+        x, y = (w - nw) // 2, round(h * ZOOM_TOP)
+        img = img.crop((x, y, x + nw, y + nh))
+        w, h = img.size
     if w / h > ratio:                                   # troppo larga: si tagliano i lati
         nw = round(h * ratio)
         img = img.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))

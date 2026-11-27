@@ -115,6 +115,10 @@ class SiteEvent:
 
 var sites: Array[Site] = []
 var events := {}               ## id -> SiteEvent
+## Frequenza degli eventi (sezione [generale], richiesta di Federico del 27/11/2026: «un po' troppo frequenti»).
+var interval_scale := 1.0      ## moltiplica gli intervalli `ogni` degli eventi ricorrenti
+var chance_scale := 1.0        ## moltiplica la `probabilita` degli eventi condizionati sotto il 100%
+var max_per_faction := 0       ## eventi ricorrenti e condizionati al massimo per fazione e anno (0 = senza limite)
 var errors := PackedStringArray()
 var _by_id := {}
 var _by_region := {}           ## id regione -> Array[Site]
@@ -148,6 +152,11 @@ static func parse_text(text: String) -> LegendarySites:
 
 func _read_all(cfg: ConfigFile, positions: ConfigFile) -> void:
 	for section in cfg.get_sections():
+		if section == GENERAL_SECTION:
+			interval_scale = maxf(0.1, float(cfg.get_value(section, "scala_intervalli", 1.0)))
+			chance_scale = maxf(0.0, float(cfg.get_value(section, "scala_probabilita", 1.0)))
+			max_per_faction = maxi(0, int(cfg.get_value(section, "max_eventi_fazione_anno", 0)))
+			continue
 		if section.begins_with("evento."):
 			_read_event(cfg, section)
 		else:
@@ -295,6 +304,22 @@ func _check_outcome(event_id: String, outcome: Variant) -> void:
 	for k in outcome:
 		if not OUTCOME_KEYS.has(str(k)):
 			errors.append("evento %s: esito sconosciuto %s" % [event_id, k])
+
+
+const GENERAL_SECTION := "generale"
+
+
+## Intervallo di un evento ricorrente con `scala_intervalli` (almeno un anno).
+func interval_of(e: SiteEvent) -> Vector2i:
+	var lo := maxi(1, roundi(float(e.every.x) * interval_scale))
+	return Vector2i(lo, maxi(lo, roundi(float(e.every.y) * interval_scale)))
+
+
+## Probabilita' annua (%) di un evento condizionato con `scala_probabilita`; il 100% (eventi certi) resta tale.
+func chance_of(e: SiteEvent) -> int:
+	if e.chance >= 100:
+		return e.chance
+	return clampi(roundi(float(e.chance) * chance_scale), 0, 100)
 
 
 func site(site_id: String) -> Site:

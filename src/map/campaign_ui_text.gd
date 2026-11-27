@@ -416,8 +416,12 @@ static func income_lines(income: Dictionary) -> PackedStringArray:
 	return out
 
 
-## Una riga per un evento del registro dell'anno.
+## Una riga per un evento del registro dell'anno, senza id grezzi di regioni o fazioni (`humanize_ids`).
 static func format_event(state: GameState, e: Dictionary) -> String:
+	return humanize_ids(state, _format_event_raw(state, e))
+
+
+static func _format_event_raw(state: GameState, e: Dictionary) -> String:
 	var kind := str(e.get("tipo", ""))
 	if kind == GameState.EV_PRISONERS:
 		return str(e.get("testo", ""))   # ADR-073: testo gia' composto da PrisonerProcessor
@@ -690,17 +694,32 @@ static func chain_names(state: GameState, chain: Variant) -> String:
 
 
 ## Sostituisce gli id di regione ("ID_NORTH_SEA") di un testo con i loro nomi mostrati.
+## Anche gli id delle fazioni (FN_...) diventano il loro nome (richiesta di Federico del 27/11/2026: «FN_DANISH» compariva
+## nei messaggi degli Auror, per esempio negli spostamenti via mare non possibili).
 static func humanize_ids(state: GameState, text: String) -> String:
+	if not (text.contains("ID_") or text.contains("FN_")):
+		return text
 	var pattern := RegEx.new()
-	pattern.compile("ID_[A-Z0-9_]+")
+	pattern.compile("(ID|FN)_[A-Z0-9_]+")
 	var out := text
 	var found := pattern.search_all(text)
 	var i := found.size() - 1
 	while i >= 0:
 		var m: RegExMatch = found[i]
-		out = out.substr(0, m.get_start()) + region_name(state, m.get_string()) + out.substr(m.get_end())
+		var token := m.get_string()
+		var shown := region_name(state, token) if token.begins_with("ID_") else faction_id_label(state, token)
+		out = out.substr(0, m.get_start()) + shown + out.substr(m.get_end())
 		i -= 1
 	return out
+
+
+## Nome di una fazione da mostrare al posto del suo id (anche ribelli e Papato); l'id com'e' se non e' una fazione.
+static func faction_id_label(state: GameState, token: String) -> String:
+	var key := token.strip_edges().to_upper()
+	if state != null and state.faction(key) == null and state.campaign != null and state.campaign.faction(key) == null \
+			and key != GameState.REBEL and key != GameState.PAPAL:
+		return token
+	return SimUtil.faction_label(key)
 
 
 ## Province da evidenziare quando e' selezionato `army`: se e' un esercito di terra del giocatore,

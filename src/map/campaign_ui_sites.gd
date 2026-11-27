@@ -193,7 +193,8 @@ static func event_lines(state: GameState, s: LegendarySites.Site, player_id: Str
 					var years := int(next[eid]) - state.year
 					note = Lang.t("tra circa %d anni") % years if years > 0 else Lang.t("pronto")
 				else:
-					note = Lang.t("ogni %d-%d anni, per chi possiede la provincia") % [e.every.x, e.every.y]
+					var every := state.rules.sites.interval_of(e)
+					note = Lang.t("ogni %d-%d anni, per chi possiede la provincia") % [every.x, every.y]
 			LegendarySites.KIND_CONDITIONAL:
 				var who := {LegendarySites.WHO_GENERAL: "un generale", LegendarySites.WHO_FLEET: "una flotta", LegendarySites.WHO_AGENT: "un agente"}
 				note = Lang.t("quando %s si trova qui") % Lang.t(str(who.get(e.who, "qualcuno")))

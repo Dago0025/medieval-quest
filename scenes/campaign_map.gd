@@ -1322,7 +1322,7 @@ func _hide_hover() -> void:
 
 
 func _toast_show(text: String) -> void:
-	_toast.text = text
+	_toast.text = CampaignUiText.humanize_ids(_state, text) if _state != null else text   # mai id grezzi (27/11/2026)
 	# i messaggi lunghi vanno a capo entro il 60% della finestra (al massimo 760 punti), quelli brevi restano su una riga
 	_toast.autowrap_mode = TextServer.AUTOWRAP_OFF
 	_toast.custom_minimum_size = Vector2.ZERO
@@ -8170,7 +8170,7 @@ func _margin() -> MarginContainer:
 
 
 func _show_message(text: String) -> void:
-	_message.text = text
+	_message.text = CampaignUiText.humanize_ids(_state, text) if _state != null and _state.campaign != null else text
 	_message.visible = true
 
 

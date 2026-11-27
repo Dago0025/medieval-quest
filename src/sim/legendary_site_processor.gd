@@ -54,7 +54,16 @@ static func process_year(state: GameState) -> void:
 		return
 	ensure_init(state)
 	var rng := _rng(state, "luoghi")
-	for s in state.rules.sites.sites:
+	# 27/11/2026: luoghi in ordine casuale ogni anno, cosi' il tetto di eventi per fazione non premia sempre i primi del file
+	var order: Array = state.rules.sites.sites.duplicate()
+	for i in range(order.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var tmp: Variant = order[i]
+		order[i] = order[j]
+		order[j] = tmp
+	var fired := {}   # fazione -> eventi ricorrenti e condizionati gia' avvenuti quest'anno
+	for item in order:
+		var s: LegendarySites.Site = item
 		if not LegendarySites.is_active(state, s):
 			continue
 		if s.is_sea():
@@ -66,7 +75,7 @@ static func process_year(state: GameState) -> void:
 				break   # un esito ha chiuso il luogo
 			var e: LegendarySites.SiteEvent = state.rules.sites.event(eid)
 			if e != null:
-				_event_year(state, s, e, rng)
+				_event_year(state, s, e, rng, fired)
 
 
 ## Lealta' temporanea lasciata da un esito (`ordine`), letta da ProvinceProcessor.loyalty_terms.
@@ -140,8 +149,15 @@ static func _sea_year(state: GameState, s: LegendarySites.Site, rng: RandomNumbe
 				})
 
 
-static func _event_year(state: GameState, s: LegendarySites.Site, e: LegendarySites.SiteEvent, rng: RandomNumberGenerator) -> void:
+## Vero se la fazione ha gia' avuto quest'anno gli eventi concessi (`max_eventi_fazione_anno`).
+static func _capped(state: GameState, fired: Dictionary, faction: String) -> bool:
+	var cap := state.rules.sites.max_per_faction
+	return cap > 0 and int(fired.get(faction, 0)) >= cap
+
+
+static func _event_year(state: GameState, s: LegendarySites.Site, e: LegendarySites.SiteEvent, rng: RandomNumberGenerator, fired: Dictionary = {}) -> void:
 	var st := _st(state, s.id)
+	var cat := state.rules.sites
 	match e.kind:
 		LegendarySites.KIND_HISTORICAL:
 			var done: Array = st.get("fatti", [])
@@ -161,24 +177,29 @@ static func _event_year(state: GameState, s: LegendarySites.Site, e: LegendarySi
 			if not e.religions.is_empty() and not e.religions.has(ReligionProcessor.faction_religion(state, owner)):
 				return
 			var next: Dictionary = st.get("prossimo", {})
+			var every := cat.interval_of(e)
 			if not next.has(e.id):
-				next[e.id] = state.year + rng.randi_range(e.every.x, e.every.y)
+				next[e.id] = state.year + rng.randi_range(every.x, every.y)
 				st["prossimo"] = next
 				return
 			if state.year < int(next[e.id]):
 				return
-			next[e.id] = state.year + rng.randi_range(e.every.x, e.every.y)
+			if _capped(state, fired, owner):
+				return   # gia' un evento quest'anno: questo aspetta l'anno dopo
+			next[e.id] = state.year + rng.randi_range(every.x, every.y)
 			st["prossimo"] = next
+			fired[owner] = int(fired.get(owner, 0)) + 1
 			trigger(state, s, e, owner, {})
 		LegendarySites.KIND_CONDITIONAL:
 			if not LegendarySites.manifests(s, state.year):
 				return
 			for ctx in _candidates(state, s, e):
 				var faction := str(ctx["fazione"])
-				if not _may_fire(state, st, e, faction, ctx):
+				if not _may_fire(state, st, e, faction, ctx) or _capped(state, fired, faction):
 					continue
-				if rng.randi_range(1, 100) > e.chance:
+				if rng.randi_range(1, 100) > cat.chance_of(e):
 					continue
+				fired[faction] = int(fired.get(faction, 0)) + 1
 				_mark_fired(state, st, e, faction, ctx)
 				trigger(state, s, e, faction, ctx)
 				return   # un solo evento condizionato per luogo e anno

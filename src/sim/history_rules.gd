@@ -14,7 +14,7 @@ var inventions := {"GUNPOWDER": "POLVERE_DA_SPARO", "COMPASS": "BUSSOLA"}
 var invention_free := PackedStringArray(["FN_DANISH"])
 
 ## Popoli senza cavalli prima dell'arrivo degli europei.
-var horseless_factions := PackedStringArray(["FN_AZTECS", "FN_INCA", "FN_MISSISSIPPIANS"])
+var horseless_factions := PackedStringArray(["FN_AZTECS", "FN_INCA", "FN_MISSISSIPPIANS", "FN_MAYA"])
 ## Regioni delle Americhe: l'arrivo e' il primo anno in cui una fazione fuori da `horseless_factions` ne possiede una.
 var americas := PackedStringArray()
 

@@ -112,7 +112,6 @@ GGConquestReward::	FN_AZTECS	0.5
 SetShieldImage::	FN_AZTECS	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
 SetFactionCol::	FN_AZTECS	32 150 140	122 31 31
 SetRegionOwner::	ID_TOLLAN	FN_AZTECS
-SetRegionOwner::	ID_MAYA	FN_AZTECS
 MakeBuilding::	ID_TOLLAN	Castle4
 MakeBuilding::	ID_TOLLAN	Spearmaker
 MakeBuilding::	ID_TOLLAN	Bowyer
@@ -124,8 +123,9 @@ MakeUnit::	ID_TOLLAN	AztTlamani	60	PAGAN_CULTURE
 MakeUnit::	ID_TOLLAN	AztTlamani	60	PAGAN_CULTURE
 MakeUnit::	ID_TOLLAN	AztTlahuitolli	60	PAGAN_CULTURE
 MakeUnit::	ID_TOLLAN	AztTlahuitolli	60	PAGAN_CULTURE
-MakeUnit::	ID_MAYA	AztTepoztopilli	100	PAGAN_CULTURE
-MakeUnit::	ID_MAYA	AztTlahuitolli	60	PAGAN_CULTURE
+// 27/11/2026: lo Yucatan passa ai Maya; le loro truppe restano a Tollan
+MakeUnit::	ID_TOLLAN	AztTepoztopilli	100	PAGAN_CULTURE
+MakeUnit::	ID_TOLLAN	AztTlahuitolli	60	PAGAN_CULTURE
 SetStartLeader::	FN_AZTECS	0	8	1	0	0	0	0	0	0	0
 PlaceLeader::	ID_TOLLAN	FN_AZTECS
 AddHeir::	FN_AZTECS	1	20
@@ -370,3 +370,69 @@ AddHeir::	FN_KHMER	1	22
 AddHeir::	FN_KHMER	0	16
 AddHeir::	FN_KHMER	1	12
 
+// ---- FN_MAYA  (citta' maya dello Yucatan e dell'America centrale, 27/11/2026: usano gli asset degli Aztechi)
+DeclareFaction::	"FN_MAYA"
+SetActiveFaction::	FN_MAYA	FT_MAJOR
+SetTreasury::	FN_MAYA	10000	8000	6000	4000
+SetCulture::	FN_MAYA	PAGAN_CULTURE
+SetReligion::	FN_MAYA	REL_PAGAN
+SetBehaviour::	FN_MAYA	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_MAYA	3
+GGConquestReward::	FN_MAYA	0.5
+SetShieldImage::	FN_MAYA	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_MAYA	193 68 14	30 95 116
+SetRegionOwner::	ID_MAYA	FN_MAYA
+SetRegionOwner::	ID_CENTRAL_AMERICA	FN_MAYA
+MakeBuilding::	ID_MAYA	Castle4
+MakeBuilding::	ID_MAYA	Spearmaker
+MakeBuilding::	ID_MAYA	Bowyer
+MakeBuilding::	ID_MAYA	Improved_farmland
+MakeBuilding::	ID_MAYA	Town_watch
+MakeBuilding::	ID_MAYA	Port
+MakeUnit::	ID_MAYA	MayLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	MayHolcan	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	MayHolcan	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	MayHulChe	60	PAGAN_CULTURE
+MakeUnit::	ID_MAYA	MayCanoa	1
+MakeUnit::	ID_CENTRAL_AMERICA	MayLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CENTRAL_AMERICA	MayFrombolieri	60	PAGAN_CULTURE
+SetStartLeader::	FN_MAYA	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_MAYA	FN_MAYA
+AddHeir::	FN_MAYA	1	21
+AddHeir::	FN_MAYA	0	15
+AddHeir::	FN_MAYA	1	12
+
+// ---- FN_KARAKHANIDS  (khanato karakhanide di Balasagun, Kashgar e Samarcanda, 27/11/2026: carte delle truppe turche della XL)
+DeclareFaction::	"FN_KARAKHANIDS"
+SetActiveFaction::	FN_KARAKHANIDS	FT_MAJOR
+SetTreasury::	FN_KARAKHANIDS	10000	8000	6000	4000
+SetCulture::	FN_KARAKHANIDS	MUSLIM_CULTURE
+SetReligion::	FN_KARAKHANIDS	REL_ISLAMIC
+SetBehaviour::	FN_KARAKHANIDS	MUSLIM_EXPANSIONIST
+SetFactionMusic::	FN_KARAKHANIDS	1
+GGConquestReward::	FN_KARAKHANIDS	0.5
+SetShieldImage::	FN_KARAKHANIDS	"Turkey_lge"	"Turkey_sml"	"Turkey"	"F1012"	"F1012"
+SetFactionCol::	FN_KARAKHANIDS	123 45 38	232 200 106
+SetRegionOwner::	ID_SEMIRECHYE	FN_KARAKHANIDS
+SetRegionOwner::	ID_KASHGAR	FN_KARAKHANIDS
+SetRegionOwner::	ID_TRANSOXIANA	FN_KARAKHANIDS
+MakeBuilding::	ID_SEMIRECHYE	Castle4
+MakeBuilding::	ID_SEMIRECHYE	Spearmaker
+MakeBuilding::	ID_SEMIRECHYE	Bowyer
+MakeBuilding::	ID_SEMIRECHYE	Horse_breeder
+MakeBuilding::	ID_SEMIRECHYE	Town_watch
+MakeBuilding::	ID_SEMIRECHYE	Mosque
+MakeBuilding::	ID_TRANSOXIANA	Mosque
+MakeBuilding::	ID_KASHGAR	Mosque
+MakeUnit::	ID_SEMIRECHYE	KrkArcieriCavallo	40	MUSLIM_CULTURE
+MakeUnit::	ID_SEMIRECHYE	KrkArcieriCavallo	40	MUSLIM_CULTURE
+MakeUnit::	ID_SEMIRECHYE	KrkCavLeggera	40	MUSLIM_CULTURE
+MakeUnit::	ID_SEMIRECHYE	KrkFanteria	100	MUSLIM_CULTURE
+MakeUnit::	ID_KASHGAR	KrkArcieri	60	MUSLIM_CULTURE
+MakeUnit::	ID_TRANSOXIANA	KrkArcieriCavallo	40	MUSLIM_CULTURE
+SetStartLeader::	FN_KARAKHANIDS	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_SEMIRECHYE	FN_KARAKHANIDS
+AddHeir::	FN_KARAKHANIDS	1	24
+AddHeir::	FN_KARAKHANIDS	1	19
+AddHeir::	FN_KARAKHANIDS	0	16
+AddHeir::	FN_KARAKHANIDS	1	11

@@ -112,6 +112,29 @@ def pyramid(d, size):
     d.polygon([(cx - tw * 0.7, top - sh * 1.3), (cx + tw * 0.7, top - sh * 1.3), (cx, top - sh * 2.4)], fill=255)
 
 
+def maya_temple(d, size):
+    """Tempio maya alla maniera di Tikal (27/11/2026): piramide stretta e alta, tempietto e cresta traforata in cima."""
+    w, h = size
+    cx, base = w * 0.5, h * 0.70
+    steps, sw, sh = 7, w * 0.50, h * 0.055
+    for i in range(steps):
+        ww = sw * (1 - i / (steps + 2.2))
+        d.rectangle([cx - ww / 2, base - (i + 1) * sh, cx + ww / 2, base - i * sh], fill=255)
+    top = base - steps * sh
+    tw = sw * 0.30
+    d.rectangle([cx - tw / 2, top - sh * 1.6, cx + tw / 2, top], fill=255)
+    cw = tw * 0.62
+    d.rectangle([cx - cw / 2, top - sh * 3.3, cx + cw / 2, top - sh * 1.6], fill=255)
+    d.rectangle([cx - cw * 0.12, top - sh * 2.9, cx + cw * 0.12, top - sh * 2.0], fill=0)
+
+
+def maya_stairs(d, size):
+    w, h = size
+    cx, base = w * 0.5, h * 0.70
+    sw, sh = w * 0.11, h * 0.055 * 7
+    d.rectangle([cx - sw / 2, base - sh, cx + sw / 2, base], fill=255)
+
+
 def stairs(d, size):
     # scalinata frontale (piu' scura sulla piramide)
     w, h = size
@@ -186,6 +209,9 @@ SPECS = {
     'fn_mongols': {'field': (74, 134, 192), 'figures': [(sun_rays(0.13, 0.27, 12), (216, 180, 74)), (disc(0.13), (216, 180, 74))]},
     'fn_chola': {'field': (140, 28, 60), 'figures': [(sun_rays(0.2, 0.36, 12), (232, 192, 96)), (disc(0.2), (232, 192, 96))]},
     'fn_khmer': {'field': (106, 58, 138), 'figures': [(stairs, (224, 184, 80))]},
+    # 27/11/2026: Maya (piramide giada su rosso cinabro) e Karakhanidi (mezzaluna d'oro su rosso bruno)
+    'fn_maya': {'field': (193, 68, 14), 'figures': [(maya_temple, (58, 150, 140)), (maya_stairs, (30, 95, 116))]},
+    'fn_karakhanids': {'field': (123, 45, 38), 'figures': [(crescent, (232, 200, 106)), (sun_rays(0.045, 0.1, 8, -0.1), (232, 200, 106)), (disc(0.045, -0.1), (232, 200, 106))]},
 }
 
 

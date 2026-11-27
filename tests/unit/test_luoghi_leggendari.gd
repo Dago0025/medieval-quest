@@ -271,3 +271,61 @@ func test_bussola_della_minimappa_apre_tutti_i_medaglioni(t: TestContext) -> voi
 	t.assert_true(layer.show_all())
 	t.assert_eq(layer.site_at(p + Vector2(15, 0)), "a", "col medaglione aperto si'")
 	layer.free()
+
+
+## Richiesta di Federico del 27/11/2026: eventi dei luoghi meno frequenti. [generale] allunga gli intervalli, abbassa le
+## probabilita' sotto il 100% e limita gli eventi per fazione e anno; senza la sezione nulla cambia.
+func test_frequenza_degli_eventi(t: TestContext) -> void:
+	var plain := LegendarySites.parse_text(CATALOGO)
+	t.assert_eq(plain.interval_of(plain.event("tempio_scelta")), Vector2i(1, 1), "senza [generale]")
+	t.assert_eq(plain.max_per_faction, 0)
+	var cat := LegendarySites.parse_text("[generale]\nscala_intervalli=1.5\nscala_probabilita=0.5\nmax_eventi_fazione_anno=1\n" + CATALOGO + """
+[evento.tempio_raro]
+luogo="tempio"
+tipo="condizionato"
+chi="generale"
+probabilita=30
+titolo="Raro"
+testo="Testo"
+esito={"tesoro": 1}
+""")
+	t.assert_true(cat.errors.is_empty(), str(cat.errors))
+	t.assert_true(cat.site("generale") == null, "[generale] non e' un luogo")
+	t.assert_eq(cat.interval_of(cat.event("tempio_scelta")), Vector2i(2, 2), "1 x 1,5 arrotondato")
+	t.assert_eq(cat.chance_of(cat.event("tempio_raro")), 15, "30% x 0,5")
+	t.assert_eq(cat.chance_of(cat.event("gorgo_eroe")), 100, "gli eventi certi restano certi")
+	# tetto: due eventi ricorrenti pronti nello stesso anno per la stessa fazione -> ne avviene uno solo
+	for cap in [0, 1]:
+		var s := W.world()
+		s.rules.sites = LegendarySites.parse_text(("[generale]\nmax_eventi_fazione_anno=%d\n" % cap) + """
+[fonte]
+categoria="storico"
+simbolo="tempio"
+regione="ID_ALTA"
+nome="Fonte"
+eventi=["fonte_uno", "fonte_due"]
+
+[evento.fonte_uno]
+luogo="fonte"
+tipo="ricorrente"
+ogni=[1, 1]
+titolo="Uno"
+testo="Testo"
+esito={"tesoro": 10}
+
+[evento.fonte_due]
+luogo="fonte"
+tipo="ricorrente"
+ogni=[1, 1]
+titolo="Due"
+testo="Testo"
+esito={"tesoro": 10}
+""")
+		t.assert_true(s.rules.sites.errors.is_empty(), str(s.rules.sites.errors))
+		LegendarySiteProcessor.ensure_init(s)
+		LegendarySiteProcessor.process_year(s)
+		for year in 3:
+			s.year += 1
+			s.events.clear()
+			LegendarySiteProcessor.process_year(s)
+			t.assert_eq(W.events_of(s, GameState.EV_SITE_EVENT).size(), 2 if cap == 0 else 1, "tetto %d, anno %d" % [cap, year])

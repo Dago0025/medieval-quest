@@ -1,6 +1,8 @@
 """Ritratti per cultura delle fazioni nuove (ADR-087): dalle cartelle di MTW/_ia_locale/ritratti alle serie del gioco.
 
-Uso:  python tools/prepara_ritratti_culture.py <cartella ritratti>
+Uso:  python tools/prepara_ritratti_culture.py <cartella ritratti> [--stretto]
+
+--stretto: ritaglio dal petto in su come i ritratti gia' in gioco (prepara_rifatti.ZOOM), per i ritratti usciti con tutto il busto; le principesse no (Federico: vanno bene cosi').
 
 Cerca in ogni sottocartella i file <CULTURA>-<RUOLO>-NN.png (codici dei documenti dei prompt del progetto MTW:
 GIA-R-01, CIN-PS-03, KAN-SA-01...), li ritaglia come gli altri ritratti (prepara_rifatti.portrait, 384x568) e li salva
@@ -19,10 +21,12 @@ CODE = re.compile(r"^([A-Z]{3})-([A-Z]{1,2})-(\d\d)\.png$")
 
 
 def main():
-    if len(sys.argv) != 2:
+    args = [a for a in sys.argv[1:] if a != "--stretto"]
+    stretto = "--stretto" in sys.argv[1:]
+    if len(args) != 1:
         print(__doc__)
         sys.exit(2)
-    src = sys.argv[1]
+    src = args[0]
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
     found = {}
     for folder, _, files in os.walk(src):
@@ -38,7 +42,7 @@ def main():
             if old.endswith(".png"):
                 os.remove(os.path.join(dest, old))
         for n, path in sorted(items):
-            portrait(path).save(os.path.join(dest, "%02d.png" % n), optimize=True)
+            portrait(path, zoom=stretto and role != "princess").save(os.path.join(dest, "%02d.png" % n), optimize=True)
         print("%s/%s: %d" % (culture, role, len(items)))
 
 

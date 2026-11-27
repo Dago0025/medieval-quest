@@ -307,10 +307,10 @@ static func order_move(state: GameState, faction_id: String, army_id: int, path:
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	if path.is_empty():
 		return failure(Lang.t("Percorso vuoto"))
 	if army.in_castle and state.is_besieged(army.region):
@@ -405,10 +405,10 @@ static func order_naval_attack(state: GameState, faction_id: String, army_id: in
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	if not army.is_fleet:
 		return failure(Lang.t("Solo una flotta puo' attaccare una flotta"))
 	var target := state.army(target_id)
@@ -457,7 +457,7 @@ static func cancel_move(state: GameState, faction_id: String, army_id: int) -> D
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	army.path = PackedStringArray()
 	army.sea_route = PackedStringArray()
 	army.pending_conflict = ""
@@ -801,10 +801,10 @@ static func can_order_assault(state: GameState, faction_id: String, army_id: int
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	if army.is_fleet:
 		return failure(Lang.t("Le flotte non assaltano i castelli"))
 	if army.in_castle:
@@ -837,7 +837,7 @@ static func cancel_assault(state: GameState, faction_id: String, army_id: int) -
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	if not army.assault_ordered:
 		return failure(Lang.t("Nessun assalto ordinato per l'esercito %d") % army_id)
 	_set_assault(state, army.region, army.faction, false)
@@ -862,7 +862,7 @@ static func can_enter_castle(state: GameState, faction_id: String, army_id: int)
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	if army.is_fleet:
 		return failure(Lang.t("Le flotte non entrano nei castelli"))
 	if army.in_castle:
@@ -977,7 +977,7 @@ static func order_garrison_move(state: GameState, faction_id: String, army_id: i
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	if army.is_fleet:
 		return failure(Lang.t("Le flotte non entrano nei castelli"))
 	var key := SimUtil.norm(region_id)
@@ -1001,7 +1001,7 @@ static func leave_castle(state: GameState, faction_id: String, army_id: int) -> 
 	if army == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id])
+		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)])
 	if not army.in_castle:
 		return failure(Lang.t("L'esercito %d non e' nel castello") % army_id)
 	if state.is_besieged(army.region):
@@ -1022,7 +1022,7 @@ static func assign_title(state: GameState, faction_id: String, character_id: int
 		return failure(problem)
 	var c := _own_character(state, faction_id, character_id)
 	if c == null:
-		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [faction_id, character_id])
+		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [SimUtil.faction_label(faction_id), character_id])
 	if c.role == Character.ROLE_LEADER:
 		return failure(Lang.t("Il capo non puo' ricevere un titolo di governatore"))
 	if not c.can_command(state.rules.dynasty, state.year):
@@ -1043,10 +1043,10 @@ static func assign_title(state: GameState, faction_id: String, character_id: int
 static func revoke_title(state: GameState, faction_id: String, character_id: int) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	var c := _own_character(state, faction.id, character_id)
 	if c == null:
-		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [faction_id, character_id])
+		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [SimUtil.faction_label(faction_id), character_id])
 	if c.title == "":
 		return failure(Lang.t("%s non ha un titolo") % c.full_name())
 	var province_id := c.title
@@ -1062,7 +1062,7 @@ static func revoke_title(state: GameState, faction_id: String, character_id: int
 static func assign_office(state: GameState, faction_id: String, character_id: int, building: String) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	var b := building.strip_edges().to_lower()
 	if state.campaign.office_for(faction.id, b) == null:
 		return failure(Lang.t("%s non ha una carica legata a %s") % [faction.id, b])
@@ -1071,7 +1071,7 @@ static func assign_office(state: GameState, faction_id: String, character_id: in
 		return failure(Lang.t("La carica si sblocca costruendo %s") % b)
 	var c := _own_character(state, faction.id, character_id)
 	if c == null:
-		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [faction_id, character_id])
+		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [SimUtil.faction_label(faction_id), character_id])
 	if c.role == Character.ROLE_LEADER:
 		return failure(Lang.t("Il capo non puo' ricevere una carica"))
 	if not c.can_command(state.rules.dynasty, state.year):
@@ -1087,10 +1087,10 @@ static func assign_office(state: GameState, faction_id: String, character_id: in
 static func revoke_office(state: GameState, faction_id: String, character_id: int) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	var c := _own_character(state, faction.id, character_id)
 	if c == null:
-		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [faction_id, character_id])
+		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [SimUtil.faction_label(faction_id), character_id])
 	if c.office == "":
 		return failure(Lang.t("%s non ha una carica") % c.full_name())
 	var b := c.office
@@ -1105,7 +1105,7 @@ static func revoke_office(state: GameState, faction_id: String, character_id: in
 static func set_commander(state: GameState, faction_id: String, army_id: int, character_id: int) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	var a := state.army(army_id)
 	if a == null:
 		return failure(Lang.t("Esercito sconosciuto: %d") % army_id)
@@ -1113,7 +1113,7 @@ static func set_commander(state: GameState, faction_id: String, army_id: int, ch
 		return failure(Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction.id])
 	var c := _own_character(state, faction.id, character_id)
 	if c == null:
-		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [faction_id, character_id])
+		return failure(Lang.t("Personaggio sconosciuto o non di %s: %d") % [SimUtil.faction_label(faction_id), character_id])
 	if not c.can_command(state.rules.dynasty, state.year):
 		return failure(Lang.t("%s non puo' comandare (minorenne o principessa)") % c.full_name())
 	if c.army == army_id:
@@ -1148,12 +1148,12 @@ static func _own_character(state: GameState, faction_id: String, character_id: i
 static func _agent_problem(state: GameState, faction_id: String, agent_id: int) -> String:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id
+		return Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id)
 	var agent := state.agent(agent_id)
 	if agent == null:
 		return Lang.t("Agente sconosciuto: %d") % agent_id
 	if agent.faction != faction.id:
-		return Lang.t("L'agente %d non appartiene a %s") % [agent_id, faction_id]
+		return Lang.t("L'agente %d non appartiene a %s") % [agent_id, SimUtil.faction_label(faction_id)]
 	return ""
 
 
@@ -1330,7 +1330,7 @@ static func decide_prisoners(state: GameState, faction_id: String, prisoner_id: 
 	if e.is_empty():
 		return failure(Lang.t("Prigionieri sconosciuti: %d") % prisoner_id)
 	if str(e["vincitore"]) != SimUtil.norm(faction_id) or str(e["stato"]) != PrisonerProcessor.STATE_PENDING:
-		return failure(Lang.t("Non spetta a %s decidere di questi prigionieri") % faction_id)
+		return failure(Lang.t("Non spetta a %s decidere di questi prigionieri") % SimUtil.faction_label(faction_id))
 	var before := state.events.size()
 	if choice == "libera":
 		PrisonerProcessor._release(state, e, PrisonerProcessor.OUTCOME_RELEASED)
@@ -1350,7 +1350,7 @@ static func answer_ransom(state: GameState, faction_id: String, prisoner_id: int
 	if e.is_empty():
 		return failure(Lang.t("Prigionieri sconosciuti: %d") % prisoner_id)
 	if str(e["perdente"]) != SimUtil.norm(faction_id) or str(e["stato"]) != PrisonerProcessor.STATE_RANSOM:
-		return failure(Lang.t("Nessun riscatto chiesto a %s per questi prigionieri") % faction_id)
+		return failure(Lang.t("Nessun riscatto chiesto a %s per questi prigionieri") % SimUtil.faction_label(faction_id))
 	var before := state.events.size()
 	PrisonerProcessor.answer_ransom(state, e, pay)
 	return success(_prisoner_outcome(state, before, prisoner_id, "paga" if pay else "rifiuta"))
@@ -1380,12 +1380,12 @@ static func _prisoner_outcome(state: GameState, before: int, prisoner_id: int, c
 static func answer_proposal(state: GameState, faction_id: String, proposal_id: int, accept: bool) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	var proposal := state.proposal(proposal_id)
 	if proposal.is_empty():
 		return failure(Lang.t("Proposta sconosciuta: %d") % proposal_id)
 	if str(proposal.get("a", "")) != faction.id:
-		return failure(Lang.t("La proposta %d non e' per %s") % [proposal_id, faction_id])
+		return failure(Lang.t("La proposta %d non e' per %s") % [proposal_id, SimUtil.faction_label(faction_id)])
 	var kind := str(proposal.get("tipo", ""))
 	var from_id := str(proposal.get("da", ""))
 	var agent := state.agent(int(proposal.get("agente", 0)))
@@ -1417,12 +1417,12 @@ static func answer_proposal(state: GameState, faction_id: String, proposal_id: i
 static func _crusade_army_problem(state: GameState, faction_id: String, army_id: int) -> String:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id
+		return Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id)
 	var army := state.army(army_id)
 	if army == null:
 		return Lang.t("Esercito sconosciuto: %d") % army_id
 	if army.faction != faction.id:
-		return Lang.t("L'esercito %d non appartiene a %s") % [army_id, faction_id]
+		return Lang.t("L'esercito %d non appartiene a %s") % [army_id, SimUtil.faction_label(faction_id)]
 	if not army.is_crusade():
 		return Lang.t("L'esercito %d non e' un esercito crociato") % army_id
 	return ""
@@ -1490,7 +1490,7 @@ static func crusade_targets(state: GameState, faction_id: String, army_id: int) 
 static func papal_status(state: GameState, faction_id: String) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null:
-		return failure(Lang.t("Fazione sconosciuta: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta: %s") % SimUtil.faction_label(faction_id))
 	return success(PapacyProcessor.status(state, faction.id))
 
 
@@ -1503,7 +1503,7 @@ static func papal_status(state: GameState, faction_id: String) -> Dictionary:
 static func continue_after_victory(state: GameState, faction_id: String) -> Dictionary:
 	var faction := state.faction(faction_id)
 	if faction == null:
-		return failure(Lang.t("Fazione sconosciuta: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta: %s") % SimUtil.faction_label(faction_id))
 	if not faction.is_player:
 		return failure(Lang.t("Solo la fazione del giocatore puo' scegliere di continuare"))
 	var v := state.victory
@@ -1586,7 +1586,7 @@ static func _religion_allows(state: GameState, family: BuildingType, faction_id:
 static func _check_owned_province(state: GameState, faction_id: String, province_id: String) -> String:
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id
+		return Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id)
 	var province := state.province(province_id)
 	if province == null:
 		return Lang.t("Provincia sconosciuta: %s") % province_id
@@ -1608,7 +1608,7 @@ static func _own_army_problem(state: GameState, faction_id: String, army: Army) 
 	if army == null:
 		return Lang.t("Esercito inesistente")
 	if army.faction != SimUtil.norm(faction_id):
-		return Lang.t("Non e' un esercito di %s") % faction_id
+		return Lang.t("Non e' un esercito di %s") % SimUtil.faction_label(faction_id)
 	if army.stacks.is_empty():
 		return Lang.t("L'esercito %d non ha pile") % army.id
 	if army.is_crusade():
@@ -1864,7 +1864,7 @@ static func disband_problem(state: GameState, faction_id: String, army: Army) ->
 	if army == null:
 		return Lang.t("Esercito inesistente")
 	if army.faction != SimUtil.norm(faction_id):
-		return Lang.t("Non e' un esercito di %s") % faction_id
+		return Lang.t("Non e' un esercito di %s") % SimUtil.faction_label(faction_id)
 	if army.stacks.is_empty():
 		return Lang.t("L'esercito %d non ha pile") % army.id
 	if army.is_crusade():
@@ -2086,10 +2086,10 @@ static func cancel_retrain(state: GameState, faction_id: String, army_id: int) -
 	if army == null:
 		return failure(Lang.t("Esercito inesistente"))
 	if army.faction != SimUtil.norm(faction_id):
-		return failure(Lang.t("Non e' un esercito di %s") % faction_id)
+		return failure(Lang.t("Non e' un esercito di %s") % SimUtil.faction_label(faction_id))
 	var faction := state.faction(faction_id)
 	if faction == null or not faction.alive:
-		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % faction_id)
+		return failure(Lang.t("Fazione sconosciuta o non attiva: %s") % SimUtil.faction_label(faction_id))
 	if RetrainProcessor.orders_of(state, army.id).is_empty():
 		return failure(Lang.t("Nessun riaddestramento da annullare per l'esercito %d") % army.id)
 	var cancelled := RetrainProcessor.cancel_army_orders(state, army.id)

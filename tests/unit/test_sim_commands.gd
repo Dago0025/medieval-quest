@@ -190,13 +190,15 @@ func test_costruzione_tesoro_insufficiente(t: TestContext) -> void:
 func test_costruzione_coda_piena(t: TestContext) -> void:
 	var s := _world()
 	s.faction("FN_ALPHA").treasury = 99999
-	for family in ["IMPROVED_FARMLAND", "BOWYER", "CHURCH", "UNIVERSITY"]:
+	for family in ["IMPROVED_FARMLAND", "BOWYER", "CHURCH", "UNIVERSITY", "MERCHANT"]:
 		_expect_ok(t, GameCommands.queue_building(s, "FN_ALPHA", "ID_ALTA", family), family)
-	t.assert_eq(s.province("ID_ALTA").building_queue.size(), 4)
+	t.assert_eq(s.province("ID_ALTA").building_queue.size(), 5, "cinque voci (Federico, 27/11/2026)")
 	var before := s.faction("FN_ALPHA").treasury
-	_expect_fail(t, GameCommands.queue_building(s, "FN_ALPHA", "ID_ALTA", "MERCHANT"), "quinta voce")
+	var full := GameCommands.queue_building(s, "FN_ALPHA", "ID_ALTA", "CASTLE")
+	t.assert_false(bool(full["ok"]), "sesta voce")
+	t.assert_true(str(full.get("errore", "")).contains("piena"), str(full))
 	t.assert_eq(s.faction("FN_ALPHA").treasury, before)
-	t.assert_eq(s.province("ID_ALTA").building_queue.size(), 4)
+	t.assert_eq(s.province("ID_ALTA").building_queue.size(), 5)
 	# l'altra provincia ha la sua coda
 	_expect_ok(t, GameCommands.queue_building(s, "FN_ALPHA", "ID_BASSA", "SALT_MINE"), "coda di BASSA")
 

@@ -6,7 +6,7 @@ extends RefCounted
 
 const NEW := {"FN_JAPANESE": "ID_KINAI", "FN_CHINESE": "ID_KAIFENG", "FN_AZTECS": "ID_TOLLAN", "FN_INCA": "ID_CUZCO",
 	"FN_KANEM": "ID_KANEM", "FN_MISSISSIPPIANS": "ID_MISSISSIPPI", "FN_KOREANS": "ID_KOREA", "FN_MONGOLS": "ID_MONGOLIA",
-	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER"}
+	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER", "FN_MAYA": "ID_MAYA", "FN_KARAKHANIDS": "ID_SEMIRECHYE"}
 
 
 func _ready(t: TestContext) -> bool:
@@ -57,6 +57,13 @@ func test_fazioni_nuove_nelle_loro_regioni(t: TestContext) -> void:
 	t.assert_eq(c2.region("ID_EAST_MONGOLIA").owner, "FN_MONGOLS")
 	for r in ["ID_DECCAN", "ID_CEYLON"]:
 		t.assert_eq(c2.region(r).owner, "FN_CHOLA", r)
+	# 27/11/2026: Maya nello Yucatan e in America centrale (gli Aztechi restano a Tollan), Karakhanidi musulmani in Asia centrale
+	t.assert_eq(c2.region("ID_CENTRAL_AMERICA").owner, "FN_MAYA")
+	t.assert_eq(c2.region("ID_TOLLAN").owner, "FN_AZTECS")
+	for r in ["ID_KASHGAR", "ID_TRANSOXIANA"]:
+		t.assert_eq(c2.region(r).owner, "FN_KARAKHANIDS", r)
+	t.assert_eq(c2.faction("FN_KARAKHANIDS").religion, "REL_ISLAMIC")
+	t.assert_eq(c2.region("ID_KHWAREZM").owner, "FN_REBEL", "Khwarezm resta ai ribelli")
 
 
 func test_unita_ed_edifici_della_fazione_modello(t: TestContext) -> void:
@@ -196,3 +203,36 @@ func test_la_flotta_giapponese_va_dove_ci_sono_bersagli(t: TestContext) -> void:
 	fleet.path = PackedStringArray()
 	AiNavy.position_fleets(again, again.ctx.fleets_of("FN_JAPANESE"))
 	t.assert_true(fleet.path.is_empty(), "gia' nella zona migliore: resta")
+
+
+## Richiesta di Federico del 27/11/2026: le due civilta' nuove usano gli asset esistenti. I Maya hanno le carte, le schede,
+## i ritratti, le pedine e i castelli degli Aztechi; i Karakhanidi le carte delle truppe turche e musulmane della XL.
+func test_maya_e_karakhanidi_con_gli_asset_esistenti(t: TestContext) -> void:
+	if not _ready(t):
+		return
+	var d := _load(false)
+	var units: UnitProdLoader.UnitTable = d["units"]
+	var maya := {}
+	for u in units.land_for("FN_MAYA"):
+		maya[u.id] = true
+	t.assert_true(maya.has("MayLancieri") and maya.has("MayBalam") and not maya.has("AztTepoztopilli"), "i Maya arruolano le loro unita'")
+	t.assert_false(units.get_unit("MayGuardia") == null, "guardia dei Maya")
+	var krk := {}
+	for u in units.land_for("FN_KARAKHANIDS"):
+		krk[u.id] = true
+	t.assert_true(krk.has("KrkArcieriCavallo") and krk.has("KrkGhulam") and not krk.has("GhulamCavalry"), "i Karakhanidi arruolano le loro unita'")
+	t.assert_true(units.get_unit("Mullah").allows_faction("FN_KARAKHANIDS"), "e i mullah come i Turchi")
+	t.assert_eq(CultureUnits.card_model("MayBalam"), "AztOcelomeh", "carta azteca")
+	t.assert_eq(CultureUnits.card_model("KrkGhulam"), "GhulamCavalry", "carta della XL")
+	t.assert_eq(PortraitArt.culture_of("FN_MAYA"), "aztec")
+	t.assert_eq(PieceArt.own_culture("FN_MAYA"), "Aztec")
+	t.assert_true(units.get_unit("MayBalam") != null and not units.get_unit("MayBalam").factions.has("FN_AZTECS"))
+	if AssetLibrary.is_available():
+		t.assert_eq(AssetLibrary.unit_card_path("MayBalam"), AssetLibrary.unit_card_path("AztOcelomeh"), "stessa carta degli Aztechi")
+		t.assert_true(AssetLibrary.unit_card_path("KrkGhulam") != "", "carta della cavalleria ghulam")
+		t.assert_true(AssetLibrary.unit_picture("MayCanoa") != null, "scheda della canoa (dalla canoa azteca o dal suo modello)")
+	t.assert_true(FileAccess.file_exists("res://assets/stemmi/fn_maya.png") and FileAccess.file_exists("res://assets/stemmi/fn_karakhanids.png"), "stemmi")
+	t.assert_eq(SimUtil.faction_label("FN_KARAKHANIDS"), "Karakhanidi")
+	var heroes: HeroesData = d["heroes"]
+	t.assert_eq(heroes.forenames_of("FN_MAYA")[0], "K'ak'upakal")
+	t.assert_eq(heroes.forenames_of("FN_KARAKHANIDS")[0], "Bughra")

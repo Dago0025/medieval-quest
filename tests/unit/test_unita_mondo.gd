@@ -181,7 +181,9 @@ func test_startpos_e_carte(t: TestContext) -> void:
 	t.assert_true(seen > 50, "unita' di partenza delle fazioni nuove: %d" % seen)
 	for uid in CultureUnits.ids():
 		var model := CultureUnits.card_model(uid)
-		t.assert_true(units.get_unit(model) != null and not CultureUnits.is_culture_unit(model), "carta segnaposto di %s: %s" % [uid, model])
+		# 27/11/2026: la carta puo' essere quella rifatta di un'altra unita' delle fazioni nuove (i Maya usano le azteche)
+		var shared := CultureUnits.is_culture_unit(model) and AssetLibrary.is_remade("campmap/review_panel/Units/%s.BIF" % model)
+		t.assert_true(units.get_unit(model) != null and (shared or not CultureUnits.is_culture_unit(model)), "carta segnaposto di %s: %s" % [uid, model])
 	if GameFiles.is_available():
 		t.assert_true(AssetLibrary.unit_card_path("JapKatanaSamurai") != "", "carta del modello per i samurai")
 		t.assert_eq(AssetLibrary.unit_card_path("ChoLancieri"), "campmap/review_panel/Units/ChoLancieri.BIF", "dal 23/11/2026 tutte le 152 unita' hanno la carta propria (il segnaposto resta per quelle future)")

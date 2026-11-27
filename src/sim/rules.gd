@@ -86,7 +86,7 @@ var conquest_means := {"campo": 1.0, "assedio": 1.0, "porte": 0.4, "corruzione":
 var conquest_castle_drop := 0.5
 var conquest_other_religion := true
 
-var max_building_queue := 4
+var max_building_queue := 5   ## 4 nell'originale; 5 su richiesta di Federico (27/11/2026)
 var max_unit_queue := 5
 
 ## Fazione -> passaggi della coda di reclutamento in un anno (da `reclutamenti_per_anno` di auror.cfg; assente = 1).
