@@ -436,3 +436,54 @@ AddHeir::	FN_KARAKHANIDS	1	24
 AddHeir::	FN_KARAKHANIDS	1	19
 AddHeir::	FN_KARAKHANIDS	0	16
 AddHeir::	FN_KARAKHANIDS	1	11
+
+// ---- FN_PUEBLO  (Pueblo di Chaco Canyon, 27/11/2026: rivali dei Cahokia a ovest, con gli asset dei Cahokia)
+DeclareFaction::	"FN_PUEBLO"
+SetActiveFaction::	FN_PUEBLO	FT_MAJOR
+SetTreasury::	FN_PUEBLO	10000	8000	6000	4000
+SetCulture::	FN_PUEBLO	PAGAN_CULTURE
+SetReligion::	FN_PUEBLO	REL_PAGAN
+SetBehaviour::	FN_PUEBLO	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_PUEBLO	3
+GGConquestReward::	FN_PUEBLO	0.5
+SetShieldImage::	FN_PUEBLO	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
+SetFactionCol::	FN_PUEBLO	31 122 153	216 176 122
+SetRegionOwner::	ID_CHACO	FN_PUEBLO
+SetRegionOwner::	ID_CALIFORNIA	FN_PUEBLO
+SetRegionOwner::	ID_PLAINS	FN_PUEBLO
+MakeBuilding::	ID_CHACO	Castle4
+MakeBuilding::	ID_CHACO	Spearmaker
+MakeBuilding::	ID_CHACO	Bowyer
+MakeBuilding::	ID_CHACO	Improved_farmland
+MakeBuilding::	ID_CHACO	Town_watch
+MakeBuilding::	ID_PLAINS	Bowyer
+MakeUnit::	ID_CHACO	PueLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	PueLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	PueMazze	60	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	PueArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_CHACO	PueArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_PLAINS	PueMazze	60	PAGAN_CULTURE
+MakeUnit::	ID_PLAINS	PueBastoni	60	PAGAN_CULTURE
+MakeUnit::	ID_CALIFORNIA	PueArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_CALIFORNIA	PueTomol	1
+SetStartLeader::	FN_PUEBLO	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_CHACO	FN_PUEBLO
+AddHeir::	FN_PUEBLO	1	22
+AddHeir::	FN_PUEBLO	1	17
+AddHeir::	FN_PUEBLO	0	14
+AddHeir::	FN_PUEBLO	1	10
+
+// ---- guarnigioni ribelli del Nord America (27/11/2026: con due sole pile i Cahokia prendevano le terre libere del
+// nord nei primi dieci anni). Le regioni restano ai ribelli, con due pile in piu' e un castello piu' forte.
+MakeBuilding::	ID_VINLAND	Castle3
+MakeUnit::	ID_VINLAND	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_VINLAND	Spearmen	100	PAGAN_CULTURE
+MakeBuilding::	ID_HUDSON	Castle3
+MakeUnit::	ID_HUDSON	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_HUDSON	Spearmen	100	PAGAN_CULTURE
+MakeBuilding::	ID_DENE	Castle3
+MakeUnit::	ID_DENE	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_DENE	Spearmen	100	PAGAN_CULTURE
+MakeBuilding::	ID_ALASKA	Castle3
+MakeUnit::	ID_ALASKA	Woodsman	60	PAGAN_CULTURE
+MakeUnit::	ID_ALASKA	Spearmen	100	PAGAN_CULTURE

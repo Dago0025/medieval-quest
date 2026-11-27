@@ -6,7 +6,7 @@ extends RefCounted
 
 const NEW := {"FN_JAPANESE": "ID_KINAI", "FN_CHINESE": "ID_KAIFENG", "FN_AZTECS": "ID_TOLLAN", "FN_INCA": "ID_CUZCO",
 	"FN_KANEM": "ID_KANEM", "FN_MISSISSIPPIANS": "ID_MISSISSIPPI", "FN_KOREANS": "ID_KOREA", "FN_MONGOLS": "ID_MONGOLIA",
-	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER", "FN_MAYA": "ID_MAYA", "FN_KARAKHANIDS": "ID_SEMIRECHYE"}
+	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER", "FN_MAYA": "ID_MAYA", "FN_KARAKHANIDS": "ID_SEMIRECHYE", "FN_PUEBLO": "ID_CHACO"}
 
 
 func _ready(t: TestContext) -> bool:
@@ -236,3 +236,26 @@ func test_maya_e_karakhanidi_con_gli_asset_esistenti(t: TestContext) -> void:
 	var heroes: HeroesData = d["heroes"]
 	t.assert_eq(heroes.forenames_of("FN_MAYA")[0], "K'ak'upakal")
 	t.assert_eq(heroes.forenames_of("FN_KARAKHANIDS")[0], "Bughra")
+
+
+## Richiesta di Federico del 27/11/2026: i Cahokia prendevano in breve tutto il Nord America senza rivali. I Pueblo tengono
+## Chaco, California e Grandi Pianure (confinanti con i Cahokia) con unita', ritratti, pedine e castelli dei Cahokia.
+func test_pueblo_rivali_dei_cahokia(t: TestContext) -> void:
+	if not _ready(t):
+		return
+	var d := _load(false)
+	var c: CampaignData = d["campaign"]
+	for r in ["ID_CHACO", "ID_CALIFORNIA", "ID_PLAINS"]:
+		t.assert_eq(c.region(r).owner, "FN_PUEBLO", r)
+	t.assert_true(c.region("ID_PLAINS").neighbours.has("ID_MISSISSIPPI"), "confinano con i Cahokia")
+	var units: UnitProdLoader.UnitTable = d["units"]
+	var mine := {}
+	for u in units.land_for("FN_PUEBLO"):
+		mine[u.id] = true
+	t.assert_true(mine.has("PueLancieri") and mine.has("PueSocietaArco") and not mine.has("CahLancieri"), "unita' proprie")
+	t.assert_eq(CultureUnits.card_model("PueSocietaArco"), "CahFalco", "carta dei Cahokia")
+	t.assert_eq(PortraitArt.culture_of("FN_PUEBLO"), "mississippian")
+	t.assert_eq(PieceArt.own_culture("FN_PUEBLO"), "Mississippian")
+	t.assert_true(Rules.load_file().history.horseless_factions.has("FN_PUEBLO"), "senza cavalli fino agli stranieri")
+	t.assert_true(FileAccess.file_exists("res://assets/stemmi/fn_pueblo.png"))
+	t.assert_eq((d["heroes"] as HeroesData).forenames_of("FN_PUEBLO")[0], "Tawakwaptiwa")

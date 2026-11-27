@@ -128,6 +128,25 @@ def maya_temple(d, size):
     d.rectangle([cx - cw * 0.12, top - sh * 2.9, cx + cw * 0.12, top - sh * 2.0], fill=0)
 
 
+def pueblo_terraces(d, size):
+    """Casa pueblo a terrazze (27/11/2026): quattro piani che arretrano verso destra, con porte e scale a pioli."""
+    w, h = size
+    left, base = w * 0.22, h * 0.68
+    fh = h * 0.105
+    widths = [0.56, 0.43, 0.30, 0.17]
+    for i, f in enumerate(widths):
+        x0 = left + (widths[0] - f) * w
+        d.rectangle([x0, base - (i + 1) * fh, left + widths[0] * w, base - i * fh], fill=255)
+    for i, f in enumerate(widths[:3]):
+        x0 = left + (widths[0] - f) * w
+        dx = x0 + w * 0.05
+        d.rectangle([dx, base - (i + 1) * fh + fh * 0.35, dx + w * 0.035, base - i * fh - fh * 0.05], fill=0)
+    lx = left + (widths[0] - widths[1]) * w - w * 0.06
+    for k in (0, 1):
+        x = lx + k * w * 0.05
+        d.line([(x, base - fh * 2.4), (x, base - fh * 0.9)], fill=255, width=max(2, int(w * 0.012)))
+
+
 def maya_stairs(d, size):
     w, h = size
     cx, base = w * 0.5, h * 0.70
@@ -211,6 +230,8 @@ SPECS = {
     'fn_khmer': {'field': (106, 58, 138), 'figures': [(stairs, (224, 184, 80))]},
     # 27/11/2026: Maya (piramide giada su rosso cinabro) e Karakhanidi (mezzaluna d'oro su rosso bruno)
     'fn_maya': {'field': (193, 68, 14), 'figures': [(maya_temple, (58, 150, 140)), (maya_stairs, (30, 95, 116))]},
+    # 27/11/2026: Pueblo (casa a terrazze color pietra su turchese, sole sopra)
+    'fn_pueblo': {'field': (31, 122, 153), 'figures': [(pueblo_terraces, (216, 176, 122)), (sun_rays(0.045, 0.095, 8, -0.2), (232, 200, 106)), (disc(0.045, -0.2), (232, 200, 106))]},
     'fn_karakhanids': {'field': (123, 45, 38), 'figures': [(crescent, (232, 200, 106)), (sun_rays(0.045, 0.1, 8, -0.1), (232, 200, 106)), (disc(0.045, -0.1), (232, 200, 106))]},
 }
 
