@@ -6,8 +6,9 @@ const MAP_SCENE := "res://scenes/campaign_map.tscn"
 const BACKGROUND := "frontend_files/default_parchment_wide.tga"
 const SIDE_PARCHMENT := "frontend_files/Main_Menu/parch322x536_no_border.BIF"
 const DEFAULT_FACTION := "FN_DANISH"
-## Veste nuova (ADR-030, scelte di Federico dell'11/11): sfondo dipinto a tutto schermo (castello sulla scogliera, generato
-## in locale) e menu in una colonna a sinistra con l'emblema degli Auror. Se le immagini mancano resta il menu di prima.
+## Veste nuova (ADR-030, scelte di Federico dell'11/11): sfondo dipinto a tutto schermo e menu in una colonna a sinistra
+## con l'emblema degli Auror. Se le immagini mancano resta il menu di prima. Dal 27/11/2026 lo sfondo e' il grande porto
+## (MQ_SFONDO_C, Pro Image 3, con la seppia leggera di tools/seppia_sfondo.py) al posto del castello nella nebbia.
 const NEW_BACKGROUND := "res://assets/ui/menu/sfondo.jpg"
 const NEW_EMBLEM := "res://assets/stemmi/auror_grande.png"
 const HOME_SKETCH := "Credits/Out/pic_03.tga"   ## schizzo a matita dei titoli di coda: un guerriero senza insegne
@@ -37,6 +38,9 @@ var _effects_slider: HSlider
 var _message: Label
 var _logo_clicks: Array[int] = []
 var _logo: Control = null   ## emblema (o titolo) che lampeggia al cambio di modalita'
+var _updates_check: CheckButton   ## ADR-144: controllo degli aggiornamenti all'avvio (Impostazioni)
+var _update_panel: PanelContainer = null   ## ADR-144: avviso della nuova versione, solo nella pagina iniziale
+var _version_label: Label
 
 
 func _ready() -> void:
@@ -74,8 +78,14 @@ func _ready() -> void:
 	_message.offset_bottom = -20
 	_message.add_theme_color_override("font_color", Color(0.98, 0.92, 0.78))
 	add_child(_message)
+	_version_label = _build_version_label()
+	add_child(_version_label)
 	_show_page(_home)
 	GameAudio.play_music("menu")
+	var updates := UpdateCheck.new()   # ADR-144: nuove versioni su GitHub, in silenzio se non c'e' rete
+	updates.update_found.connect(_show_update)
+	add_child(updates)
+	updates.start()
 	if not GameFiles.campaign_available():
 		_message.text = Lang.t("Dati della campagna non trovati: %s") % GameFiles.startpos()
 
@@ -414,6 +424,13 @@ func _build_settings_page() -> Control:
 	grid.add_child(_label(Lang.t("Volume degli effetti")))
 	_effects_slider = _slider(0.0, 1.0, 0.05)
 	grid.add_child(_effects_slider)
+	grid.add_child(_label(Lang.t("Nuove versioni")))
+	_updates_check = CheckButton.new()
+	_updates_check.text = Lang.t("Controlla all'avvio")
+	for c in ["font_color", "font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
+		_updates_check.add_theme_color_override(c, UiTheme.INK)   # il tema dei pulsanti ha il testo bianco
+	_updates_check.tooltip_text = Lang.t("All'avvio chiede a GitHub se c'è una versione più recente del gioco.")
+	grid.add_child(_updates_check)
 	var buttons := HBoxContainer.new()
 	buttons.alignment = BoxContainer.ALIGNMENT_END
 	buttons.add_theme_constant_override("separation", 12)
@@ -455,6 +472,9 @@ func _difficulty_button() -> OptionButton:
 func _show_page(page: Control) -> void:
 	for p in [_home, _new_page, _settings_page]:
 		p.visible = p == page
+	_version_label.visible = page == _home
+	if _update_panel != null:
+		_update_panel.visible = page == _home
 	if page == _home:
 		_continue_button.disabled = SaveGame.list_summaries().is_empty()
 	elif page == _settings_page:
@@ -463,6 +483,91 @@ func _show_page(page: Control) -> void:
 		_tilt_slider.value_changed.emit(_tilt_slider.value)
 		_music_slider.value = float(UserSettings.get_value("volume_musica"))
 		_effects_slider.value = float(UserSettings.get_value("volume_effetti"))
+		_updates_check.button_pressed = UpdateCheck.enabled()
+
+
+# --- aggiornamenti (ADR-144) -----------------------------------------------------------------------------------------
+
+
+## Versione in uso, discreta nell'angolo in basso a destra della pagina iniziale.
+func _build_version_label() -> Label:
+	var l := Label.new()
+	l.text = Lang.t("Versione %s") % UpdateCheck.current_version()
+	l.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	l.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	l.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	l.offset_right = -18
+	l.offset_bottom = -10
+	l.add_theme_font_size_override("font_size", 14)
+	l.add_theme_color_override("font_color", Color(0.98, 0.92, 0.78, 0.75))
+	l.add_theme_color_override("font_outline_color", Color(0.05, 0.03, 0.02, 0.9))
+	l.add_theme_constant_override("outline_size", 4)
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return l
+
+
+## Avviso della nuova versione in basso a destra: Scarica (installer o pagina della release), Novita' (pagina),
+## Piu' tardi (chiude fino al prossimo avvio), Salta questa versione (non la ripropone piu').
+func _show_update(info: Dictionary) -> void:
+	if _update_panel != null:
+		_update_panel.queue_free()
+	var version := str(info.get("versione", ""))
+	var page := str(info.get("pagina", UpdateCheck.RELEASES_PAGE))
+	var download := str(info.get("installer", ""))
+	if download == "":
+		download = page
+	_update_panel = PanelContainer.new()
+	_update_panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	_update_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_update_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_update_panel.offset_right = -24
+	_update_panel.offset_bottom = -40
+	_update_panel.custom_minimum_size = Vector2(440, 0)
+	var box := _box(_update_panel, 8)
+	var title := Label.new()
+	title.text = Lang.t("Nuova versione disponibile")
+	title.theme_type_variation = "Title"
+	box.add_child(title)
+	var text := Label.new()
+	text.text = Lang.t("%s %s è pronto da scaricare. Versione in uso: %s.") % [UiTheme.GAME_NAME, version, UpdateCheck.current_version()]
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	text.custom_minimum_size = Vector2(396, 0)
+	box.add_child(text)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 8)
+	box.add_child(row)
+	var get_it := Button.new()
+	get_it.text = Lang.t("Scarica")
+	get_it.tooltip_text = download
+	get_it.pressed.connect(func() -> void:
+		GameAudio.play_sfx("menu_clic")
+		OS.shell_open(download))
+	row.add_child(get_it)
+	if download != page:
+		var notes := Button.new()
+		notes.text = Lang.t("Novità")
+		notes.tooltip_text = page
+		notes.pressed.connect(func() -> void:
+			GameAudio.play_sfx("menu_clic")
+			OS.shell_open(page))
+		row.add_child(notes)
+	var later := Button.new()
+	later.text = Lang.t("Più tardi")
+	later.pressed.connect(func() -> void:
+		GameAudio.play_sfx("chiudi")
+		_update_panel.queue_free()
+		_update_panel = null)
+	row.add_child(later)
+	var skip := Button.new()
+	skip.text = Lang.t("Salta questa versione")
+	skip.pressed.connect(func() -> void:
+		GameAudio.play_sfx("chiudi")
+		UpdateCheck.skip_version(version)
+		_update_panel.queue_free()
+		_update_panel = null)
+	row.add_child(skip)
+	add_child(_update_panel)
+	_update_panel.visible = _home.visible
 
 
 # --- azioni ---------------------------------------------------------------------------------------------------------
@@ -573,6 +678,7 @@ func _on_settings_save() -> void:
 	UserSettings.set_value("inclinazione", snappedf(_tilt_slider.value, 0.1))
 	UserSettings.set_value("volume_musica", _music_slider.value)
 	UserSettings.set_value("volume_effetti", _effects_slider.value)
+	UserSettings.set_value("aggiornamenti", _updates_check.button_pressed)
 	_message.text = Lang.t("Impostazioni salvate.") if UserSettings.save() else Lang.t("Impostazioni non salvate (file non scrivibile).")
 	GameAudio.apply_volumes()
 	_show_page(_home)

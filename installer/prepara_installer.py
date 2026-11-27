@@ -89,12 +89,19 @@ def licenze_terze_parti():
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--versione", required=True, help="versione nel formato A.B.C (es. 2026.11.20)")
+    ap.add_argument("--versione", required=True, help="versione nel formato A.B.C o A.B.C.D per un secondo rilascio nello stesso giorno (es. 2026.11.20, 2026.11.27.1)")
     ap.add_argument("--exe", default=os.path.join(PROGETTO, "build", NOME + ".exe"))
     ap.add_argument("--makensis", default="makensis")
     a = ap.parse_args()
-    if not re.fullmatch(r"\d+\.\d+\.\d+", a.versione):
-        sys.exit("Versione non valida: serve A.B.C")
+    if not re.fullmatch(r"\d+\.\d+\.\d+(\.\d+)?", a.versione):
+        sys.exit("Versione non valida: serve A.B.C o A.B.C.D")
+    vi = a.versione if a.versione.count(".") == 3 else a.versione + ".0"   # VIProductVersion vuole 4 numeri
+    # ADR-144: il gioco confronta config/version con il tag della release su GitHub: devono coincidere
+    with open(os.path.join(PROGETTO, "project.godot"), encoding="utf-8") as f:
+        m = re.search(r'^config/version="([^"]*)"', f.read(), re.M)
+    if not m or m.group(1) != a.versione:
+        sys.exit("project.godot ha config/version=%s: aggiornala a %s e riesporta l'eseguibile prima dell'installer"
+                 % (m.group(1) if m else "(mancante)", a.versione))
     if not os.path.exists(a.exe):
         sys.exit("Non trovato: %s" % a.exe)
 
@@ -112,7 +119,7 @@ def main():
     scrivi(avviso, leggi("installer/avviso.txt"), bom=True)   # NSIS Unicode legge l'UTF-8 solo con BOM
 
     uscita = os.path.join(build, "MedievalQuest-Setup-%s.exe" % a.versione)
-    cmd = [a.makensis, "-V2", "-DVERSIONE=" + a.versione, "-DPAYLOAD=" + payload, "-DUSCITA=" + uscita,
+    cmd = [a.makensis, "-V2", "-DVERSIONE=" + a.versione, "-DVIVERSIONE=" + vi, "-DPAYLOAD=" + payload, "-DUSCITA=" + uscita,
            "-DICONA=" + os.path.join(PROGETTO, "assets", "icona.ico"), "-DAVVISO=" + avviso,
            os.path.join(QUI, "medieval_quest.nsi")]
     print(" ".join(cmd))

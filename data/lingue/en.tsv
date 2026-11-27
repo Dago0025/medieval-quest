@@ -181,6 +181,7 @@
 %s %s un assedio.	%s %s a siege.
 %s %s una provincia	%s %s a province
 %s %s · %d denari, %d anni	%s %s · %d denarii, %d years
+%s %s è pronto da scaricare. Versione in uso: %s.	%s %s is ready to download. Installed version: %s.
 %s %s%s ha come bersaglio %s	%s %s%s is targeting %s
 %s %s%s non ha più un bersaglio	%s %s%s no longer has a target
 %s %s\n%s · %s\nClic: la finestra della provincia	%s %s\n%s · %s\nClick: province window
@@ -478,6 +479,7 @@ Agricoltura	Farming
 Agricoltura %s	Farming %s
 Agricoltura: %d	Farming: %d
 All'attacco della flotta %d %s	Attacking fleet %d %s
+All'avvio chiede a GitHub se c'è una versione più recente del gioco.	At startup, asks GitHub whether a newer version of the game is available.
 Alla prima conquista	On first conquest
 Alleanza	Alliance
 Alleanza %s	Alliance %s
@@ -697,6 +699,7 @@ Conquista di %s	Conquest of %s
 Conquiste	Conquests
 Continua	Continue
 Continua a giocare	Continue playing
+Controlla all'avvio	Check at startup
 Conversione a %s: +%s punti all'anno a %s	Conversion to %s: +%s points a year in %s
 Conversione ai %s	Conversion to the %s
 Corrompi l'%s (%d uomini)	Bribe the %s (%d men)
@@ -1306,9 +1309,12 @@ Non è possibile barricarsi.	It is not possible to withdraw into the castle.
 Normale	Normal
 Notizia	News
 Notizie dalle altre fazioni	News from other factions
+Novità	What's new
 Nozze %s	Wedding %s
 Nozze reali	Royal wedding
 Nuova campagna	New Campaign
+Nuova versione disponibile	New version available
+Nuove versioni	New versions
 Nuovo agente%s: %s%s.	New agent%s: %s%s.
 Occupazione	Occupation
 Ogni anno la popolazione si converte ai %s (%d)	Every year the people convert to the %s (%d)
@@ -1355,6 +1361,7 @@ Pieta' del capo	Leader's piety
 Pieta' del capo %s	Leader's piety %s
 Pietà	Piety
 Pietà %d	Piety %d
+Più tardi	Later
 Popolo ribelle: %s	Rebel people: %s
 Porti stranieri raggiunti dalle flotte e quanto rende ciascuno	Foreign ports reached by the fleets and what each one yields
 Porto: %s	Port: %s
@@ -1498,6 +1505,7 @@ Sala del consiglio	Council chamber
 Saldo dell'ultimo anno: %s denari	Last year's balance: %s denarii
 Saldo previsto	Expected balance
 Saldo reale dell'anno scorso	Actual balance last year
+Salta questa versione	Skip this version
 Salta tutte	Skip all
 Salva	Save
 Salva con un nome. F5: salvataggio rapido.	Save under a name. F5: quick save.
@@ -1509,6 +1517,7 @@ Salvataggio di un'altra mappa (%s).	Save from another map (%s).
 Salvataggio non leggibile (JSON non valido): %s	Save cannot be read (invalid JSON): %s
 Salvataggio non riuscito: %s	Save failed: %s
 Salvataggio non trovato: %s	Save not found: %s
+Scarica	Download
 Scegli due eserciti diversi	Choose two different armies
 Scegli il bersaglio	Choose target
 Scegli la tua fazione	Choose your faction
@@ -1725,6 +1734,7 @@ Valore: %s · posizione: %s	Valour: %s · position: %s
 Vedi la mappa (Esc)	View the map (Esc)
 Velocità	Speed
 Velocità della nave	Speed of the ship
+Versione %s	Version %s
 Versione del salvataggio non supportata: %d (attese da 1 a %d)	Unsupported save version: %d (expected 1 to %d)
 Vescovo	Bishop
 Vescovo ortodosso	Orthodox bishop

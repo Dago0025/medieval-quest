@@ -1,7 +1,7 @@
 class_name UserSettings
 extends RefCounted
 ## Impostazioni dell'utente (fase 8c), in user://impostazioni.cfg: difficolta' predefinita dell'IA, inclinazione della
-## plancia, volumi, lingua. Le chiavi mancanti valgono i predefiniti; un file illeggibile si ignora.
+## plancia, volumi, lingua, controllo degli aggiornamenti. Le chiavi mancanti valgono i predefiniti; un file illeggibile si ignora.
 
 const PATH := "user://impostazioni.cfg"
 const DIFFICULTIES := ["facile", "normale", "difficile", "molto_difficile"]
@@ -13,6 +13,8 @@ const DEFAULTS := {
 	"volume_musica": 0.7,
 	"volume_effetti": 0.8,
 	"lingua": "it",          ## Lang.LANGUAGES (ADR-066): scelta nel menu iniziale, vale anche nelle sessioni successive
+	"aggiornamenti": true,    ## ADR-144: controllo delle nuove versioni su GitHub all'avvio (UpdateCheck)
+	"aggiornamenti_salta": "",   ## ADR-144: versione da non riproporre («Salta questa versione»)
 }
 
 static var _cfg: ConfigFile = null

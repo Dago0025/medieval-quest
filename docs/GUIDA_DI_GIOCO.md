@@ -174,6 +174,7 @@ La scheda **Agenti** della finestra spie e messaggi elenca tutti i tuoi agenti; 
 ## 11. Problemi comuni
 
 - **Schermo nero o il gioco non parte**: aggiorna i driver della scheda video.
+- **Nuove versioni**: all'avvio il gioco controlla su GitHub se c'è una versione più recente e, se c'è, lo segnala in basso a destra nel menu iniziale con il pulsante Scarica. Serve la connessione a internet; senza, il gioco parte come sempre. Il controllo si spegne da Impostazioni → Nuove versioni.
 - **Mancano alcune immagini degli eventi**: manca la cartella `originale` accanto a `Medieval Quest.exe`. Reinstalla il gioco.
 - **Avviso di Windows SmartScreen**: l'installer non è firmato. «Ulteriori informazioni» → «Esegui comunque».
 

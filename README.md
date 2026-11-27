@@ -16,6 +16,8 @@ Il gioco è scritto da zero con [Godot Engine 4.7](https://godotengine.org) (GDS
 
 Windows può mostrare l'avviso di SmartScreen perché l'installer non è firmato: «Ulteriori informazioni» → «Esegui comunque».
 
+**Aggiornamenti:** all'avvio il gioco chiede a GitHub se c'è una versione più recente e, se c'è, lo segnala nel menu iniziale con un pulsante per scaricarla. Basta installarla sopra la precedente: salvataggi e impostazioni restano. Il controllo si spegne da Impostazioni.
+
 **Requisiti:** Windows 10 o 11 a 64 bit, scheda video compatibile con Vulkan o OpenGL 3.3 (va bene anche una grafica integrata recente), circa 1 GB di spazio libero.
 
 **Salvataggi e impostazioni** stanno in `%APPDATA%\Godot\app_userdata\MTW Remake`. La disinstallazione non li cancella.
@@ -51,6 +53,8 @@ It is written from scratch with [Godot Engine 4.7](https://godotengine.org) (GDS
 3. Start **Medieval Quest** from the Start menu or the desktop shortcut.
 
 Windows may show a SmartScreen warning because the installer is not signed: "More info" → "Run anyway".
+
+**Updates:** at startup the game asks GitHub whether a newer version is available and, if so, shows it in the main menu with a download button. Just install it over the previous one: saves and settings are kept. The check can be turned off in Settings.
 
 **Requirements:** 64-bit Windows 10 or 11, a graphics card supporting Vulkan or OpenGL 3.3 (a recent integrated GPU is fine), about 1 GB of free space.
 

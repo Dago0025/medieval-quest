@@ -10,6 +10,9 @@ SetCompressorDictSize 64
 !ifndef VERSIONE
   !define VERSIONE "0.0.0"
 !endif
+!ifndef VIVERSIONE
+  !define VIVERSIONE "${VERSIONE}.0"   ; 4 numeri (prepara_installer.py la passa gia' completa)
+!endif
 !define NOME "Medieval Quest"
 !define EDITORE "Federico Deserti (progetto amatoriale)"
 !define CHIAVE_DISINST "Software\Microsoft\Windows\CurrentVersion\Uninstall\MedievalQuest"
@@ -22,7 +25,7 @@ RequestExecutionLevel user
 ShowInstDetails show
 BrandingText "${NOME} ${VERSIONE}"
 
-VIProductVersion "${VERSIONE}.0"
+VIProductVersion "${VIVERSIONE}"
 VIAddVersionKey /LANG=0 "ProductName" "${NOME}"
 VIAddVersionKey /LANG=0 "ProductVersion" "${VERSIONE}"
 VIAddVersionKey /LANG=0 "FileVersion" "${VERSIONE}"
