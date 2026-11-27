@@ -51,6 +51,11 @@ static func process_year(state: GameState) -> void:
 
 static func _process_province(state: GameState, p: ProvinceState, here: Array) -> void:
 	var rr := state.rules.religion
+	# luoghi leggendari: la popolazione si sposta verso la religione indicata (Monte Athos)
+	var conv := LegendarySites.region_conversion(state, p.id)
+	for rel in conv:
+		if int(conv[rel]) > 0:
+			shift(p, str(rel), float(conv[rel]))
 	var owner_rel := owner_religion(state, p)
 	# 1. deriva (gli eretici di un proprietario cattolico non derivano: si spengono con inquisitori e religiosi)
 	if owner_rel != "":

@@ -114,7 +114,7 @@ static func cost_rows(unit: UnitType, state: GameState = null, faction_id: Strin
 		return out
 	var traits: FactionTraits = state.rules.traits if state != null and state.rules != null else FactionTraits.new()
 	var years := traits.unit_years(faction_id, unit)
-	out.append([Lang.t("Costo"), Lang.t("%d fiorini") % traits.unit_cost(faction_id, unit)])
+	out.append([Lang.t("Costo"), Lang.t("%d denari") % traits.unit_cost(faction_id, unit)])
 	out.append([Lang.t("Mantenimento"), Lang.t("%d l'anno") % roundi(float(unit.support_cost) * traits.upkeep_factor(faction_id, unit))])
 	out.append([Lang.t("Addestramento"), "%d %s" % [years, Lang.t("anno") if years == 1 else Lang.t("anni")]])
 	return out

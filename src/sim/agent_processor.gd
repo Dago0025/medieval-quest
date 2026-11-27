@@ -347,7 +347,7 @@ static func _resolve_bribe(state: GameState, a: AgentState, army: Army) -> void:
 		return
 	faction.spend(price, FactionState.SPEND_BRIBES)
 	var province_id := transfer_army(state, army, a.faction)
-	data["testo"] = Lang.t("%s corrompe l'esercito %d di %s per %d fiorini (%s).") % [SimUtil.faction_label(a.faction), army.id, SimUtil.faction_label(previous), price, WarProcessor.region_label(state, army.region)]
+	data["testo"] = Lang.t("%s corrompe l'esercito %d di %s per %d denari (%s).") % [SimUtil.faction_label(a.faction), army.id, SimUtil.faction_label(previous), price, WarProcessor.region_label(state, army.region)]
 	if province_id != "":
 		data["provincia"] = province_id
 		data["testo"] = String(data["testo"]) + Lang.t(" Con la guarnigione passa la provincia.")
@@ -665,7 +665,7 @@ static func _open_gates(state: GameState) -> void:
 ## produttore, nome dalla lista della fazione (EV_AGENT_RECRUITED).
 static func spawn_recruit(state: GameState, province: ProvinceState, unit: UnitType) -> AgentState:
 	var a := state.create_agent(province.owner, province.id, unit.id, unit.type_name, state.year + 1)
-	a.valour = clampi(initial_valour(state, province, unit) + state.rules.traits.agent_bonus(province.owner, unit.type_name), 0, state.rules.agents.max_valour)   # ADR-089
+	a.valour = clampi(initial_valour(state, province, unit) + state.rules.traits.agent_bonus(province.owner, unit.type_name) + LegendarySites.agent_bonus(state, province.id, unit.type_name), 0, state.rules.agents.max_valour)   # ADR-089, luoghi leggendari
 	apply_valour_floor(state, a)
 	a.name = agent_name(state, a)
 	state.add_event(GameState.EV_AGENT_RECRUITED, _agent_data(a, province.id, {

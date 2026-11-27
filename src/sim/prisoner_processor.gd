@@ -21,7 +21,7 @@ extends RefCounted
 ## (il comandante vincitore conta i prigionieri giustiziati: vizio «Butcher»). Il giocatore decide con `GameCommands`
 ## (finestra dopo il resoconto); l'IA decide nel fine anno (`process_year`): giustizia se il suo capo ha almeno
 ## `terrore_esecuzione_ia` di terrore, altrimenti chiede il riscatto; da perdente paga sempre per il re o un erede (anche
-## indebitandosi, come il giocatore: manuale p32), per gli altri solo se ha i fiorini. Decisioni del giocatore lasciate in
+## indebitandosi, come il giocatore: manuale p32), per gli altri solo se ha i denari. Decisioni del giocatore lasciate in
 ## sospeso: al fine anno seguente il riscatto si chiede (vincitore) o si paga (perdente) da solo (`settle_overdue`).
 ## Nessun sorteggio.
 
@@ -264,7 +264,7 @@ static func _ai_executes(state: GameState, e: Dictionary) -> bool:
 	return leader != null and leader.effective(Character.ATTR_DREAD, state.rules, state.campaign) >= state.rules.combat.ai_execute_dread
 
 
-## L'IA perdente paga sempre per il re o per un erede/principe, per gli altri solo se ha i fiorini.
+## L'IA perdente paga sempre per il re o per un erede/principe, per gli altri solo se ha i denari.
 static func ai_pays(state: GameState, e: Dictionary) -> bool:
 	for ch in characters_of(state, e):
 		if ch.role == Character.ROLE_LEADER or (ch.royal_blood and (ch.role == Character.ROLE_HEIR or ch.role == Character.ROLE_PRINCE)):
@@ -281,7 +281,7 @@ static func ask_ransom(state: GameState, e: Dictionary) -> void:
 	e["prezzo"] = price(state, e)
 	if _is_player(state, str(e["perdente"])):
 		e["stato"] = STATE_RANSOM
-		_emit(state, e, OUTCOME_RANSOM_ASKED, Lang.t("%s chiede %d fiorini di riscatto per %s.") % [SimUtil.faction_label(str(e["vincitore"])), int(e["prezzo"]), _captives_text(state, e)])
+		_emit(state, e, OUTCOME_RANSOM_ASKED, Lang.t("%s chiede %d denari di riscatto per %s.") % [SimUtil.faction_label(str(e["vincitore"])), int(e["prezzo"]), _captives_text(state, e)])
 		return
 	answer_ransom(state, e, ai_pays(state, e))
 
@@ -333,7 +333,7 @@ static func _release(state: GameState, e: Dictionary, outcome: String) -> void:
 		var verb := Lang.t("riscattati") if outcome == OUTCOME_RANSOMED else Lang.t("liberati")
 		text = Lang.t("%s %s tornano a %s.") % [_captives_text(state, e, people), verb, WarProcessor.region_label(state, home)]
 		if outcome == OUTCOME_RANSOMED:
-			text = Lang.t("%s paga %d fiorini a %s: %s") % [SimUtil.faction_label(str(e["perdente"])), int(e["prezzo"]), SimUtil.faction_label(str(e["vincitore"])), text]
+			text = Lang.t("%s paga %d denari a %s: %s") % [SimUtil.faction_label(str(e["perdente"])), int(e["prezzo"]), SimUtil.faction_label(str(e["vincitore"])), text]
 	state.prisoners.erase(e)
 	var extra := {"provincia_ritorno": home}
 	if home == "":

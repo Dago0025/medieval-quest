@@ -38,7 +38,7 @@ static func province_levels(state: GameState, province: ProvinceState) -> Dictio
 				continue
 			var key := str(parsed["chiave"])
 			out[key] = maxi(int(out[key]), int(parsed["livello"]))
-	out["armi"] = mini(int(out["armi"]), MAX_LEVEL)
+	out["armi"] = mini(int(out["armi"]) + LegendarySites.region_int(state, province.id, "armi_reclute"), MAX_LEVEL)   # luoghi leggendari (Fucina di Efesto)
 	out["armatura"] = mini(int(out["armatura"]), MAX_LEVEL)
 	return out
 

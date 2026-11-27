@@ -307,3 +307,26 @@ func test_emblema_dei_potenziamenti(t: TestContext) -> void:
 	var tex := OriginalHud.upgrade_emblem(2, 3)
 	t.assert_true(tex != null and tex.get_width() == 64, "SVG disegnato a 64x64")
 	t.assert_true(OriginalHud.upgrade_emblem(9, 9) == OriginalHud.upgrade_emblem(4, 4), "livelli oltre il massimo: oro")
+
+
+## «H: comandi e tasti» in piccolo sotto le due carte della barra (richiesta di Federico del 27/11/2026): il clic apre
+## la finestra dei comandi, che ha le sezioni con i tasti in grassetto.
+func test_scritta_dei_comandi_sotto_le_carte(t: TestContext) -> void:
+	var hud := OriginalHud.new()
+	hud._ready()
+	var hint := hud.help_hint()
+	t.assert_true(hint != null and hint.visible)
+	var mid := hint.position.y + hint.size.y / 2.0
+	t.assert_true(mid > OriginalHud.BUILD_POS.y + OriginalHud.CARD_SIZE.y and mid < OriginalHud.BAR_H, "centrata sotto le carte, dentro la barra")
+	var hits := [0]
+	hud.help_pressed.connect(func() -> void: hits[0] += 1)
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	hint.gui_input.emit(click)
+	t.assert_eq(hits[0], 1, "il clic apre la finestra dei comandi")
+	hud.free()
+	var sections := CampaignUiHelp.sections()
+	t.assert_eq(sections.size(), 6)
+	var text := CampaignUiHelp.bbcode(sections[0][1])
+	t.assert_true(text.contains("[b]") and text.contains("Bussola"), "tasti in grassetto, anche la bussola")

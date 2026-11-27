@@ -39,7 +39,7 @@ stringhe italiane non avvolte. Il test `test_lingua` fallisce se una frase di `L
 | guarnigione | garrison |
 | assedio / assalto | siege / assault |
 | barricarsi nel castello | withdraw into the castle |
-| fiorini | florins |
+| denari | denarii |
 | tesoro / reddito / saldo | treasury / income / balance |
 | agricoltura / miniere / commercio | farming / mining / trade |
 | mantenimento / tasse | upkeep / taxes |

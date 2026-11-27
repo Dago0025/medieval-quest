@@ -340,7 +340,7 @@ func test_gli_effetti_della_scomunica(t: TestContext) -> void:
 	s.form_alliance(W.A, W.B)
 	s.papal_warnings[_warning_key(W.A, W.D)] = {"anno": 1000, "scadenza": 1002}
 	t.assert_true(bool(GameCommands.queue_unit(s, W.A, W.NORD1, "Crusade")["ok"]))
-	t.assert_eq(s.faction(W.A).treasury, 4000, "mille fiorini pagati")
+	t.assert_eq(s.faction(W.A).treasury, 4000, "mille denari pagati")
 	var army := W.add_crusade(s, W.A, W.NORD2)
 	t.assert_true(PapacyProcessor.excommunicate(s, W.A, PapacyProcessor.REASON_PAPACY, W.ROMA))
 	var f := s.faction(W.A)

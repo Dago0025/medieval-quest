@@ -45,7 +45,7 @@ static func orders_in(state: GameState, province_id: String) -> int:
 	return n
 
 
-## Annulla gli ordini dell'esercito e rimborsa la fazione. Restituisce {"pile": n, "rimborso": fiorini}.
+## Annulla gli ordini dell'esercito e rimborsa la fazione. Restituisce {"pile": n, "rimborso": denari}.
 static func cancel_army_orders(state: GameState, army_id: int) -> Dictionary:
 	var kept: Array[Dictionary] = []
 	var count := 0
@@ -250,7 +250,7 @@ static func _process_army(state: GameState, army_id: int, group: Array) -> void:
 			"unita": done_units,
 			"uomini": done_men,
 			"costo": done_cost,
-			"testo": Lang.t("%d pile dell'esercito %d di %s tornano all'organico pieno a %s (%d uomini, %d fiorini).") % [
+			"testo": Lang.t("%d pile dell'esercito %d di %s tornano all'organico pieno a %s (%d uomini, %d denari).") % [
 				done_stacks, army_id, SimUtil.faction_label(faction_id), place, done_men, done_cost],
 		})
 	if refunded_stacks > 0:
@@ -263,7 +263,7 @@ static func _process_army(state: GameState, army_id: int, group: Array) -> void:
 			"unita": refunded_units,
 			"rimborso": refunded_cost,
 			"motivo": reason,
-			"testo": Lang.t("Riaddestramento annullato a %s (esercito %d di %s): %d fiorini rimborsati.") % [
+			"testo": Lang.t("Riaddestramento annullato a %s (esercito %d di %s): %d denari rimborsati.") % [
 				place, army_id, SimUtil.faction_label(faction_id), refunded_cost],
 		})
 

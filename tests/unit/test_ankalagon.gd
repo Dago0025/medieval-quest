@@ -146,3 +146,18 @@ func test_pedina_del_drago(t: TestContext) -> void:
 	for state in ["awaiting", "moving"]:
 		t.assert_true(AssetLibrary.is_remade("%s/Units/Auror/ankalagon_held_%s.BIF" % [PieceArt.BASE, state]), state)
 	t.assert_true(AssetLibrary.is_remade("campmap/review_panel/Units/%s.BIF" % ID) or AssetLibrary.unit_card_path(ID) != "", "carta")
+
+
+## Dalla scheda di Darkos si apre la scheda della sua unita', cioe' Ankalagon (richiesta di Federico del 27/11/2026).
+func test_dalla_scheda_di_darkos_si_apre_ankalagon(t: TestContext) -> void:
+	var s := _game(t)
+	if s == null:
+		return
+	var king := s.leader_of("FN_DANISH")
+	var led := CampaignUiText.led_unit(s, king)
+	t.assert_false(led.is_empty(), "Darkos guida un'unita'")
+	var army := s.army(int(led["esercito"]))
+	t.assert_eq(army.stacks[int(led["pila"])].unit_id, ID, "la sua unita' e' Ankalagon")
+	var info := CampaignUiUnitInfo.info(s, army, int(led["pila"]))
+	t.assert_eq(str(info["unita"]), ID, "la scheda e' quella del drago")
+	t.assert_true(str(info["comandante"]) != "", "con il nome di Darkos")

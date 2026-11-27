@@ -35,7 +35,7 @@ static func picked(army: Army, indices: PackedInt32Array) -> PackedInt32Array:
 	return out
 
 
-## Fiorini di mantenimento l'anno che si risparmiano congedando le pile `indices` (lo stesso numero che dà il comando).
+## Denari di mantenimento l'anno che si risparmiano congedando le pile `indices` (lo stesso numero che dà il comando).
 static func upkeep_saved(state: GameState, army: Army, indices: PackedInt32Array) -> int:
 	if army == null or state.units == null:
 		return 0
@@ -74,7 +74,7 @@ static func button_state(state: GameState, faction_id: String, army: Army, indic
 		return out
 	out["attivo"] = true
 	out["testo"] = "%s (%d)" % [Lang.t(BUTTON_TEXT), chosen.size()]
-	out["suggerimento"] = Lang.t("Congeda %s: %d fiorini di mantenimento in meno l'anno. Chiede conferma.") % [count_text(chosen.size(), army.is_fleet), upkeep_saved(state, army, chosen)]
+	out["suggerimento"] = Lang.t("Congeda %s: %d denari di mantenimento in meno l'anno. Chiede conferma.") % [count_text(chosen.size(), army.is_fleet), upkeep_saved(state, army, chosen)]
 	return out
 
 
@@ -107,7 +107,7 @@ static func confirm_text(state: GameState, faction_id: String, army: Army, indic
 			var who := (Lang.t(" e %s resta senza esercito") % commander.full_name()) if commander != null else ""
 			lines.append(Lang.t("È l'intero esercito: la pedina sparisce dalla mappa%s.") % who)
 	lines.append("")
-	lines.append(Lang.t("Risparmi %d fiorini di mantenimento l'anno.") % upkeep_saved(state, army, chosen))
+	lines.append(Lang.t("Risparmi %d denari di mantenimento l'anno.") % upkeep_saved(state, army, chosen))
 	if becomes_mercenaries(state, army):
 		lines.append(Lang.t("I congedati diventano mercenari in %s: potrà assoldarli chi possiede la provincia.") % CampaignUiText.region_name(state, army.region))
 	lines.append(Lang.t("Non c'è rimborso e non si torna indietro."))
@@ -120,7 +120,7 @@ static func done_text(r: Dictionary, fleet: bool) -> String:
 	var text := "%s %s" % [Lang.t("Congedata") if count == 1 else Lang.t("Congedate"), count_text(count, fleet)]
 	if not fleet:
 		text += Lang.t(" (%d uomini)") % int(r.get("uomini", 0))
-	text += Lang.t(": %d fiorini di mantenimento in meno l'anno.") % int(r.get("mantenimento", 0))
+	text += Lang.t(": %d denari di mantenimento in meno l'anno.") % int(r.get("mantenimento", 0))
 	var companies := int(r.get("mercenari", 0))
 	if companies > 0:
 		text += Lang.t(" Ora %s tra i mercenari della provincia.") % (Lang.t("è") if companies == 1 else Lang.t("sono"))

@@ -538,7 +538,7 @@ static func _papal_uprising(state: GameState, f: FactionState, site: ProvinceSta
 
 
 ## Una fazione cattolica non scomunicata con almeno `min_religiosi` religiosi cattolici (vescovi, sacerdoti) riceve
-## `importo` fiorini con probabilita' `p_dono` all'anno (PROVVISORIA, catalogo: trigger ignoto). Un sorteggio per
+## `importo` denari con probabilita' `p_dono` all'anno (PROVVISORIA, catalogo: trigger ignoto). Un sorteggio per
 ## fazione adatta, in ordine di dichiarazione, solo con il Papato vivo.
 static func _gifts(state: GameState) -> void:
 	var pr := state.rules.papacy
@@ -561,7 +561,7 @@ static func _gifts(state: GameState) -> void:
 			"regione": "",
 			"importo": pr.gift_amount,
 			"religiosi": int(counts.get(f.id, 0)),
-			"testo": Lang.t("Il Papa dona %d fiorini a %s.") % [pr.gift_amount, SimUtil.faction_label(f.id)],
+			"testo": Lang.t("Il Papa dona %d denari a %s.") % [pr.gift_amount, SimUtil.faction_label(f.id)],
 		})
 
 

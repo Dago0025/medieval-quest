@@ -378,11 +378,11 @@ func test_etichetta_della_voce_di_reclutamento(t: TestContext) -> void:
 	var check := GameCommands.can_queue_unit(s, W.A, W.NORD1, "Crusade")
 	t.assert_true(bool(check["ok"]), str(check["errore"]))
 	var text := CampaignUiPapacy.recruit_text(crusade_unit, CRUSADE, int(check["costo"]), int(check["anni"]))
-	t.assert_eq(text, "[Crociata] Crociata · 1000 fiorini, 4 anni")
+	t.assert_eq(text, "[Crociata] Crociata · 1000 denari, 4 anni")
 	var jihad_unit := s.units.get_unit("Jihad")
 	var jihad_check := GameCommands.can_queue_unit(s, W.B, W.SUD1, "Jihad")
 	t.assert_true(bool(jihad_check["ok"]), str(jihad_check["errore"]))
-	t.assert_eq(CampaignUiPapacy.recruit_text(jihad_unit, JIHAD, int(jihad_check["costo"]), int(jihad_check["anni"])), "[Jihad] Jihad · 500 fiorini, 2 anni")
+	t.assert_eq(CampaignUiPapacy.recruit_text(jihad_unit, JIHAD, int(jihad_check["costo"]), int(jihad_check["anni"])), "[Jihad] Jihad · 500 denari, 2 anni")
 	t.assert_true(CampaignUiPapacy.recruit_tip(CRUSADE, "Costo.").begins_with("Costo.\n"))
 	t.assert_true(CampaignUiPapacy.recruit_tip(CRUSADE, "Costo.").contains("Una alla volta"))
 	t.assert_true(CampaignUiPapacy.recruit_tip(JIHAD, "Costo.").contains("musulmane"))
@@ -396,7 +396,7 @@ func test_motivo_dell_indisponibilita_dall_errore_vero(t: TestContext) -> void:
 	var banned := GameCommands.can_queue_unit(s, W.A, W.NORD1, "Crusade")
 	t.assert_false(bool(banned["ok"]))
 	t.assert_eq(CampaignUiPapacy.unavailable_reason(str(banned["errore"])), "scomunica")
-	t.assert_eq(CampaignUiPapacy.recruit_text(unit, CRUSADE, 1000, 4, str(banned["errore"])), "[Crociata] Crociata · 1000 fiorini, 4 anni (scomunica)")
+	t.assert_eq(CampaignUiPapacy.recruit_text(unit, CRUSADE, 1000, 4, str(banned["errore"])), "[Crociata] Crociata · 1000 denari, 4 anni (scomunica)")
 	PapacyProcessor.lift_excommunication(s, W.A, "morte_del_papa")
 	# crociata in coda
 	t.assert_true(bool(GameCommands.queue_unit(s, W.A, W.NORD1, "Crusade")["ok"]))
@@ -414,7 +414,7 @@ func test_motivo_dell_indisponibilita_dall_errore_vero(t: TestContext) -> void:
 	var other := GameCommands.can_queue_unit(s, W.G, W.EST, "Crusade")
 	t.assert_false(bool(other["ok"]), "manca la Chapter House")
 	t.assert_eq(CampaignUiPapacy.unavailable_reason(str(other["errore"])), "")
-	t.assert_eq(CampaignUiPapacy.recruit_text(unit, CRUSADE, 1000, 4, str(other["errore"])), "[Crociata] Crociata · 1000 fiorini, 4 anni")
+	t.assert_eq(CampaignUiPapacy.recruit_text(unit, CRUSADE, 1000, 4, str(other["errore"])), "[Crociata] Crociata · 1000 denari, 4 anni")
 	t.assert_eq(CampaignUiPapacy.unavailable_reason(""), "")
 
 
@@ -477,7 +477,7 @@ func test_testi_degli_avvertimenti_e_delle_scomuniche(t: TestContext) -> void:
 	t.assert_eq(_text(s, GameState.EV_PAPAL_TRUCE, {"fazione": W.A, "con": W.G, "fino_al": 1012}),
 		"Il Papa impone una tregua tra Alpha e Gamma fino al 1012.")
 	t.assert_eq(_text(s, GameState.EV_EXCOMMUNICATION, {"fazione": W.A, "motivo": "attacco_al_papato", "influenza_persa": 2, "alleanze_rotte": [W.G], "rimborso": 1000}),
-		"Alpha è scomunicata dal Papa (ha attaccato il Papato). L'influenza del suo capo scende di 2. Alleanze rotte con Gamma. Le crociate in coda sono annullate: rimborsati 1000 fiorini.")
+		"Alpha è scomunicata dal Papa (ha attaccato il Papato). L'influenza del suo capo scende di 2. Alleanze rotte con Gamma. Le crociate in coda sono annullate: rimborsati 1000 denari.")
 	t.assert_eq(_text(s, GameState.EV_EXCOMMUNICATION, {"fazione": W.A, "motivo": "attacco_durante_avvertimento", "influenza_persa": 0, "alleanze_rotte": [], "rimborso": 0}),
 		"Alpha è scomunicata dal Papa (ha ignorato l'avvertimento del Papa).")
 	t.assert_eq(_text(s, GameState.EV_EXCOMMUNICATION_LIFTED, {"fazione": W.A, "motivo": "morte_del_papa"}),
@@ -489,7 +489,7 @@ func test_testi_degli_avvertimenti_e_delle_scomuniche(t: TestContext) -> void:
 	t.assert_eq(_text(s, GameState.EV_EXCOMMUNICATION_LIFTED, {"fazione": W.A, "motivo": ""}),
 		"La scomunica di Alpha è revocata.")
 	t.assert_eq(_text(s, GameState.EV_PAPAL_GIFT, {"fazione": W.A, "importo": 1000, "religiosi": 3}),
-		"Dono del Papa per Alpha: 1000 fiorini (3 religiosi).")
+		"Dono del Papa per Alpha: 1000 denari (3 religiosi).")
 	t.assert_eq(_text(s, GameState.EV_PAPACY_REEMERGED, {"fazione": W.P, "provincia": W.ROMA, "regione": W.ROMA, "pile": 4, "riemersioni": 1}),
 		"Il Papato riemerge a Roma con 4 armate (riemersione 1).")
 	t.assert_eq(_text(s, GameState.EV_ALLIANCE_BROKEN, {"fazione": W.A, "con": W.G, "motivo": "scomunica", "influenza_persa": 0}),

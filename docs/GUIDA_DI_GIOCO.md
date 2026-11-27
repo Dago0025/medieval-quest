@@ -30,7 +30,7 @@ La **Classifica** (tasto G) mostra in ogni momento province, reddito e quota di 
 
 - **Plancia**: la mappa con province, mari, castelli, porti e pedine (eserciti, flotte, agenti). Si vede tutto nelle tue province, nelle regioni dove hai pedine e in quelle confinanti; il resto è coperto dalla nebbia.
 - **Barra in alto**: Corte, Diplomazia, Classifica, anno, tesoro, entrate e guerre in corso. In alto a destra: «Regnanti» e «Menu».
-- **Barra in basso**: minimappa (clic per spostare la vista), medaglioni informativi, carte della provincia, dell'esercito o della flotta scelti, comandi dell'esercito, tesoro e pulsante **Fine anno**.
+- **Barra in basso**: minimappa (clic per spostare la vista; la bussola nell'angolo in basso a sinistra mostra tutti i luoghi leggendari scoperti), medaglioni informativi, carte della provincia, dell'esercito o della flotta scelti, comandi dell'esercito, tesoro e pulsante **Fine anno**. Sotto le carte di costruzione e addestramento, «H: comandi e tasti» apre l'elenco dei comandi.
 - **Passaggio del mouse**: su pedine, mari e province compare un riquadro con proprietario e rapporti. Colori: rosso per i nemici, blu per i neutrali, verde per gli alleati.
 
 ---
@@ -48,6 +48,7 @@ La **Classifica** (tasto G) mostra in ogni momento province, reddito e quota di 
 | Tinta della religione | **R** |
 | Nomi delle regioni | **N** |
 | Opzioni della mappa | Clic sullo stemma nella barra in basso |
+| Tutti i luoghi leggendari scoperti | Clic sulla bussola della minimappa (di nuovo: tornano i pallini) |
 
 ### Selezione e ordini
 
@@ -74,7 +75,7 @@ La **Classifica** (tasto G) mostra in ogni momento province, reddito e quota di 
 | **Q** | Code di costruzione e arruolamento di tutte le province |
 | **,** e **.** | Provincia precedente / successiva (con **Maiusc**: solo quelle con qualcosa in coda) |
 | **F5 / F9** | Salvataggio / caricamento rapido |
-| **H** | Elenco dei comandi |
+| **H** | Comandi e tasti (anche con un clic sulla scritta sotto le carte della barra) |
 
 ---
 
@@ -106,6 +107,14 @@ Ogni provincia ha un castello, edifici, una popolazione con la sua religione, un
 - **Lealtà**: tasse alte, religione diversa, eserciti stranieri e spie nemiche la abbassano; guarnigioni, edifici religiosi e un buon governatore la alzano. Una provincia scontenta si ribella.
 - **Commercio**: il commercio locale rende anche senza porto. Con porti e flotte che presidiano le rotte arrivano anche le entrate del commercio marittimo, che crescono con la ricchezza dei porti raggiunti. Una flotta nemica in una zona di mare la chiude.
 
+### Luoghi leggendari
+
+Sulla mappa del mondo ci sono 39 luoghi storici e mitologici, su terra e in mare: rovine, santuari, meraviglie e insidie.
+
+- **Scoperta**: un luogo resta nascosto finché non vedi la sua regione. Sulla mappa è un pallino; passandoci sopra si apre il medaglione col nome, con un clic la scheda con la tavola, la descrizione e gli effetti.
+- **Effetti**: chi tiene la provincia riceve bonus e malus (rendite, lealtà, agenti, reclute, calamità, difesa del castello). Alcuni dipendono dalla religione o dall'anno. Nei mari valgono per chi li attraversa o per chi li presidia con una flotta per alcuni anni.
+- **Eventi**: alcuni luoghi propongono scelte, con un'opzione sicura, una rischiosa e talvolta una che chiede requisiti (denaro, stelle, religione). Il sigillo rosso sul pallino indica una scelta in attesa.
+
 ---
 
 ## 6. Eserciti e flotte
@@ -115,7 +124,7 @@ Ogni provincia ha un castello, edifici, una popolazione con la sua religione, un
 - **Attaccare**: trascina l'esercito su uno straniero. Se l'attacco apre una guerra nuova (pace, alleanza, tregua) il gioco chiede conferma.
 - **Castelli**: trascina un esercito sul tuo castello per barricarlo (entrano le unità che ci stanno: 16 posti, la cavalleria ne occupa due; in una fortezza entra un'intera armata di 20 unità). Su un castello nemico inizia l'assedio; con l'assedio in corso, lo stesso gesto ordina l'assalto.
 - **Comandi nella barra in basso**: annulla ordini, barricati, assalta, riaddestra, comandante, **Ripristina** (rimette in forze tutte le unità non piene, pagando subito) e **Congeda** (le unità lasciano l'esercito senza rimborso e diventano mercenari).
-- **Comandanti**: re, principi e generali guidano gli eserciti. Clic destro sulla carta del comandante apre la sua scheda con ritratto, stelle e tratti.
+- **Comandanti**: re, principi e generali guidano gli eserciti. Clic destro sulla carta del comandante apre la sua scheda con ritratto, stelle e tratti; il pulsante «Scheda dell'unità che guida» mostra uomini, valore, armi e attributi della sua unità.
 - **Flotte**: ogni flotta ha un ammiraglio che migliora vincendo. Le navi percorrono ogni anno tante zone di mare quanto il loro raggio. Le flotte non alleate, anche neutrali, bloccano il passaggio delle truppe via mare (blocco navale). Le tempeste possono affondare le navi più fragili.
 - **Vista da vicino**: vedi composizione e forze di eserciti e flotte stranieri nelle regioni che confinano con le tue province o dove hai navi vicine. Per edifici, lealtà e rendite delle province altrui servono le spie.
 

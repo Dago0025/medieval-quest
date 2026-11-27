@@ -55,7 +55,7 @@ static func window_of(state: GameState, faction_id: String, prisoner_id: int) ->
 		lines.append(Lang.t("Dopo lo scontro a %s i tuoi uomini hanno catturato prigionieri di %s:") % [place, loser_name])
 		lines.append(captives)
 		lines.append("")
-		lines.append(Lang.t("Puoi liberarli, chiedere un riscatto di %d fiorini (%s decide se pagare: se rifiuta saranno giustiziati) o giustiziarli tutti.") % [price, loser_name])
+		lines.append(Lang.t("Puoi liberarli, chiedere un riscatto di %d denari (%s decide se pagare: se rifiuta saranno giustiziati) o giustiziarli tutti.") % [price, loser_name])
 		return {
 			"id": prisoner_id,
 			"titolo": Lang.t("Prigionieri di %s a %s") % [loser_name, place],
@@ -73,7 +73,7 @@ static func window_of(state: GameState, faction_id: String, prisoner_id: int) ->
 		lines.append(Lang.t("%s tiene prigionieri questi tuoi uomini, catturati a %s:") % [captor_name, place])
 		lines.append(captives)
 		lines.append("")
-		lines.append(Lang.t("Chiede %d fiorini di riscatto (nel tesoro ne hai %d; puoi anche indebitarti).") % [price, treasury])
+		lines.append(Lang.t("Chiede %d denari di riscatto (nel tesoro ne hai %d; puoi anche indebitarti).") % [price, treasury])
 		if home != "":
 			lines.append(Lang.t("Se paghi tornano a %s; se rifiuti saranno giustiziati.") % CampaignUiText.region_name(state, home))
 		else:
@@ -83,7 +83,7 @@ static func window_of(state: GameState, faction_id: String, prisoner_id: int) ->
 			"titolo": Lang.t("Riscatto chiesto da %s") % captor_name,
 			"testo": "\n".join(lines),
 			"scelte": [
-				{"id": PAY, "testo": Lang.t("Paga %d fiorini") % price},
+				{"id": PAY, "testo": Lang.t("Paga %d denari") % price},
 				{"id": REFUSE, "testo": Lang.t("Rifiuta")},
 			],
 		}

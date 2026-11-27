@@ -146,7 +146,7 @@ func test_le_catture_dello_stesso_scontro_stanno_in_una_voce(t: TestContext) -> 
 func test_il_riscatto(t: TestContext) -> void:
 	var s := W.world()
 	var e := {"pile": [UnitStack.new("Spearmen", 40, 0).to_dict()], "personaggi": []}
-	t.assert_eq(PrisonerProcessor.price(s, e), 20, "Spearmen 100 fiorini per 100 uomini: 40 uomini x 1 x 0,5")
+	t.assert_eq(PrisonerProcessor.price(s, e), 20, "Spearmen 100 denari per 100 uomini: 40 uomini x 1 x 0,5")
 	e["personaggi"] = [s.leader_of(W.A).id]
 	t.assert_eq(PrisonerProcessor.price(s, e), 3020, "piu' il re")
 
@@ -177,7 +177,7 @@ func test_l_ia_chiede_il_riscatto_e_l_ia_paga_per_il_re(t: TestContext) -> void:
 	t.assert_true(back != null and back.region == W.NORD2 and back.faction == W.A, "al comando dei suoi uomini riscattati")
 
 
-func test_l_ia_senza_fiorini_rifiuta_e_i_prigionieri_muoiono(t: TestContext) -> void:
+func test_l_ia_senza_denari_rifiuta_e_i_prigionieri_muoiono(t: TestContext) -> void:
 	var w := _lost_attack()
 	var s: GameState = w["stato"]
 	s.leader_of(W.G).dread = 0
@@ -236,7 +236,7 @@ func test_il_giocatore_vincitore_decide(t: TestContext) -> void:
 			t.assert_eq(r["esito"], PrisonerProcessor.OUTCOME_RELEASED)
 			t.assert_eq(after, a_men + losses, "gli uomini tornano")
 		elif choice == "riscatto":
-			t.assert_eq(r["esito"], PrisonerProcessor.OUTCOME_REFUSED, "ALPHA senza fiorini rifiuta")
+			t.assert_eq(r["esito"], PrisonerProcessor.OUTCOME_REFUSED, "ALPHA senza denari rifiuta")
 			t.assert_eq(after, a_men)
 		else:
 			t.assert_eq(r["esito"], PrisonerProcessor.OUTCOME_EXECUTED)

@@ -1,7 +1,7 @@
 extends RefCounted
 ## Interfaccia del riaddestramento: logica pura in CampaignUiRetrain (src/map), testi dei due eventi nel resoconto di fine anno
 ## e messaggi d'esito. I pulsanti veri stanno in scenes/campaign_map.gd e non si provano qui. Mondo di prova: agent_world.gd
-## (ALPHA con 10000 fiorini; Spearmen 100 uomini e 100 fiorini, Nizari solo di BETA).
+## (ALPHA con 10000 denari; Spearmen 100 uomini e 100 denari, Nizari solo di BETA).
 
 const W := preload("res://tests/unit/agent_world.gd")
 
@@ -76,11 +76,11 @@ func test_costo_totale_nel_testo_e_nel_tooltip(t: TestContext) -> void:
 	var one := CampaignUiRetrain.panel_state(s, W.A, a, PackedInt32Array([0]))
 	t.assert_eq(int(one["costo"]), 60)
 	t.assert_eq(int(one["pile"]), 1)
-	t.assert_eq(str(one["testo"]), "Riaddestra le pile scelte (60 fiorini)")
-	t.assert_true(str(one["tooltip"]).contains("Costo totale: 60 fiorini per 1 pile."), str(one["tooltip"]))
+	t.assert_eq(str(one["testo"]), "Riaddestra le pile scelte (60 denari)")
+	t.assert_true(str(one["tooltip"]).contains("Costo totale: 60 denari per 1 pile."), str(one["tooltip"]))
 	var two := CampaignUiRetrain.panel_state(s, W.A, a, PackedInt32Array([2, 0]))
 	t.assert_eq(int(two["costo"]), 60 + 30, "in qualsiasi ordine di spunta")
-	t.assert_eq(str(two["testo"]), "Riaddestra le pile scelte (90 fiorini)")
+	t.assert_eq(str(two["testo"]), "Riaddestra le pile scelte (90 denari)")
 	# una pila piena spuntata non costa e il tooltip dice perche'
 	var with_full := CampaignUiRetrain.panel_state(s, W.A, a, PackedInt32Array([0, 1]))
 	t.assert_eq(int(with_full["costo"]), 60)
@@ -146,18 +146,18 @@ func test_messaggi_dei_comandi(t: TestContext) -> void:
 	var a := _army(s, W.BASSA, [["Spearmen", 40, 0], ["Spearmen", 100, 0]])
 	var ordered := GameCommands.order_retrain(s, W.A, a.id, PackedInt32Array([0, 1]))
 	t.assert_eq(CampaignUiRetrain.ordered_text(s, ordered),
-		"Riaddestramento ordinato: 1 pile, 60 fiorini (a fine anno tornano all'organico pieno). Saltate 1 pile (La pila e' gia' al completo).")
+		"Riaddestramento ordinato: 1 pile, 60 denari (a fine anno tornano all'organico pieno). Saltate 1 pile (La pila e' gia' al completo).")
 	var refused := GameCommands.order_retrain(s, W.A, a.id, PackedInt32Array([0]))
 	t.assert_eq(CampaignUiRetrain.ordered_text(s, refused), "La pila e' gia' in riaddestramento", "il motivo del rifiuto")
 	var cancelled := GameCommands.cancel_retrain(s, W.A, a.id)
-	t.assert_eq(CampaignUiRetrain.cancelled_text(s, cancelled), "Riaddestramento annullato: 60 fiorini rimborsati per 1 pile.")
+	t.assert_eq(CampaignUiRetrain.cancelled_text(s, cancelled), "Riaddestramento annullato: 60 denari rimborsati per 1 pile.")
 	var nothing := GameCommands.cancel_retrain(s, W.A, a.id)
 	t.assert_eq(CampaignUiRetrain.cancelled_text(s, nothing), "Nessun riaddestramento da annullare per l'esercito %d" % a.id)
 	# nota dopo un movimento o una divisione che annulla gli ordini
 	var b := _army(s, W.BASSA, [["Spearmen", 40, 0]])
 	GameCommands.order_retrain(s, W.A, b.id, PackedInt32Array([0]))
 	var moved := GameCommands.order_move(s, W.A, b.id, PackedStringArray([W.ALTA]))
-	t.assert_eq(CampaignUiRetrain.refund_note(moved), "Riaddestramento annullato: 60 fiorini rimborsati.")
+	t.assert_eq(CampaignUiRetrain.refund_note(moved), "Riaddestramento annullato: 60 denari rimborsati.")
 	t.assert_eq(CampaignUiRetrain.refund_note({"ok": true, "errore": ""}), "", "nessuna nota senza ordini annullati")
 
 
@@ -169,7 +169,7 @@ func test_testi_dei_due_eventi(t: TestContext) -> void:
 	var place := CampaignUiText.region_name(s, W.BASSA)
 	var done := _ev(GameState.EV_RETRAINED, {"fazione": W.A, "provincia": W.BASSA, "regione": W.BASSA, "esercito": 7, "pile": 2, "uomini": 90, "costo": 90, "unita": ["Spearmen", "Spearmen"]})
 	t.assert_eq(CampaignUiText.format_event(s, done),
-		"Riaddestramento a %s (esercito 7): 2 pile tornano all'organico pieno, +90 uomini (90 fiorini)." % place)
+		"Riaddestramento a %s (esercito 7): 2 pile tornano all'organico pieno, +90 uomini (90 denari)." % place)
 	var reasons := {
 		"esercito_perso": "l'esercito non c'è più",
 		"esercito_mosso": "l'esercito si è mosso",
@@ -179,9 +179,9 @@ func test_testi_dei_due_eventi(t: TestContext) -> void:
 	for key in reasons:
 		var cancelled := _ev(GameState.EV_RETRAIN_CANCELLED, {"fazione": W.A, "provincia": W.BASSA, "esercito": 7, "pile": 1, "rimborso": 60, "motivo": key})
 		t.assert_eq(CampaignUiText.format_event(s, cancelled),
-			"Riaddestramento annullato a %s (esercito 7): 1 pile, 60 fiorini rimborsati (%s)." % [place, reasons[key]], key)
+			"Riaddestramento annullato a %s (esercito 7): 1 pile, 60 denari rimborsati (%s)." % [place, reasons[key]], key)
 	var no_reason := _ev(GameState.EV_RETRAIN_CANCELLED, {"fazione": W.A, "provincia": W.BASSA, "esercito": 7, "pile": 1, "rimborso": 60})
-	t.assert_eq(CampaignUiText.format_event(s, no_reason), "Riaddestramento annullato a %s (esercito 7): 1 pile, 60 fiorini rimborsati." % place)
+	t.assert_eq(CampaignUiText.format_event(s, no_reason), "Riaddestramento annullato a %s (esercito 7): 1 pile, 60 denari rimborsati." % place)
 	# senza luogo si ripiega sul testo della simulazione, poi sul tipo
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_RETRAINED, {"testo": "Testo della simulazione."})), "Testo della simulazione.")
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_RETRAINED, {})), GameState.EV_RETRAINED)
@@ -223,7 +223,7 @@ func test_pulsante_ripristina(t: TestContext) -> void:
 	var on := CampaignUiRetrain.restore_action(s, W.A, a)
 	t.assert_true(bool(on["visibile"]) and bool(on["attivo"]), str(on))
 	t.assert_eq(on["testo"], "Ripristina")
-	t.assert_true(str(on["suggerimento"]).contains("2 pile") and str(on["suggerimento"]).contains("70 uomini") and str(on["suggerimento"]).contains("70 fiorini"), str(on["suggerimento"]))
+	t.assert_true(str(on["suggerimento"]).contains("2 pile") and str(on["suggerimento"]).contains("70 uomini") and str(on["suggerimento"]).contains("70 denari"), str(on["suggerimento"]))
 	var abroad := _army(s, W.MEZZA, [["Spearmen", 40, 0]])
 	var off := CampaignUiRetrain.restore_action(s, W.A, abroad)
 	t.assert_true(bool(off["visibile"]) and not bool(off["attivo"]), "fuori dalle proprie province: spento, con il motivo")

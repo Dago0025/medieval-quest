@@ -50,7 +50,7 @@ func cost_for(unit_cost: int, men: int, full: int) -> int:
 	if full <= 0 or men >= full:
 		return 0
 	var missing := full - maxi(0, men)
-	# snappedf: un fattore non esatto in binario non deve far salire il risultato di un fiorino
+	# snappedf: un fattore non esatto in binario non deve far salire il risultato di un denaro
 	return ceili(snappedf(float(unit_cost) * cost_factor * float(missing) / float(full), 0.000001))
 
 

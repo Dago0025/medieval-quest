@@ -21,7 +21,7 @@ func test_demolire_toglie_un_livello_e_rimborsa_meta(t: TestContext) -> void:
 	var before := s.faction("FN_ALPHA").treasury
 	var check := GameCommands.can_demolish_building(s, "FN_ALPHA", "ID_ALTA", "MERCHANT")
 	t.assert_true(bool(check["ok"]), str(check))
-	t.assert_eq(int(check["rimborso"]), 500, "meta' dei 1000 fiorini del livello 2")
+	t.assert_eq(int(check["rimborso"]), 500, "meta' dei 1000 denari del livello 2")
 	var r := GameCommands.demolish_building(s, "FN_ALPHA", "ID_ALTA", "MERCHANT")
 	t.assert_true(bool(r["ok"]))
 	t.assert_eq(alta.level_of("MERCHANT"), 1)

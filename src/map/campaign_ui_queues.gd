@@ -87,7 +87,7 @@ static func summary(province: ProvinceState) -> String:
 
 
 ## Tessere degli edifici in coda, nell'ordine della coda: {"indice" (nella coda, per annullare), "famiglia", "livello",
-## "anni" (che mancano), "in_corso" (vero per il primo), "rimborso" (fiorini restituiti annullando)}.
+## "anni" (che mancano), "in_corso" (vero per il primo), "rimborso" (denari restituiti annullando)}.
 static func building_tiles(province: ProvinceState) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	if province == null:
@@ -116,7 +116,7 @@ static func building_tile_text(tile: Dictionary, title: String) -> Dictionary:
 	var years := int(tile.get("anni", 0))
 	var when := "%d %s" % [years, Lang.t("anno") if years == 1 else Lang.t("anni")]
 	var caption := (Lang.t("in corso · %s") % when) if bool(tile.get("in_corso", false)) else (Lang.t("in attesa · %s") % when)
-	var tip := Lang.t("%s\n%s\nClic: toglilo dalla coda e torna tra gli edifici da costruire (rimborso %d fiorini, i lavori fatti si perdono).") % [
+	var tip := Lang.t("%s\n%s\nClic: toglilo dalla coda e torna tra gli edifici da costruire (rimborso %d denari, i lavori fatti si perdono).") % [
 		title, Lang.t("In costruzione: mancano %s.") % when if bool(tile.get("in_corso", false)) else Lang.t("In coda: %s di lavori.") % when, int(tile.get("rimborso", 0))]
 	return {"didascalia": caption, "suggerimento": tip}
 
@@ -144,7 +144,7 @@ static func unit_tile_text(tile: Dictionary, title: String) -> Dictionary:
 	var years := int(tile.get("anni", 0))
 	var when := "%d %s" % [years, Lang.t("anno") if years == 1 else Lang.t("anni")]
 	var caption := (Lang.t("in corso · %s") % when) if bool(tile.get("in_corso", false)) else (Lang.t("in attesa · %s") % when)
-	return {"didascalia": caption, "suggerimento": Lang.t("%s\n%s\nClic: toglila dalla coda (rimborso %d fiorini).") % [
+	return {"didascalia": caption, "suggerimento": Lang.t("%s\n%s\nClic: toglila dalla coda (rimborso %d denari).") % [
 		title, Lang.t("In addestramento: mancano %s.") % when if bool(tile.get("in_corso", false)) else Lang.t("In coda: %s di addestramento.") % when, int(tile.get("rimborso", 0))]}
 
 

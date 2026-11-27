@@ -222,16 +222,16 @@ static func _disasters(state: GameState, rules: EventRules, black_death_now: boo
 		# regioni immuni (Atlantide, 18/11/2026): il sorteggio resta, per non spostare i numeri casuali delle altre
 		var immune := rules.is_immune(p.id)
 		if rules.flood_chance > 0.0 and not state.campaign.is_unfloodable(p.id):
-			if state.rng.randf() < rules.flood_chance and not immune:
+			if state.rng.randf() < rules.flood_chance * LegendarySites.region_factor(state, p.id, "inondazioni") and not immune:
 				_flood(state, rules, p)
 		if rules.famine_chance > 0.0:
-			if state.rng.randf() < rules.famine_chance and not immune:
+			if state.rng.randf() < rules.famine_chance * LegendarySites.region_factor(state, p.id, "carestia") and not immune:
 				_famine(state, rules, p)
 		if rules.quake_chance > 0.0 and not state.campaign.is_unquakeable(p.id):
-			if state.rng.randf() < rules.quake_chance_for(p.id):
+			if state.rng.randf() < rules.quake_chance_for(p.id) * LegendarySites.region_factor(state, p.id, "terremoti"):
 				_quake(state, p)
 		if rules.plague_chance > 0.0 and not plagued.has(p.id):
-			if state.rng.randf() < rules.plague_chance and not immune:
+			if state.rng.randf() < rules.plague_chance * LegendarySites.region_factor(state, p.id, "peste") and not immune:
 				if _plague(state, rules, p, "", false, plagued):
 					removed = true
 				if rules.plague_spread > 0.0:
@@ -249,7 +249,7 @@ static func _disasters(state: GameState, rules: EventRules, black_death_now: boo
 				continue
 			if state.rules.storm_immune_factions.has(SimUtil.norm(a.faction)):
 				continue   # flotte_immuni_tempeste (auror.cfg): gli Auror non affondano nelle tempeste (23/11/2026)
-			if state.rng.randf() < rules.storm_chance * storm_factor(state, a):
+			if state.rng.randf() < rules.storm_chance * storm_factor(state, a) * LegendarySites.faction_factor(state, a.faction, "tempeste"):
 				if _storm(state, a):
 					removed = true
 	if _black_death(state, rules, black_death_now):

@@ -133,6 +133,8 @@ var retrain := RetrainRules.new()
 var mercenaries := MercenaryRules.new()   ## fase 8d: data/regole/mercenari.cfg
 ## Tratti storici delle fazioni (data/regole/tratti_fazioni.cfg, ADR-089): bonus e malus per fazione. Vuoti con `Rules.new()`.
 var traits := FactionTraits.new()
+## Luoghi leggendari (data/luoghi/luoghi.cfg, 26/11/2026): vuoti con `Rules.new()`.
+var sites := LegendarySites.new()
 ## Limiti storici (data/regole/storia.cfg, ADR-114): invenzioni, cavalli nelle Americhe, guardia del capo.
 var history := HistoryRules.new()
 
@@ -249,6 +251,10 @@ static func load_file(path: String = DEFAULT_PATH) -> Rules:
 	if FileAccess.file_exists(traits_path):
 		rules.traits = FactionTraits.load_file(traits_path)
 		rules.errors.append_array(rules.traits.errors)
+	# I luoghi leggendari stanno in data/luoghi/luoghi.cfg (assente = nessun luogo, 26/11/2026).
+	if FileAccess.file_exists(LegendarySites.DEFAULT_PATH):
+		rules.sites = LegendarySites.load_file(LegendarySites.DEFAULT_PATH)
+		rules.errors.append_array(rules.sites.errors)
 	# I limiti storici stanno in storia.cfg (assente = valori predefiniti, ADR-114).
 	var history_path := path.get_base_dir().path_join("storia.cfg")
 	if FileAccess.file_exists(history_path):

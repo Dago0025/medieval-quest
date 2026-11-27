@@ -1,8 +1,8 @@
 extends RefCounted
 ## Potenziamenti degli Auror portati dal gioco originale (patch exe del 2026-11-09, scheda MTW del Second Brain):
 ## ogni pila della fazione nasce con valore 9 e la coda di reclutamento del giocatore fa 5 passaggi l'anno.
-## Mondo piccolo tests/fixtures/sim_*.txt: ALPHA (tesoro 5000) ha ID_ALTA e ID_BASSA; Spearmen 100 fiorini, 1 anno;
-## Archers 150 fiorini, 2 anni, con BOWYER. Nei test FN_ALPHA prende le regole che nel gioco ha FN_DANISH.
+## Mondo piccolo tests/fixtures/sim_*.txt: ALPHA (tesoro 5000) ha ID_ALTA e ID_BASSA; Spearmen 100 denari, 1 anno;
+## Archers 150 denari, 2 anni, con BOWYER. Nei test FN_ALPHA prende le regole che nel gioco ha FN_DANISH.
 
 const STARTPOS := "res://tests/fixtures/sim_startpos.txt"
 const UNITS := "res://tests/fixtures/sim_unit_prod.txt"

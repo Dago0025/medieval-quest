@@ -116,6 +116,7 @@ static func to_dict(state: GameState) -> Dictionary:
 		"contatto_americhe": state.americas_contact_year,
 		"riemersioni_papato": state.papacy_reemergences,
 		"eventi_6a": _plain(EventProcessor.save_data(state)),
+		"luoghi": _plain(LegendarySiteProcessor.save_data(state)),   # luoghi leggendari (assenti nei salvataggi di prima)
 		"vittoria": _plain(state.victory.to_dict()),
 		"proposte": _plain(state.pending_proposals.duplicate(true)),
 		"prossima_proposta": state.next_proposal_id,
@@ -298,6 +299,7 @@ static func from_dict(data: Dictionary, campaign: CampaignData, units: UnitProdL
 	# versione 8: eventi storici accaduti, Peste Nera, Orda d'Oro; prima nessun evento accaduto
 	if version >= 8:
 		EventProcessor.load_data(state, d.get("eventi_6a", {}))
+		LegendarySiteProcessor.load_data(state, d.get("luoghi", {}))
 	# versione 9: esito della partita; prima nessun esito
 	if version >= 9:
 		var victory_data: Dictionary = d.get("vittoria", {})

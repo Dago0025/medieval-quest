@@ -127,6 +127,21 @@ static func commander_badge(state: GameState, army: Army, index: int) -> Diction
 
 ## Personaggio legato alla carta `index` dell'esercito (il comandante sulla sua pila), 0 per le altre: il clic destro su
 ## quella carta apre la sua scheda con il ritratto invece della scheda dell'unita' (richiesta di Federico dell'11/11/2026).
+## Unita' guidata da un personaggio (richiesta di Federico del 27/11/2026: dalla scheda del re o del generale si apre la
+## scheda della sua unita'): {"esercito", "pila"} della pila del comandante; vuoto se non comanda un esercito di terra
+## (gli ammiragli non sono personaggi: la loro nave apre gia' la scheda dell'ammiraglio).
+static func led_unit(state: GameState, c: Character) -> Dictionary:
+	if state == null or c == null or not c.alive or c.army <= 0:
+		return {}
+	var army := state.army(c.army)
+	if army == null or army.stacks.is_empty():
+		return {}
+	var index := commander_stack(state, army) if state.commander_of(army.id) == c else -1
+	if index < 0 or index >= army.stacks.size():
+		return {}
+	return {"esercito": army.id, "pila": index}
+
+
 static func card_character(state: GameState, army: Army, index: int) -> int:
 	if army == null or index < 0 or index != commander_stack(state, army):
 		return 0
@@ -366,7 +381,7 @@ static func balance_lines(f: FactionState) -> PackedStringArray:
 		for key in spent:
 			total_spent += int(spent[key])
 		if li.has("saldo"):
-			out.append(Lang.t("Saldo dell'ultimo anno: %s fiorini") % signed(int(li["saldo"])))
+			out.append(Lang.t("Saldo dell'ultimo anno: %s denari") % signed(int(li["saldo"])))
 		out.append(Lang.t("Reddito netto (rendite meno mantenimento): %s") % signed(net))
 		var line := spending_line(spent)
 		if line != "":
@@ -423,7 +438,7 @@ static func format_event(state: GameState, e: Dictionary) -> String:
 			unit_name(str(e.get("unita", ""))),
 			int(e.get("esercito", 0))]
 	if kind == GameState.EV_QUEUE_PAUSED:
-		return Lang.t("Coda ripetuta di %s in pausa: per %s servono %d fiorini. Riprende quando il tesoro basta.") % [
+		return Lang.t("Coda ripetuta di %s in pausa: per %s servono %d denari. Riprende quando il tesoro basta.") % [
 			region_name(state, str(e.get("provincia", ""))),
 			unit_name(str(e.get("unita", ""))),
 			int(e.get("costo", 0))]
@@ -474,7 +489,7 @@ static func format_event(state: GameState, e: Dictionary) -> String:
 			region_name(state, str(e.get("da", ""))),
 			region_name(state, str(e.get("verso", "")))]
 	if kind == GameState.EV_NEGATIVE_TREASURY:
-		return Lang.t("Tesoro negativo: %d fiorini.") % int(e.get("tesoro", 0))
+		return Lang.t("Tesoro negativo: %d denari.") % int(e.get("tesoro", 0))
 	var phase3 := _format_phase3(state, kind, e)
 	if phase3 != "":
 		return phase3
@@ -504,7 +519,7 @@ static func format_event(state: GameState, e: Dictionary) -> String:
 			admiral_stars_text(int_of(e.get("stelle"))), region_name(state, text_of(e.get("regione", "")))]
 	if kind == GameState.EV_MERCENARY_HIRED:
 		var fid := _actor_id(e)
-		return Lang.t("%s %s %s (%d uomini) a %s per %d fiorini.") % [fsubj(fid), fverb(fid, Lang.t("assolda"), Lang.t("assoldano")),
+		return Lang.t("%s %s %s (%d uomini) a %s per %d denari.") % [fsubj(fid), fverb(fid, Lang.t("assolda"), Lang.t("assoldano")),
 			unit_name(text_of(e.get("unita", ""))), int_of(e.get("uomini")), region_name(state, text_of(e.get("provincia", ""))), int_of(e.get("costo"))]
 	return kind
 
@@ -1487,6 +1502,7 @@ const TERM_VALUE_KEYS := ["valore", "value", "delta"]
 ## Etichette dei termini della lealtà obiettivo (chiave in minuscolo -> testo).
 const TERM_LABELS := {
 	"base": "Base",
+	"luogo": "Luogo leggendario",
 	"tax": "Tassa",
 	"tassa": "Tassa",
 	"garrison": "Guarnigione",
@@ -2001,7 +2017,7 @@ static func loyalty_terms_of(raw: Variant) -> Array[Dictionary]:
 ## Dettaglio dell'ultimo calcolo della lealta' (`ProvinceState.last_loyalty`, chiavi italiane).
 const LOYALTY_DETAIL_KEYS := ["last_loyalty", "ultima_lealta"]
 ## Termini del dettaglio, nell'ordine in cui si mostrano; tutti tranne «base» solo se diversi da zero.
-const LOYALTY_DETAIL_TERMS := ["base", "tassa", "guarnigione", "edifici", "ribellione_regionale", "religione", "distanza", "terrore", "spie", "inquisitori", "inquisitore", "scomunica", "occupazione", "fazione"]
+const LOYALTY_DETAIL_TERMS := ["base", "tassa", "guarnigione", "edifici", "ribellione_regionale", "religione", "distanza", "terrore", "spie", "inquisitori", "inquisitore", "scomunica", "occupazione", "fazione", "luogo"]
 
 
 ## Coppie [termine, valore] del dettaglio della lealta': solo i termini noti (non «somma», «uomini», «passi»), con
@@ -2494,7 +2510,7 @@ static func _format_phase5a(state: GameState, kind: String, e: Dictionary) -> St
 		var army_id := int_of(e.get("esercito"))
 		if kind == event_kind("EV_BRIBE_REFUSED"):
 			return Lang.t("L'esercito %d %s rifiuta la corruzione %s%s.") % [army_id, fprep("di", other_id), fprep("di", actor_id, "by"), at]
-		var bribe := Lang.t("%s %s l'esercito %d %s per %d fiorini%s.") % [fsubj(actor_id), fverb(actor_id, Lang.t("corrompe"), Lang.t("corrompono")), army_id, fprep("di", other_id), int_of(e.get("prezzo")), at]
+		var bribe := Lang.t("%s %s l'esercito %d %s per %d denari%s.") % [fsubj(actor_id), fverb(actor_id, Lang.t("corrompe"), Lang.t("corrompono")), army_id, fprep("di", other_id), int_of(e.get("prezzo")), at]
 		var province_id := text_of(e.get("provincia", ""))
 		if province_id != "":
 			bribe += Lang.t(" Con la guarnigione passa %s.") % region_name(state, province_id)

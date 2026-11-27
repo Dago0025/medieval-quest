@@ -139,7 +139,7 @@ static func effect_line(state: GameState, e: Dictionary) -> String:
 	elif effect == EventRules.EFFECT_PIETY:
 		text = Lang.t("pietà del capo %s: %s") % [CampaignUiText.signed(value), faction_list(factions)]
 	elif effect == EventRules.EFFECT_TREASURY:
-		text = Lang.t("tesoro %s fiorini: %s") % [CampaignUiText.signed(value), faction_list(factions)]
+		text = Lang.t("tesoro %s denari: %s") % [CampaignUiText.signed(value), faction_list(factions)]
 	if effect != EventRules.EFFECT_NONE and effect != "" and bool(e.get("provvisoria", false)):
 		text += Lang.t(" (effetto provvisorio)")
 	return text

@@ -216,7 +216,7 @@ func test_finestre_degli_eventi_storici(t: TestContext) -> void:
 	t.assert_true(fallback.contains("Il testo originale non è disponibile"), fallback)
 	t.assert_true(fallback.contains("«prova_9»"), fallback)
 	t.assert_true(fallback.contains("1000"), fallback)
-	t.assert_eq(windows[2]["effetto"], "tesoro +200 fiorini: Alpha")
+	t.assert_eq(windows[2]["effetto"], "tesoro +200 denari: Alpha")
 
 
 func test_finestra_con_i_testi_dell_installazione_assenti(t: TestContext) -> void:
@@ -244,7 +244,7 @@ func test_righe_degli_effetti(t: TestContext) -> void:
 		[{"effetto": "zelo", "valore": 20, "regioni": [W.NORD1]}, "zelo +20: Nord1"],
 		[{"effetto": "eretici", "valore": 10, "regioni": [W.NORD1]}, "eretici +10% in Nord1"],
 		[{"effetto": "pieta_capo", "valore": 1, "fazioni": [W.A]}, "pietà del capo +1: Alpha"],
-		[{"effetto": "tesoro", "valore": -300, "fazioni": [W.G]}, "tesoro -300 fiorini: Gamma"],
+		[{"effetto": "tesoro", "valore": -300, "fazioni": [W.G]}, "tesoro -300 denari: Gamma"],
 		[{"effetto": "nessuno"}, "nessun effetto sul gioco"],
 		[{}, "nessun effetto sul gioco"],
 		[{"effetto": "zelo", "valore": 5, "regioni": [W.NORD1, W.NORD2, W.NORD3, W.EST, W.DELTA1, W.SUD1, W.SUD2]}, "zelo +5: Nord1, Nord2, Nord3, Est, Delta1 e altre 2"],

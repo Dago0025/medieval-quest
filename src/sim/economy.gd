@@ -3,7 +3,7 @@ extends RefCounted
 ## Calcolo del reddito delle province e del mantenimento (fase 2, catalogo sezione Economia).
 ##
 ## Reddito di una provincia propria non contesa, per voce, arrotondato all'intero
-## (PROVVISORIA: l'arrotondamento al fiorino non e' documentato, catalogo r.34):
+## (PROVVISORIA: l'arrotondamento al denaro non e' documentato, catalogo r.34):
 ##   agricoltura = roundi(SetAttributes x scala annua x terreno x tassa)
 ##   miniere     = roundi(somma delle rendite dei livelli costruiti x scala miniere)
 ##   commercio   = roundi(somma merci x moltiplicatore edificio x scala annua x fattore)
@@ -33,12 +33,12 @@ static func province_income(state: GameState, province: ProvinceState, acumen: D
 		return result
 	var rules := state.rules
 	var factor := acumen_multiplier(state, province, acumen)
-	var income_factor := province.temp_factor(ProvinceState.TEMP_INCOME)
+	var income_factor := province.temp_factor(ProvinceState.TEMP_INCOME) * LegendarySites.region_factor(state, province.id, "reddito")   # luoghi leggendari
 	var traits := rules.traits   # ADR-089: tratti storici della fazione proprietaria
-	var farm := roundi(float(region.income) * rules.annual_scale * rules.farm_multiplier(province.level_of(rules.farm_family)) * rules.tax_multiplier(province.tax_level) * factor * province.temp_factor(ProvinceState.TEMP_FARM) * income_factor * traits.farm_factor(province.owner))
-	var mines := roundi(float(mine_income(state, province)) * rules.mine_scale * income_factor * traits.mine_factor(province.owner))
+	var farm := roundi(float(region.income) * rules.annual_scale * rules.farm_multiplier(province.level_of(rules.farm_family)) * rules.tax_multiplier(province.tax_level) * factor * province.temp_factor(ProvinceState.TEMP_FARM) * income_factor * traits.farm_factor(province.owner) * LegendarySites.region_factor(state, province.id, "agricoltura"))
+	var mines := roundi(float(mine_income(state, province)) * rules.mine_scale * income_factor * traits.mine_factor(province.owner) * LegendarySites.region_factor(state, province.id, "miniere"))
 	var parts := trade_breakdown(state, province, region, factor)
-	var trade := roundi(float(int(parts["locale"]) + int(parts["marittimo"]) + int(parts["importazioni"])) * income_factor * traits.trade_factor(province.owner))
+	var trade := roundi(float(int(parts["locale"]) + int(parts["marittimo"]) + int(parts["importazioni"])) * income_factor * traits.trade_factor(province.owner) * LegendarySites.region_factor(state, province.id, "commercio"))
 	result["commercio_locale"] = int(parts["locale"])
 	result["commercio_marittimo"] = int(parts["marittimo"])
 	result["importazioni"] = int(parts["importazioni"])
@@ -83,7 +83,7 @@ static func trade_income(state: GameState, province: ProvinceState, region: Camp
 	return int(parts["locale"]) + int(parts["marittimo"]) + int(parts["importazioni"])
 
 
-## Le tre parti del commercio: {"locale", "marittimo", "importazioni" (fiorini l'anno, arrotondati), "partner" (id delle
+## Le tre parti del commercio: {"locale", "marittimo", "importazioni" (denari l'anno, arrotondati), "partner" (id delle
 ## province straniere raggiunte via mare, PackedStringArray)}. `hypothesis` (facoltativo, vedi `trade_partners`) calcola le rotte
 ## di un'ipotesi invece che delle flotte presenti: lo usa l'IA (ADR-053) con la stessa formula del giocatore.
 static func trade_breakdown(state: GameState, province: ProvinceState, region: CampaignData.Region, factor: float = 1.0, hypothesis: Dictionary = {}) -> Dictionary:
@@ -116,15 +116,17 @@ static func trade_breakdown(state: GameState, province: ProvinceState, region: C
 			if not goods.has(g):
 				imports += float(q_goods[g]) * weight
 	if trade_level > 0:
-		out["marittimo"] = roundi(exports * building * scale * rules.sea_trade_share)
+		# luoghi leggendari: della provincia (Colosso, Faro) e presidi delle zone di mare della fazione (Sirene, Scilla)
+		var sites := maxf(0.0, 1.0 + (LegendarySites.region_value(state, province.id, "commercio_marittimo") + LegendarySites.faction_value(state, province.owner, "commercio_marittimo")) / 100.0)
+		out["marittimo"] = roundi(exports * building * scale * rules.sea_trade_share * sites)
 	out["importazioni"] = roundi(imports * scale * rules.import_share)
 	return out
 
 
 ## Quanto rende ogni porto raggiunto dalla provincia (finestra Economia, richiesta di Federico del 2026-11-13): stessa formula
 ## di `trade_breakdown`, porto per porto. Ogni voce: "provincia", "fazione", "peso" (`partner_weight`), "valore"
-## (`partner_value`), "merci" e "importazioni" (fiorini l'anno, non arrotondati: la somma arrotondata e' quella di
-## `trade_breakdown`), "fiorini" (le due parti insieme, arrotondate). Ordinate dal porto che rende di piu'; vuoto senza porto
+## (`partner_value`), "merci" e "importazioni" (denari l'anno, non arrotondati: la somma arrotondata e' quella di
+## `trade_breakdown`), "denari" (le due parti insieme, arrotondate). Ordinate dal porto che rende di piu'; vuoto senza porto
 ## costruito o senza rotte.
 static func trade_partner_details(state: GameState, province: ProvinceState, region: CampaignData.Region, factor: float = 1.0) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
@@ -153,7 +155,7 @@ static func trade_partner_details(state: GameState, province: ProvinceState, reg
 		var sold := exports * building * scale * rules.sea_trade_share if trade_level > 0 else 0.0
 		var taxed := imports * scale * rules.import_share
 		out.append({"provincia": pid, "fazione": q.owner, "peso": weight, "valore": partner_value(state, q, q_region),
-			"merci": sold, "importazioni": taxed, "fiorini": roundi(sold + taxed), "k": out.size()})
+			"merci": sold, "importazioni": taxed, "denari": roundi(sold + taxed), "k": out.size()})
 	out.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		var fa := float(a["merci"]) + float(a["importazioni"])
 		var fb := float(b["merci"]) + float(b["importazioni"])
@@ -272,7 +274,7 @@ static func _trade_zone_open(state: GameState, faction_id: String, zone_id: Stri
 	return own
 
 
-## Commercio via mare (marittimo + importazioni, fiorini l'anno) di tutte le province della fazione con il porto, con le flotte
+## Commercio via mare (marittimo + importazioni, denari l'anno) di tutte le province della fazione con il porto, con le flotte
 ## presenti o con l'ipotesi `hypothesis` (vedi `trade_partners`). Stessa formula di `trade_breakdown` (senza acume ne' effetti
 ## temporanei): l'IA la usa per confrontare piani di zone (ADR-053).
 static func sea_trade_of(state: GameState, faction_id: String, hypothesis: Dictionary = {}) -> int:
@@ -307,7 +309,7 @@ static func faction_upkeep(state: GameState, faction_id: String) -> int:
 	var total := 0
 	for a in state.armies_of(faction_id):
 		total += army_support_sum(state, a)
-	return roundi(float(total) * state.rules.upkeep_multiplier)
+	return roundi(float(total) * state.rules.upkeep_multiplier) + LegendarySites.upkeep(state, faction_id)   # + mantenimento dei luoghi leggendari
 
 
 ## Acume del governatore di ogni provincia e del capo di ogni fazione (valori efficaci), da calcolare una volta

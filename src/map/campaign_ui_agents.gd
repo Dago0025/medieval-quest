@@ -439,7 +439,7 @@ static func is_recruitable_agent(unit: UnitType) -> bool:
 
 ## Voce di reclutamento di un agente: l'etichetta lo distingue dalle truppe.
 static func recruit_text(unit: UnitType, cost: int, years: int) -> String:
-	return Lang.t("[Agente] %s · %d fiorini, %d anni") % [CampaignUiText.agent_unit_name(unit.id), cost, years]
+	return Lang.t("[Agente] %s · %d denari, %d anni") % [CampaignUiText.agent_unit_name(unit.id), cost, years]
 
 
 ## Tooltip della voce di reclutamento: tipo, costo e aiuto sull'uso.
@@ -562,7 +562,7 @@ static func option_text(state: GameState, opt: Dictionary) -> String:
 	text += " · %s" % chance_text(p)
 	var price := CampaignUiText.int_of(opt.get("prezzo"))
 	if kind == AgentMissions.BRIBE:
-		text += Lang.t(" · %d fiorini") % price
+		text += Lang.t(" · %d denari") % price
 		if not bool(opt.get("tesoro_sufficiente", true)):
 			text += Lang.t(" (tesoro insufficiente)")
 	return text
@@ -705,7 +705,7 @@ static func ordered_text(state: GameState, agent: AgentState, result: Dictionary
 	extras.append(Lang.t("riuscita %s") % chance_text(float(result.get("probabilita", 0.0))))
 	var price := CampaignUiText.int_of(result.get("prezzo"))
 	if kind == AgentMissions.BRIBE:
-		extras.append(Lang.t("%d fiorini a fine anno se accetta") % price)
+		extras.append(Lang.t("%d denari a fine anno se accetta") % price)
 	text += " (%s)." % ", ".join(extras)
 	if region_id != agent.region:
 		text += Lang.t(" L'agente ci va prima.")

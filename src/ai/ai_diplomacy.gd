@@ -65,7 +65,7 @@ static func wants_truce(data: AiPlan, enemy_id: String, near: Dictionary = {}) -
 	return data.rng.randf() < data.rules.peace_prob
 
 
-## Commercio via mare (fiorini l'anno) che la fazione perde per la guerra con `enemy_id`: differenza tra il commercio con le flotte
+## Commercio via mare (denari l'anno) che la fazione perde per la guerra con `enemy_id`: differenza tra il commercio con le flotte
 ## presenti senza quella guerra (le sue flotte non chiudono le zone, i suoi porti tornano partner) e quello di oggi. Stessa
 ## funzione del giocatore (`Economy.sea_trade_of`, ADR-051/053).
 static func lost_trade(data: AiPlan, enemy_id: String) -> int:

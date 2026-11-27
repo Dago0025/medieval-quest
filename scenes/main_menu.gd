@@ -508,7 +508,7 @@ static func faction_summary(data: CampaignData, faction_id: String) -> String:
 	if f.leader_region != "":
 		lines.append(Lang.t("Capitale: %s") % RegionNames.shown(data, f.leader_region))
 	if not f.treasury.is_empty():
-		lines.append(Lang.t("Tesoro iniziale: %d fiorini") % f.treasury[0])
+		lines.append(Lang.t("Tesoro iniziale: %d denari") % f.treasury[0])
 	return "\n".join(lines)
 
 

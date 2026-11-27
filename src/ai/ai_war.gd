@@ -303,7 +303,7 @@ static func _best_target(plan: AiPlan, tried: Dictionary, rolls: Dictionary) -> 
 		if r < AiPolicy.threshold_for(plan, kind):
 			continue
 		var region := state.campaign.region(n)
-		var value := float(region.income) + 50.0 * float(Combat.castle_level(state, n)) + 100.0
+		var value := (float(region.income) + 50.0 * float(Combat.castle_level(state, n)) + 100.0) * LegendarySites.region_factor(state, n, "bersaglio_ia")   # luoghi leggendari
 		var score := value if raider else value * minf(r, 4.0)
 		if score <= best_score:
 			continue

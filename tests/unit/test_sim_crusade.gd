@@ -67,7 +67,7 @@ func test_condizioni_per_reclutare_una_crociata(t: TestContext) -> void:
 	t.assert_true(str(muslim["errore"]).find("cattolici") >= 0, str(muslim["errore"]))
 	t.assert_false(bool(GameCommands.can_queue_unit(s, W.A, W.NORD2, "Crusade")["ok"]), "NORD2 non ha la Chapter House")
 	s.faction(W.A).treasury = 999
-	t.assert_false(bool(GameCommands.can_queue_unit(s, W.A, W.NORD1, "Crusade")["ok"]), "mille fiorini")
+	t.assert_false(bool(GameCommands.can_queue_unit(s, W.A, W.NORD1, "Crusade")["ok"]), "mille denari")
 
 
 func test_condizioni_per_reclutare_un_jihad(t: TestContext) -> void:
@@ -158,7 +158,7 @@ func test_la_scomunica_in_coda_rimborsa_e_la_nascita_si_ferma(t: TestContext) ->
 	GameCommands.queue_unit(s, W.A, W.NORD1, "Crusade")
 	TurnProcessor.end_year(s)
 	PapacyProcessor.excommunicate(s, W.A, "x")
-	t.assert_eq(s.faction(W.A).treasury, 5000 + int(s.faction(W.A).last_income["netto"]), "rimborsati i mille fiorini")
+	t.assert_eq(s.faction(W.A).treasury, 5000 + int(s.faction(W.A).last_income["netto"]), "rimborsati i mille denari")
 	for i in 5:
 		TurnProcessor.end_year(s)
 	t.assert_true(_crusade_army(s, W.A) == null, "nessuna crociata")

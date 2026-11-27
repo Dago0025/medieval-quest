@@ -151,6 +151,8 @@ static func _other(state: GameState, kind: String, e: Dictionary, key: String) -
 	var mentions := CampaignUiText.event_mentions(e, key)
 	var other := _other_faction(state, e, key)
 	var text := CampaignUiText.format_event(state, e)
+	if kind == GameState.EV_SITE_DISCOVERED or kind == GameState.EV_SITE_EVENT or kind == GameState.EV_SITE_TRANSIT:
+		return CampaignUiSites.alert_window(state, kind, e, key)   # luoghi leggendari (26/11/2026)
 	match kind:
 		GameState.EV_SIEGE_STARTED:
 			if SimUtil.norm(CampaignUiText.text_of(e.get("assediata"))) != key:

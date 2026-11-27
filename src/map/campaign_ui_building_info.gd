@@ -31,7 +31,7 @@ static func info(state: GameState, family_id: String, level: int, faction_id: St
 	var levels := fam.levels.size()
 	var effects: Array = []
 	if lv.income != 0:
-		effects.append([Lang.t("Rendita"), Lang.t("%d fiorini l'anno") % lv.income])
+		effects.append([Lang.t("Rendita"), Lang.t("%d denari l'anno") % lv.income])
 	if lv.happiness != 0:
 		effects.append([Lang.t("Lealtà"), CampaignUiText.signed(lv.happiness)])
 	if lv.capacity > 0:
@@ -46,7 +46,7 @@ static func info(state: GameState, family_id: String, level: int, faction_id: St
 		effects.append([Lang.t("Mercenari"), Lang.t("li attira (%d)") % lv.mercenary_magnetism])
 	var years := state.rules.traits.building_years(faction_id, lv) if state.rules != null else maxi(1, lv.build_time)   # ADR-089
 	var price := state.rules.traits.building_cost(faction_id, lv) if state.rules != null else lv.cost
-	var costs: Array = [[Lang.t("Costo"), Lang.t("%d fiorini") % price], [Lang.t("Costruzione"), "%d %s" % [years, Lang.t("anno") if years == 1 else Lang.t("anni")]]]
+	var costs: Array = [[Lang.t("Costo"), Lang.t("%d denari") % price], [Lang.t("Costruzione"), "%d %s" % [years, Lang.t("anno") if years == 1 else Lang.t("anni")]]]
 	var reqs: Array = []
 	var needs := requires_text(state, lv.requires)
 	reqs.append([Lang.t("Richiede"), needs if needs != "" else Lang.t("nessun edificio")])

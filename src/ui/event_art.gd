@@ -70,6 +70,12 @@ static func theme_texture(theme: String, seed: String = "") -> Texture2D:
 
 ## Immagine di sfondo di una finestra di evento: il tema degli avvisi (CampaignUiAlerts) o la tavola dell'evento storico.
 static func window_texture(w: Dictionary) -> Texture2D:
+	# luoghi leggendari: la tavola dipinta del luogo, altrimenti una tavola generica scelta dal luogo (26/11/2026)
+	var picture := str(w.get("immagine", ""))
+	if picture != "" and ResourceLoader.exists(picture):
+		return load(picture) as Texture2D
+	if str(w.get("luogo_leggendario", "")) != "":
+		return historical_texture(-1, "luogo_" + str(w["luogo_leggendario"]))
 	var theme := str(w.get("tema", ""))
 	if theme != "":
 		return theme_texture(theme, "%s|%d" % [str(w.get("titolo", "")), int(w.get("anno", 0))])

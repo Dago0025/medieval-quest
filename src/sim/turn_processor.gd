@@ -52,6 +52,8 @@ static func end_year(state: GameState) -> Dictionary:
 		return {"ok": false, "anno": state.year, "finita": true, "errori": errors, "avvisi": warnings}
 	state.events.clear()
 	PrisonerProcessor.settle_overdue(state)   # ADR-073: decisioni sui prigionieri lasciate in sospeso dal giocatore
+	LegendarySiteProcessor.ensure_init(state)   # luoghi leggendari: chi li possiede all'inizio li conosce gia'
+	LegendarySiteProcessor.settle_overdue(state)   # scelte dei luoghi lasciate in sospeso dal giocatore
 	TroopUpgrades.apply_faction_minimum(state)   # armi e armatura minime della fazione (Auror: oro), anche per le pile passate di mano
 	PapacyProcessor.snapshot(state)
 	DynastyProcessor.sync_positions(state)
@@ -69,6 +71,7 @@ static func end_year(state: GameState) -> Dictionary:
 	ReligionProcessor.process_year(state)
 	PapacyProcessor.process_year(state)
 	EventProcessor.process_year(state)
+	LegendarySiteProcessor.process_year(state)   # luoghi leggendari: scoperte, eventi, transito e presidio (26/11/2026)
 	AgentProcessor.sync_year(state)
 	_income_and_upkeep(state, errors, warnings)
 	EventProcessor.clear_temporary(state)

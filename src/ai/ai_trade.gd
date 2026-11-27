@@ -48,7 +48,7 @@ static func plan(data: AiPlan) -> void:
 
 
 ## Zone da presidiare per massimizzare il commercio via mare con al massimo `max_zones` flotte. Esito: "zone" (PackedStringArray,
-## nell'ordine in cui sono entrate nel piano), "rendita" (commercio via mare stimato con il piano, fiorini l'anno), "base" (senza
+## nell'ordine in cui sono entrate nel piano), "rendita" (commercio via mare stimato con il piano, denari l'anno), "base" (senza
 ## nessuna zona presidiata), "rotte" (Array di {"zone", "guadagno"} scelte), "serve_nave" (vero se una rotta rimasta fuori per
 ## mancanza di flotte renderebbe almeno `soglia_costruzione_nave`).
 static func plan_zones(data: AiPlan, max_zones: int) -> Dictionary:

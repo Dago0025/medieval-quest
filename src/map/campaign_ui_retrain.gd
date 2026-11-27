@@ -80,13 +80,13 @@ static func panel_state(state: GameState, faction_id: String, army: Army, checke
 	out["costo"] = cost
 	out["pile"] = taken
 	if cost > 0:
-		out["testo"] = Lang.t("%s (%d fiorini)") % [Lang.t(BUTTON_TEXT), cost]
+		out["testo"] = Lang.t("%s (%d denari)") % [Lang.t(BUTTON_TEXT), cost]
 	var lines: Array[String] = [Lang.t("Riporta all'organico pieno le pile spuntate pagando in proporzione agli uomini mancanti; la pila perde esperienza in proporzione ai nuovi arrivati. Si applica a fine anno, se l'esercito resta fermo qui.")]
 	if cost > 0:
-		lines.append(Lang.t("Costo totale: %d fiorini per %d pile.") % [cost, taken])
+		lines.append(Lang.t("Costo totale: %d denari per %d pile.") % [cost, taken])
 		var faction := state.faction(faction_id)
 		if faction != null and faction.treasury < cost:
-			lines.append(Lang.t("Tesoro insufficiente: ci sono %d fiorini.") % faction.treasury)
+			lines.append(Lang.t("Tesoro insufficiente: ci sono %d denari.") % faction.treasury)
 	elif ascending.is_empty():
 		lines.append(Lang.t("Spunta le pile da riaddestrare (non i mercenari né gli ordini militari)."))
 	lines.append_array(notes)
@@ -103,7 +103,7 @@ static func has_controls(state: GameState, faction_id: String, army: Army) -> bo
 static func ordered_text(state: GameState, r: Dictionary) -> String:
 	if not bool(r["ok"]):
 		return CampaignUiText.order_error_text(state, str(r["errore"]))
-	var text := Lang.t("Riaddestramento ordinato: %d pile, %d fiorini (a fine anno tornano all'organico pieno).") % [int(r.get("pile", 0)), int(r.get("costo", 0))]
+	var text := Lang.t("Riaddestramento ordinato: %d pile, %d denari (a fine anno tornano all'organico pieno).") % [int(r.get("pile", 0)), int(r.get("costo", 0))]
 	var skipped := CampaignUiText.list_of(r.get("rifiutate"))
 	if not skipped.is_empty():
 		var first: Dictionary = skipped[0]
@@ -134,12 +134,12 @@ static func restore_action(state: GameState, faction_id: String, army: Army) -> 
 	var cost := int(preview["costo"])
 	var treasury := state.faction(faction_id).treasury
 	out["attivo"] = treasury >= RetrainProcessor.stack_cost(state, army.stacks[int((preview["indici"] as Array)[0])])
-	var lines := PackedStringArray([Lang.t("Riporta al pieno delle forze %d %s entro fine anno: %d uomini, %d fiorini.") % [
+	var lines := PackedStringArray([Lang.t("Riporta al pieno delle forze %d %s entro fine anno: %d uomini, %d denari.") % [
 		piles, Lang.t("pila") if piles == 1 else Lang.t("pile"), int(preview["uomini"]), cost]])
 	if treasury < cost:
 		lines.append(Lang.t("Il tesoro (%d) non basta per tutte: si ripristinano quelle che si possono pagare.") % treasury)
 	if not out["attivo"]:
-		lines[lines.size() - 1] = Lang.t("Tesoro insufficiente: servono %d fiorini, ce ne sono %d.") % [cost, treasury]
+		lines[lines.size() - 1] = Lang.t("Tesoro insufficiente: servono %d denari, ce ne sono %d.") % [cost, treasury]
 	lines.append(Lang.t("Se l'esercito si muove prima di fine anno, il costo è rimborsato."))
 	out["suggerimento"] = "\n".join(lines)
 	return out
@@ -158,7 +158,7 @@ static func restored_text(state: GameState, army: Army, r: Dictionary) -> String
 	if not bool(r["ok"]):
 		return CampaignUiText.order_error_text(state, str(r["errore"]))
 	var piles := int(r.get("pile", 0))
-	var text := Lang.t("%s torna al pieno delle forze a fine anno: %d %s, %d uomini, %d fiorini.") % [
+	var text := Lang.t("%s torna al pieno delle forze a fine anno: %d %s, %d uomini, %d denari.") % [
 		CampaignUiText.army_title(army), piles, Lang.t("pila") if piles == 1 else Lang.t("pile"), int(r.get("uomini", 0)), int(r.get("costo", 0))]
 	if int(r.get("rimaste", 0)) > 0:
 		text += Lang.t(" Il tesoro non bastava per altre %d.") % int(r["rimaste"])
@@ -172,7 +172,7 @@ static func restored_text(state: GameState, army: Army, r: Dictionary) -> String
 static func cancelled_text(state: GameState, r: Dictionary) -> String:
 	if not bool(r["ok"]):
 		return CampaignUiText.order_error_text(state, str(r["errore"]))
-	return Lang.t("Riaddestramento annullato: %d fiorini rimborsati per %d pile.") % [int(r.get("rimborso", 0)), int(r.get("pile", 0))]
+	return Lang.t("Riaddestramento annullato: %d denari rimborsati per %d pile.") % [int(r.get("rimborso", 0)), int(r.get("pile", 0))]
 
 
 ## Frase da aggiungere al messaggio di un movimento, di una divisione o di un'unione che ha annullato degli ordini di
@@ -180,7 +180,7 @@ static func cancelled_text(state: GameState, r: Dictionary) -> String:
 static func refund_note(r: Dictionary) -> String:
 	if int(r.get("pile_riaddestramento", 0)) <= 0:
 		return ""
-	return Lang.t("Riaddestramento annullato: %d fiorini rimborsati.") % int(r.get("rimborso_riaddestramento", 0))
+	return Lang.t("Riaddestramento annullato: %d denari rimborsati.") % int(r.get("rimborso_riaddestramento", 0))
 
 
 ## Testo italiano degli eventi EV_RETRAINED e EV_RETRAIN_CANCELLED; vuoto per gli altri tipi. Senza i campi essenziali ripiega
@@ -196,10 +196,10 @@ static func format_event(state: GameState, kind: String, e: Dictionary) -> Strin
 	var army_id := CampaignUiText.int_of(e.get("esercito"))
 	var stacks := CampaignUiText.int_of(e.get("pile"))
 	if kind == GameState.EV_RETRAINED:
-		return Lang.t("Riaddestramento a %s (esercito %d): %d pile tornano all'organico pieno, +%d uomini (%d fiorini).") % [
+		return Lang.t("Riaddestramento a %s (esercito %d): %d pile tornano all'organico pieno, +%d uomini (%d denari).") % [
 			place, army_id, stacks, CampaignUiText.int_of(e.get("uomini")), CampaignUiText.int_of(e.get("costo"))]
 	var reason := Lang.t(str(CANCEL_REASONS.get(CampaignUiText.text_of(e.get("motivo")), "")))
-	var text := Lang.t("Riaddestramento annullato a %s (esercito %d): %d pile, %d fiorini rimborsati") % [
+	var text := Lang.t("Riaddestramento annullato a %s (esercito %d): %d pile, %d denari rimborsati") % [
 		place, army_id, stacks, CampaignUiText.int_of(e.get("rimborso"))]
 	if reason != "":
 		text += Lang.t(" (%s)") % reason

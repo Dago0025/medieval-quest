@@ -52,7 +52,7 @@ func test_scheda_dell_unita(t: TestContext) -> void:
 		rows[str(r[0])] = str(r[1])
 	t.assert_eq(rows.get("Uomini"), "60 su 100", "uomini attuali e pieni")
 	t.assert_eq(rows.get("Valore"), "3")
-	t.assert_eq(rows.get("Costo"), "100 fiorini")
+	t.assert_eq(rows.get("Costo"), "100 denari")
 	t.assert_true(rows.has("Carica") and rows.has("Mischia") and rows.has("Difesa") and rows.has("Armatura base"), str(rows))
 	t.assert_eq(str(info["comandante"]), "", "nessun comandante")
 	var c := W.add_general(s, W.A, W.BASSA)
@@ -175,3 +175,19 @@ func test_la_sala_dei_regnanti(t: TestContext) -> void:
 	s.leader_of(W.B).alive = false
 	for e in CampaignUiText.rulers(s, W.A):
 		t.assert_true(str(e["fazione"]) != W.B)
+
+
+## Dalla scheda del re o del generale si apre la scheda della sua unita' (richiesta di Federico del 27/11/2026).
+func test_unita_guidata_dal_personaggio(t: TestContext) -> void:
+	var s := W.world()
+	var a := _army(s, [["Spearmen", 100, 0], ["Knights", 40, 2]])
+	var c := W.add_general(s, W.A, W.BASSA)
+	t.assert_true(CampaignUiText.led_unit(s, c).is_empty(), "fuori da un esercito non guida nessuna unita'")
+	c.army = a.id
+	var led := CampaignUiText.led_unit(s, c)
+	t.assert_eq(int(led["esercito"]), a.id)
+	t.assert_eq(int(led["pila"]), CampaignUiText.commander_stack(s, a), "la pila col pennacchio")
+	c.role = Character.ROLE_LEADER
+	t.assert_eq(int(CampaignUiText.led_unit(s, c)["pila"]), 1, "anche il re")
+	c.alive = false
+	t.assert_true(CampaignUiText.led_unit(s, c).is_empty(), "i morti no")

@@ -236,7 +236,7 @@ func test_gli_agenti_reclutabili_hanno_un_etichetta(t: TestContext) -> void:
 		t.assert_eq(CampaignUiAgents.is_recruitable_agent(u), expected, u.id)
 	var text := CampaignUiAgents.recruit_text(emissary_unit, 150, 2)
 	t.assert_true(text.begins_with("[Agente] "), text)
-	t.assert_true(text.ends_with("150 fiorini, 2 anni"), text)
+	t.assert_true(text.ends_with("150 denari, 2 anni"), text)
 	t.assert_true(CampaignUiAgents.recruit_tip(emissary_unit, "Costo 150.").contains("alleanze"))
 	t.assert_eq(CampaignUiAgents.queue_label(s, emissary_unit.id), "[Agente] " + CampaignUiText.agent_unit_name(emissary_unit.id))
 	t.assert_eq(CampaignUiAgents.queue_label(s, troop_unit.id), CampaignUiText.unit_name(troop_unit.id), "le truppe in coda restano come prima")
@@ -317,7 +317,7 @@ func test_corruzione_su_un_segnalino_di_esercito(t: TestContext) -> void:
 	t.assert_eq(on_army[2]["bersaglio"], general_army.id)
 	var text := str(on_army[2]["testo"])
 	t.assert_true(text.begins_with("Corrompi l'esercito %d di Beta (60 uomini) · " % general_army.id), text)
-	t.assert_true(text.contains(" fiorini"), text)
+	t.assert_true(text.contains(" denari"), text)
 	t.assert_true(str(on_army[2]["tooltip"]).contains("solo se l'esercito accetta"), str(on_army[2]["tooltip"]))
 	# clic sulla regione: alleanza e corruzione, nell'ordine di mission_options
 	var on_region := _entries(CampaignUiAgents.click_plan(s, a, options, W.MEZZA))
@@ -338,7 +338,7 @@ func test_corruzione_con_tesoro_insufficiente_si_avverte(t: TestContext) -> void
 	t.assert_true(str(on_army[2]["testo"]).ends_with("(tesoro insufficiente)"), str(on_army[2]["testo"]))
 	var ordered := GameCommands.order_mission(s, W.A, a.id, AgentMissions.BRIBE, general_army.id)
 	t.assert_true(bool(ordered["ok"]), "l'ordine resta possibile: si paga solo se l'esercito accetta")
-	t.assert_true(CampaignUiAgents.ordered_text(s, a, ordered).contains("fiorini a fine anno se accetta"))
+	t.assert_true(CampaignUiAgents.ordered_text(s, a, ordered).contains("denari a fine anno se accetta"))
 
 
 func test_assassinio_per_nome_e_ruolo(t: TestContext) -> void:
@@ -651,9 +651,9 @@ func test_testi_degli_eventi_diplomatici(t: TestContext) -> void:
 func test_testi_di_corruzioni_e_assassinii(t: TestContext) -> void:
 	var s := _world()
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_BRIBE, {"fazione": W.A, "con": W.B, "regione": W.MEZZA, "esercito": 5, "prezzo": 4200})),
-		"Alpha corrompe l'esercito 5 di Beta per 4200 fiorini a Mezza.")
+		"Alpha corrompe l'esercito 5 di Beta per 4200 denari a Mezza.")
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_BRIBE, {"fazione": W.A, "con": W.B, "regione": W.MEZZA, "esercito": 5, "prezzo": 4200, "provincia": W.MEZZA})),
-		"Alpha corrompe l'esercito 5 di Beta per 4200 fiorini a Mezza. Con la guarnigione passa Mezza.")
+		"Alpha corrompe l'esercito 5 di Beta per 4200 denari a Mezza. Con la guarnigione passa Mezza.")
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_BRIBE_REFUSED, {"fazione": W.A, "con": W.B, "regione": W.MEZZA, "esercito": 5, "prezzo": 4200})),
 		"L'esercito 5 di Beta rifiuta la corruzione di Alpha a Mezza.")
 	t.assert_eq(CampaignUiText.format_event(s, _ev(GameState.EV_ASSASSINATION, {"fazione": W.A, "con": W.B, "regione": W.MEZZA, "bersaglio_tipo": "personaggio", "bersaglio": 3, "nome": "Henry"})),

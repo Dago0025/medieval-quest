@@ -30,7 +30,7 @@ func test_il_dettaglio_per_porto_somma_al_commercio_della_provincia(t: TestConte
 	var parts := Economy.trade_breakdown(s, alta, region)
 	t.assert_eq(roundi(float(d["merci"])), int(parts["marittimo"]), "stessa formula: merci vendute")
 	t.assert_eq(roundi(float(d["importazioni"])), int(parts["importazioni"]), "stessa formula: importazioni")
-	t.assert_eq(int(d["fiorini"]), 15, "13 + 2 con il peso per ricchezza di MEZZA (0,208)")
+	t.assert_eq(int(d["denari"]), 15, "13 + 2 con il peso per ricchezza di MEZZA (0,208)")
 
 
 func test_i_porti_sono_ordinati_dal_piu_redditizio(t: TestContext) -> void:
@@ -38,7 +38,7 @@ func test_i_porti_sono_ordinati_dal_piu_redditizio(t: TestContext) -> void:
 	s.rules.sea_trade_reference = 0.0
 	var alta := s.province("ID_ALTA")
 	var details := Economy.trade_partner_details(s, alta, s.campaign.region("ID_ALTA"))
-	t.assert_eq(int(details[0]["fiorini"]), 71, "senza peso per ricchezza: 62,4 + 8,32 = 70,72 (le due parti arrotondate insieme)")
+	t.assert_eq(int(details[0]["denari"]), 71, "senza peso per ricchezza: 62,4 + 8,32 = 70,72 (le due parti arrotondate insieme)")
 	t.assert_true(Economy.trade_partner_details(s, s.province("ID_BASSA"), s.campaign.region("ID_BASSA")).is_empty(), "entroterra: nessun porto")
 
 
@@ -56,7 +56,7 @@ func test_la_finestra_economia_mostra_i_porti_nel_dettaglio(t: TestContext) -> v
 	var port: Dictionary = ports[0]
 	t.assert_eq(str(port["nome"]), CampaignUiText.region_name(s, "ID_MEZZA"))
 	t.assert_eq(str(port["ricchezza"]), "povero", "peso 0,208")
-	t.assert_eq(int(port["fiorini"]), 15)
+	t.assert_eq(int(port["denari"]), 15)
 	t.assert_eq(int(alta["commercio_marittimo"]) + int(alta["importazioni"]), 15, "le parti del commercio nella riga")
 
 

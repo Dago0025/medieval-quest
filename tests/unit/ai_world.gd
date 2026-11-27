@@ -5,7 +5,7 @@ extends RefCounted
 ##   ID_A1 (ALPHA, porto) - ID_A2 (ALPHA) - ID_A3 (ALPHA) - ID_B1 (BETA) - ID_B2 (BETA) - ID_P1 (PAPIST, il Papato)
 ##   ID_R1 (ribelli) confina con A3; ID_G1 (GAMMA, predoni, porto) confina solo con ID_MARE, come ID_A1.
 ##   ALPHA = CATHOLIC_EXPANSIONIST, BETA = CATHOLIC_DEFENSIVE, GAMMA = BARBARIAN_RAIDER, PAPIST = POPE; tutte cattoliche.
-## Unita': Spearmen (100 fiorini, mantenimento 3), Archers (serve il Bowyer), Knights (serve Castle3), Galley (serve Shipyard1).
+## Unita': Spearmen (100 denari, mantenimento 3), Archers (serve il Bowyer), Knights (serve Castle3), Galley (serve Shipyard1).
 ## Di partenza ogni regione ha un esercito di lancieri (A1 100 piu' una galea, A2 80, A3 60, B1 70, B2 50, P1 40, R1 30, G1 90
 ## piu' una galea); i test che vogliono forze precise usano `clear_armies` e `put`.
 

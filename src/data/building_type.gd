@@ -14,7 +14,7 @@ class Level:
 	var level := 1                   ## da 1
 	var token := ""                  ## CASTLE, CASTLE2...
 	var label := ""                  ## col. 2: nome mostrato (come nel file)
-	var cost := 0                    ## col. 4, fiorini
+	var cost := 0                    ## col. 4, denari
 	var build_time := 0              ## col. 5, stagioni
 	## col. 6: requisiti. Alternative (OR) di gruppi di token (AND); vuota = nessuno.
 	var requires: Array[PackedStringArray] = []

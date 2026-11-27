@@ -1,12 +1,12 @@
 extends RefCounted
 ## Riaddestramento dell'IA: prima del reclutamento la fazione riporta all'organico pieno le pile sotto `soglia_ia` (0,7) degli
 ## eserciti di terra fermi nelle sue province, entro il budget del reclutamento. Mondo: ai_world.gd (lancieri: 100 uomini, 100
-## fiorini; il riaddestramento e' spento da `quiet_rules` e qui si riaccende con `allow_retraining`).
+## denari; il riaddestramento e' spento da `quiet_rules` e qui si riaccende con `allow_retraining`).
 
 const W := preload("res://tests/unit/ai_world.gd")
 
 
-## Mondo senza eserciti di partenza, con il riaddestramento acceso e ALPHA con 5000 fiorini.
+## Mondo senza eserciti di partenza, con il riaddestramento acceso e ALPHA con 5000 denari.
 func _world() -> GameState:
 	var s := W.world()
 	W.allow_retraining(s)
@@ -44,7 +44,7 @@ func test_resta_nel_budget_e_prosegue_con_le_pile_meno_costose(t: TestContext) -
 	var army := W.put(s, W.A, W.A2, 40)
 	army.stacks.append(UnitStack.new("Spearmen", 50, 0))
 	var plan := W.plan_for(s, W.A, "CATHOLIC_EXPANSIONIST")
-	# la pila piu' decimata (60 fiorini) non ci sta: si prende l'altra (50)
+	# la pila piu' decimata (60 denari) non ci sta: si prende l'altra (50)
 	var spent := AiEconomy.plan_retraining(plan, 55.0)
 	t.assert_eq(spent, 50)
 	t.assert_eq(s.retrain_orders.size(), 1)
@@ -63,7 +63,7 @@ func test_prima_la_pila_piu_decimata(t: TestContext) -> void:
 	army.stacks.append(UnitStack.new("Spearmen", 20, 0))
 	var plan := W.plan_for(s, W.A, "CATHOLIC_EXPANSIONIST")
 	AiEconomy.plan_retraining(plan, 90.0)
-	t.assert_eq(s.retrain_orders.size(), 1, "con 90 fiorini ce ne sta una sola (80 + 40 = 120)")
+	t.assert_eq(s.retrain_orders.size(), 1, "con 90 denari ce ne sta una sola (80 + 40 = 120)")
 	t.assert_eq(int(s.retrain_orders[0]["pila"]), 1, "la pila da 20 uomini")
 
 
@@ -111,7 +111,7 @@ func test_il_costo_rientra_nel_budget_del_reclutamento(t: TestContext) -> void:
 	var start := s.faction(W.A).treasury
 	var spent := AiEconomy.plan_recruitment(plan)
 	t.assert_eq(RetrainProcessor.orders_of(s, weak.id).size(), 1, "la pila di A3 e' stata riaddestrata prima di reclutare")
-	t.assert_true(spent >= 40, "la spesa comprende i 40 fiorini del riaddestramento")
+	t.assert_true(spent >= 40, "la spesa comprende i 40 denari del riaddestramento")
 	t.assert_eq(start - s.faction(W.A).treasury, spent, "il tesoro scende della spesa totale")
 	t.assert_eq(plan.ctx.rejected, 0, "nessun rifiuto: %s" % str(plan.ctx.rejections))
 	var budget := plan.num("quota_truppe") * float(plan.income)

@@ -70,7 +70,7 @@ static func from_box(state: GameState, player_id: String, group: Array[int], box
 ## Ordina a tutti gli eserciti di `ids` di andare in `region_id` (movimento o attacco). Chi e' gia' li' resta (il suo
 ## movimento si annulla, come col clic destro sulla propria regione); le flotte verso una zona lontana seguono la rotta
 ## piu' breve. Esito: {"partiti": [id], "restano": [id], "falliti": [{"id", "errore"}], "attacco": bool,
-## "rimborso": fiorini dei riaddestramenti annullati, "pile_riaddestramento": pile}.
+## "rimborso": denari dei riaddestramenti annullati, "pile_riaddestramento": pile}.
 static func order_move_all(state: GameState, player_id: String, ids: Array[int], region_id: String) -> Dictionary:
 	var out := {"partiti": [], "restano": [], "falliti": [], "attacco": false, "rimborso": 0, "pile_riaddestramento": 0}
 	for id in ids:

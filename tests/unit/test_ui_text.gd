@@ -77,7 +77,7 @@ func test_righe_degli_eventi(t: TestContext) -> void:
 	var conflict := CampaignUiText.format_event(s, {"tipo": GameState.EV_PENDING_CONFLICT, "esercito": 2, "da": "ID_BASSA", "verso": "ID_MEZZA"})
 	t.assert_true(conflict.contains("Mezza") and conflict.contains("conflitto in sospeso"), conflict)
 	var negative := CampaignUiText.format_event(s, {"tipo": GameState.EV_NEGATIVE_TREASURY, "tesoro": -40})
-	t.assert_eq(negative, "Tesoro negativo: -40 fiorini.")
+	t.assert_eq(negative, "Tesoro negativo: -40 denari.")
 	t.assert_eq(CampaignUiText.format_event(s, {"tipo": "altro"}), "altro", "tipo sconosciuto: il nome del tipo")
 
 

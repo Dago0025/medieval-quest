@@ -33,6 +33,8 @@ signal action_pressed(id: String)        ## comando dell'esercito scelto, dalla 
 signal dismiss_pressed                   ## «Congeda»: sciogliere le unita' scelte nel pannello di rassegna (ADR-031)
 signal proposals_pressed
 signal shield_pressed                    ## clic sullo stemma della fazione: il menu delle opzioni della mappa
+signal sites_pressed                     ## clic sulla bussola della minimappa: i medaglioni di tutti i luoghi scoperti
+signal help_pressed                      ## clic su «H: comandi e tasti» sotto le carte: la finestra dei comandi
 
 const BAR_W := 800.0
 const BAR_H := 115.0
@@ -111,6 +113,11 @@ const IRON := Color("3a3a38")
 const OUTLINE := Color("120b06")
 const SEAL_RED := Color("7a1e16")
 const SEAL_RED_HOVER := Color("96281d")
+const COMPASS_NORTH := Color("b3352a")
+const HELP_HINT_FONT := 7                   ## «H: comandi e tasti» sotto le carte (a misura 800x115)
+const HELP_HINT_LIGHT := Color("e8d6a0")    ## pergamena chiara sul legno della veste nuova
+## Bussola dei luoghi leggendari nell'angolo in basso a sinistra della minimappa (richiesta di Federico del 26/11/2026).
+const COMPASS := Vector2(20, 20)
 ## Texture ripetibili della veste nuova (facoltative): `legno.png` e `pergamena.png`. Se mancano restano le tinte piatte.
 ## Si rigenerano con tools/genera_texture_base.py o si sostituiscono con tools/prepara_texture.py (immagini dipinte).
 const SKIN_DIR := "res://assets/ui/veste/"
@@ -133,6 +140,10 @@ const NEW_CARD_WELL := Rect2(9, 2, 62, 57)   ## riquadro con la cornice d'ottone
 var ui_scale := 1.0
 var _bar: Control
 var _minimap: Control
+var _help_hint: Label
+var _compass: Control
+var _compass_on := false
+var _compass_hover := false
 var _mini_rect: TextureRect
 var _mini_quad := PackedVector2Array()
 var _mini_overlay: Control
@@ -219,7 +230,7 @@ static func scale_for(view_height: float) -> float:
 
 
 func set_status(treasury: int, year: int, treasury_tip: String, year_tip: String, game_over: bool, end_tip: String) -> void:
-	_treasury.text = Lang.t("%d fiorini") % treasury
+	_treasury.text = Lang.t("%d denari") % treasury
 	_treasury.add_theme_color_override("font_color", Color("8a1c12") if treasury < 0 else PLATE_TEXT)
 	_treasury.tooltip_text = treasury_tip
 	_year.text = Lang.t("AD %d") % year
@@ -472,6 +483,26 @@ func _build_bar() -> void:
 	_build_card.gui_input.connect(_on_card_input.bind("build"))
 	_train_card = _card(TRAIN_POS, "campmap/buttons/button_trainunit.BIF", Lang.t("Addestramento: apre la pergamena di addestramento della provincia scelta"))
 	_train_card.gui_input.connect(_on_card_input.bind("train"))
+	# «H: comandi e tasti» in piccolo sotto le due carte (richiesta di Federico del 27/11/2026); il clic apre la finestra
+	_help_hint = Label.new()
+	_help_hint.text = Lang.t("H: comandi e tasti")
+	_help_hint.position = Vector2(BUILD_POS.x, BUILD_POS.y + CARD_SIZE.y)
+	_help_hint.size = Vector2(TRAIN_POS.x + CARD_SIZE.x - BUILD_POS.x, BAR_H - BUILD_POS.y - CARD_SIZE.y)
+	_help_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_help_hint.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_help_hint.add_theme_font_size_override("font_size", HELP_HINT_FONT)
+	_help_hint.add_theme_color_override("font_color", HELP_HINT_LIGHT if veste_nuova else PLATE_TEXT)
+	_help_hint.mouse_filter = Control.MOUSE_FILTER_STOP
+	_help_hint.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	_help_hint.tooltip_text = Lang.t("Tutti i comandi del mouse e i tasti (H)")
+	_help_hint.gui_input.connect(func(event: InputEvent) -> void:
+		if event is InputEventMouseButton and (event as InputEventMouseButton).pressed and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+			help_pressed.emit())
+	_bar.add_child(_help_hint)
+	# centrata nella fascia di 10 punti sotto le carte (la riga del carattere nitido e' piu' alta della fascia)
+	var band := BAR_H - BUILD_POS.y - CARD_SIZE.y
+	_help_hint.size.y = _help_hint.get_combined_minimum_size().y
+	_help_hint.position.y = BUILD_POS.y + CARD_SIZE.y + band / 2.0 - _help_hint.size.y / 2.0
 	_arrow(Vector2(LEFT_W - 20.0, 0), Vector2(20, 58), "campmap/buttons/button_ipprev.BIF", -1)
 	_arrow(Vector2(LEFT_W - 20.0, 58), Vector2(20, 57), "campmap/buttons/button_ipnext.BIF", 1)
 	_shield = TextureRect.new()
@@ -668,6 +699,80 @@ func _build_minimap() -> void:
 	_mini_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_mini_overlay.draw.connect(_draw_minimap_overlay)
 	_minimap.add_child(_mini_overlay)
+	_compass = Control.new()
+	_compass.size = COMPASS
+	_compass.position = Vector2(_mini_frame() + 3.0, _mini_frame() + MINI_H - COMPASS.y - 3.0)
+	_compass.mouse_filter = Control.MOUSE_FILTER_STOP
+	_compass.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	_compass.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS   # bussola dipinta a 128 px
+	_compass.visible = false
+	_compass.draw.connect(_draw_compass)
+	_compass.gui_input.connect(_on_compass_input)
+	_compass.mouse_entered.connect(_on_compass_hover.bind(true))
+	_compass.mouse_exited.connect(_on_compass_hover.bind(false))
+	_minimap.add_child(_compass)
+
+
+## Bussola dei luoghi leggendari: `shown` la mostra (solo sulla mappa del mondo), `on` = medaglioni tutti aperti.
+func set_sites_button(shown: bool, on: bool, tip: String) -> void:
+	if _compass == null:
+		return
+	_compass.visible = shown
+	_compass_on = on
+	_compass.tooltip_text = tip
+	_compass.queue_redraw()
+
+
+func sites_button() -> Control:
+	return _compass
+
+
+func help_hint() -> Label:
+	return _help_hint
+
+
+func _on_compass_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT:
+		sites_pressed.emit()
+		_compass.accept_event()
+
+
+func _on_compass_hover(on: bool) -> void:
+	_compass_hover = on
+	_compass.queue_redraw()
+
+
+## Disco scuro con l'anello d'ottone e la rosa dei venti: punta del nord rossa, le altre d'ottone; piu' chiara al
+## passaggio del mouse, su fondo d'ambra se attiva.
+func _draw_compass() -> void:
+	var c := _compass
+	var s := c.size
+	var m := s / 2.0
+	var lit := _compass_on or _compass_hover
+	c.draw_circle(m, s.x / 2.0, Color(0.42, 0.29, 0.09, 0.95) if _compass_on else Color(0.10, 0.07, 0.04, 0.80))
+	c.draw_arc(m, s.x / 2.0 - 0.75, 0.0, TAU, 32, BRASS if lit else BRASS_DARK, 1.5, true)
+	var painted := painted_texture("bussola")
+	if painted != null:
+		# rosa dei venti dipinta (assets/ui/veste/bussola.png, tools/prepara_simboli_luoghi.py): piu' chiara se accesa
+		var side := s.x * 0.84
+		c.draw_texture_rect(painted, Rect2(m - Vector2(side, side) / 2.0, Vector2(side, side)), false, Color(1.25, 1.2, 1.1) if lit else Color.WHITE)
+		return
+	var ink := BRASS.lightened(0.3) if lit else BRASS
+	var tip_len := s.x * 0.37
+	var side_len := s.x * 0.20
+	var half := s.x * 0.10
+	for d in [Vector2.RIGHT, Vector2.LEFT]:
+		_compass_point(c, m, d, side_len, half * 0.8, ink.darkened(0.25))
+	_compass_point(c, m, Vector2.DOWN, tip_len, half, ink)
+	_compass_point(c, m, Vector2.UP, tip_len, half, COMPASS_NORTH.lightened(0.2) if lit else COMPASS_NORTH)
+	c.draw_circle(m, 1.6, WOOD_DARK)
+	c.draw_circle(m, 0.9, ink)
+
+
+## Una punta della rosa dei venti: triangolo dal centro (base larga `half` per lato) fino a `length` nella direzione `d`.
+func _compass_point(c: Control, m: Vector2, d: Vector2, length: float, half: float, color: Color) -> void:
+	var side := Vector2(-d.y, d.x) * half
+	c.draw_colored_polygon(PackedVector2Array([m + d * length, m + side, m - side]), color)
 
 
 func _draw_minimap_overlay() -> void:

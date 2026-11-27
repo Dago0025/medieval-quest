@@ -104,7 +104,7 @@ static func plan_buildings(plan: AiPlan) -> void:
 			built += 1
 
 
-## Migliore costruzione ammessa di una provincia entro `available` fiorini: {"famiglia", "costo", "score"} oppure {}.
+## Migliore costruzione ammessa di una provincia entro `available` denari: {"famiglia", "costo", "score"} oppure {}.
 static func _best_building(plan: AiPlan, p: ProvinceState, available: int) -> Dictionary:
 	var state := plan.state
 	var region := state.campaign.region(p.id)
@@ -231,7 +231,7 @@ static func plan_disband(plan: AiPlan) -> int:
 ## `tetto_mantenimento` x reddito. Le province minacciate vengono prima (minaccia / forza propria), poi la capitale se ha
 ## meno uomini del minimo, poi le province di frontiera, poi le altre. Unita' scelte con i pesi della colonna 14 per il profilo
 ## tra quelle reclutabili nella provincia (edifici richiesti, cultura, regione, epoca), con un po' di rumore.
-## Restituisce i fiorini spesi.
+## Restituisce i denari spesi.
 static func plan_recruitment(plan: AiPlan) -> int:
 	var state := plan.state
 	var quota := plan.num("quota_truppe")
@@ -330,7 +330,7 @@ static func plan_mercenaries(plan: AiPlan, budget: float, support_room: float, s
 ## Riaddestramento (PROVVISORIO, `[riaddestramento]` di ia.cfg): le pile con meno di `soglia_ia` dell'organico pieno degli eserciti
 ## di terra fermi nelle province della fazione (`GameCommands.retrain_options`: niente assedio, mercenari, ordini militari) si
 ## riaddestrano con `GameCommands.order_retrain`, nell'ordine di priorita' del reclutamento (province minacciate prima) e poi della
-## pila piu' decimata, finche' il costo sta nel `budget` del reclutamento. Restituisce i fiorini spesi (da contare nel budget).
+## pila piu' decimata, finche' il costo sta nel `budget` del reclutamento. Restituisce i denari spesi (da contare nel budget).
 static func plan_retraining(plan: AiPlan, budget: float) -> int:
 	var state := plan.state
 	var threshold := plan.rules.retrain_threshold

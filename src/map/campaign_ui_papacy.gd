@@ -374,10 +374,10 @@ static func unavailable_reason(error: String) -> String:
 	return ""
 
 
-## Voce di reclutamento: «[Crociata] Crusade · 1000 fiorini, 4 anni» e, se non disponibile per un motivo papale,
+## Voce di reclutamento: «[Crociata] Crusade · 1000 denari, 4 anni» e, se non disponibile per un motivo papale,
 ## «(scomunica)».
 static func recruit_text(unit: UnitType, kind: String, cost: int, years: int, error: String = "") -> String:
-	var text := Lang.t("%s %s · %d fiorini, %d anni") % [kind_tag(kind), CampaignUiText.agent_unit_name(unit.id), cost, years]
+	var text := Lang.t("%s %s · %d denari, %d anni") % [kind_tag(kind), CampaignUiText.agent_unit_name(unit.id), cost, years]
 	var reason := unavailable_reason(error)
 	if reason != "":
 		text += " (%s)" % reason
@@ -449,7 +449,7 @@ static func format_event(state: GameState, kind: String, e: Dictionary) -> Strin
 			banned += Lang.t(" Alleanze rotte con %s.") % CampaignUiText.fnames(broken)
 		var refund := CampaignUiText.int_of(e.get("rimborso"))
 		if refund > 0:
-			banned += Lang.t(" Le crociate in coda sono annullate: rimborsati %d fiorini.") % refund
+			banned += Lang.t(" Le crociate in coda sono annullate: rimborsati %d denari.") % refund
 		return banned
 	if kind == GameState.EV_EXCOMMUNICATION_LIFTED:
 		if actor_id == "":
@@ -463,7 +463,7 @@ static func format_event(state: GameState, kind: String, e: Dictionary) -> Strin
 		var amount := CampaignUiText.int_of(e.get("importo"))
 		if actor_id == "" or amount <= 0:
 			return fallback_text
-		var gift := Lang.t("Dono del Papa per %s: %d fiorini") % [CampaignUiText.fart(actor_id), amount]
+		var gift := Lang.t("Dono del Papa per %s: %d denari") % [CampaignUiText.fart(actor_id), amount]
 		var religious := CampaignUiText.int_of(e.get("religiosi"))
 		if religious > 0:
 			gift += Lang.t(" (%d religiosi)") % religious

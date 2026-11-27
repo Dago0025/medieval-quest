@@ -97,28 +97,9 @@ const INFO_RIGHT_WIDTH := 500.0                        ## colonna dei dati
 const INFO_BODY_HEIGHT := 480.0                        ## altezza fissa del corpo della scheda (la colonna dei dati scorre)
 const INFO_LABEL_WIDTH := 110.0                        ## etichette delle righe (Richiede, Epoche...)
 const INFO_UNLOCK_CARD := Vector2(64, 64)              ## carte delle unita' sbloccate da un edificio
-const HELP_TEXT := """Mappa: trascina con il tasto sinistro o usa le frecce; rotella per lo zoom
-Trascina una tua pedina su una regione: muovi o attacca; nella sua regione la sposti dove vuoi
-Trascina un esercito su un altro tuo: si uniscono (subito, o all'arrivo se è nella regione accanto)
-Alt+clic sui tuoi eserciti, o Alt+trascina un riquadro: li scegli insieme; trascinane uno o clic destro: vanno tutti
-Trascina un emissario su un re, un esercito o un emissario straniero: alleanza o tregua; una principessa: nozze
-Trascina un esercito su un tuo castello: si barricano le unità che ci stanno; su uno nemico: assedio o assalto
-Clic sul castello: le truppe dentro; secondo clic: la pergamena con gli eserciti del castello
-Clic su un edificio costruito: la sua scheda · le reclute nascono nel castello finché c'è posto
-, e . (o le frecce della barra): provincia precedente o successiva, con Maiusc solo quelle con qualcosa in coda
-Q: le code di costruzione e addestramento di tutte le province
-P, Pagina su/giù: prospettiva · B: confini · R: tinta della religione · N: nomi delle regioni
-Clic sinistro: seleziona provincia, esercito o agente · Esc: chiude o deseleziona
-«Menu» in alto a destra (o Esc): salva, carica, menu iniziale, esci dal gioco · F5 e F9: salvataggio e caricamento rapidi
-«Regnanti» in alto a destra (o K): i sovrani in carica · clic destro sulla carta del comandante: la sua scheda con il ritratto
-Esercito scelto: i suoi comandi (annulla ordini, barricati, assalta, riaddestra, comandante, congeda) sono nella barra in basso
-Esercito o flotta scelti: clic sulle carte nella barra in basso per sceglierle, poi trascinale sulla mappa per separarle
-Carte scelte e «Congeda» nella barra: le unità lasciano l'esercito senza rimborso e diventano mercenari; niente più mantenimento
-Clic destro con un esercito: muovi o attacca; sulle province cerchiate trasporta via mare
-Clic destro con un agente: muovi o scegli la missione
-Crociata o jihad senza bersaglio: il clic destro sceglie il bersaglio
-Invio: fine anno · F5/F9: salva/carica · F1: economia · clic sullo stemma in basso: opzioni della mappa
-C: corte · D: diplomazia · G: classifica · H: questo aiuto"""
+const HELP_COLUMN_WIDTH := 520.0   ## colonne della finestra «Comandi e tasti» (CampaignUiHelp)
+const HELP_SECTION_COLUMNS := [0, 0, 1, 0, 0, 1]   ## colonna di ogni sezione: mappa, selezione, agenti, province a sinistra; eserciti e partita a destra
+const HELP_TEXT_SIZE := 15
 const COURT_TEXT_WIDTH := 720.0    ## larghezza del testo di un personaggio nel pannello della corte (allargata il 20/11/2026)
 const SEAL_IMAGE := "campmap/Menu/seal.BIF"   ## sigillo di ceralacca del fine anno (40x41, 2 fotogrammi)
 const SEAL_SIZE := 46.0
@@ -160,6 +141,17 @@ var _details := false               ## pergamena informativa della pedina selezi
 var _province_details := false      ## pergamena della provincia aperta (clic destro sulla provincia, Dettagli)
 var _commander_menu: PopupMenu       ## comandanti possibili per l'esercito scelto (pulsante «Comandante» della barra)
 var _governor_menu: PopupPanel       ## scelta del governatore o di chi riceve una carica (scheda Governo, 20/11/2026)
+## Luoghi leggendari (26/11/2026): pallini e medaglioni sulla mappa, scheda del luogo, finestra delle scelte.
+var _site_layer: SiteLayer
+var _sites_all := false                ## bussola della minimappa: medaglioni di tutti i luoghi scoperti aperti
+var _site_panel: PanelContainer
+var _site_box: VBoxContainer
+var _site_choice_panel: PanelContainer
+var _site_choice_title: Label
+var _site_choice_text: Label
+var _site_choice_list: VBoxContainer
+var _site_choice_queue: Array[int] = []
+var _site_choice_current := 0
 var _character_panel: PanelContainer  ## scheda di un personaggio con il ritratto (clic destro sulla carta del comandante)
 var _character_box: VBoxContainer
 var _rulers_panel: PanelContainer     ## sala dei regnanti: i capi in carica di tutte le fazioni
@@ -451,6 +443,8 @@ func _process(delta: float) -> void:
 		_clamp_camera()
 	if _army_layer != null:
 		_army_layer.set_view(_camera.position, _zoom, _view_size(), _projection)
+	if _site_layer != null:
+		_site_layer.set_view(_camera.position, _zoom, _view_size(), _projection)
 	if _border_layer != null:
 		# confini a riquadri (BorderLayer): si aggiornano allo zoom solo quelli in vista
 		var flat := _view_size() / _zoom
@@ -567,6 +561,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					pass   # sui prigionieri si decide con i pulsanti (ADR-073)
 				elif _proposal_panel.visible:
 					_on_proposal_later()
+				elif _site_panel != null and _site_panel.visible:
+					_site_panel.visible = false
 				elif _character_panel != null and _character_panel.visible:
 					_character_panel.visible = false
 				elif _rulers_panel != null and _rulers_panel.visible:
@@ -1050,6 +1046,7 @@ func _start_game() -> bool:
 		_player_id = _saved_player(_state, _player_id)
 		_proposal_queue = CampaignUiProposals.queue_ids(_state, _player_id)
 		_prisoner_queue = CampaignUiPrisoners.queue_ids(_state, _player_id)
+		_site_choice_queue = CampaignUiSites.queue_ids(_state, _player_id)
 		return _mark_player()
 	var seed_number := GameLaunch.seed_value if GameLaunch.seed_value != 0 else Settings.NEW_GAME_SEED
 	_state = GameSetup.new_game(_data, _units, _buildings, _rules, seed_number, _heroes)
@@ -1226,8 +1223,15 @@ func _update_hover(screen: Vector2) -> void:
 		_hide_hover()
 		return
 	var text := ""
-	var agent := _state.agent(_army_layer.agent_at(screen))
-	if agent != null:
+	# luoghi leggendari: il pallino sotto il puntatore si apre nel medaglione con il riquadro
+	var site_id := _site_layer.site_at(screen) if _site_layer != null else ""
+	if _site_layer != null:
+		_site_layer.set_hovered(site_id)
+	var agent := _state.agent(_army_layer.agent_at(screen)) if site_id == "" else null
+	var site := _state.rules.sites.site(site_id) if site_id != "" else null
+	if site != null:
+		text = CampaignUiSites.hover_text(_state, site)
+	elif agent != null:
 		text = CampaignUiHover.agent_text(_state, _player_id, agent, true)
 	else:
 		var army := _state.army(_army_layer.army_at(screen))
@@ -1265,7 +1269,9 @@ func _update_hover(screen: Vector2) -> void:
 		_hover_panel.reset_size()
 	var view := get_viewport().get_visible_rect().size
 	var box := _hover_panel.get_combined_minimum_size()
-	var pos := screen + Vector2(18, 22)
+	var pos := screen + (Vector2(30, -box.y - 6.0) if site != null else Vector2(18, 22))   # luoghi: sopra a destra, lascia libero il nome sotto il medaglione
+	if pos.y < 4.0:
+		pos.y = screen.y + 30.0
 	if pos.x + box.x > view.x - 4.0:
 		pos.x = screen.x - box.x - 12.0
 	if pos.y + box.y > view.y - 4.0:
@@ -1277,6 +1283,8 @@ func _update_hover(screen: Vector2) -> void:
 func _hide_hover() -> void:
 	if _hover_panel != null:
 		_hover_panel.visible = false
+	if _site_layer != null:
+		_site_layer.set_hovered("")
 
 
 func _toast_show(text: String) -> void:
@@ -1314,6 +1322,7 @@ func _on_end_year() -> void:
 		# ADR-073: prima si decide dei prigionieri (come nell'originale, la finestra non si salta)
 		if not _prisoner_panel.visible:
 			_prisoner_queue = CampaignUiPrisoners.queue_ids(_state, _player_id)
+			_site_choice_queue = CampaignUiSites.queue_ids(_state, _player_id)
 			_show_next_prisoners()
 		_toast_show(Lang.t("Decidi prima la sorte dei prigionieri."))
 		return
@@ -1343,6 +1352,7 @@ func _on_end_year() -> void:
 		_report_pending = {"anno": played_year, "sezioni": sections, "fine": finished}
 	_proposal_queue = CampaignUiProposals.queue_ids(_state, _player_id)
 	_prisoner_queue = CampaignUiPrisoners.queue_ids(_state, _player_id)
+	_site_choice_queue = CampaignUiSites.queue_ids(_state, _player_id)
 	_end_pending = CampaignUiVictory.has_end_screen(_state)
 	_show_next_popup()
 
@@ -1528,6 +1538,7 @@ func _load_named(save_name: String) -> void:
 	_prisoner_panel.visible = false
 	_prisoner_current = 0
 	_prisoner_queue = CampaignUiPrisoners.queue_ids(_state, _player_id)
+	_site_choice_queue = CampaignUiSites.queue_ids(_state, _player_id)
 	_end_panel.visible = false
 	_end_pending = false
 	_hide_mission_menu()
@@ -1588,6 +1599,7 @@ func _rebuild_markers() -> void:
 		_selected_agent = 0
 	# nebbia di guerra (Visibility, manuale p11): le forze altrui si vedono solo nelle regioni visibili
 	_seen = Visibility.visible_regions(_state, _player_id)
+	_refresh_sites()
 	var shown: Array[Army] = []
 	for a in _state.armies:
 		if not a.stacks.is_empty() and (a.faction == _player_id or _seen.has(a.region)):
@@ -2882,6 +2894,10 @@ func _order_group_to(region_id: String, confirmed: bool = false) -> void:
 
 func _on_left_click(screen: Vector2) -> void:
 	_hide_mission_menu()
+	var site_id := _site_layer.site_at(screen) if _site_layer != null else ""
+	if site_id != "":
+		_show_site_sheet(site_id)
+		return
 	_group.clear()   # un clic normale torna alla selezione di una sola pedina
 	var agent_id: int = _army_layer.agent_at(screen)
 	if agent_id > 0:
@@ -2947,6 +2963,8 @@ func _build_hud() -> void:
 	_hud.dismiss_pressed.connect(func() -> void: _ask_dismiss(_selected_army, PackedInt32Array(_card_pick)))
 	_hud.proposals_pressed.connect(_on_proposals_button)
 	_hud.shield_pressed.connect(_toggle_map_options)
+	_hud.sites_pressed.connect(_toggle_sites_all)
+	_hud.help_pressed.connect(func() -> void: _help_panel.visible = not _help_panel.visible)
 	_build_game_menu()
 
 
@@ -3622,6 +3640,15 @@ func _show_character_info(character_id: int) -> void:
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		l.custom_minimum_size = Vector2(330, 0)
 		col.add_child(l)
+	var led := CampaignUiText.led_unit(_state, c)
+	if not led.is_empty():
+		var unit_button := _make_button(Lang.t("Scheda dell'unità che guida"))
+		unit_button.tooltip_text = Lang.t("Uomini, valore, armi, armatura e attributi dell'unità con cui combatte.")
+		unit_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		unit_button.pressed.connect(func() -> void:
+			_character_panel.visible = false
+			_show_unit_info(int(led["esercito"]), int(led["pila"])))
+		col.add_child(unit_button)
 	_character_panel.visible = true
 	GameAudio.play_sfx("pergamena")
 
@@ -5171,7 +5198,7 @@ func _add_queue_row(queue_name: String, index: int, text: String, refund: int) -
 	label.tooltip_text = text
 	row.add_child(label)
 	var cancel := _make_button(Lang.t("Annulla"))
-	cancel.tooltip_text = Lang.t("Rimborso: %d fiorini") % refund
+	cancel.tooltip_text = Lang.t("Rimborso: %d denari") % refund
 	cancel.pressed.connect(_on_cancel_queue.bind(queue_name, index))
 	row.add_child(cancel)
 	_province_box.add_child(row)
@@ -5182,7 +5209,7 @@ func _on_cancel_queue(queue_name: String, index: int) -> void:
 		return
 	var r := GameCommands.cancel_queue_item(_state, _player_id, _selected.id, queue_name, index)
 	if bool(r["ok"]):
-		_after_command(r, Lang.t("Annullato: rimborsati %d fiorini.") % int(r["rimborso"]))
+		_after_command(r, Lang.t("Annullato: rimborsati %d denari.") % int(r["rimborso"]))
 	else:
 		_after_command(r, "")
 
@@ -5212,14 +5239,14 @@ func _building_entries(province: ProvinceState) -> Array[Dictionary]:
 			cost = int(check["costo"])
 			years = int(check["anni"])
 		var title := CampaignUiText.building_name(_state, fam.id, lv.level)
-		var tip := Lang.t("Costo %d fiorini, %d anni.") % [cost, years]
+		var tip := Lang.t("Costo %d denari, %d anni.") % [cost, years]
 		if not ok:
 			tip = str(check["errore"])
 			var needs := CampaignUiText.requires_text(_state, lv.requires)
 			if needs != "":
 				tip += Lang.t("\nRichiede: %s") % needs
 		entries.append({"ok": ok, "family": fam.id, "level": lv.level, "label": lv.label, "title": title, "cost": cost, "years": years,
-			"text": Lang.t("%s · %d fiorini, %d anni") % [title, cost, years], "tip": "%s\n%s" % [title, tip]})
+			"text": Lang.t("%s · %d denari, %d anni") % [title, cost, years], "tip": "%s\n%s" % [title, tip]})
 	return entries
 
 
@@ -5264,13 +5291,13 @@ func _unit_entries(province: ProvinceState) -> Array[Dictionary]:
 		if ok:
 			cost = int(check["costo"])
 			years = int(check["anni"])
-		var tip := Lang.t("Costo %d fiorini, %d anni.") % [cost, years]
+		var tip := Lang.t("Costo %d denari, %d anni.") % [cost, years]
 		if not ok:
 			tip = str(check["errore"])
 			var needs := CampaignUiText.requires_text(_state, u.requires)
 			if needs != "":
 				tip += Lang.t("\nRichiede: %s") % needs
-		var text := Lang.t("%s · %d fiorini, %d anni") % [CampaignUiText.unit_name(u.id), cost, years]
+		var text := Lang.t("%s · %d denari, %d anni") % [CampaignUiText.unit_name(u.id), cost, years]
 		if crusade_kind != "":
 			text = CampaignUiPapacy.recruit_text(u, crusade_kind, cost, years, "" if ok else str(check["errore"]))
 			tip = CampaignUiPapacy.recruit_tip(crusade_kind, tip)
@@ -5320,6 +5347,10 @@ func _build_ui() -> void:
 	# Fase 8: tema dell'interfaccia (pergamene dell'originale, caratteri OFL). I controlli sotto un CanvasLayer non ereditano
 	# il tema della finestra: si fonde nel tema predefinito, che vale ovunque (anche per menu a tendina e suggerimenti).
 	UiTheme.install()
+	# Luoghi leggendari: sotto le pedine (pallini discreti, medaglione al passaggio del mouse)
+	_site_layer = SiteLayer.new()
+	_site_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_ui.add_child(_site_layer)
 	# Segnalini sotto a tutto il resto dell'interfaccia.
 	_army_layer = ArmyLayerScript.new()
 	_army_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -5349,6 +5380,7 @@ func _build_ui() -> void:
 	_build_history_panel()
 	_build_proposal_panel()
 	_build_prisoner_panel()
+	_build_site_choice_panel()
 	_build_end_panel()
 	_build_unit_info_panel()
 	_build_province_modal()
@@ -5391,6 +5423,7 @@ func _build_ui() -> void:
 	_help_label.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	_help_label.theme_type_variation = "MapLabel"
 	_help_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_help_label.visible = false   # richiesta di Federico del 27/11/2026: la scritta sta in piccolo sotto le carte della barra
 	_ui.add_child(_help_label)
 
 	_help_panel = PanelContainer.new()
@@ -5399,15 +5432,57 @@ func _build_ui() -> void:
 	_help_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_help_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_help_panel)
+	var help_margin := _margin()
+	_help_panel.add_child(help_margin)
 	var help_box := VBoxContainer.new()
-	_help_panel.add_child(help_box)
+	help_box.add_theme_constant_override("separation", 6)
+	help_margin.add_child(help_box)
+	var help_head := HBoxContainer.new()
+	help_box.add_child(help_head)
 	var help_title := Label.new()
-	help_title.text = Lang.t("Comandi")
+	help_title.text = Lang.t("Comandi e tasti")
 	help_title.theme_type_variation = "Title"
-	help_box.add_child(help_title)
-	var help_text := Label.new()
-	help_text.text = "\n".join(PackedStringArray(Array(HELP_TEXT.split("\n")).map(func(row: String) -> String: return Lang.t(row))))
-	help_box.add_child(help_text)
+	help_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	help_head.add_child(help_title)
+	var help_close := _make_button(Lang.t("Chiudi (H o Esc)"))
+	help_close.pressed.connect(func() -> void: _help_panel.visible = false)
+	help_head.add_child(help_close)
+	help_box.add_child(UiTheme.divider())
+	# sezioni su due colonne: titolo nel carattere dei titoli, tasti in grassetto (CampaignUiHelp)
+	var help_columns := HBoxContainer.new()
+	help_columns.add_theme_constant_override("separation", 28)
+	help_box.add_child(help_columns)
+	var sections := CampaignUiHelp.sections()
+	var columns: Array[VBoxContainer] = []
+	for i in 2:
+		var col := VBoxContainer.new()
+		col.add_theme_constant_override("separation", 10)
+		col.custom_minimum_size = Vector2(HELP_COLUMN_WIDTH, 0)
+		help_columns.add_child(col)
+		columns.append(col)
+	for i in sections.size():
+		var section: Array = sections[i]
+		var box := VBoxContainer.new()
+		box.add_theme_constant_override("separation", 2)
+		columns[int(HELP_SECTION_COLUMNS[i]) if i < HELP_SECTION_COLUMNS.size() else 1].add_child(box)
+		var head := Label.new()
+		head.text = str(section[0])
+		head.theme_type_variation = "Subtitle"
+		box.add_child(head)
+		var rows := RichTextLabel.new()
+		rows.bbcode_enabled = true
+		rows.fit_content = true
+		rows.scroll_active = false
+		rows.selection_enabled = false
+		rows.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		rows.custom_minimum_size = Vector2(HELP_COLUMN_WIDTH, 0)
+		rows.add_theme_color_override("default_color", UiTheme.INK)
+		rows.add_theme_font_size_override("normal_font_size", HELP_TEXT_SIZE)
+		rows.add_theme_font_size_override("bold_font_size", HELP_TEXT_SIZE)
+		rows.add_theme_font_override("bold_font", UiTheme.bold_font())
+		rows.add_theme_constant_override("line_separation", 3)
+		rows.text = CampaignUiHelp.bbcode(section[1])
+		box.add_child(rows)
 
 	_summary_panel = PanelContainer.new()
 	_summary_panel.visible = false
@@ -6123,6 +6198,8 @@ func _show_next_popup() -> void:
 		_show_events(int(r["anno"]), secs, str(r["fine"]))
 	if _show_next_prisoners():
 		pass
+	elif _show_next_site_choice():
+		pass
 	elif _show_next_proposal():
 		pass
 	elif _end_pending:
@@ -6132,7 +6209,7 @@ func _show_next_popup() -> void:
 
 ## Riempie la finestra illustrata con una finestra di CampaignUiEvents o di CampaignUiAlerts e la mette al suo posto.
 func _show_illustrated(window: Dictionary) -> void:
-	var alert := str(window.get("tema", "")) != ""
+	var alert := str(window.get("tema", "")) != "" or str(window.get("luogo_leggendario", "")) != ""
 	var year := int(window.get("anno", _state.year if _state != null else 0))
 	var category := str(window.get("categoria", ""))
 	if category == "":
@@ -6899,7 +6976,7 @@ func _repeat_pending_lines(province: ProvinceState) -> PackedStringArray:
 		var unit_id := province.repeat_pending[i]
 		var unit := _state.units.get_unit(unit_id)
 		var cost := _state.rules.traits.unit_cost(province.owner, unit) if unit != null else 0
-		out.append(Lang.t("%d. %s · in pausa: servono %d fiorini") % [start + i + 1, CampaignUiPapacy.queue_label(_state, unit_id), cost])
+		out.append(Lang.t("%d. %s · in pausa: servono %d denari") % [start + i + 1, CampaignUiPapacy.queue_label(_state, unit_id), cost])
 	return out
 
 
@@ -6930,7 +7007,7 @@ func _fill_merc_tab(province: ProvinceState) -> void:
 		var unit_id := str(o["unita"])
 		var tex := PieceArt.unit_card(_data, _player_id, unit_id) if AssetLibrary.is_available() else null
 		var caption := Lang.t("%s\n%d uomini · %d f") % [CampaignUiText.unit_name(unit_id), int(o["uomini"]), int(o["costo"])]
-		var tip := Lang.t("%s, %d uomini\nIngaggio: %d fiorini") % [CampaignUiText.unit_name(unit_id), int(o["uomini"]), int(o["costo"])]
+		var tip := Lang.t("%s, %d uomini\nIngaggio: %d denari") % [CampaignUiText.unit_name(unit_id), int(o["uomini"]), int(o["costo"])]
 		if not bool(o["ok"]):
 			tip += "\n" + str(o["errore"])
 		var tile := _modal_tile(tex, MODAL_CARD_SIZE, caption, tip + Lang.t("\nClic destro: scheda dell'unità"), bool(o["ok"]))
@@ -6983,7 +7060,7 @@ func _modal_queue_row(queue_name: String, index: int, text: String, refund: int)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
 	var cancel := _make_button(Lang.t("Annulla"))
-	cancel.tooltip_text = Lang.t("Rimborso: %d fiorini") % refund
+	cancel.tooltip_text = Lang.t("Rimborso: %d denari") % refund
 	cancel.pressed.connect(_on_cancel_queue.bind(queue_name, index))
 	row.add_child(cancel)
 	return row
@@ -7352,7 +7429,7 @@ func _refresh_demolish_button(data: Dictionary) -> void:
 	_unit_info_demolish.visible = true
 	_unit_info_demolish.disabled = not bool(check["ok"])
 	if bool(check["ok"]):
-		_unit_info_demolish.tooltip_text = Lang.t("Demolisci l'edificio: tornano %d fiorini (la metà del costo). Chiede conferma.") % int(check["rimborso"])
+		_unit_info_demolish.tooltip_text = Lang.t("Demolisci l'edificio: tornano %d denari (la metà del costo). Chiede conferma.") % int(check["rimborso"])
 	else:
 		_unit_info_demolish.tooltip_text = CampaignUiText.order_error_text(_state, str(check["errore"]))
 
@@ -7368,13 +7445,13 @@ func _ask_demolish() -> void:
 		return
 	var name_text := CampaignUiText.building_name(_state, family, int(check["livello"]))
 	_confirm_ask(Lang.t("Demolire %s?") % name_text,
-		Lang.t("L'edificio scende di un livello e tornano nel tesoro %d fiorini. Non si annulla.") % int(check["rimborso"]),
+		Lang.t("L'edificio scende di un livello e tornano nel tesoro %d denari. Non si annulla.") % int(check["rimborso"]),
 		Lang.t("Demolisci"), Lang.t("Annulla"), func() -> void:
 			var r := GameCommands.demolish_building(_state, _player_id, province_id, family)
 			_unit_info_panel.visible = false
 			if bool(r["ok"]):
 				GameAudio.play_sfx("soldi")
-			_after_command(r, Lang.t("Demolito: %s (+%d fiorini).") % [name_text, int(r.get("rimborso", 0))]))
+			_after_command(r, Lang.t("Demolito: %s (+%d denari).") % [name_text, int(r.get("rimborso", 0))]))
 
 
 func _step_building_info(delta: int) -> void:
@@ -8158,18 +8235,18 @@ func _refresh_economy() -> void:
 		[Lang.t("Agricoltura"), str(int(r["agricoltura"]))],
 		[Lang.t("Miniere"), str(int(r["miniere"]))],
 		[Lang.t("Commercio"), str(int(r["commercio"]))],
-		[Lang.t("Proventi previsti quest'anno"), Lang.t("%d fiorini") % int(r["totale"])],
-		[Lang.t("Mantenimento delle forze"), Lang.t("-%d fiorini") % int(r["mantenimento"])],
-		[Lang.t("Saldo previsto"), Lang.t("%+d fiorini") % int(r["saldo"])],
-		[Lang.t("Tesoro"), Lang.t("%d fiorini") % int(r["tesoro"])],
+		[Lang.t("Proventi previsti quest'anno"), Lang.t("%d denari") % int(r["totale"])],
+		[Lang.t("Mantenimento delle forze"), Lang.t("-%d denari") % int(r["mantenimento"])],
+		[Lang.t("Saldo previsto"), Lang.t("%+d denari") % int(r["saldo"])],
+		[Lang.t("Tesoro"), Lang.t("%d denari") % int(r["tesoro"])],
 	]
 	if not last.is_empty():
-		lines.append([Lang.t("Reddito netto dell'anno scorso"), Lang.t("%+d fiorini") % int(last.get("netto", 0))])
+		lines.append([Lang.t("Reddito netto dell'anno scorso"), Lang.t("%+d denari") % int(last.get("netto", 0))])
 		var last_spent := CampaignUiText.spending_line(last.get("spese", {}))
 		if last_spent != "":
 			lines.append([Lang.t("Spese dell'anno scorso"), last_spent])
 		if last.has("saldo"):
-			lines.append([Lang.t("Saldo reale dell'anno scorso"), Lang.t("%+d fiorini") % int(last["saldo"])])
+			lines.append([Lang.t("Saldo reale dell'anno scorso"), Lang.t("%+d denari") % int(last["saldo"])])
 	var f_now := _state.faction(_player_id)
 	if f_now != null and CampaignUiText.spending_line(f_now.spent) != "":
 		lines.append([Lang.t("Spese di quest'anno finora"), CampaignUiText.spending_line(f_now.spent)])
@@ -8247,7 +8324,7 @@ func _economy_ports(d: Dictionary) -> Control:
 		wealth.add_theme_color_override("font_color", UiTheme.INK_GOOD if float(port["peso"]) >= 0.8 else UiTheme.INK_FAINT)
 		grid.add_child(wealth)
 		var gain := Label.new()
-		gain.text = "+%d" % int(port["fiorini"])
+		gain.text = "+%d" % int(port["denari"])
 		gain.custom_minimum_size.x = 52
 		gain.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		grid.add_child(gain)
@@ -8257,7 +8334,7 @@ func _economy_ports(d: Dictionary) -> Control:
 	if ports.size() > shown:
 		var rest := 0
 		for i in range(shown, ports.size()):
-			rest += int((ports[i] as Dictionary)["fiorini"])
+			rest += int((ports[i] as Dictionary)["denari"])
 		var more := Label.new()
 		more.text = Lang.t("e altri %d porti: +%d") % [ports.size() - shown, rest]
 		more.add_theme_color_override("font_color", UiTheme.INK_FAINT)
@@ -8278,3 +8355,239 @@ func _toggle_summary() -> void:
 	var label := _summary_panel.find_child("SummaryLabel", true, false) as Label
 	label.text = MainScene.summary_from(_data)
 	_summary_panel.visible = true
+
+
+# --- luoghi leggendari (26/11/2026) ----------------------------------------------------------------------------------------
+
+
+## Pallini dei luoghi gia' scoperti: un luogo si scopre vedendo la sua regione (nebbia di guerra); prima non compare nulla.
+func _refresh_sites() -> void:
+	if _site_layer == null or _state == null or _state.rules == null or _state.rules.sites.is_empty() or not RegionMap.world:
+		if _hud != null:
+			_hud.set_sites_button(false, false, "")
+		return
+	LegendarySiteProcessor.discover_seen(_state, _player_id, _seen)
+	var list: Array[Dictionary] = []
+	for s in _state.rules.sites.sites:
+		if not s.has_position or _state.campaign.region(s.region) == null:
+			continue
+		if not LegendarySiteProcessor.is_discovered(_state, _player_id, s.id) or not LegendarySites.manifests(s, _state.year):
+			continue
+		list.append({"id": s.id, "pos": s.position, "categoria": s.category, "simbolo": s.symbol, "nome": s.label(_state.year),
+			"in_attesa": CampaignUiSites.has_pending(_state, _player_id, s.id), "inattivo": not LegendarySites.is_active(_state, s)})
+	_site_layer.set_sites(list)
+	_update_sites_button()
+
+
+## Bussola della minimappa: apre o chiude insieme i medaglioni di tutti i luoghi leggendari scoperti.
+func _toggle_sites_all() -> void:
+	_sites_all = not _sites_all
+	if _site_layer != null:
+		_site_layer.set_show_all(_sites_all)
+	_update_sites_button()
+
+
+func _update_sites_button() -> void:
+	if _hud == null or _site_layer == null:
+		return
+	var tip := Lang.t("Luoghi leggendari scoperti: %d") % _site_layer.site_count()
+	tip += "\n" + (Lang.t("Clic: torna ai pallini") if _sites_all else Lang.t("Clic: mostra i medaglioni di tutti i luoghi scoperti"))
+	_hud.set_sites_button(true, _sites_all, tip)
+
+
+## Scheda del luogo (clic sul pallino o sul medaglione): tavola dipinta, descrizione, effetti, eventi.
+func _show_site_sheet(site_id: String) -> void:
+	var s := _state.rules.sites.site(site_id)
+	if s == null:
+		return
+	GameAudio.play_sfx("seleziona")
+	_hide_hover()
+	if _site_panel == null:
+		var holder := CenterContainer.new()
+		holder.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		holder.z_index = 9
+		_ui.add_child(holder)
+		_site_panel = PanelContainer.new()
+		holder.add_child(_site_panel)
+		var margin := _margin()
+		_site_panel.add_child(margin)
+		_site_box = VBoxContainer.new()
+		_site_box.custom_minimum_size = Vector2(560, 0)
+		_site_box.add_theme_constant_override("separation", 8)
+		margin.add_child(_site_box)
+	_clear_children(_site_box)
+	var head := HBoxContainer.new()
+	head.add_theme_constant_override("separation", 10)
+	_site_box.add_child(head)
+	var tex := load(SiteLayer.texture_path(s.symbol, s.category)) as Texture2D if ResourceLoader.exists(SiteLayer.texture_path(s.symbol, s.category)) else null
+	if tex != null:
+		head.add_child(UiTheme.picture(tex, Vector2(56, 56)))
+	var titles := VBoxContainer.new()
+	titles.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	head.add_child(titles)
+	var title := Label.new()
+	title.text = s.label(_state.year)
+	title.theme_type_variation = "Title"
+	titles.add_child(title)
+	var sub := Label.new()
+	sub.text = "%s · %s" % [CampaignUiSites.category_label(s.category), CampaignUiText.region_name(_state, s.region)]
+	sub.theme_type_variation = "Subtitle"
+	titles.add_child(sub)
+	var close := _make_button(Lang.t("Chiudi (Esc)"))
+	close.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	close.pressed.connect(func() -> void: _site_panel.visible = false)
+	head.add_child(close)
+	_site_box.add_child(UiTheme.divider())
+	var pic := CampaignUiSites.picture(s.id)
+	if pic != null:
+		_site_box.add_child(UiTheme.picture(pic, Vector2(560, 315)))
+	var desc := Label.new()
+	desc.text = s.text()
+	desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	desc.custom_minimum_size = Vector2(560, 0)
+	_site_box.add_child(desc)
+	var holder_line := CampaignUiSites.holder_line(_state, s)
+	if not LegendarySites.is_active(_state, s):
+		holder_line += " · " + Lang.t("Il luogo non ha piu' effetti")
+	if holder_line != "":
+		var who := Label.new()
+		who.text = holder_line
+		who.add_theme_color_override("font_color", UiTheme.INK_FAINT)
+		_site_box.add_child(who)
+	var rich := RichTextLabel.new()
+	rich.bbcode_enabled = true
+	rich.fit_content = true
+	rich.scroll_active = false
+	rich.custom_minimum_size = Vector2(560, 0)
+	rich.add_theme_color_override("default_color", UiTheme.INK)
+	var parts := PackedStringArray()
+	for sec in CampaignUiSites.sheet_sections(_state, s):
+		parts.append("[b]%s[/b]" % str(sec["titolo"]))
+		for l in sec["righe"]:
+			parts.append(CampaignUiSites.colored(l))
+	var events := CampaignUiSites.event_lines(_state, s, _player_id)
+	if not events.is_empty():
+		parts.append("[b]%s[/b]" % Lang.t("Eventi"))
+		parts.append_array(events)
+	rich.text = "\n".join(parts)
+	_site_box.add_child(rich)
+	var buttons := HBoxContainer.new()
+	buttons.add_theme_constant_override("separation", 10)
+	_site_box.add_child(buttons)
+	var go := _make_button(Lang.t("Vai alla regione"))
+	go.pressed.connect(func() -> void:
+		_site_panel.visible = false
+		if _anchors.has(s.region):
+			_camera.position = s.position
+			_clamp_camera()
+		var region := _state.campaign.region(s.region)
+		if region != null and not region.is_sea:
+			_select(region))
+	buttons.add_child(go)
+	for c in LegendarySiteProcessor.choices_for(_state, _player_id):
+		if str(c["luogo"]) == s.id:
+			var decide := _make_button(Lang.t("Decidi"))
+			var cid := int(c["id"])
+			decide.pressed.connect(func() -> void:
+				_site_panel.visible = false
+				_open_site_choice(cid))
+			buttons.add_child(decide)
+			break
+	_site_panel.visible = true
+
+
+## Finestra di una scelta di un luogo (come i prigionieri, ADR-073): un pulsante per opzione con costo, requisiti ed esiti;
+## «Decidi dopo» la lascia in attesa (a fine anno si sceglie da sola l'opzione piu' prudente).
+func _build_site_choice_panel() -> void:
+	var modal := IllustratedModal.new()
+	modal.set_width(680.0)
+	_site_choice_panel = modal
+	_site_choice_panel.visible = false
+	_site_choice_panel.z_index = 6
+	_site_choice_panel.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_site_choice_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_site_choice_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
+	_ui.add_child(_site_choice_panel)
+	var box := modal.body
+	_site_choice_title = Label.new()
+	_site_choice_title.add_theme_font_size_override("font_size", 20)
+	_site_choice_title.add_theme_color_override("font_color", SECTION_COLOR)
+	_site_choice_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_site_choice_title.custom_minimum_size = Vector2(560.0, 0.0)
+	box.add_child(_site_choice_title)
+	_site_choice_text = Label.new()
+	_site_choice_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_site_choice_text.custom_minimum_size = Vector2(560.0, 0.0)
+	box.add_child(_site_choice_text)
+	_site_choice_list = VBoxContainer.new()
+	_site_choice_list.add_theme_constant_override("separation", 6)
+	box.add_child(_site_choice_list)
+
+
+## Mostra la prossima scelta dei luoghi in attesa; falso se non ce ne sono.
+func _show_next_site_choice() -> bool:
+	while not _site_choice_queue.is_empty():
+		var cid: int = _site_choice_queue.pop_front()
+		if _open_site_choice(cid):
+			return true
+	if _site_choice_panel != null:
+		_site_choice_panel.visible = false
+	return false
+
+
+func _open_site_choice(choice_id: int) -> bool:
+	var w := CampaignUiSites.choice_window(_state, _player_id, choice_id)
+	if w.is_empty():
+		return false
+	_site_choice_current = choice_id
+	_site_choice_title.text = str(w["titolo"])
+	_site_choice_text.text = str(w["testo"])
+	_clear_children(_site_choice_list)
+	var options: Array = w["opzioni"]
+	for i in options.size():
+		var o: Dictionary = options[i]
+		var row := VBoxContainer.new()
+		row.add_theme_constant_override("separation", 1)
+		_site_choice_list.add_child(row)
+		var b := _make_button(str(o["testo"]))
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		var problem := str(o["problema"])
+		b.disabled = problem != ""
+		b.tooltip_text = problem if problem != "" else str(o["nota"])
+		b.pressed.connect(_on_site_choice.bind(i))
+		row.add_child(b)
+		var note := Label.new()
+		note.text = ("%s (%s)" % [str(o["nota"]), problem]) if problem != "" else str(o["nota"])
+		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		note.custom_minimum_size = Vector2(560.0, 0.0)
+		note.add_theme_font_size_override("font_size", 13)
+		note.add_theme_color_override("font_color", UiTheme.INK_FAINT)
+		row.add_child(note)
+	var later := _make_button(Lang.t("Decidi dopo"))
+	later.pressed.connect(func() -> void:
+		_site_choice_current = 0
+		_site_choice_panel.visible = false
+		_show_next_popup())
+	_site_choice_list.add_child(later)
+	var modal := _site_choice_panel as IllustratedModal
+	modal.set_category(str(w["categoria"]))
+	var pic := CampaignUiSites.picture(str(w["luogo_leggendario"]))
+	modal.set_picture(pic if pic != null else EventArt.historical_texture(-1, "luogo_" + str(w["luogo_leggendario"])))
+	_site_choice_panel.visible = true
+	return true
+
+
+func _on_site_choice(index: int) -> void:
+	if _site_choice_current == 0:
+		return
+	var result := GameCommands.choose_site_option(_state, _player_id, _site_choice_current, index)
+	if not bool(result["ok"]):
+		_toast_show(str(result["errore"]))
+		return
+	var lines: PackedStringArray = result["righe"]
+	_toast_show("\n".join(lines) if not lines.is_empty() else Lang.t("Non succede nulla."))
+	_site_choice_current = 0
+	_site_choice_panel.visible = false
+	_refresh_all()
+	_show_next_popup()

@@ -119,7 +119,8 @@ static func loyalty_terms(state: GameState, p: ProvinceState, distances: Diction
 	var excommunication := PapacyProcessor.loyalty_term(state, p)
 	var occupation := -occupation_term(state, p)
 	var traits := 0 if is_rebel else state.rules.traits.loyalty_bonus(p.owner)   # ADR-089: tratti della fazione
-	var total := pr.base + tax + garrison + buildings + regional + religion + distance + terror + spies + inquisitors + excommunication + occupation + traits
+	var sites := 0 if is_rebel else LegendarySites.region_int(state, p.id, "lealta") + LegendarySiteProcessor.temp_loyalty(state, p.id)   # luoghi leggendari
+	var total := pr.base + tax + garrison + buildings + regional + religion + distance + terror + spies + inquisitors + excommunication + occupation + traits + sites
 	return {
 		"base": pr.base,
 		"tassa": tax,
@@ -134,6 +135,7 @@ static func loyalty_terms(state: GameState, p: ProvinceState, distances: Diction
 		"scomunica": excommunication,
 		"occupazione": occupation,
 		"fazione": traits,
+		"luogo": sites,
 		"somma": total,
 		"obiettivo": clampi(total, 0, pr.max_loyalty),
 		"uomini": men,

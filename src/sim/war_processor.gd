@@ -466,7 +466,7 @@ static func _process_siege(state: GameState, siege: SiegeState) -> void:
 			ordered = true
 	# assalto ordinato dall'assediante: battaglia con il moltiplicatore del castello
 	if ordered:
-		var result := Combat.resolve(state, region_id, besiegers, garrison, BattleResult.KIND_ASSAULT, Combat.defender_multiplier(state, BattleResult.KIND_ASSAULT, level))
+		var result := Combat.resolve(state, region_id, besiegers, garrison, BattleResult.KIND_ASSAULT, Combat.defender_multiplier(state, BattleResult.KIND_ASSAULT, level) * LegendarySites.region_factor(state, region_id, "difesa"))   # luoghi leggendari (Danevirke, Muraglia)
 		for a in besiegers:
 			a.assault_ordered = false
 		if result.attacker_won:
@@ -516,7 +516,7 @@ static func _process_siege(state: GameState, siege: SiegeState) -> void:
 	siege.army_ids = PackedInt32Array()
 	for a in besiegers:
 		siege.army_ids.append(a.id)
-	if siege.years >= c.starve_after(level):
+	if siege.years >= c.starve_after(level) + LegendarySites.region_int(state, region_id, "anni_assedio"):
 		var men := Combat.men_of(garrison)
 		var garrison_faction := garrison[0].faction
 		var captor_id := 0

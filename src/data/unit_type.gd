@@ -17,7 +17,7 @@ const ALL_PERIODS := "ALL_PERIODS"
 var id: String                          ## col. 0, univoco (maiuscole come nel file)
 var index := 0                          ## posizione nel file (da 0)
 var type_name := ""                     ## col. 1: INFANTRY, CAVALRY, SPY, BISHOP...
-var cost := 0                           ## col. 2, fiorini
+var cost := 0                           ## col. 2, denari
 var support_cost := 0                   ## col. 3, per stagione
 var build_time := 0                     ## col. 4, stagioni
 var honour_handicap := 0                ## col. 5

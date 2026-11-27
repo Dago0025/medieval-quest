@@ -1815,7 +1815,7 @@ static func disband_problem(state: GameState, faction_id: String, army: Army) ->
 ## (manuale p26 e p70, `[congedo] diventano_mercenari` in mercenari.cfg); le navi spariscono. Vale ovunque (in marcia, nel castello, in mare) e per ogni pila, mercenari compresi. Si possono
 ## congedare tutte: l'esercito sparisce e il suo comandante resta senza esercito, come dopo un'unione. Gli ordini di
 ## riaddestramento dell'esercito sono annullati e rimborsati (gli indici delle pile cambiano). Esito: "pile" e "uomini"
-## congedati, "mantenimento" (fiorini l'anno risparmiati), "rimosso" (vero se l'esercito e' sparito), "mercenari"
+## congedati, "mantenimento" (denari l'anno risparmiati), "rimosso" (vero se l'esercito e' sparito), "mercenari"
 ## (compagnie di mercenari nate dal congedo).
 static func disband_stacks(state: GameState, faction_id: String, army_id: int, indices: PackedInt32Array) -> Dictionary:
 	var army := state.army(army_id)
@@ -2070,7 +2070,7 @@ static func can_hire_mercenary(state: GameState, faction_id: String, province_id
 	var cost := state.rules.mercenaries.hire_cost(unit.cost)
 	var faction := state.faction(faction_id)
 	if faction == null or faction.treasury < cost:
-		var r := failure(Lang.t("Tesoro insufficiente: servono %d fiorini") % cost)
+		var r := failure(Lang.t("Tesoro insufficiente: servono %d denari") % cost)
 		r["costo"] = cost
 		return r
 	return success({"costo": cost})
@@ -2103,3 +2103,24 @@ static func hire_mercenary(state: GameState, faction_id: String, province_id: St
 	state.add_event(GameState.EV_MERCENARY_HIRED, {"fazione": fid, "provincia": province_id, "unita": st.unit_id, "uomini": st.men,
 		"costo": cost, "esercito": target.id})
 	return success({"costo": cost, "esercito": target.id, "unita": st.unit_id})
+
+
+# --- luoghi leggendari ---------------------------------------------------------------------------------------------------
+
+
+## Scelta del giocatore in un evento di un luogo leggendario (LegendarySiteProcessor): `index` = opzione. Esito con
+## "righe" (risultati leggibili).
+static func choose_site_option(state: GameState, faction_id: String, choice_id: int, index: int) -> Dictionary:
+	var c := LegendarySiteProcessor.choice(state, choice_id)
+	if c.is_empty():
+		return failure(Lang.t("Scelta inesistente: %d") % choice_id)
+	if str(c["fazione"]) != SimUtil.norm(faction_id):
+		return failure(Lang.t("La scelta non spetta a questa fazione"))
+	var e := state.rules.sites.event(str(c["evento"]))
+	if e == null:
+		return failure(Lang.t("Evento sconosciuto"))
+	var problem := LegendarySiteProcessor.option_problem(state, e, faction_id, c.get("contesto", {}), index)
+	if problem != "":
+		return failure(problem)
+	var lines := LegendarySiteProcessor.resolve_choice(state, c, index)
+	return success({"righe": lines})

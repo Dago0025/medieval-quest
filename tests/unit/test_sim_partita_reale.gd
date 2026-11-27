@@ -393,6 +393,9 @@ func _men_balance(s: GameState) -> int:
 		elif kind == GameState.EV_PRISONERS and (str(e["esito"]) == PrisonerProcessor.OUTCOME_RELEASED or str(e["esito"]) == PrisonerProcessor.OUTCOME_RANSOMED):
 			# ADR-073: i prigionieri catturati sono gia' tolti (catture); liberati o riscattati tornano
 			balance += int(e.get("uomini", 0))
+		elif kind == GameState.EV_SITE_TRANSIT or kind == GameState.EV_SITE_EVENT:
+			# luoghi leggendari: navi perse nel transito, uomini persi negli esiti degli eventi
+			balance -= int(e.get("uomini", 0))
 		elif kind == GameState.EV_RETRAINED or kind == GameState.EV_ROYAL_GUARD:
 			# riaddestramento: le pile decimate tornano all'organico pieno, gli uomini aggiunti li dichiara l'evento;
 			# ADR-114: la guardia del capo li crea
@@ -580,7 +583,7 @@ func test_rapporto_economia_del_primo_anno(t: TestContext) -> void:
 func _build_report(s: GameState, before: Dictionary, first_year: int) -> String:
 	var lines := PackedStringArray()
 	lines.append("Rapporto economia del primo anno (%d -> %d), seme %d" % [first_year, s.year, s.seed_value])
-	lines.append("Reddito = agricoltura + miniere + commercio; netto = reddito - mantenimento. Fiorini.")
+	lines.append("Reddito = agricoltura + miniere + commercio; netto = reddito - mantenimento. Denari.")
 	lines.append("Da confrontare a mano con il gioco originale (catalogo, sezione Economia). Regole PROVVISORIE: miniere, commercio, mantenimento, arrotondamento.")
 	lines.append("")
 	lines.append("%-24s %4s %10s %8s %10s %13s %9s %12s %12s" % ["fazione", "prov", "agricolt.", "miniere", "commercio", "mantenimento", "netto", "tesoro prima", "tesoro dopo"])

@@ -42,14 +42,14 @@ static func report(state: GameState, player_id: String) -> Dictionary:
 
 
 ## Porti raggiunti dalla provincia per la finestra Economia, dal piu' redditizio: {"provincia", "nome", "fazione",
-## "fazione_nome", "peso", "ricchezza" (testo: ricchissima, ricca, media, povera), "fiorini"}.
+## "fazione_nome", "peso", "ricchezza" (testo: ricchissima, ricca, media, povera), "denari"}.
 static func port_lines(state: GameState, p: ProvinceState, factor: float = 1.0) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	for d in Economy.trade_partner_details(state, p, state.campaign.region(p.id), factor):
 		var weight := float(d["peso"])
 		out.append({"provincia": str(d["provincia"]), "nome": CampaignUiText.region_name(state, str(d["provincia"])),
 			"fazione": str(d["fazione"]), "fazione_nome": CampaignUiText.faction_name(str(d["fazione"])),
-			"peso": weight, "ricchezza": wealth_label(weight), "fiorini": int(d["fiorini"])})
+			"peso": weight, "ricchezza": wealth_label(weight), "denari": int(d["denari"])})
 	return out
 
 

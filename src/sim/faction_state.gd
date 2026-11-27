@@ -14,7 +14,7 @@ var alive := true
 var is_player := false
 ## Dettaglio dell'ultimo fine anno: agricoltura, miniere, commercio, mantenimento, netto.
 var last_income := {}
-## Spese dell'anno in corso per voce, in fiorini (i rimborsi tolgono): "costruzioni", "arruolamenti", "riaddestramento",
+## Spese dell'anno in corso per voce, in denari (i rimborsi tolgono): "costruzioni", "arruolamenti", "riaddestramento",
 ## "mercenari", "corruzione" (segnalazione di Federico, 2026-11-13: il tesoro scendeva con il reddito netto in attivo, perche'
 ## il reddito non conta le spese, per esempio le code ripetute). A fine anno vanno in `last_income["spese"]`.
 var spent := {}

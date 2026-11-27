@@ -195,6 +195,11 @@ const EV_RETRAINED := "riaddestramento"
 const EV_RETRAIN_CANCELLED := "riaddestramento_annullato"
 ## Fase 8d: mercenari assoldati ("fazione", "provincia", "unita", "uomini", "costo", "esercito").
 const EV_MERCENARY_HIRED := "mercenari_assoldati"
+## Luoghi leggendari (26/11/2026): "luogo" (id), "regione"; EV_SITE_EVENT anche "evento", "titolo", "esito" (righe dei
+## risultati), "scelta" (id della scelta in attesa del giocatore, 0 = nessuna), "opzione" (scelta fatta, -1 = nessuna).
+const EV_SITE_DISCOVERED := "luogo_conquistato"
+const EV_SITE_EVENT := "luogo_evento"
+const EV_SITE_TRANSIT := "luogo_transito"
 
 ## Fazione dei ribelli: in guerra con tutti.
 const REBEL := "FN_REBEL"
@@ -247,6 +252,12 @@ var next_proposal_id := 1
 ## ADR-073: prigionieri in attesa di una decisione (vedi PrisonerProcessor), in ordine di id. Salvati.
 var prisoners: Array[Dictionary] = []
 var next_prisoner_id := 1
+## Luoghi leggendari (LegendarySiteProcessor): stato per luogo, scelte del giocatore in attesa, luoghi scoperti sulla
+## mappa per fazione (id -> PackedStringArray). Salvati.
+var sites_state := {}
+var site_choices: Array[Dictionary] = []
+var next_site_choice_id := 1
+var sites_discovered := {}
 ## Fase 5c: avvertimenti papali in corso. Chiave "CHI>CONTRO" (la fazione ammonita e quella che non deve attaccare)
 ## -> {"anno": anno dell'avvertimento, "scadenza": ultimo anno in cui un attacco porta alla scomunica}.
 var papal_warnings := {}

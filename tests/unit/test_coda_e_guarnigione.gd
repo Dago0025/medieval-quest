@@ -2,7 +2,7 @@ extends RefCounted
 ## Test della coda di reclutamento ripetuta e della guarnigione volontaria (richieste di Federico del 2026-11-09).
 ## Mondo piccolo tests/fixtures/sim_*.txt: ALPHA (tesoro 5000) ha ID_ALTA (Castle3) e ID_BASSA (Castle); BETA ha
 ## ID_MEZZA (Castle2) con l'esercito 4; l'esercito 1 e' di ALPHA in ALTA, il 3 di ALPHA in BASSA.
-## Spearmen: 100 fiorini, 1 anno.
+## Spearmen: 100 denari, 1 anno.
 
 const STARTPOS := "res://tests/fixtures/sim_startpos.txt"
 const UNITS := "res://tests/fixtures/sim_unit_prod.txt"

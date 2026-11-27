@@ -1,8 +1,8 @@
 extends RefCounted
 ## Riaddestramento delle unita' (RetrainRules, RetrainProcessor, GameCommands.order_retrain / cancel_retrain / retrain_options),
 ## salvataggi di versione 11 e interazione con muovere, dividere e unire gli eserciti. Mondo di prova: agent_world.gd (in sola
-## lettura). ALPHA (ALTA, BASSA), BETA (MEZZA), GAMMA (ORTO), ribelli (SOLA). Unita': Spearmen (100 uomini, 100 fiorini, nessun
-## requisito), Archers (60 uomini, 150 fiorini, serve BOWYER), Alpine (80 uomini, 120 fiorini, solo ID_BASSA), Nizari (solo BETA).
+## lettura). ALPHA (ALTA, BASSA), BETA (MEZZA), GAMMA (ORTO), ribelli (SOLA). Unita': Spearmen (100 uomini, 100 denari, nessun
+## requisito), Archers (60 uomini, 150 denari, serve BOWYER), Alpine (80 uomini, 120 denari, solo ID_BASSA), Nizari (solo BETA).
 ## Nessun numero dipende dai dati Auror.
 
 const W := preload("res://tests/unit/agent_world.gd")
@@ -64,7 +64,7 @@ func test_costo_proporzionale_per_eccesso(t: TestContext) -> void:
 	r.cost_factor = 1.5
 	t.assert_eq(r.cost_for(100, 50, 100), 75)
 	r.cost_factor = 1.1
-	t.assert_eq(r.cost_for(100, 50, 100), 55, "il fattore non esatto in binario non fa salire il costo di un fiorino")
+	t.assert_eq(r.cost_for(100, 50, 100), 55, "il fattore non esatto in binario non fa salire il costo di un denaro")
 
 
 func test_il_valore_si_dilusce(t: TestContext) -> void:
