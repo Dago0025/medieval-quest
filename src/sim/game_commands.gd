@@ -38,7 +38,11 @@ static func set_tax(state: GameState, faction_id: String, province_id: String, l
 		return failure(problem)
 	if not state.rules.is_valid_tax(level):
 		return failure(Lang.t("Livello di tassa non valido: %d (ammessi da 0 a %d)") % [level, state.rules.tax_multipliers.size() - 1])
-	state.province(province_id).tax_level = level
+	var p := state.province(province_id)
+	if p.tax_level == level:
+		return success()
+	p.tax_level = level
+	ProvinceProcessor.sync_loyalty(state, p)   # ADR-150: la tassa pesa subito sulla lealta'
 	return success()
 
 
@@ -1026,7 +1030,11 @@ static func assign_title(state: GameState, faction_id: String, character_id: int
 	var key := SimUtil.norm(province_id)
 	if c.title == key:
 		return failure(Lang.t("%s governa gia' %s") % [c.full_name(), key])
+	var left := c.title
 	DynastyProcessor.assign_title(state, c, key)
+	ProvinceProcessor.sync_loyalty(state, state.province(key))   # ADR-150: il governatore conta subito
+	if left != "":
+		ProvinceProcessor.sync_loyalty(state, state.province(left))   # ... anche nella provincia che lascia
 	return success({"provincia": key, "personaggio": c.id})
 
 
@@ -1043,6 +1051,7 @@ static func revoke_title(state: GameState, faction_id: String, character_id: int
 		return failure(Lang.t("%s non ha un titolo") % c.full_name())
 	var province_id := c.title
 	DynastyProcessor.release_title(state, c, "revocato", true)
+	ProvinceProcessor.sync_loyalty(state, state.province(province_id))   # ADR-150
 	return success({"provincia": province_id, "personaggio": c.id})
 
 

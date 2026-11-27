@@ -1518,6 +1518,8 @@ const TERM_LABELS := {
 	"distanza": "Distanza dal capo",
 	"dread": "Terrore del governatore",
 	"terrore": "Terrore del governatore",
+	"acume": "Acume del governatore",
+	"acumen": "Acume del governatore",
 	"governor": "Governatore",
 	"governatore": "Governatore",
 	"ribellione_regionale": "Ribellione regionale",
@@ -1946,7 +1948,7 @@ static func governor_choices(state: GameState, province: ProvinceState) -> Array
 	var out: Array[Dictionary] = []
 	for c in eligible_governors(state, province):
 		out.append({"personaggio": c, "qui": state.character_region(c) == province.id, "titolato": c.title != "",
-			"punteggio": attr_value(state, c, Character.ATTR_ACUMEN), "testo": governor_option_text(state, c)})
+			"punteggio": attr_value(state, c, Character.ATTR_ACUMEN), "testo": governor_option_text(state, c, true)})
 	return _sorted_choices(out)
 
 
@@ -1979,8 +1981,11 @@ static func _sorted_choices(items: Array[Dictionary]) -> Array[Dictionary]:
 
 
 ## Voce del selettore del governatore: nome, stelle, acume, lealtà e l'eventuale provincia già governata.
-static func governor_option_text(state: GameState, c: Character) -> String:
+## `with_effect`: in coda l'effetto sulla lealta' della provincia (ADR-150), «provincia +12».
+static func governor_option_text(state: GameState, c: Character, with_effect: bool = false) -> String:
 	var text := Lang.t("%s · %s · acume %d · lealtà %d") % [c.full_name(), stars_text(c.stars(state.rules, state.campaign)), attr_value(state, c, Character.ATTR_ACUMEN), attr_value(state, c, Character.ATTR_LOYALTY)]
+	if with_effect:
+		text += Lang.t(" · provincia %s") % signed(governor_loyalty_effect(state, c))
 	if c.title != "":
 		text += Lang.t(" (governa %s)") % region_name(state, c.title)
 	return text
@@ -2017,7 +2022,7 @@ static func loyalty_terms_of(raw: Variant) -> Array[Dictionary]:
 ## Dettaglio dell'ultimo calcolo della lealta' (`ProvinceState.last_loyalty`, chiavi italiane).
 const LOYALTY_DETAIL_KEYS := ["last_loyalty", "ultima_lealta"]
 ## Termini del dettaglio, nell'ordine in cui si mostrano; tutti tranne «base» solo se diversi da zero.
-const LOYALTY_DETAIL_TERMS := ["base", "tassa", "guarnigione", "edifici", "ribellione_regionale", "religione", "distanza", "terrore", "spie", "inquisitori", "inquisitore", "scomunica", "occupazione", "fazione", "luogo"]
+const LOYALTY_DETAIL_TERMS := ["base", "tassa", "guarnigione", "edifici", "ribellione_regionale", "religione", "distanza", "terrore", "acume", "spie", "inquisitori", "inquisitore", "scomunica", "occupazione", "fazione", "luogo"]
 
 
 ## Coppie [termine, valore] del dettaglio della lealta': solo i termini noti (non «somma», «uomini», «passi»), con
@@ -2064,12 +2069,14 @@ const LOYALTY_REVOLT_RISK := 0.25
 ## di rivolta a fine anno, 0..1, come il sorteggio: `ProvinceProcessor.revolt_risk`), "stato" (LOYALTY_*), "titolo" («Fedele»,
 ## «Tranquilla», «Scontenta», «Rivolta probabile»), "rischio_testo" («Rischio di rivolta a fine anno: 15%»), "tendenza"
 ## («in calo verso 60: 76 a fine anno»), "termini" ([nome, valore] di ciò che la determina), "spiegazione"}.
+## ADR-150 (27/11/2026): si calcola adesso (`ProvinceProcessor.live_loyalty`), non dal fine anno precedente, cosi' una tassa,
+## un governatore o una guarnigione nuovi si vedono subito; "variazione" = effetto delle leve immediate non ancora registrato
+## (truppe entrate o uscite nel turno: conta al fine anno).
 static func loyalty_status(state: GameState, province: ProvinceState) -> Dictionary:
 	var pr := state.rules.province
-	var current := province.loyalty
-	var target := current
-	if typeof(province.last_loyalty) == TYPE_DICTIONARY and _is_number(province.last_loyalty.get("obiettivo")):
-		target = int(province.last_loyalty["obiettivo"])
+	var live := ProvinceProcessor.live_loyalty(state, province)
+	var current := int(live["corrente"])
+	var target := int(live["obiettivo"])
 	var end := clampi(ProvinceProcessor.approach(current, target, pr.drift), 0, pr.max_loyalty)
 	var risk := ProvinceProcessor.revolt_risk(state, province, end)
 	var status := LOYALTY_CALM
@@ -2092,14 +2099,27 @@ static func loyalty_status(state: GameState, province: ProvinceState) -> Diction
 	if risk > 0.0:
 		risk_text = Lang.t("Rischio di rivolta a fine anno: %s") % percent_text(risk)
 	var terms: Array = []
-	if typeof(province.last_loyalty) == TYPE_DICTIONARY:
-		for pair in loyalty_detail_pairs(province.last_loyalty):
-			terms.append([term_label(str(pair[0])), int(roundf(float(pair[1])))])
+	for pair in loyalty_detail_pairs(live):
+		terms.append([term_label(str(pair[0])), int(roundf(float(pair[1])))])
 	var explanation := Lang.t("Sotto %d di lealtà, a ogni fine anno la provincia può ribellarsi: %s di probabilità per ogni punto sotto %d, al massimo %s.") % [
 		pr.revolt_threshold, percent_text(pr.revolt_k), pr.revolt_threshold, percent_text(pr.revolt_max_chance)]
 	return {"valore": current, "massimo": pr.max_loyalty, "soglia": pr.revolt_threshold, "obiettivo": target, "fine_anno": end,
 		"rischio": risk, "stato": status, "titolo": title, "rischio_testo": risk_text, "tendenza": trend, "termini": terms,
-		"spiegazione": explanation}
+		"spiegazione": explanation, "variazione": int(live["variazione_immediata"])}
+
+
+## Effetto di un governatore sulla lealta' della provincia che governa (ADR-150): terrore e acume efficaci per i loro
+## punti di province.cfg. Lo stesso calcolo di `ProvinceProcessor.loyalty_terms`.
+static func governor_loyalty_effect(state: GameState, c: Character) -> int:
+	var pr := state.rules.province
+	return c.effective(Character.ATTR_DREAD, state.rules, state.campaign) * pr.dread_per_point \
+		+ c.effective(Character.ATTR_ACUMEN, state.rules, state.campaign) * pr.acumen_per_point
+
+
+## Effetto del livello di tassa sulla lealta' (termine «tassa»), per le voci del selettore.
+static func tax_option_text(state: GameState, level: int) -> String:
+	return Lang.t("%s (%d%%) · lealtà %s") % [tax_name(level), roundi(state.rules.tax_multiplier(level) * 100.0),
+		signed(state.rules.province.tax_term(level))]
 
 
 ## Popolo dei ribelli di una regione (`SetRegionRebels` e' l'indice nell'elenco dei popoli ribelli, non una probabilita':

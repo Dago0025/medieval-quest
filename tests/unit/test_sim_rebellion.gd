@@ -21,6 +21,7 @@ func _world(seed_value: int = 7) -> GameState:
 	# religione e' proporzionale (BASSA: -11). Questi test della 4b misurano le altre regole con la penalita' piena della
 	# 4b (-15): ogni provincia parte tutta della religione della sua cultura. La regola nuova e' in test_sim_religion.gd.
 	rules.religion.other_owner_share = 0
+	rules.province.acumen_per_point = 0   # ADR-150: l'acume del governatore si misura in test_sim_loyalty.gd
 	var s := GameSetup.new_game(campaign, units, buildings, rules, seed_value, HeroesLoader.load_file(HEROES))
 	var governor := s.governor_of("ID_BASSA")
 	governor.dread = 3
@@ -40,6 +41,7 @@ func _force(s: GameState) -> void:
 func _restive(s: GameState, region_id: String) -> void:
 	var p := s.province(region_id)
 	p.tax_level = 4
+	ProvinceProcessor.sync_loyalty(s, p)   # ADR-150: tassa gia' registrata, resta la deriva
 	p.loyalty = 30
 
 
@@ -109,6 +111,7 @@ func test_una_rivolta_certa_crea_l_esercito_ribelle(t: TestContext) -> void:
 func test_senza_rivolta_sopra_la_soglia_niente_sorteggi(t: TestContext) -> void:
 	var s := _world()
 	s.rules.province = ProvinceRules.new()
+	s.rules.province.acumen_per_point = 0   # come _world (ADR-150)
 	var rng_before := s.rng.state
 	s.events.clear()
 	ProvinceProcessor.process_year(s)

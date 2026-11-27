@@ -6,12 +6,21 @@ extends RefCounted
 const W := preload("res://tests/unit/agent_world.gd")
 
 
+## ADR-150: la scheda calcola la lealta' adesso, quindi l'obiettivo voluto si ottiene con la base delle regole e il
+## dettaglio salvato e' quello vero (nessuna variazione in sospeso).
 func _province(loyalty: int, target: int) -> Array:
 	var s := W.world()
 	var p := s.province(W.ALTA)
-	p.loyalty = loyalty
-	p.last_loyalty = {"base": 100, "tassa": target - 100, "obiettivo": target}
+	_with(s, p, loyalty, target)
 	return [s, p]
+
+
+func _with(s: GameState, p: ProvinceState, loyalty: int, target: int) -> ProvinceState:
+	s.rules.province.base += target - int(ProvinceProcessor.loyalty_terms(s, p)["somma"])
+	p.loyalty = loyalty
+	p.loyalty_owner = p.owner
+	p.last_loyalty = ProvinceProcessor.loyalty_terms(s, p)
+	return p
 
 
 func test_il_rischio_e_quello_del_sorteggio_con_la_lealta_di_fine_anno(t: TestContext) -> void:
@@ -24,7 +33,8 @@ func test_il_rischio_e_quello_del_sorteggio_con_la_lealta_di_fine_anno(t: TestCo
 	t.assert_true(str(st["tendenza"]).begins_with("in calo verso 60"), str(st["tendenza"]))
 	t.assert_true(st["stato"] == CampaignUiText.LOYALTY_RESTLESS or st["stato"] == CampaignUiText.LOYALTY_REVOLT, str(st))
 	t.assert_true(str(st["spiegazione"]).contains("100"), "la soglia spiegata")
-	t.assert_eq(st["termini"][0], ["Base", 100])
+	t.assert_eq(st["termini"][0], ["Base", s.rules.province.base])
+	t.assert_eq(st["obiettivo"], 60)
 
 
 func test_rischio_in_percentuale_e_stati(t: TestContext) -> void:
@@ -37,19 +47,13 @@ func test_rischio_in_percentuale_e_stati(t: TestContext) -> void:
 		t.assert_eq(st["stato"], CampaignUiText.LOYALTY_REVOLT, "38 a fine anno: 50% (limite), rivolta probabile")
 		t.assert_true(str(st["rischio_testo"]).ends_with("50%"), str(st["rischio_testo"]))
 		t.assert_true(CampaignUiText.loyalty_summary(s, p).contains("rivolta a fine anno 50%"))
-	var calm := CampaignUiText.loyalty_status(s, _with(p, 120, 125))
+	var calm := CampaignUiText.loyalty_status(s, _with(s, p, 120, 125))
 	t.assert_eq(calm["stato"], CampaignUiText.LOYALTY_CALM)
 	t.assert_eq(calm["rischio_testo"], "Rischio di rivolta a fine anno: nessuno")
-	var loyal := CampaignUiText.loyalty_status(s, _with(p, 170, 170))
+	var loyal := CampaignUiText.loyalty_status(s, _with(s, p, 170, 170))
 	t.assert_eq(loyal["stato"], CampaignUiText.LOYALTY_LOYAL)
 	t.assert_eq(loyal["tendenza"], "stabile")
 	t.assert_eq(CampaignUiText.loyalty_summary(s, p), "Lealtà: Fedele (170 su 200)")
-
-
-func _with(p: ProvinceState, loyalty: int, target: int) -> ProvinceState:
-	p.loyalty = loyalty
-	p.last_loyalty = {"base": 100, "obiettivo": target}
-	return p
 
 
 func test_percentuali(t: TestContext) -> void:
@@ -65,3 +69,13 @@ func test_il_popolo_dei_ribelli_al_posto_del_numero(t: TestContext) -> void:
 	t.assert_eq(CampaignUiText.rebel_people(0), "gli Alani", "primo popolo dei testi italiani")
 	t.assert_eq(CampaignUiText.rebel_people(-1), "")
 	t.assert_eq(CampaignUiText.rebel_people(5000), "")
+
+
+## ADR-150: il selettore della tassa dice quanto pesa ogni livello sulla lealta'.
+func test_le_voci_della_tassa_mostrano_la_lealta(t: TestContext) -> void:
+	var s := W.world()
+	var low := CampaignUiText.tax_option_text(s, 0)
+	var high := CampaignUiText.tax_option_text(s, s.rules.tax_multipliers.size() - 1)
+	t.assert_true(low.ends_with("lealtà " + CampaignUiText.signed(s.rules.province.tax_term(0))), low)
+	t.assert_true(high.ends_with("lealtà " + CampaignUiText.signed(s.rules.province.tax_term(s.rules.tax_multipliers.size() - 1))), high)
+

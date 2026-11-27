@@ -4726,9 +4726,9 @@ func _add_tax_row(province: ProvinceState) -> void:
 	var options := OptionButton.new()
 	options.focus_mode = Control.FOCUS_NONE
 	options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	options.tooltip_text = Lang.t("Il livello di tassa modifica il reddito agricolo della provincia.")
+	options.tooltip_text = Lang.t("Il livello di tassa modifica il reddito agricolo della provincia e, subito, la sua lealtà.")
 	for level in range(_rules.tax_multipliers.size()):
-		options.add_item("%s (%d%%)" % [CampaignUiText.tax_name(level), roundi(_rules.tax_multiplier(level) * 100.0)], level)
+		options.add_item(CampaignUiText.tax_option_text(_state, level), level)
 	options.select(clampi(province.tax_level, 0, options.item_count - 1))
 	options.item_selected.connect(_on_tax_selected)
 	row.add_child(options)

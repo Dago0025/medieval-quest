@@ -11,7 +11,8 @@ import os, re, sys
 from prepara_rifatti import portrait
 
 CULTURES = {"GIA": "japanese", "CIN": "chinese", "AZT": "aztec", "INC": "inca", "KAN": "kanem",
-            "MIS": "mississippian", "COR": "korean", "MON": "mongol", "IND": "indian", "SEA": "southeast_asian"}
+            "MIS": "mississippian", "COR": "korean", "MON": "mongol", "IND": "indian", "SEA": "southeast_asian",
+            "AUR": "auror"}
 ROLES = {"R": "king", "G": "general", "PR": "prince", "PS": "princess", "EM": "emissary", "SP": "spy",
          "AS": "assassin", "SA": "religious", "AM": "admiral"}
 CODE = re.compile(r"^([A-Z]{3})-([A-Z]{1,2})-(\d\d)\.png$")

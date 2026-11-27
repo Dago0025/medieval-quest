@@ -22,6 +22,7 @@ var religion_penalty := 15           ## PROVVISORIA: religione della regione div
 var distance_step := 3               ## PROVVISORIA: per passo di distanza dal capo
 var distance_max := 8                ## PROVVISORIA: passi oltre i quali la distanza non pesa piu'
 var dread_per_point := 2             ## PROVVISORIA: per punto di terrore del governatore
+var acumen_per_point := 1            ## PROVVISORIA (ADR-150): per punto di acume del governatore
 var regional_scale := 1.0            ## PROVVISORIA: moltiplicatore della tabella della ribellione regionale
 var conquest_loyalty := 70           ## PROVVISORIA: lealta' massima di una provincia appena conquistata
 ## Occupazione (15/11, ADR-070): una provincia conquistata a chi la possedeva all'inizio della campagna perde
@@ -108,6 +109,7 @@ static func load_file(path: String = DEFAULT_PATH) -> ProvinceRules:
 	r.distance_step = _int(cfg, "lealta", "penalita_distanza", r.distance_step)
 	r.distance_max = _int(cfg, "lealta", "distanza_max", r.distance_max)
 	r.dread_per_point = _int(cfg, "lealta", "terrore_per_punto", r.dread_per_point)
+	r.acumen_per_point = _int(cfg, "lealta", "acume_per_punto", r.acumen_per_point)
 	r.regional_scale = _float(cfg, "lealta", "scala_ribellione_regionale", r.regional_scale)
 	r.conquest_loyalty = _int(cfg, "lealta", "lealta_conquista", r.conquest_loyalty)
 	r.occupation_base = _int(cfg, "occupazione", "penalita", r.occupation_base)
@@ -211,6 +213,7 @@ func to_dict() -> Dictionary:
 		"distance_step": distance_step,
 		"distance_max": distance_max,
 		"dread_per_point": dread_per_point,
+		"acumen_per_point": acumen_per_point,
 		"regional_scale": regional_scale,
 		"conquest_loyalty": conquest_loyalty,
 		"occupation_base": occupation_base,

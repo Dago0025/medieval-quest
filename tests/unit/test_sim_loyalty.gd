@@ -29,6 +29,8 @@ func _world(seed_value: int = 7) -> GameState:
 	# religione e' proporzionale (BASSA: -11). Questi test della 4b misurano le altre regole con la penalita' piena della
 	# 4b (-15): ogni provincia parte tutta della religione della sua cultura. La regola nuova e' in test_sim_religion.gd.
 	rules.religion.other_owner_share = 0
+	# ADR-150: l'acume del governatore (termine nuovo) si misura a parte in test_governatore_terrore_e_acume_subito.
+	rules.province.acumen_per_point = 0
 	var s := GameSetup.new_game(campaign, units, buildings, rules, seed_value, HeroesLoader.load_file(HEROES))
 	var governor := s.governor_of("ID_BASSA")
 	governor.dread = 3
@@ -280,6 +282,7 @@ func test_lealta_bassa_un_solo_evento(t: TestContext) -> void:
 	var s := _world()
 	var bassa := s.province("ID_BASSA")
 	bassa.tax_level = 4          # obiettivo 75
+	ProvinceProcessor.sync_loyalty(s, bassa)   # ADR-150: la tassa nuova e' gia' registrata, resta solo la deriva
 	bassa.loyalty = 105
 	s.events.clear()
 	ProvinceProcessor.process_year(s)
@@ -437,6 +440,7 @@ func test_i_salvataggi_della_versione_3_calcolano_la_lealta(t: TestContext) -> v
 		var parsed: Variant = JSON.parse_string(JSON.stringify(old))
 		var old_rules := Rules.new()
 		old_rules.religion.other_owner_share = 0     # come _world (le versioni vecchie non hanno le religioni: partita nuova)
+		old_rules.province.acumen_per_point = 0      # come _world (ADR-150)
 		var r := SaveGame.from_dict(parsed, s.campaign, s.units, s.buildings, old_rules, s.heroes)
 		t.assert_true(bool(r["ok"]), "v%d: %s" % [version, str(r["errore"])])
 		if not bool(r["ok"]):
@@ -448,3 +452,63 @@ func test_i_salvataggi_della_versione_3_calcolano_la_lealta(t: TestContext) -> v
 			t.assert_eq(loaded.province("ID_BASSA").loyalty, 75, "v3: governatore a terrore 3, tassa massima (100 - 25)")
 		t.assert_eq(loaded.province("ID_BASSA").loyalty_owner, "FN_ALPHA")
 		t.assert_eq(SaveGame.to_dict(loaded)["versione"], SaveGame.VERSION, "si riscrive nella versione corrente")
+
+
+# --- ADR-150: leve immediate ------------------------------------------------------------------------------
+
+
+## Richiesta di Federico del 27/11/2026: alzando la tassa l'effetto sulla lealta' si vede subito, e il fine anno non lo
+## conta una seconda volta.
+func test_la_tassa_pesa_subito(t: TestContext) -> void:
+	var s := _world()
+	var alta := s.province("ID_ALTA")
+	t.assert_eq(alta.loyalty, 125, "partenza all'obiettivo (tassa normale)")
+	var r := GameCommands.set_tax(s, "FN_ALPHA", "ID_ALTA", 4)
+	t.assert_true(bool(r["ok"]), str(r))
+	t.assert_eq(alta.loyalty, 100, "125 - 25 subito")
+	t.assert_eq(int(alta.last_loyalty["tassa"]), -25, "dettaglio aggiornato")
+	t.assert_eq(int(CampaignUiText.loyalty_status(s, alta)["valore"]), 100, "la scheda mostra il valore nuovo")
+	ProvinceProcessor.process_year(s)
+	t.assert_eq(alta.loyalty, 100, "gia' all'obiettivo: nessun doppio calo")
+	GameCommands.set_tax(s, "FN_ALPHA", "ID_ALTA", 0)
+	t.assert_eq(alta.loyalty, 150, "tassa minima: +50 rispetto alla massima")
+
+
+## Una leva cambiata fuori dai comandi (truppe entrate o uscite, tassa toccata dall'IA) si vede nell'anteprima e conta a
+## fine anno, prima della deriva del resto.
+func test_le_leve_cambiate_contano_a_fine_anno(t: TestContext) -> void:
+	var s := _world()
+	var alta := s.province("ID_ALTA")
+	alta.tax_level = 4
+	var live := ProvinceProcessor.live_loyalty(s, alta)
+	t.assert_eq(int(live["variazione_immediata"]), -25)
+	t.assert_eq(int(live["corrente"]), 100)
+	t.assert_eq(alta.loyalty, 125, "l'anteprima non cambia lo stato")
+	t.assert_eq(int(CampaignUiText.loyalty_status(s, alta)["variazione"]), -25)
+	ProvinceProcessor.process_year(s)
+	t.assert_eq(alta.loyalty, 100)
+	var extra := s.create_army("FN_ALPHA", "ID_ALTA", false)
+	t.assert_true(extra != null, "esercito in piu'")
+	t.assert_eq(alta.loyalty, 100, "la guarnigione non muta lo stato prima del fine anno")
+
+
+## Terrore e acume del governatore (acume: termine nuovo, PROVVISORIO) contano subito quando lo si nomina o lo si revoca.
+func test_governatore_terrore_e_acume_subito(t: TestContext) -> void:
+	var s := _world()
+	s.rules.province.acumen_per_point = 1
+	var bassa := s.province("ID_BASSA")
+	var governor := s.governor_of("ID_BASSA")
+	governor.acumen = 4
+	ProvinceProcessor.sync_loyalty(s, bassa)
+	var terms := ProvinceProcessor.loyalty_terms(s, bassa)
+	var acumen := governor.effective(Character.ATTR_ACUMEN, s.rules, s.campaign)
+	t.assert_eq(int(terms["acume"]), acumen, "un punto di lealta' per punto di acume")
+	t.assert_eq(CampaignUiText.governor_loyalty_effect(s, governor), int(terms["terrore"]) + int(terms["acume"]))
+	t.assert_true(CampaignUiText.governor_option_text(s, governor, true).contains(" · provincia +"), CampaignUiText.governor_option_text(s, governor, true))
+	var before := bassa.loyalty
+	var r := GameCommands.revoke_title(s, "FN_ALPHA", governor.id)
+	t.assert_true(bool(r["ok"]), str(r))
+	t.assert_eq(bassa.loyalty, before - int(terms["terrore"]) - int(terms["acume"]), "senza governatore si perdono subito")
+	r = GameCommands.assign_title(s, "FN_ALPHA", governor.id, "ID_BASSA")
+	t.assert_true(bool(r["ok"]), str(r))
+	t.assert_eq(bassa.loyalty, before, "di nuovo governata: torna com'era")

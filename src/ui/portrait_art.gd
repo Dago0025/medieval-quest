@@ -72,8 +72,15 @@ static var _cultures := {}        ## fazione -> cultura
 static var _cultures_loaded := false
 
 
+## Serie esclusiva degli Auror (Federico 27/11/2026: «ritratti esclusivi per gli auror ... distinti dal resto degli
+## occidentali»): `assets/ritratti/auror/<ruolo>/`, solo in modalita' Auror; i Danesi storici restano ai cattolici.
+const AUROR_CULTURE := "auror"
+
+
 ## Cultura dei ritratti della fazione ("" = nessuna: decide la religione).
 static func culture_of(faction_id: String) -> String:
+	if Scenario.auror and SimUtil.norm(faction_id) == AUROR:
+		return AUROR_CULTURE
 	if not _cultures_loaded:
 		_cultures_loaded = true
 		var cfg := ConfigFile.new()

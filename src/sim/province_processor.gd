@@ -83,6 +83,7 @@ static func init_loyalty(state: GameState) -> void:
 		p.loyalty = int(terms["obiettivo"])
 		p.loyalty_owner = p.owner
 		terms["corrente"] = p.loyalty
+		terms[CALC_OWNER_KEY] = p.owner
 		p.last_loyalty = terms
 
 
@@ -90,28 +91,26 @@ static func init_loyalty(state: GameState) -> void:
 
 
 ## Dettaglio dell'obiettivo di lealta' di una provincia (senza modificare lo stato): "base", "tassa", "guarnigione",
-## "edifici", "ribellione_regionale" (<= 0), "religione" (<= 0, fase 5b: proporzionale alla quota della religione del
+## "edifici", "ribellione_regionale" (<= 0), "acume" (governatore, ADR-150), "religione" (<= 0, fase 5b: proporzionale alla quota della religione del
 ## proprietario), "distanza" (<= 0), "terrore", "spie" (fase 5a), "inquisitori" (<= 0, fase 5b), "scomunica" (<= 0, fase 5c), "somma" (senza limiti),
 ## "obiettivo" (somma limitata a 0..massimo), piu' "uomini" (guarnigione) e "passi" (distanza dal capo).
 ## `distances` e' la tabella annuale (fazione -> regione -> passi); vuota = si calcola qui.
 static func loyalty_terms(state: GameState, p: ProvinceState, distances: Dictionary = {}) -> Dictionary:
 	var pr := state.rules.province
 	var is_rebel := p.owner == GameState.REBEL
-	var men := garrison_men(state, p)
-	var garrison := mini(floori(float(men) * float(pr.garrison_per_100) / 100.0), pr.garrison_max)
-	var tax := 0
+	var quick := immediate_terms(state, p)
+	var men := int(quick["uomini"])
+	var garrison := int(quick["guarnigione"])
+	var tax := int(quick["tassa"])
+	var terror := int(quick["terrore"])
+	var acumen := int(quick["acume"])
 	var religion := 0
 	var distance := 0
-	var terror := 0
 	var steps := 0
 	if not is_rebel:
-		tax = pr.tax_term(p.tax_level)
 		religion = ReligionProcessor.loyalty_term(state, p)
 		steps = _distance_steps(state, p, distances)
 		distance = -steps * pr.distance_step
-		var governor := state.governor_of(p.id)
-		if governor != null and governor.faction == p.owner:
-			terror = governor.effective(Character.ATTR_DREAD, state.rules, state.campaign) * pr.dread_per_point
 	var buildings := _buildings_term(state, p)
 	var regional := -pr.regional_penalty(p.id)
 	var spies := spies_term(state, p)
@@ -120,7 +119,7 @@ static func loyalty_terms(state: GameState, p: ProvinceState, distances: Diction
 	var occupation := -occupation_term(state, p)
 	var traits := 0 if is_rebel else state.rules.traits.loyalty_bonus(p.owner)   # ADR-089: tratti della fazione
 	var sites := 0 if is_rebel else LegendarySites.region_int(state, p.id, "lealta") + LegendarySiteProcessor.temp_loyalty(state, p.id)   # luoghi leggendari
-	var total := pr.base + tax + garrison + buildings + regional + religion + distance + terror + spies + inquisitors + excommunication + occupation + traits + sites
+	var total := pr.base + tax + garrison + buildings + regional + religion + distance + terror + acumen + spies + inquisitors + excommunication + occupation + traits + sites
 	return {
 		"base": pr.base,
 		"tassa": tax,
@@ -130,6 +129,7 @@ static func loyalty_terms(state: GameState, p: ProvinceState, distances: Diction
 		"religione": religion,
 		"distanza": distance,
 		"terrore": terror,
+		"acume": acumen,
 		"spie": spies,
 		"inquisitori": inquisitors,
 		"scomunica": excommunication,
@@ -304,6 +304,82 @@ static func _bfs(campaign: CampaignData, start: String) -> Dictionary:
 	return dist
 
 
+## Termini della lealta' che il giocatore muove con i suoi ordini e che agiscono subito sulla lealta' corrente (ADR-150,
+## richiesta di Federico del 27/11/2026: alzando le tasse o nominando un governatore capace l'effetto si vede subito,
+## come nell'originale). Tutto il resto (religione, distanza, edifici, occupazione...) continua ad avvicinarsi piano.
+const IMMEDIATE_TERMS := ["tassa", "guarnigione", "terrore", "acume"]
+## Proprietario per cui e' stato fatto l'ultimo calcolo (in `last_loyalty`): dopo un cambio di mano la differenza non vale.
+const CALC_OWNER_KEY := "proprietario"
+
+
+## Termini immediati di una provincia (ADR-150), piu' "uomini" della guarnigione: calcolo leggero, senza distanze.
+static func immediate_terms(state: GameState, p: ProvinceState) -> Dictionary:
+	var pr := state.rules.province
+	var men := garrison_men(state, p)
+	var out := {"tassa": 0, "guarnigione": mini(floori(float(men) * float(pr.garrison_per_100) / 100.0), pr.garrison_max),
+		"terrore": 0, "acume": 0, "uomini": men}
+	if p.owner == GameState.REBEL:
+		return out
+	out["tassa"] = pr.tax_term(p.tax_level)
+	var governor := state.governor_of(p.id)
+	if governor != null and governor.faction == p.owner:
+		out["terrore"] = governor.effective(Character.ATTR_DREAD, state.rules, state.campaign) * pr.dread_per_point
+		out["acume"] = governor.effective(Character.ATTR_ACUMEN, state.rules, state.campaign) * pr.acumen_per_point
+	return out
+
+
+## Somma dei termini immediati di un dettaglio della lealta'.
+static func immediate_sum(terms: Dictionary) -> int:
+	var total := 0
+	for key in IMMEDIATE_TERMS:
+		total += int(terms.get(key, 0))
+	return total
+
+
+## Lealta' di adesso (senza modificare lo stato): il dettaglio di `loyalty_terms` con "corrente" = lealta' salvata piu' la
+## variazione dei termini immediati rispetto all'ultimo calcolo ("variazione_immediata"), entro 0..massimo. Senza un calcolo
+## precedente, se intanto la provincia ha cambiato padrone o se e' dei ribelli (non danno ordini: la loro lealta' resta
+## lenta) la variazione e' zero. Nessun sorteggio.
+static func live_loyalty(state: GameState, p: ProvinceState, distances: Dictionary = {}) -> Dictionary:
+	var terms := loyalty_terms(state, p, distances)
+	var delta := 0
+	var last: Dictionary = p.last_loyalty if typeof(p.last_loyalty) == TYPE_DICTIONARY else {}
+	if not last.is_empty() and p.owner != GameState.REBEL and p.owner == p.loyalty_owner and str(last.get(CALC_OWNER_KEY, p.owner)) == p.owner:
+		delta = immediate_sum(terms) - immediate_sum(last)
+	terms["variazione_immediata"] = delta
+	terms["corrente"] = clampi(p.loyalty + delta, 0, state.rules.province.max_loyalty)
+	return terms
+
+
+## Applica subito alla lealta' corrente la variazione dei termini immediati (tassa, guarnigione, governatore) e aggiorna il
+## dettaglio (termini, somma, obiettivo): si chiama dopo gli ordini che li cambiano (ADR-150), anche quelli dell'IA, quindi
+## ricalcola solo i termini immediati. Le province appena passate di mano aspettano il fine anno; senza un dettaglio
+## precedente lo si calcola per intero, senza variazione.
+static func sync_loyalty(state: GameState, p: ProvinceState) -> void:
+	if p == null or p.owner != p.loyalty_owner or p.owner == GameState.REBEL:
+		return
+	var pr := state.rules.province
+	var last: Dictionary = p.last_loyalty if typeof(p.last_loyalty) == TYPE_DICTIONARY else {}
+	if last.is_empty() or not last.has("somma") or str(last.get(CALC_OWNER_KEY, p.owner)) != p.owner:
+		var full := loyalty_terms(state, p)
+		full["corrente"] = p.loyalty
+		full[CALC_OWNER_KEY] = p.owner
+		p.last_loyalty = full
+		return
+	var now := immediate_terms(state, p)
+	var delta := immediate_sum(now) - immediate_sum(last)
+	var terms := last.duplicate()
+	for key in now:
+		terms[key] = now[key]
+	p.loyalty = clampi(p.loyalty + delta, 0, pr.max_loyalty)
+	terms["somma"] = int(last["somma"]) + delta
+	terms["obiettivo"] = clampi(int(terms["somma"]), 0, pr.max_loyalty)
+	terms["corrente"] = p.loyalty
+	terms[CALC_OWNER_KEY] = p.owner
+	p.last_loyalty = terms
+
+
+
 ## Un anno di avvicinamento all'obiettivo: si colma la frazione `deriva` del divario, almeno un punto, senza superarlo.
 static func approach(current: int, target: int, drift: float) -> int:
 	var gap := target - current
@@ -319,10 +395,12 @@ static func _update_loyalty(state: GameState, distances: Dictionary) -> void:
 	var pr := state.rules.province
 	for p in state.provinces:
 		_handle_owner_change(state, p)
-		var terms := loyalty_terms(state, p, distances)
+		var terms := live_loyalty(state, p, distances)   # ADR-150: prima le leve immediate, poi la deriva del resto
 		var target := int(terms["obiettivo"])
-		p.loyalty = clampi(approach(p.loyalty, target, pr.drift), 0, pr.max_loyalty)
+		p.loyalty = clampi(approach(int(terms["corrente"]), target, pr.drift), 0, pr.max_loyalty)
 		terms["corrente"] = p.loyalty
+		terms.erase("variazione_immediata")
+		terms[CALC_OWNER_KEY] = p.owner
 		p.last_loyalty = terms
 		if p.owner == GameState.REBEL:
 			p.counters["anni_sotto_soglia"] = 0
