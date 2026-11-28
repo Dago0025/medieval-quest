@@ -4,6 +4,8 @@ Medieval Quest è una partita a turni sulla mappa del mondo: ogni turno è un an
 
 In partita il tasto **H** mostra in ogni momento l'elenco dei comandi.
 
+*English version: [GAME_GUIDE.md](GAME_GUIDE.md).*
+
 ---
 
 ## 1. Primi passi
@@ -100,11 +102,11 @@ Una pedina con un ordine compare subito nella regione d'arrivo, ma ci arriva dav
 
 Ogni provincia ha un castello, edifici, una popolazione con la sua religione, una lealtà e delle entrate. La finestra della provincia ha le schede **Provincia, Castello, Governo, Edifici** più costruzione e arruolamento.
 
-- **Costruire**: scegli un edificio tra quelli «Da costruire»; passa con la sua icona tra quelli «In costruzione». Un clic sulla tessera lo annulla. Un edificio costruito si può demolire (tornano metà del costo); quando una provincia viene conquistata alcuni edifici vanno distrutti.
+- **Costruire**: scegli un edificio tra quelli «Da costruire»; passa con la sua icona tra quelli «In costruzione». In coda ci stanno fino a 5 edifici. Un clic sulla tessera lo annulla. Un edificio costruito si può demolire (tornano metà del costo); quando una provincia viene conquistata alcuni edifici vanno distrutti.
 - **Arruolare**: le schede Truppe, Flotta e Agenti mostrano cosa puoi arruolare lì, in base agli edifici. Con «Ripeti la coda» le unità completate ripartono da sole; se il tesoro non basta la coda va in pausa e riprende appena possibile.
 - **Armi e armature**: armaioli e fabbri migliorano le truppe arruolate nella provincia. I livelli compaiono sulle carte: scudo (armatura) sopra, spada (armi) sotto.
 - **Governatore**: nella scheda Governo scegli chi amministra la provincia. Il suo acume influisce su entrate e ordine.
-- **Lealtà**: tasse alte, religione diversa, eserciti stranieri e spie nemiche la abbassano; guarnigioni, edifici religiosi e un buon governatore la alzano. Una provincia scontenta si ribella.
+- **Lealtà**: tasse alte, religione diversa, eserciti stranieri e spie nemiche la abbassano; guarnigioni, edifici religiosi e un buon governatore la alzano. Tasse, guarnigione e governatore contano subito, senza aspettare la fine dell'anno: la scelta della tassa e l'elenco dei candidati governatore mostrano di quanto cambia. Una provincia scontenta si ribella.
 - **Commercio**: il commercio locale rende anche senza porto. Con porti e flotte che presidiano le rotte arrivano anche le entrate del commercio marittimo, che crescono con la ricchezza dei porti raggiunti. Una flotta nemica in una zona di mare la chiude.
 
 ### Luoghi leggendari
@@ -169,14 +171,14 @@ La scheda **Agenti** della finestra spie e messaggi elenca tutti i tuoi agenti; 
 - **F5** salvataggio rapido, **F9** caricamento rapido.
 - Dal **Menu** (in alto a destra o Esc): salva, carica, torna al menu iniziale, esci dal gioco.
 - I file stanno in `%APPDATA%\Godot\app_userdata\MTW Remake` e restano anche dopo la disinstallazione.
+- Le partite salvate prima della versione 2026.11.28 non hanno le regioni nuove della mappa del mondo: per giocarle serve una nuova campagna.
 
 ---
 
 ## 11. Problemi comuni
 
 - **Schermo nero o il gioco non parte**: aggiorna i driver della scheda video.
-- **Nuove versioni**: all'avvio il gioco controlla su GitHub se c'è una versione più recente e, se c'è, lo segnala in basso a destra nel menu iniziale con il pulsante Scarica. Serve la connessione a internet; senza, il gioco parte come sempre. Il controllo si spegne da Impostazioni → Nuove versioni.
-- **Mancano alcune immagini degli eventi**: manca la cartella `originale` accanto a `Medieval Quest.exe`. Reinstalla il gioco.
+- **Nuove versioni**: all'avvio il gioco controlla su GitHub se c'è una versione più recente e, se c'è, lo segnala in basso a destra nel menu iniziale con i pulsanti Scarica, Novità, Più tardi e Salta questa versione. Serve la connessione a internet; senza, il gioco parte come sempre. Il controllo si spegne da Impostazioni → Nuove versioni.
 - **Avviso di Windows SmartScreen**: l'installer non è firmato. «Ulteriori informazioni» → «Esegui comunque».
 
 Il progetto **non prevede supporto**: questa guida e il codice sorgente sono tutta la documentazione disponibile.

@@ -8,7 +8,8 @@ Crea installer/build/payload/ con:
   - Medieval Quest.exe (pck incorporato, da esporta.bat);
   (dal 26/11/2026 niente cartella originale/: immagini e audio sono tutti del progetto, quindi l'installer non contiene
   file del gioco originale);
-  - Guida di gioco.html e Crediti e diritti.html (da docs/GUIDA_DI_GIOCO.md e CREDITI_E_DIRITTI.md);
+  - Guida di gioco.html, Game guide.html e Crediti e diritti.html (da docs/GUIDA_DI_GIOCO.md, docs/GAME_GUIDE.md e
+    CREDITI_E_DIRITTI.md);
   - LEGGIMI.txt, LICENSE.txt, LICENZE_TERZE_PARTI.txt (Godot Engine e caratteri);
 poi compila installer/build/MedievalQuest-Setup-<versione>.exe.
 Richiede Python 3 con il pacchetto `markdown` e NSIS 3 (makensis) su Windows o Linux.
@@ -111,6 +112,7 @@ def main():
     os.makedirs(payload)
     shutil.copy2(a.exe, os.path.join(payload, NOME + ".exe"))
     scrivi(os.path.join(payload, "Guida di gioco.html"), html("Medieval Quest - Guida di gioco", leggi("docs/GUIDA_DI_GIOCO.md")))
+    scrivi(os.path.join(payload, "Game guide.html"), html("Medieval Quest - Game guide", leggi("docs/GAME_GUIDE.md")))
     scrivi(os.path.join(payload, "Crediti e diritti.html"), html("Medieval Quest - Crediti e diritti", leggi("CREDITI_E_DIRITTI.md")))
     scrivi(os.path.join(payload, "LEGGIMI.txt"), leggi("README.md"), bom=True)
     scrivi(os.path.join(payload, "LICENSE.txt"), leggi("LICENSE"), bom=True)

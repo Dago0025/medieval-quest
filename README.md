@@ -35,7 +35,7 @@ Windows può mostrare l'avviso di SmartScreen perché l'installer non è firmato
 
 ## Come si gioca
 
-La guida completa, con comandi e regole principali, è in [docs/GUIDA_DI_GIOCO.md](docs/GUIDA_DI_GIOCO.md); l'installer la copia anche nella cartella del gioco. In partita il tasto **H** mostra l'elenco dei comandi.
+La guida completa, con comandi e regole principali, è in [docs/GUIDA_DI_GIOCO.md](docs/GUIDA_DI_GIOCO.md) (in inglese: [docs/GAME_GUIDE.md](docs/GAME_GUIDE.md)); l'installer le copia entrambe nella cartella del gioco. In partita il tasto **H** mostra l'elenco dei comandi.
 
 ## Diritti e crediti
 
@@ -84,7 +84,7 @@ Windows may show a SmartScreen warning because the installer is not signed: "Mor
 
 ### How to play
 
-The full guide, with controls and main rules, is in [docs/GUIDA_DI_GIOCO.md](docs/GUIDA_DI_GIOCO.md) (Italian); the installer also copies it to the game folder. In game, press **H** for the list of controls and keys.
+The full guide, with controls and main rules, is in [docs/GAME_GUIDE.md](docs/GAME_GUIDE.md) (Italian original: [docs/GUIDA_DI_GIOCO.md](docs/GUIDA_DI_GIOCO.md)); the installer copies both to the game folder. In game, press **H** for the list of controls and keys.
 
 ### Rights and credits
 
