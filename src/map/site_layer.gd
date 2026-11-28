@@ -5,14 +5,18 @@ extends Control
 ## assets/luoghi/simboli) con il nome sotto. Si vedono solo i luoghi gia' scoperti dal giocatore. Sta sotto le pedine
 ## (stesso sistema di coordinate di ArmyLayer: mondo -> vista piatta -> prospettiva). Non riceve il mouse: lo interroga
 ## la mappa con `site_at`.
+## Dal 28/11/2026 (richiesta di Federico) niente anello d'ottone: medaglioni e pallini un po' piu' grandi; il luogo sotto il
+## mouse e quello con la scheda aperta (`set_selected`) si alzano su un alone dorato, cosi' si vedono anche tra gli altri;
+## con `make_overlay` questi due si disegnano su un livello sopra le pedine (nessun castello li copre).
 
-const DOT_RADIUS := 4.5                  ## raggio del pallino, in pixel dello schermo
-const DOT_HIT := 11.0                     ## raggio cliccabile del pallino
-const MEDALLION := 44.0                   ## diametro del medaglione al passaggio del mouse
-const MEDALLION_HIT := 24.0
-const MEDALLION_ALL := 34.0               ## medaglioni tutti aperti dalla bussola della minimappa
+const DOT_RADIUS := 5.5                  ## raggio del pallino, in pixel dello schermo
+const DOT_HIT := 12.0                     ## raggio cliccabile del pallino
+const MEDALLION := 52.0                   ## diametro del medaglione al passaggio del mouse o con la scheda aperta
+const MEDALLION_HIT := 28.0
+const MEDALLION_ALL := 40.0               ## medaglioni tutti aperti dalla bussola della minimappa
 const LABEL_ALL := 11                     ## corpo dei nomi con i medaglioni tutti aperti
-const RING := Color(0.86, 0.71, 0.36)
+const GLOW := Color(1.0, 0.82, 0.40)      ## alone del luogo in evidenza (mouse o scheda aperta)
+const GLOW_WIDTH := 9.0                   ## quanto l'alone esce dal disco
 const OUTLINE := Color(0.12, 0.08, 0.04, 0.85)
 const PENDING := Color(0.72, 0.10, 0.08)
 const PLATE := Color(0.93, 0.88, 0.75, 0.95)
@@ -33,6 +37,7 @@ class Entry:
 
 var _entries: Array[Entry] = []
 var _hovered := ""
+var _selected := ""
 var _show_all := false
 var _center := Vector2.ZERO
 var _zoom := 1.0
@@ -41,6 +46,23 @@ var _projection: MapProjection = null
 var _tilt_seen := 0.0
 var _screen_seen := Vector2.ZERO
 var _textures := {}
+var _overlay: Control = null
+
+
+## Livello sopra le pedine per i luoghi in evidenza: va aggiunto dopo ArmyLayer. Senza, restano in questo livello.
+func make_overlay() -> Control:
+	if _overlay == null:
+		_overlay = Control.new()
+		_overlay.name = "SitesLifted"
+		_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_overlay.draw.connect(_draw_lifted_on.bind(_overlay))
+	return _overlay
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DRAW and _overlay != null and is_instance_valid(_overlay):
+		_overlay.queue_redraw()
 
 
 func _init() -> void:
@@ -62,6 +84,8 @@ func set_sites(list: Array[Dictionary]) -> void:
 		_entries.append(e)
 	if _hovered != "" and not has_site(_hovered):
 		_hovered = ""
+	if _selected != "" and not has_site(_selected):
+		_selected = ""
 	queue_redraw()
 
 
@@ -97,6 +121,22 @@ func set_hovered(site_id: String) -> void:
 		return
 	_hovered = site_id
 	queue_redraw()
+
+
+## Luogo con la scheda aperta ("" = nessuno): resta aperto e in evidenza finche' la scheda non si chiude.
+func set_selected(site_id: String) -> void:
+	if site_id == _selected:
+		return
+	_selected = site_id
+	queue_redraw()
+
+
+func selected() -> String:
+	return _selected
+
+
+func _highlighted(e: Entry) -> bool:
+	return e.id == _hovered or e.id == _selected
 
 
 static func texture_path(symbol: String, category: String) -> String:
@@ -142,7 +182,7 @@ func site_at(screen: Vector2) -> String:
 	var best_d := INF
 	for e in _entries:
 		var p := _to_screen(e.world)
-		var radius := MEDALLION_HIT if e.id == _hovered else (MEDALLION_ALL * 0.55 if _show_all else DOT_HIT)
+		var radius := MEDALLION_HIT if _highlighted(e) else (MEDALLION_ALL * 0.55 if _show_all else DOT_HIT)
 		var d := p.distance_to(screen)
 		if d <= radius and d < best_d:
 			best = e.id
@@ -160,14 +200,14 @@ func screen_point(site_id: String) -> Vector2:
 
 func _draw() -> void:
 	var screen := _screen_size()
-	var hovered_entry: Entry = null
+	var lifted: Array[Entry] = []
 	var shown: Array[Entry] = []
 	for e in _entries:
 		var p := _to_screen(e.world)
 		if p.x < -60.0 or p.y < -60.0 or p.x > screen.x + 60.0 or p.y > screen.y + 60.0:
 			continue
-		if e.id == _hovered:
-			hovered_entry = e
+		if _highlighted(e):
+			lifted.append(e)
 			continue
 		if _show_all:
 			shown.append(e)
@@ -180,35 +220,62 @@ func _draw() -> void:
 		var plates: Array[Rect2] = []
 		for e in shown:
 			_draw_medallion(_to_screen(e.world), e, MEDALLION_ALL, LABEL_ALL, plates)
-	if hovered_entry != null:
-		_draw_medallion(_to_screen(hovered_entry.world), hovered_entry)
+	if _overlay == null or not is_instance_valid(_overlay):
+		_draw_lifted_on(self, lifted)
+
+
+## Luoghi in evidenza, per ultimi e sopra gli altri: prima quello selezionato, poi quello sotto il mouse. `target` e' il
+## controllo su cui disegnare (questo livello o quello sopra le pedine).
+func _draw_lifted_on(target: CanvasItem, lifted: Array = []) -> void:
+	if lifted.is_empty():
+		var screen := _screen_size()
+		for e in _entries:
+			var q := _to_screen(e.world)
+			if _highlighted(e) and q.x > -60.0 and q.y > -60.0 and q.x < screen.x + 60.0 and q.y < screen.y + 60.0:
+				lifted.append(e)
+	lifted.sort_custom(func(a: Entry, b: Entry) -> bool: return a.id == _selected and b.id != _selected)
+	for e in lifted:
+		var p := _to_screen(e.world)
+		_draw_glow(target, p, MEDALLION / 2.0)
+		_draw_medallion(p, e, MEDALLION, 13, null, target)
+
+
+## Alone dorato morbido attorno al disco (anelli concentrici sempre piu' trasparenti, niente cornice netta).
+func _draw_glow(target: CanvasItem, p: Vector2, radius: float) -> void:
+	var steps := 8
+	for i in range(steps, 0, -1):
+		var k := float(i) / steps
+		target.draw_circle(p, radius + GLOW_WIDTH * k, Color(GLOW.r, GLOW.g, GLOW.b, 0.26 * (1.0 - k) + 0.06))
 
 
 func _draw_dot(p: Vector2, e: Entry) -> void:
 	var fill: Color = CampaignUiSites.CATEGORY_COLORS.get(e.category, Color(0.6, 0.45, 0.2))
 	if e.inactive:
 		fill = fill.lerp(Color(0.45, 0.45, 0.45), 0.7)
-	draw_circle(p + Vector2(0.6, 1.0), DOT_RADIUS + 1.6, Color(0, 0, 0, 0.35))
-	draw_circle(p, DOT_RADIUS + 1.6, OUTLINE)
-	draw_circle(p, DOT_RADIUS + 0.8, RING)
-	draw_circle(p, DOT_RADIUS - 0.4, fill)
+	# senza anello d'ottone (28/11/2026): ombra, filo scuro e il colore della categoria con un punto di luce
+	draw_circle(p + Vector2(0.6, 1.0), DOT_RADIUS + 1.4, Color(0, 0, 0, 0.35))
+	draw_circle(p, DOT_RADIUS + 1.0, OUTLINE)
+	draw_circle(p, DOT_RADIUS, fill)
+	draw_circle(p - Vector2(DOT_RADIUS, DOT_RADIUS) * 0.3, DOT_RADIUS * 0.45, fill.lightened(0.35))
 	if e.pending:
 		draw_circle(p + Vector2(DOT_RADIUS + 1.5, -DOT_RADIUS - 1.5), 2.6, PENDING)
 
 
-func _draw_medallion(p: Vector2, e: Entry, diameter: float = MEDALLION, label_size: int = 13, plates = null) -> void:
+func _draw_medallion(p: Vector2, e: Entry, diameter: float = MEDALLION, label_size: int = 13, plates = null, target: CanvasItem = null) -> void:
+	var c: CanvasItem = target if target != null else self
 	if e.texture != null:
 		# l'immagine ha un margine per l'ombra e l'alone: il disco e' 88 px su (88 + 24)
 		var full := diameter * float(e.texture.get_width()) / 88.0
-		draw_texture_rect(e.texture, Rect2(p - Vector2(full, full) / 2.0, Vector2(full, full)), false)
+		c.draw_texture_rect(e.texture, Rect2(p - Vector2(full, full) / 2.0, Vector2(full, full)), false)
 	else:
-		draw_circle(p, diameter / 2.0, OUTLINE)
-		draw_circle(p, diameter / 2.0 - 2.0, RING)
+		var fill: Color = CampaignUiSites.CATEGORY_COLORS.get(e.category, Color(0.6, 0.45, 0.2))
+		c.draw_circle(p, diameter / 2.0, OUTLINE)
+		c.draw_circle(p, diameter / 2.0 - 1.5, fill.darkened(0.4))
 	if e.pending:
-		var c := p + Vector2(diameter * 0.38, -diameter * 0.38)
-		draw_circle(c, 7.0, PENDING)
+		var seal := p + Vector2(diameter * 0.38, -diameter * 0.38)
+		c.draw_circle(seal, 7.0, PENDING)
 		var f := get_theme_default_font()
-		draw_string(f, c + Vector2(-2.5, 4.5), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1, 0.92, 0.8))
+		c.draw_string(f, seal + Vector2(-2.5, 4.5), "!", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color(1, 0.92, 0.8))
 	if e.label != "":
 		var font: Font = UiTheme.crisp_text_bold()
 		var size := label_size
@@ -219,8 +286,8 @@ func _draw_medallion(p: Vector2, e: Entry, diameter: float = MEDALLION, label_si
 				if (r as Rect2).intersects(box):
 					return
 			plates.append(box)
-		draw_style_box(_plate_box(), box)
-		draw_string(font, Vector2(box.position.x + 8.0, box.position.y + size + 2.0), e.label, HORIZONTAL_ALIGNMENT_LEFT, -1, size, INK)
+		c.draw_style_box(_plate_box(), box)
+		c.draw_string(font, Vector2(box.position.x + 8.0, box.position.y + size + 2.0), e.label, HORIZONTAL_ALIGNMENT_LEFT, -1, size, INK)
 
 
 var _plate: StyleBoxFlat = null

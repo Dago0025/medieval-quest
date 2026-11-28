@@ -18,6 +18,7 @@ SetFactionCol::	FN_JAPANESE	188 30 40	236 230 216
 SetRegionOwner::	ID_KINAI	FN_JAPANESE
 SetRegionOwner::	ID_KYUSHU	FN_JAPANESE
 SetRegionOwner::	ID_TOHOKU	FN_JAPANESE
+SetRegionOwner::	ID_KANTO	FN_JAPANESE
 MakeBuilding::	ID_KINAI	Castle4
 MakeBuilding::	ID_KINAI	Spearmaker
 MakeBuilding::	ID_KINAI	Bowyer
@@ -65,6 +66,13 @@ SetRegionOwner::	ID_JIANGNAN	FN_CHINESE
 SetRegionOwner::	ID_HUGUANG	FN_CHINESE
 SetRegionOwner::	ID_FUJIAN	FN_CHINESE
 SetRegionOwner::	ID_LINGNAN	FN_CHINESE
+SetRegionOwner::	ID_HEBEI	FN_CHINESE
+SetRegionOwner::	ID_SHANDONG	FN_CHINESE
+SetRegionOwner::	ID_HEDONG	FN_CHINESE
+SetRegionOwner::	ID_HUAINAN	FN_CHINESE
+SetRegionOwner::	ID_JIANGXI	FN_CHINESE
+SetRegionOwner::	ID_GUANGXI	FN_CHINESE
+SetRegionOwner::	ID_HUNAN	FN_CHINESE
 MakeBuilding::	ID_KAIFENG	Castle4
 MakeBuilding::	ID_KAIFENG	Spearmaker
 MakeBuilding::	ID_KAIFENG	Bowyer
@@ -251,6 +259,7 @@ GGConquestReward::	FN_KOREANS	0.5
 SetShieldImage::	FN_KOREANS	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
 SetFactionCol::	FN_KOREANS	30 75 140	240 236 224
 SetRegionOwner::	ID_KOREA	FN_KOREANS
+SetRegionOwner::	ID_GYEONGSANG	FN_KOREANS
 MakeBuilding::	ID_KOREA	Castle4
 MakeBuilding::	ID_KOREA	Spearmaker
 MakeBuilding::	ID_KOREA	Bowyer
@@ -316,6 +325,8 @@ SetFactionCol::	FN_CHOLA	140 28 60	232 192 96
 SetRegionOwner::	ID_CHOLA	FN_CHOLA
 SetRegionOwner::	ID_DECCAN	FN_CHOLA
 SetRegionOwner::	ID_CEYLON	FN_CHOLA
+SetRegionOwner::	ID_KERALA	FN_CHOLA
+SetRegionOwner::	ID_GANGAVADI	FN_CHOLA
 MakeBuilding::	ID_CHOLA	Castle4
 MakeBuilding::	ID_CHOLA	Spearmaker
 MakeBuilding::	ID_CHOLA	Bowyer
@@ -352,6 +363,7 @@ GGConquestReward::	FN_KHMER	0.5
 SetShieldImage::	FN_KHMER	"Lithuanians_lge"	"Lithuanians_sml"	"Lithuanians"	"F1024"	"F1024"
 SetFactionCol::	FN_KHMER	106 58 138	224 184 80
 SetRegionOwner::	ID_KHMER	FN_KHMER
+SetRegionOwner::	ID_LAVO	FN_KHMER
 MakeBuilding::	ID_KHMER	Castle4
 MakeBuilding::	ID_KHMER	Spearmaker
 MakeBuilding::	ID_KHMER	Bowyer
@@ -416,6 +428,8 @@ SetFactionCol::	FN_KARAKHANIDS	123 45 38	232 200 106
 SetRegionOwner::	ID_SEMIRECHYE	FN_KARAKHANIDS
 SetRegionOwner::	ID_KASHGAR	FN_KARAKHANIDS
 SetRegionOwner::	ID_TRANSOXIANA	FN_KARAKHANIDS
+SetRegionOwner::	ID_FERGHANA	FN_KARAKHANIDS
+SetRegionOwner::	ID_KHOTAN	FN_KARAKHANIDS
 MakeBuilding::	ID_SEMIRECHYE	Castle4
 MakeBuilding::	ID_SEMIRECHYE	Spearmaker
 MakeBuilding::	ID_SEMIRECHYE	Bowyer
@@ -472,6 +486,70 @@ AddHeir::	FN_PUEBLO	1	22
 AddHeir::	FN_PUEBLO	1	17
 AddHeir::	FN_PUEBLO	0	14
 AddHeir::	FN_PUEBLO	1	10
+
+// ---- FN_GHANA  (impero del Ghana, Wagadu dei Soninke, 28/11/2026: rivali del Kanem in Africa occidentale, con gli asset del Kanem)
+DeclareFaction::	"FN_GHANA"
+SetActiveFaction::	FN_GHANA	FT_MAJOR
+SetTreasury::	FN_GHANA	10000	8000	6000	4000
+SetCulture::	FN_GHANA	PAGAN_CULTURE
+SetReligion::	FN_GHANA	REL_PAGAN
+SetBehaviour::	FN_GHANA	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_GHANA	1
+GGConquestReward::	FN_GHANA	0.5
+SetShieldImage::	FN_GHANA	"Almohads_lge"	"Almohads_sml"	"Almohads"	"F1000"	"F1000"
+SetFactionCol::	FN_GHANA	58 38 24	216 170 60
+SetRegionOwner::	ID_GHANA	FN_GHANA
+SetRegionOwner::	ID_MALI	FN_GHANA
+SetRegionOwner::	ID_BAMBUK	FN_GHANA
+MakeBuilding::	ID_GHANA	Castle4
+MakeBuilding::	ID_GHANA	Spearmaker
+MakeBuilding::	ID_GHANA	Bowyer
+MakeBuilding::	ID_GHANA	Horse_breeder
+MakeBuilding::	ID_GHANA	Town_watch
+MakeBuilding::	ID_MALI	Spearmaker
+MakeUnit::	ID_GHANA	GhaCavLeggera	40	PAGAN_CULTURE
+MakeUnit::	ID_GHANA	GhaLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_GHANA	GhaArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_GHANA	GhaGiavellotti	60	PAGAN_CULTURE
+MakeUnit::	ID_MALI	GhaLancieri	100	PAGAN_CULTURE
+SetStartLeader::	FN_GHANA	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_GHANA	FN_GHANA
+AddHeir::	FN_GHANA	1	22
+AddHeir::	FN_GHANA	1	18
+AddHeir::	FN_GHANA	0	15
+AddHeir::	FN_GHANA	1	11
+
+// ---- FN_ZIMBABWE  (Shona di Mapungubwe e del Grande Zimbabwe, 28/11/2026: una fazione dell'Africa australe, con gli asset del Kanem)
+DeclareFaction::	"FN_ZIMBABWE"
+SetActiveFaction::	FN_ZIMBABWE	FT_MAJOR
+SetTreasury::	FN_ZIMBABWE	10000	8000	6000	4000
+SetCulture::	FN_ZIMBABWE	PAGAN_CULTURE
+SetReligion::	FN_ZIMBABWE	REL_PAGAN
+SetBehaviour::	FN_ZIMBABWE	ORTHODOX_EXPANSIONIST
+SetFactionMusic::	FN_ZIMBABWE	1
+GGConquestReward::	FN_ZIMBABWE	0.5
+SetShieldImage::	FN_ZIMBABWE	"Almohads_lge"	"Almohads_sml"	"Almohads"	"F1000"	"F1000"
+SetFactionCol::	FN_ZIMBABWE	90 122 42	220 207 180
+SetRegionOwner::	ID_ZIMBABWE	FN_ZIMBABWE
+SetRegionOwner::	ID_SOUTHERN_AFRICA	FN_ZIMBABWE
+SetRegionOwner::	ID_MAPUNGUBWE	FN_ZIMBABWE
+MakeBuilding::	ID_ZIMBABWE	Castle4
+MakeBuilding::	ID_ZIMBABWE	Spearmaker
+MakeBuilding::	ID_ZIMBABWE	Bowyer
+MakeBuilding::	ID_ZIMBABWE	Improved_farmland
+MakeBuilding::	ID_ZIMBABWE	Town_watch
+MakeBuilding::	ID_SOUTHERN_AFRICA	Spearmaker
+MakeUnit::	ID_ZIMBABWE	ZimLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_ZIMBABWE	ZimLancieri	100	PAGAN_CULTURE
+MakeUnit::	ID_ZIMBABWE	ZimArcieri	60	PAGAN_CULTURE
+MakeUnit::	ID_ZIMBABWE	ZimAsce	60	PAGAN_CULTURE
+MakeUnit::	ID_SOUTHERN_AFRICA	ZimGiavellotti	60	PAGAN_CULTURE
+SetStartLeader::	FN_ZIMBABWE	0	8	1	0	0	0	0	0	0	0
+PlaceLeader::	ID_ZIMBABWE	FN_ZIMBABWE
+AddHeir::	FN_ZIMBABWE	1	22
+AddHeir::	FN_ZIMBABWE	1	18
+AddHeir::	FN_ZIMBABWE	0	15
+AddHeir::	FN_ZIMBABWE	1	11
 
 // ---- guarnigioni ribelli del Nord America (27/11/2026: con due sole pile i Cahokia prendevano le terre libere del
 // nord nei primi dieci anni). Le regioni restano ai ribelli, con due pile in piu' e un castello piu' forte.

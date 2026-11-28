@@ -6,6 +6,8 @@ extends RefCounted
 const E := preload("res://tests/unit/event_world.gd")
 const W := preload("res://tests/unit/papacy_world.gd")
 
+## Eventi storici di data/eventi/eventi_storici.cfg: i 71 dell'originale (0-70) e i 71 aggiunti il 28/11/2026 (71-141).
+const STORICI := 142
 const MINI_HISTORY := "res://tests/fixtures/mini_eventi_storici.cfg"
 const MINI_EVENTS := "res://tests/fixtures/mini_events.txt"
 const SIM_STARTPOS := "res://tests/fixtures/sim_startpos.txt"
@@ -53,7 +55,7 @@ func test_i_valori_della_specifica(t: TestContext) -> void:
 func test_rules_legge_gli_eventi_dal_file(t: TestContext) -> void:
 	var rules := Rules.load_file()
 	t.assert_eq(rules.errors, PackedStringArray(), "tutti i file delle regole senza errori")
-	t.assert_eq(rules.events.history.size(), 71, "71 eventi storici")
+	t.assert_eq(rules.events.history.size(), STORICI, "%d eventi storici" % STORICI)
 	t.assert_eq(rules.events.errors, PackedStringArray())
 	t.assert_true(Rules.new().events.history.is_empty(), "Rules.new() non ha eventi storici")
 	t.assert_eq(Rules.new().events.to_dict(), rules.events.to_dict(), "la tabella non fa parte di to_dict")
@@ -62,9 +64,9 @@ func test_rules_legge_gli_eventi_dal_file(t: TestContext) -> void:
 func test_ogni_indice_ha_una_sezione_coerente(t: TestContext) -> void:
 	var rules := EventRules.load_file(EventRules.DEFAULT_PATH, EventRules.DEFAULT_HISTORY_PATH)
 	t.assert_eq(rules.errors, PackedStringArray())
-	t.assert_eq(rules.history.size(), 71)
+	t.assert_eq(rules.history.size(), STORICI)
 	var keys := {}
-	for i in 71:
+	for i in STORICI:
 		var e := rules.historical(i)
 		t.assert_true(e != null, "manca l'evento %d" % i)
 		if e == null:
@@ -84,7 +86,7 @@ func test_ogni_indice_ha_una_sezione_coerente(t: TestContext) -> void:
 			t.assert_true(e.faction != "" or not e.regions.is_empty() or e.culture != "", "evento %d: effetto senza ambito" % i)
 	t.assert_eq(rules.historical(54).year_from, rules.black_death_from, "la Peste Nera ha la finestra dell'evento 54")
 	t.assert_eq(rules.historical(54).year_to, rules.black_death_to)
-	t.assert_true(rules.historical(71) == null)
+	t.assert_true(rules.historical(STORICI) == null)
 
 
 func test_tabella_sintetica_con_errori(t: TestContext) -> void:

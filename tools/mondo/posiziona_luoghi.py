@@ -5,6 +5,9 @@ Per ogni luogo di data/luoghi/luoghi.cfg cerca il pixel piu' vicino al punto rea
   - non copre il castello (SetCastle / 16, il castello sta sopra il punto), le pedine alla sua destra, il porto (SetPort),
     il nome della regione (mondo.json "label") ne' le pedine delle zone di mare (ancora "origin");
   - sta ad almeno DIST_LUOGHI px dagli altri luoghi.
+  - per i luoghi di terra, sta sulla terra anche nella plancia dipinta (plancia.jpg), a MARGINE_COSTA px dal mare
+    dipinto: la costa disegnata non coincide con quella della bitmap delle regioni (Roma finiva in mare, 28/11/2026);
+    se nella regione la terra asciutta e' tutta sotto castello e pedine, sulla terra accanto della stessa terraferma.
 Nelle regioni troppo piccole (isole) il punto puo' uscire dalla regione, entro FUORI_MAX px da essa.
 Scrive data/luoghi/posizioni.cfg ([posizioni] id=Vector2(x, y), pixel della bitmap delle regioni).
 
@@ -25,6 +28,8 @@ import proiezione as P  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 
 MARGINE = 10          # distanza minima dal confine della regione
+MARGINE_COSTA = 8     # distanza minima dal mare della plancia dipinta (luoghi di terra)
+MARGINE_COSTA_MIN = 4 # nelle regioni piccole e coperte dal castello (Roma) basta questa, pur di restare nella regione
 DIST_LUOGHI = 60      # distanza minima tra due luoghi
 FUORI_MAX = 140       # quanto puo' uscire dalla regione un luogo di una regione troppo piccola
 # Ingombri in pixel del mondo (a zoom 1 un pixel del mondo = un punto dello schermo; ADR-064, army_layer.gd):
@@ -34,6 +39,9 @@ PEDINE_MARE = (-95, -82, 95, 44)       # pedine delle flotte attorno all'ancora 
 FORTEZZA_SCALA = 2.6                   # fortezza degli Auror (FortressArt.MAP_SCALE) piu' grande di un castello
 PORTO_RAGGIO = 34
 NOME = (-80, -16, 80, 16)              # nome della regione attorno al punto del nome
+# Luoghi da cercare a partire dal porto della loro regione invece che dal punto reale: id -> spostamento (dx, dy) dal porto.
+# Roma (richiesta di Federico del 28/11/2026): a sud del porto della regione di Roma, non verso la Toscana.
+DAL_PORTO = {"roma": (0, 30)}
 
 
 def leggi_luoghi(path):
@@ -100,6 +108,11 @@ def main():
         img = np.array(Image.open(os.path.join(mm, "regioni_auror.png" if auror else "regioni.png")).convert("RGB"))
         rg[auror] = img[..., 0].astype(np.int32) + 256 * img[..., 1].astype(np.int32)
     H, W = rg[False].shape
+    pl = {}
+    for auror in (False, True):
+        img = np.array(Image.open(os.path.join(mm, "plancia_auror.jpg" if auror else "plancia.jpg")).convert("RGB")).astype(np.int16)
+        # terra dipinta: beige/verde con il blu ben sotto rosso e verde; mare e filetto di costa hanno blu >= rosso
+        pl[auror] = (np.minimum(img[..., 0], img[..., 1]) - img[..., 2]) > 20
     fatti = {}
     out = ["; Posizioni dei luoghi leggendari sulla plancia del mondo (pixel della bitmap delle regioni).",
            "; Generato da tools/mondo/posiziona_luoghi.py: non modificare a mano, rilanciare lo script.", "", "[posizioni]"]
@@ -114,7 +127,9 @@ def main():
             continue
         idx = rg[bool(d.get("solo_auror"))]
         ox0, oy0 = r["origin"]
-        if "lat" in d:
+        if lid in DAL_PORTO and rid in porti:
+            tx, ty = porti[rid][0] + DAL_PORTO[lid][0], porti[rid][1] + DAL_PORTO[lid][1]
+        elif "lat" in d:
             tx, ty = P.to_px(d["lat"], d["lon"])
             tx, ty = float(tx), float(ty)
         else:
@@ -135,7 +150,25 @@ def main():
             for dx in range(-MARGINE, MARGINE + 1, 2):
                 if dx * dx + dy * dy <= MARGINE * MARGINE:
                     core &= pad[MARGINE + dy:MARGINE + dy + inside.shape[0], MARGINE + dx:MARGINE + dx + inside.shape[1]]
-        def ingombri(scala_ing):
+        land = pl[bool(d.get("solo_auror"))][y_a:y_b, x_a:x_b]
+        if not r.get("sea"):
+            padl = np.pad(land, MARGINE_COSTA, constant_values=False)
+            dry = land.copy()
+            for dy in range(-MARGINE_COSTA, MARGINE_COSTA + 1, 2):
+                for dx in range(-MARGINE_COSTA, MARGINE_COSTA + 1, 2):
+                    if dx * dx + dy * dy <= MARGINE_COSTA * MARGINE_COSTA:
+                        dry &= padl[MARGINE_COSTA + dy:MARGINE_COSTA + dy + land.shape[0], MARGINE_COSTA + dx:MARGINE_COSTA + dx + land.shape[1]]
+            padl = np.pad(land, MARGINE_COSTA_MIN, constant_values=False)
+            dry_min = land.copy()
+            for dy in range(-MARGINE_COSTA_MIN, MARGINE_COSTA_MIN + 1):
+                for dx in range(-MARGINE_COSTA_MIN, MARGINE_COSTA_MIN + 1):
+                    if dx * dx + dy * dy <= MARGINE_COSTA_MIN * MARGINE_COSTA_MIN:
+                        dry_min &= padl[MARGINE_COSTA_MIN + dy:MARGINE_COSTA_MIN + dy + land.shape[0], MARGINE_COSTA_MIN + dx:MARGINE_COSTA_MIN + dx + land.shape[1]]
+        else:
+            dry = np.ones_like(inside)
+            dry_min = dry
+
+        def ingombri(scala_ing, pedine_altri=True):
             free = np.ones_like(inside)
             # ingombri di tutte le regioni vicine (anche le confinanti: castelli e nomi sconfinano)
             for oid, o in by_id.items():
@@ -146,7 +179,8 @@ def main():
                     if x_a - 300 < cx < x_b + 300 and y_a - 300 < cy < y_b + 300:
                         scala = FORTEZZA_SCALA if oid == "ID_ATLANTIS" else 1.0
                         rett(free, cx, cy, CASTELLO, x_a, y_a, scala * scala_ing)
-                        rett(free, cx, cy, PEDINE_TERRA, x_a, y_a, (1.0 if scala == 1.0 else 1.6) * scala_ing)
+                        if pedine_altri or oid == rid:
+                            rett(free, cx, cy, PEDINE_TERRA, x_a, y_a, (1.0 if scala == 1.0 else 1.6) * scala_ing)
                 if o.get("sea") or oid not in castelli:
                     ax, ay = o["origin"]
                     if x_a - 300 < ax < x_b + 300 and y_a - 300 < ay < y_b + 300:
@@ -173,10 +207,37 @@ def main():
             near = near | p2[0:-2 * step, step:-step] | p2[2 * step:, step:-step] | p2[step:-step, 0:-2 * step] | p2[step:-step, 2 * step:]
         free1 = ingombri(1.0)
         free2 = ingombri(0.6)
-        tiers = [(core & free1, ""), (inside & free1, " (vicino al confine)"), (core & free2, " (ingombri ridotti)"),
-                 (inside & free2, " (vicino al confine, ingombri ridotti)"),
+        free_own = ingombri(0.6, False)   # senza le pedine dei castelli di altre regioni (si vedono solo se ci sono eserciti)
+        # terra dipinta della stessa terraferma, raggiungibile dalla terra asciutta della regione entro FUORI_MAX px: per le
+        # regioni tutte coperte dal castello (Roma) il luogo va sulla terra accanto, mai su un'altra isola o oltre il mare
+        mass = inside & dry
+        if mass.any() and not r.get("sea"):
+            step = 4
+            for _ in range(FUORI_MAX // step):
+                p2 = np.pad(mass, step, constant_values=False)
+                grown = mass | p2[0:-2 * step, step:-step] | p2[2 * step:, step:-step] | p2[step:-step, 0:-2 * step] | p2[step:-step, 2 * step:]
+                grown &= dry
+                if (grown == mass).all():
+                    break
+                mass = grown
+        landmass = mass & (win > 0) & (win < info["sea_first"])
+        # prima i punti sulla terra dipinta dentro la regione (anche con ingombri molto ridotti), poi le regole di prima
+        tiers = [(core & free1 & dry, ""), (inside & free1 & dry, " (vicino al confine)"),
+                 (core & free2 & dry, " (ingombri ridotti)"), (inside & free2 & dry, " (vicino al confine, ingombri ridotti)"),
+                 (inside & free2 & dry_min, " (nella regione, vicino a costa e confine, ingombri ridotti)"),
+                 (inside & free_own & dry_min, " (nella regione, sotto le pedine di un castello vicino)"),
+                 (landmass & free2, " (sulla terra accanto alla regione)"),
+                 (core & free1, " (costa dipinta)"), (inside & free1, " (costa dipinta, vicino al confine)"),
+                 (core & free2, " (costa dipinta, ingombri ridotti)"),
+                 (inside & free2, " (costa dipinta, vicino al confine, ingombri ridotti)"),
                  (near & free1 & (win >= info["sea_first"]), " (in mare accanto alla regione: troppo piccola)"),
                  (near & free1 & (win > 0), " (fuori dalla regione: troppo piccola)")]
+        if lid in DAL_PORTO and rid in porti:
+            # a ridosso del porto anche sotto castello e pedine (il luogo si disegna sotto di loro): basta stare nella
+            # regione, sulla terra dipinta e fuori dal molo
+            pqx, pqy = porti[rid]
+            off_port = (xx - pqx) ** 2 + (yy - pqy) ** 2 > 16 ** 2
+            tiers = [((win == r["index"]) & dry_min & off_port & (yy > pqy), " (a sud del porto)")] + tiers
         cand, nota = None, ""
         for c, n in tiers:
             if c.any():

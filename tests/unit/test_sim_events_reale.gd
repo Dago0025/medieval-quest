@@ -1,9 +1,11 @@
 extends RefCounted
 ## Fase 6a sui dati reali dell'installazione (EARLY_XL.TXT, prod unita' ed edifici, Loc/<lingua>/Events.txt), saltata se
 ## l'installazione manca: ogni regione, fazione, cultura e merce citata dai file dei dati esiste nello startpos, i titoli e i
-## testi dei 71 eventi storici si leggono da Events.txt, e una partita dal primo anno al 1700 (nessun ordine) fa accadere
+## testi dei 142 eventi storici (71 dell'originale e 71 aggiunti il 28/11/2026) si leggono da data/testi, e una partita dal primo anno al 1700 (nessun ordine) fa accadere
 ## ogni evento storico al piu' una volta, la Peste Nera una volta sola e l'Orda d'Oro nel suo anno.
 ## I testi originali non stanno nel repository: qui si controlla solo che ci siano.
+
+const STORICI := 142
 
 var _campaign: CampaignData
 var _units: UnitProdLoader.UnitTable
@@ -57,19 +59,23 @@ func test_ogni_regione_dei_file_di_dati_esiste_nello_startpos(t: TestContext) ->
 	var rules := Rules.load_file()
 	t.assert_eq(rules.errors, PackedStringArray())
 	var ev := rules.events
-	t.assert_eq(ev.history.size(), 71)
+	t.assert_eq(ev.history.size(), STORICI)
 	var cultures := {}
 	for r in _campaign.land_regions():
 		cultures[r.culture.strip_edges().to_upper()] = true
+	# gli eventi del 28/11/2026 citano anche regioni e fazioni della mappa del mondo (startpos_mondo.txt, fazioni_mondo.txt)
+	var world := StartposLoader.load_text(Dharma.startpos_text(WorldMap.startpos_text(TextIO.read_latin1(GameFiles.startpos()), false) + "\n" + WorldFactions.startpos_text())) if WorldMap.available() else _campaign
 	for e in ev.history:
+		var in_europe := e.index < 71
 		for id in e.regions:
-			t.assert_true(_land(id), "evento %d (%s): regione sconosciuta %s" % [e.index, e.key, id])
+			var region := (_campaign if in_europe else world).region(id)
+			t.assert_true(region != null and not region.is_sea, "evento %d (%s): regione sconosciuta %s" % [e.index, e.key, id])
 		if e.faction != "":
-			t.assert_true(_campaign.faction(e.faction) != null, "evento %d (%s): fazione sconosciuta %s" % [e.index, e.key, e.faction])
+			t.assert_true((_campaign if in_europe else world).faction(e.faction) != null, "evento %d (%s): fazione sconosciuta %s" % [e.index, e.key, e.faction])
 		if e.culture != "":
 			t.assert_true(cultures.has(e.culture), "evento %d (%s): cultura sconosciuta %s" % [e.index, e.key, e.culture])
 		for good in e.goods:
-			t.assert_true(_campaign.trade_goods.has(good), "evento %d (%s): merce sconosciuta %s" % [e.index, e.key, good])
+			t.assert_true(_campaign.trade_goods.has(good) or world.trade_goods.has(good), "evento %d (%s): merce sconosciuta %s" % [e.index, e.key, good])
 	for id in ev.black_death_origin:
 		t.assert_true(_land(id), "origine della Peste Nera sconosciuta: %s" % id)
 	for id in ev.horde_entry:
@@ -99,15 +105,15 @@ func test_la_cavalleria_dell_orda_esiste(t: TestContext) -> void:
 # --- testi propri del remake (data/testi, dal 18/11/2026) ---------------------------------------------------------
 
 
-func test_titoli_e_testi_dei_71_eventi_storici(t: TestContext) -> void:
+func test_titoli_e_testi_degli_eventi_storici(t: TestContext) -> void:
 	ItalianTexts.reset()
 	var texts := EventTexts.load_file()
-	t.assert_eq(texts.historical_count(), 71, "71 titoli")
-	for i in 71:
+	t.assert_eq(texts.historical_count(), STORICI, "%d titoli" % STORICI)
+	for i in STORICI:
 		t.assert_true(texts.has_historical(i), "evento %d senza titolo o testo" % i)
 		t.assert_true(texts.historical_title(i).strip_edges() != "", "titolo vuoto: %d" % i)
 		t.assert_true(texts.historical_text(i).strip_edges() != "", "testo vuoto: %d" % i)
-	t.assert_false(texts.has_historical(71))
+	t.assert_false(texts.has_historical(STORICI))
 	for kind in [GameState.EV_FLOOD, GameState.EV_FAMINE, GameState.EV_QUAKE, GameState.EV_STORM, GameState.EV_PLAGUE, GameState.EV_BLACK_DEATH]:
 		var message := texts.disaster_message(kind, "Prova")
 		t.assert_true(message != "", "messaggio mancante: %s" % kind)
@@ -162,7 +168,7 @@ func test_partita_dal_primo_anno_al_1700(t: TestContext) -> void:
 			elif kind == GameState.EV_HORDE_ARRIVES:
 				horde_years.append(int(e["anno"]))
 	t.assert_eq(s.year, 1700, "arrivata al 1700")
-	t.assert_eq(historical.size(), 71, "tutti gli eventi storici con anno entro il 1700 sono accaduti")
+	t.assert_eq(historical.size(), STORICI, "tutti gli eventi storici con anno entro il 1700 sono accaduti")
 	for index in historical:
 		var e := s.rules.events.historical(index)
 		t.assert_true(e != null, "evento %d sconosciuto" % index)

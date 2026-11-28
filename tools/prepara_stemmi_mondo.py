@@ -1,6 +1,7 @@
 """Stemmi provvisori delle fazioni nuove della mappa del mondo (ADR-079), nello stesso formato degli stemmi dipinti
 (136x160, scudo con bordo di metallo): sagoma presa da uno stemma esistente, campo colorato con pennellate e figura
-semplice in rilievo. Da sostituire con stemmi dipinti in AI Playground.
+semplice in rilievo. Dal 28/11/2026 in gioco ci sono gli stemmi dipinti in AI Playground (tools/prepara_stemmi_dipinti.py):
+questo strumento resta per una fazione nuova finche' non ha il suo stemma dipinto.
 Uso: python3 prepara_stemmi_mondo.py <stemma di riferimento.png> <cartella di uscita>
 Riferimento usato: assets/stemmi/fn_almohad.png (sagoma comune a tutti gli stemmi provvisori)."""
 import math
@@ -204,6 +205,49 @@ def yin(d, size):
     d.ellipse([cx - s, cy - r / 2 - s, cx + s, cy - r / 2 + s], fill=0)
 
 
+def bida_serpent(d, size):
+    """Bida, il serpente nero del Wagadu che dava l'oro al Ghana (28/11/2026): corpo a S verticale con la testa in alto."""
+    w, h = size
+    pts = []
+    for k in range(61):
+        t = k / 60
+        y = h * (0.70 - 0.48 * t)
+        x = w * (0.5 + 0.16 * math.sin(t * 2.6 * math.pi))
+        pts.append((x, y))
+    for i in range(len(pts) - 1):
+        t = i / 60
+        r = w * (0.030 + 0.030 * min(1, t * 3)) * (1 - 0.35 * t)
+        (x0, y0), (x1, y1) = pts[i], pts[i + 1]
+        d.ellipse([x0 - r, y0 - r, x0 + r, y0 + r], fill=255)
+    hx, hy = pts[-1]
+    d.ellipse([hx - w * 0.07, hy - w * 0.055, hx + w * 0.07, hy + w * 0.045], fill=255)
+    d.ellipse([hx + w * 0.01, hy - w * 0.025, hx + w * 0.035, hy], fill=0)
+
+
+def zimbabwe_tower(d, size):
+    """Torre conica del Grande Recinto di Zimbabwe (28/11/2026), pietra a secco con una fascia a zig-zag."""
+    w, h = size
+    cx, base, top = w * 0.5, h * 0.70, h * 0.20
+    bw, tw = w * 0.20, w * 0.10
+    d.polygon([(cx - bw, base), (cx + bw, base), (cx + tw, top + h * 0.03), (cx - tw, top + h * 0.03)], fill=255)
+    d.ellipse([cx - tw, top - h * 0.0, cx + tw, top + h * 0.06], fill=255)
+    # fascia a zig-zag (chevron) nera
+    yb = top + (base - top) * 0.30
+    half = bw - (bw - tw) * (base - yb) / (base - top) * 0  # larghezza alla quota della fascia
+    half = tw + (bw - tw) * (yb - top) / (base - top)
+    n = 5
+    for k in range(n):
+        x0 = cx - half + 2 * half * k / n
+        x1 = cx - half + 2 * half * (k + 0.5) / n
+        x2 = cx - half + 2 * half * (k + 1) / n
+        d.polygon([(x0, yb), (x1, yb - h * 0.035), (x2, yb), (x2, yb + h * 0.014), (x1, yb - h * 0.021), (x0, yb + h * 0.014)], fill=0)
+    # corsi di pietra
+    for k in range(1, 6):
+        y = yb + (base - yb) * k / 6
+        hw = tw + (bw - tw) * (y - top) / (base - top)
+        d.line([(cx - hw, y), (cx + hw, y)], fill=0, width=max(1, int(h * 0.006)))
+
+
 def make(ref, spec, out_path, seed):
     outer, inner = shield_masks(ref)
     canvas = field(outer, inner, spec['field'], seed)
@@ -233,6 +277,9 @@ SPECS = {
     # 27/11/2026: Pueblo (casa a terrazze color pietra su turchese, sole sopra)
     'fn_pueblo': {'field': (31, 122, 153), 'figures': [(pueblo_terraces, (216, 176, 122)), (sun_rays(0.045, 0.095, 8, -0.2), (232, 200, 106)), (disc(0.045, -0.2), (232, 200, 106))]},
     'fn_karakhanids': {'field': (123, 45, 38), 'figures': [(crescent, (232, 200, 106)), (sun_rays(0.045, 0.1, 8, -0.1), (232, 200, 106)), (disc(0.045, -0.1), (232, 200, 106))]},
+    # 28/11/2026: Ghana (Bida, il serpente dell'oro, d'oro su bruno scuro) e Zimbabwe (torre conica di pietra su verde oliva)
+    'fn_ghana': {'field': (58, 38, 24), 'figures': [(bida_serpent, (216, 170, 60))]},
+    'fn_zimbabwe': {'field': (90, 122, 42), 'figures': [(zimbabwe_tower, (220, 207, 180))]},
 }
 
 

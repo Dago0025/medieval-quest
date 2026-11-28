@@ -12,6 +12,10 @@ const END_SIZE := Vector2(640, 480)
 ## tools/prepara_tavole.py). Se un tema ne ha, si sceglie solo tra quelle; altrimenti le tavole di illustrazioni.cfg [temi].
 const OWN_DIR := "res://assets/eventi/"
 const OWN_MAX := 30
+## Vignetta propria di un evento storico (richiesta di Federico del 28/11/2026, eventi 1000-1086 e 1441-1700):
+## assets/eventi/storici/<chiave>.png (1280x720, da tools/prepara_tavole.py, codice V_<CHIAVE>). Se manca vale la tavola
+## di illustrazioni.cfg [storici] o del tema.
+const HISTORICAL_DIR := "res://assets/eventi/storici/"
 
 static var _cfg: ConfigFile = null
 static var _own := {}
@@ -79,7 +83,23 @@ static func window_texture(w: Dictionary) -> Texture2D:
 	var theme := str(w.get("tema", ""))
 	if theme != "":
 		return theme_texture(theme, "%s|%d" % [str(w.get("titolo", "")), int(w.get("anno", 0))])
+	var own := historical_own_texture(str(w.get("chiave", "")))
+	if own != null:
+		return own
 	return historical_texture(int(w.get("indice", -1)), str(w.get("chiave", "")))
+
+
+## Percorso della vignetta propria dell'evento storico di chiave `key` ("" se non c'e').
+static func historical_own_path(key: String) -> String:
+	if key == "":
+		return ""
+	var path := HISTORICAL_DIR + key.to_lower() + ".png"
+	return path if ResourceLoader.exists(path) else ""
+
+
+static func historical_own_texture(key: String) -> Texture2D:
+	var path := historical_own_path(key)
+	return load(path) as Texture2D if path != "" else null
 
 
 ## Tavola (fotogramma da 1) per l'evento storico `index` di chiave `key`: l'abbinamento della tabella, poi un tema che compare

@@ -29,3 +29,22 @@ Ordine (cartella di lavoro `out`):
 Le regioni (nomi, semi, attributi, guarnigioni) stanno in `regioni_mondo.txt`; la forma dell'isola in `atlantide.py`
 (`SCALE` = 1,3: l'isola e' stata ingrandita del 30% in lineare il 16/11/2026; cambiandolo vanno rifatti i passi 6-9).
 `anteprima.py` disegna un ritaglio delle etichette con i nomi per il controllo a vista.
+
+## Regioni fuori Europa ridisegnate (28/11/2026, ADR-158)
+
+Senza rifare le fasi 1-5: `ridisegna_terre.py` riparte dalla bitmap finale di `data/mappa_mondo` e rifa' solo i pixel
+delle regioni TERRA (Europa, mari uniti e Atlantide restano identici), con confini naturali (pendenza, fiumi principali
+di Natural Earth come argini, rumore frattale e domain warping che si spegne vicino ai fiumi).
+
+1. `nuove_regioni.py`: le 100 regioni nuove (da quale regione nascono, nomi, capitale, semi, attributi), i semi nuovi di
+   quelle che cedono territorio, i nomi cambiati e le regioni date alle fazioni (estensione nel 1000).
+2. `aggiorna_definizioni.py regioni_mondo.txt` - scrive tutto questo in regioni_mondo.txt.
+3. `ridisegna_terre.py regioni_mondo.txt <data/mappa_mondo> geo out` (geo: `ne_10m_rivers_lake_centerlines.geojson`,
+   `elev_bump_4k.jpg`; scrive regioni*.png/.npy, mondo.json, startpos_mondo.txt, nomi_terra.cfg, anteprima.jpg).
+4. passi 8 e 8b sopra (confini_mondo.py, regioni_vista.py) per le due varianti; `anteprima_nomi.py` per il controllo.
+5. nel progetto: SetRegionOwner in fazioni_mondo.txt, nomi in data/province.cfg, liste di regioni (religione_dharma,
+   mercenari, unita_mondo, nomi_personaggi), poi `posiziona_luoghi.py`.
+6. Con `EUROPA=1` (ADR-159) `ridisegna_terre.py` rifa' anche le province europee: semi di regioni_mondo.txt, capitale e polo
+   della forma di prima, velocita' corrette perche' ogni provincia tenga la sua estensione; i confinanti dell'originale
+   restano tutti (con le zone di mare di mari_uniti.cfg). Va lanciato sui dati gia' aggiornati di data/mappa_mondo.
+7. Dopo ogni rigenerazione: `etichette_mari.py out/regioni.npy out/mondo.json` (punto del nome di ogni zona di mare, ADR-160).

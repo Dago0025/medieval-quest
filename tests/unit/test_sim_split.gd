@@ -140,3 +140,22 @@ func test_dopo_la_divisione_il_fine_anno_da_un_comandante(t: TestContext) -> voi
 	var fresh := s.army(fresh_id)
 	if fresh != null and not fresh.stacks.is_empty():
 		t.assert_true(s.commander_of(fresh_id) != null, "a fine anno l'esercito nuovo ha un comandante")
+
+
+## Richiesta di Federico del 28/11/2026: lo stendardo dell'armata si riempie con gli uomini (20 pile da 100 = 2000), non con
+## il numero di unita'; le flotte contano le navi.
+func test_stendardo_pieno_a_duemila_uomini(t: TestContext) -> void:
+	var a := Army.new(1, "FN_FRENCH", "ID_ILE_DE_FRANCE")
+	for i in 20:
+		a.stacks.append(UnitStack.new("Spearmen", 50, 0))
+	t.assert_eq(a.banner_fill(20), 0.5, "20 unita' da 50 uomini: mezzo stendardo")
+	a.stacks.clear()
+	for i in 10:
+		a.stacks.append(UnitStack.new("Spearmen", 200, 0))
+	t.assert_eq(a.banner_fill(20), 1.0, "2000 uomini in 10 unita': stendardo pieno")
+	a.stacks.append(UnitStack.new("Spearmen", 100, 0))
+	t.assert_eq(a.banner_fill(20), 1.0, "oltre 2000 resta pieno")
+	var f := Army.new(2, "FN_FRENCH", "ID_ENGLISH_CHANNEL", true)
+	for i in 5:
+		f.stacks.append(UnitStack.new("Cog", 1, 0))
+	t.assert_eq(f.banner_fill(20), 0.25, "flotta: navi su 20")

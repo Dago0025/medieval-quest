@@ -36,8 +36,43 @@ func set_regions(campaign: CampaignData, map: WorldMap) -> void:
 		var name := RegionNames.shown(campaign, r.id)
 		var area := float(map.sizes.get(r.id, 4000))
 		var size := clampf(sqrt(area) / (9.0 if r.is_sea else 7.5), 15.0, 72.0)
-		_entries.append({"pos": map.labels.get(r.id, map.anchors[r.id]), "text": name.to_upper() if r.is_sea else name, "size": size, "sea": r.is_sea})
+		var text := name.to_upper() if r.is_sea else name
+		var pos: Vector2 = map.labels.get(r.id, map.anchors[r.id])
+		if r.is_sea:
+			size = _fit_on_water(map, pos, text, size)
+		_entries.append({"pos": pos, "text": text, "size": size, "sea": r.is_sea})
 	queue_redraw()
+
+
+## Corpo del nome di un mare ridotto finche' la scritta sta tutta sull'acqua (segnalazione di Federico del 28/11/2026: da
+## lontano i nomi dei mari coprivano le terre, soprattutto nel Mediterraneo dalle zone unite): la larghezza libera e' quella
+## dell'acqua a destra e a sinistra del punto, sulla riga del nome e sopra e sotto di essa.
+func _fit_on_water(map: WorldMap, pos: Vector2, text: String, size: float) -> float:
+	var base_w := _font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, BASE_SIZE).x / float(BASE_SIZE)
+	for _i in 3:
+		var half := 0.0
+		for dy in [-0.4, 0.0, 0.4]:
+			var y := int(pos.y + dy * size)
+			var run := minf(_water_run(map, pos.x, y, -1.0), _water_run(map, pos.x, y, 1.0))
+			half = run if dy == -0.4 else minf(half, run)
+		var fit := (2.0 * half * 0.9) / maxf(base_w, 0.01)
+		if fit >= size:
+			break
+		size = maxf(fit, 6.0)
+	return size
+
+
+## Pixel d'acqua contigui dal punto verso `dir` (-1 sinistra, +1 destra), a passi di 4, fino a 4000.
+static func _water_run(map: WorldMap, x: float, y: int, dir: float) -> float:
+	var d := 0.0
+	while d < 4000.0:
+		var xi := int(x + dir * (d + 4.0))
+		if xi < 0 or xi >= map.width:
+			xi = posmod(xi, map.width)   # il Pacifico si richiude sul bordo
+		if map.index_at(xi, y) < map.sea_first:
+			break
+		d += 4.0
+	return d
 
 
 func set_shown(on: bool) -> void:

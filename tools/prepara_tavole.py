@@ -7,10 +7,12 @@ Dal 20/11/2026 le tavole fanno da sfondo alle finestre illustrate degli eventi (
 (prompt in <media>/eventi/PROMPT_EVENTI.md).
 
 Uso:  python tools/prepara_tavole.py <cartella media di AI Playground> [--foglio anteprima.png]
-Legge <media>/tavole/T###.png, <media>/eventi/E_*.png e <media>/fine_partita/F_*.png e scrive, come immagini rifatte
+Legge <media>/tavole/T###.png, <media>/eventi/E_*.png, <media>/storici/V_*.png e <media>/fine_partita/F_*.png e scrive, come immagini rifatte
 (ADR-043) che AssetLibrary usa al posto dell'originale:
 - T###            -> assets/rifatti/campmap/epic__f###.png (1280x720, 16:9; la tavola 1 sarebbe epic.png)
 - E_<TEMA>_NN     -> assets/eventi/<tema>/NN.png (1280x720, 16:9; serie propria del tema, EventArt.own_paths)
+- V_<CHIAVE>      -> assets/eventi/storici/<chiave>.png (1280x720, 16:9; vignetta propria dell'evento storico di quella
+                     chiave, EventArt.historical_own_path; cartella <media>/storici, prompt in <media>/storici/PROMPT_VIGNETTE.md)
 - F_FINE          -> assets/eventi/fine/01.png (1280x960 col nastro): tavola unica di fine partita per tutti (dal 20/11/2026)
 - F_FN_<FAZIONE>  -> assets/rifatti/campmap/gameend/fn_<fazione>_win.png (schema precedente, 39 immagini)
 - F_AUROR         -> assets/rifatti/campmap/gameend/vikings/fn_07_win.png (percorso di illustrazioni.cfg [fine])
@@ -130,6 +132,9 @@ def destination(code):
     m = re.fullmatch(r"E_([A-Z_]+?)_(\d{1,2})", code)
     if m:
         return os.path.join(EVENTS, m.group(1).lower(), "%02d.png" % int(m.group(2))), False
+    m = re.fullmatch(r"V_([A-Z0-9_]+)", code)
+    if m:
+        return os.path.join(EVENTS, "storici", m.group(1).lower() + ".png"), False
     if code == "F_FINE":
         return os.path.join(EVENTS, "fine", "01.png"), True
     if code == "F_AUROR":
@@ -149,7 +154,7 @@ def main():
     ap.add_argument("--foglio", default="")
     args = ap.parse_args()
     done = []
-    for folder in ("tavole", "eventi", "fine_partita"):
+    for folder in ("tavole", "eventi", "storici", "fine_partita"):
         src = os.path.join(args.media, folder)
         if not os.path.isdir(src):
             continue

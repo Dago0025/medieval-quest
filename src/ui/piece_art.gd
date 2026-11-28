@@ -15,8 +15,9 @@ const BASE := "campmap/pieces"
 ## Federico non la conferma a occhio.
 const SHIELD_ARMY := Rect2(4, 152, 31, 47)
 const SHIELD_LEADER := Rect2(35, 150, 31, 47)
-## Livelli del riempimento dello stendardo (uno per pila, con il massimo di 16 pile per esercito).
-const FILL_STEPS := 16.0
+## Livelli del riempimento dello stendardo: uno ogni 100 uomini dei 2000 di un esercito pieno (20 pile da 100,
+## Army.banner_fill); le flotte, che contano le navi, uno per nave.
+const FILL_STEPS := 20.0
 
 ## Castelli della mappa (campmap/pieces/buildings/*.Buf, stesso formato dei BIF): uno per grado di castello
 ## (CombatRules.castle_tier: 0 Fort ... 4 Fortress). Stockade, Warrior hold e Fortified village sono della campagna vichinga.
@@ -92,7 +93,7 @@ static func ship_folder(religion: String) -> String:
 
 
 ## Pedina di un esercito: `kind` = "army", "leader" (con un capo o un generale), "fleet", "crusade" o "jihad";
-## `moving` = ha un percorso; `fill` = quanto e' piena l'armata (pile / massimo): lo stendardo e' colorato dal basso per quella
+## `moving` = ha un percorso; `fill` = quanto e' piena l'armata (Army.banner_fill: uomini / 2000): lo stendardo e' colorato dal basso per quella
 ## parte e pallido sopra. Null se l'immagine manca (si torna ai segnalini disegnati).
 ## `kind` = "unica:<pedina>": pedina propria dell'armata che porta un'unita' unica (`UnitType.piece`, `special_kind`).
 const SPECIAL := "unica:"

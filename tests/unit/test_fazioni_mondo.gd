@@ -6,7 +6,8 @@ extends RefCounted
 
 const NEW := {"FN_JAPANESE": "ID_KINAI", "FN_CHINESE": "ID_KAIFENG", "FN_AZTECS": "ID_TOLLAN", "FN_INCA": "ID_CUZCO",
 	"FN_KANEM": "ID_KANEM", "FN_MISSISSIPPIANS": "ID_MISSISSIPPI", "FN_KOREANS": "ID_KOREA", "FN_MONGOLS": "ID_MONGOLIA",
-	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER", "FN_MAYA": "ID_MAYA", "FN_KARAKHANIDS": "ID_SEMIRECHYE", "FN_PUEBLO": "ID_CHACO"}
+	"FN_CHOLA": "ID_CHOLA", "FN_KHMER": "ID_KHMER", "FN_MAYA": "ID_MAYA", "FN_KARAKHANIDS": "ID_SEMIRECHYE", "FN_PUEBLO": "ID_CHACO",
+	"FN_GHANA": "ID_GHANA", "FN_ZIMBABWE": "ID_ZIMBABWE"}
 
 
 func _ready(t: TestContext) -> bool:
@@ -196,10 +197,12 @@ func test_la_flotta_giapponese_va_dove_ci_sono_bersagli(t: TestContext) -> void:
 	var ctx := AiContext.build(s, AiRules.load_file(AiRules.DEFAULT_PATH), "")
 	var plan := AiPlan.create(ctx, "FN_JAPANESE", "ORTHODOX_EXPANSIONIST")
 	AiNavy.position_fleets(plan, ctx.fleets_of("FN_JAPANESE"))
-	t.assert_true(not fleet.path.is_empty() and fleet.path[fleet.path.size() - 1] == "ID_SEA_JAPAN", "verso il Mar del Giappone: %s" % str(fleet.path))
+	# dal 28/11/2026 (regioni nuove) i bersagli sono sia sul Mar del Giappone (Corea, Ezo) sia sul Pacifico (Ezo, Kanto)
+	var goal := fleet.path[fleet.path.size() - 1] if not fleet.path.is_empty() else ""
+	t.assert_true(goal in ["ID_SEA_JAPAN", "ID_NW_PACIFIC"], "verso un mare con bersagli: %s" % str(fleet.path))
 	t.assert_eq(ctx.rejected, 0, "nessun comando rifiutato: %s" % str(ctx.rejections))
 	var again := AiPlan.create(AiContext.build(s, AiRules.load_file(AiRules.DEFAULT_PATH), ""), "FN_JAPANESE", "ORTHODOX_EXPANSIONIST")
-	fleet.region = "ID_SEA_JAPAN"
+	fleet.region = goal
 	fleet.path = PackedStringArray()
 	AiNavy.position_fleets(again, again.ctx.fleets_of("FN_JAPANESE"))
 	t.assert_true(fleet.path.is_empty(), "gia' nella zona migliore: resta")
@@ -259,3 +262,63 @@ func test_pueblo_rivali_dei_cahokia(t: TestContext) -> void:
 	t.assert_true(Rules.load_file().history.horseless_factions.has("FN_PUEBLO"), "senza cavalli fino agli stranieri")
 	t.assert_true(FileAccess.file_exists("res://assets/stemmi/fn_pueblo.png"))
 	t.assert_eq((d["heroes"] as HeroesData).forenames_of("FN_PUEBLO")[0], "Tawakwaptiwa")
+
+
+## Richiesta di Federico del 28/11/2026: una fazione subsahariana che contenda l'Africa al Kanem e una dell'Africa
+## australe, con gli asset grafici del Kanem e uno stemma proprio. Il Ghana tiene Ghana e Mali (confinanti con Gao, come il
+## Kanem con Hausa); lo Zimbabwe l'altopiano e il Sudafrica. Le guarnigioni ribelli di partenza diventano le loro unita'.
+func test_ghana_e_zimbabwe_rivali_del_kanem(t: TestContext) -> void:
+	if not _ready(t):
+		return
+	var d := _load(false)
+	var c: CampaignData = d["campaign"]
+	var regions := {"FN_GHANA": ["ID_GHANA", "ID_MALI", "ID_BAMBUK"], "FN_ZIMBABWE": ["ID_ZIMBABWE", "ID_SOUTHERN_AFRICA", "ID_MAPUNGUBWE"]}
+	for f in regions:
+		for r in regions[f]:
+			t.assert_eq(c.region(r).owner, f, r)
+		t.assert_eq(c.faction(f).religion, "REL_PAGAN", f)
+		t.assert_eq(PortraitArt.culture_of(f), "kanem", "ritratti del Kanem")
+		t.assert_eq(PieceArt.own_culture(f), "African", "pedine del Kanem")
+		t.assert_true(FileAccess.file_exists("res://assets/stemmi/%s.png" % f.to_lower()), "stemma proprio")
+	t.assert_true(c.region("ID_GAO").neighbours.has("ID_GHANA") and c.region("ID_GAO").neighbours.has("ID_HAUSA"), "Gao conteso col Kanem")
+	var units: UnitProdLoader.UnitTable = d["units"]
+	var ghana := {}
+	for u in units.land_for("FN_GHANA"):
+		ghana[u.id] = true
+	t.assert_true(ghana.has("GhaLancieri") and ghana.has("GhaCavLeggera") and not ghana.has("KanLancieri"), "unita' proprie del Ghana")
+	var zim := {}
+	for u in units.land_for("FN_ZIMBABWE"):
+		zim[u.id] = true
+		if u.id.begins_with("Zim"):
+			t.assert_false(u.is_cavalry(), "niente cavalli sull'altopiano: " + u.id)
+	t.assert_true(zim.has("ZimLancieri") and zim.has("ZimGuardia"), "unita' proprie dello Zimbabwe")
+	t.assert_eq(CultureUnits.card_model("GhaLancieri"), "KanLancieri", "carta del Kanem")
+	t.assert_eq(CultureUnits.card_model("ZimAsce"), "KanSao", "carta del Kanem")
+	for su in c.start_units:
+		if su.region == "ID_GHANA" or su.region == "ID_ZIMBABWE":
+			t.assert_true(su.unit_type.begins_with("Gha") or su.unit_type.begins_with("Zim"), "guarnigione convertita: " + su.unit_type)
+	var heroes: HeroesData = d["heroes"]
+	t.assert_eq(heroes.forenames_of("FN_GHANA")[0], "Tunka Manin")
+	t.assert_eq(heroes.forenames_of("FN_ZIMBABWE")[0], "Nyatsimba")
+	t.assert_eq(SimUtil.faction_label("FN_ZIMBABWE"), "Zimbabwe")
+
+
+## Richiesta di Federico del 28/11/2026: gli altri continenti piu' frammentati (221 regioni fuori Europa) e le regioni
+## nuove assegnate alle fazioni che le tenevano nel 1000 (i Song, Heian, Goryeo, Chola, Khmer, Karakhanidi...).
+func test_regioni_nuove_alle_fazioni_storiche(t: TestContext) -> void:
+	if not _ready(t):
+		return
+	var d := _load(false)
+	var c: CampaignData = d["campaign"]
+	var owners := {"ID_HEBEI": "FN_CHINESE", "ID_SHANDONG": "FN_CHINESE", "ID_HUNAN": "FN_CHINESE", "ID_KANTO": "FN_JAPANESE",
+		"ID_GYEONGSANG": "FN_KOREANS", "ID_KERALA": "FN_CHOLA", "ID_GANGAVADI": "FN_CHOLA", "ID_LAVO": "FN_KHMER",
+		"ID_FERGHANA": "FN_KARAKHANIDS", "ID_YANYUN": "FN_REBEL", "ID_EZO": "FN_REBEL", "ID_CHARCAS": "FN_REBEL"}
+	for r in owners:
+		t.assert_true(c.region(r) != null, "esiste " + r)
+		if c.region(r) != null:
+			var own := c.region(r).owner
+			t.assert_true(own == owners[r] or (owners[r] == "FN_REBEL" and own in ["", "FN_REBEL"]), "%s di %s" % [r, own])
+	t.assert_true(c.region("ID_YANYUN").neighbours.has("ID_HEBEI"), "Sedici Prefetture contese tra Liao e Song")
+	var names := ConfigFile.new()
+	names.load("res://data/province.cfg")
+	t.assert_eq(str(names.get_value("terra", "ID_YANYUN", "")), "Sedici Prefetture")

@@ -269,7 +269,7 @@ func _toggle_auror() -> void:
 		_message.text = Lang.t("Modalità Auror attivata: gli Auror entrano in gioco con tutti i loro poteri.")
 		GameAudio.play_sfx("evento_cristiano")
 	else:
-		_message.text = Lang.t("Modalità Auror disattivata: Danesi, Norvegesi e Svedesi come nell'originale.")
+		_message.text = Lang.t("Modalità Auror disattivata: si gioca lo scenario storico.")
 		GameAudio.play_sfx("chiudi")
 	if _logo != null:
 		var flash := create_tween()

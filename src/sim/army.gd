@@ -88,6 +88,20 @@ func is_full(max_stacks: int) -> bool:
 	return stacks.size() >= max_stacks
 
 
+## Uomini di una pila piena, per il riempimento dello stendardo (le unita' di fanteria piu' grandi dell'originale).
+const FULL_STACK_MEN := 100
+
+
+## Quanto e' piena l'armata per lo stendardo della pedina, 0-1 (richiesta di Federico del 28/11/2026: come nell'originale
+## conta gli uomini, non le unita'; lo stendardo e' tutto colorato a `max_stacks` unita' da 100 uomini, 2000 con 20 pile).
+## Le flotte contano le navi, che non hanno uomini.
+func banner_fill(max_stacks: int) -> float:
+	var cap := maxi(1, max_stacks)
+	if is_fleet:
+		return clampf(float(stacks.size()) / float(cap), 0.0, 1.0)
+	return clampf(float(men_total()) / float(cap * FULL_STACK_MEN), 0.0, 1.0)
+
+
 ## Vero se l'esercito si e' mosso nell'anno `year` (e' quindi l'attaccante in quella regione).
 func arrived_in(year: int) -> bool:
 	return arrived_year == year and from_region != ""

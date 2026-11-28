@@ -118,7 +118,7 @@ const COMPASS_NORTH := Color("b3352a")
 const HELP_HINT_FONT := 7                   ## «H: comandi e tasti» sotto le carte (a misura 800x115)
 const HELP_HINT_LIGHT := Color("e8d6a0")    ## pergamena chiara sul legno della veste nuova
 ## Bussola dei luoghi leggendari nell'angolo in basso a sinistra della minimappa (richiesta di Federico del 26/11/2026).
-const COMPASS := Vector2(20, 20)
+const COMPASS := Vector2(26, 26)   ## bussola dei luoghi senza anello (28/11/2026): piu' grande, prima 20
 ## Texture ripetibili della veste nuova (facoltative): `legno.png` e `pergamena.png`. Se mancano restano le tinte piatte.
 ## Si rigenerano con tools/genera_texture_base.py o si sostituiscono con tools/prepara_texture.py (immagini dipinte).
 const SKIN_DIR := "res://assets/ui/veste/"
@@ -416,7 +416,9 @@ func _build_bar() -> void:
 	_bar.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS   # immagini dipinte e rifatte piu' grandi della misura
 	add_child(_bar)
 	if veste_nuova:
-		# corpo di legno piu' largo dei controlli, stondato (i figli sono ritagliati sulla sua forma) e con l'ombra sulla mappa
+		# corpo di legno piu' largo dei controlli, stondato (i figli sono ritagliati sulla sua forma). Senza ombra (Federico,
+		# 28/11/2026): il ritaglio dei figli segue anche l'alfa dell'ombra, e il legno vi compariva come un margine
+		# semitrasparente e ombreggiato attorno all'orlo
 		var outer := Vector2(BAR_W, BAR_H) + Vector2(BAR_PAD, BAR_PAD) * 2.0
 		var body := Panel.new()
 		body.position = -Vector2(BAR_PAD, BAR_PAD)
@@ -426,9 +428,6 @@ func _build_bar() -> void:
 		var body_style := StyleBoxFlat.new()
 		body_style.bg_color = WOOD_DARK
 		body_style.set_corner_radius_all(BAR_RADIUS)
-		body_style.shadow_color = Color(0, 0, 0, 0.45)
-		body_style.shadow_size = 6
-		body_style.shadow_offset = Vector2(0, 3)
 		body.add_theme_stylebox_override("panel", body_style)
 		_bar.add_child(body)
 		body.add_child(_wood(outer))
@@ -743,20 +742,26 @@ func _on_compass_hover(on: bool) -> void:
 	_compass.queue_redraw()
 
 
-## Disco scuro con l'anello d'ottone e la rosa dei venti: punta del nord rossa, le altre d'ottone; piu' chiara al
-## passaggio del mouse, su fondo d'ambra se attiva.
+## Rosa dei venti senza disco ne' anello (richiesta di Federico del 28/11/2026): un'ombra morbida la stacca dalla
+## minimappa; al passaggio del mouse si schiarisce, accesa (medaglioni aperti) poggia su un alone d'ambra e resta chiara.
 func _draw_compass() -> void:
 	var c := _compass
 	var s := c.size
 	var m := s / 2.0
 	var lit := _compass_on or _compass_hover
-	c.draw_circle(m, s.x / 2.0, Color(0.42, 0.29, 0.09, 0.95) if _compass_on else Color(0.10, 0.07, 0.04, 0.80))
-	c.draw_arc(m, s.x / 2.0 - 0.75, 0.0, TAU, 32, BRASS if lit else BRASS_DARK, 1.5, true)
+	var r := s.x / 2.0
+	for i in range(6, 0, -1):
+		var k := float(i) / 6.0
+		if _compass_on:
+			c.draw_circle(m, r * (0.55 + 0.45 * k), Color(1.0, 0.72, 0.28, 0.10 + 0.22 * (1.0 - k)))
+		else:
+			c.draw_circle(m, r * (0.45 + 0.5 * k), Color(0.05, 0.03, 0.02, 0.07 + 0.10 * (1.0 - k)))
 	var painted := painted_texture("bussola")
 	if painted != null:
 		# rosa dei venti dipinta (assets/ui/veste/bussola.png, tools/prepara_simboli_luoghi.py): piu' chiara se accesa
-		var side := s.x * 0.84
-		c.draw_texture_rect(painted, Rect2(m - Vector2(side, side) / 2.0, Vector2(side, side)), false, Color(1.25, 1.2, 1.1) if lit else Color.WHITE)
+		var side := s.x * (1.0 if _compass_on else 0.94)
+		var tint := Color(1.35, 1.25, 1.05) if _compass_on else (Color(1.2, 1.15, 1.05) if _compass_hover else Color.WHITE)
+		c.draw_texture_rect(painted, Rect2(m - Vector2(side, side) / 2.0, Vector2(side, side)), false, tint)
 		return
 	var ink := BRASS.lightened(0.3) if lit else BRASS
 	var tip_len := s.x * 0.37

@@ -90,7 +90,12 @@ func test_le_posizioni_non_coprono_castelli_ne_pedine(t: TestContext) -> void:
 			var parts := line.split("\t", false)
 			if parts.size() >= 4 and parts[0].strip_edges() == "SetCastle::":
 				castles[parts[1].strip_edges()] = Vector2(float(parts[2]), float(parts[3])) / 16.0
+	# Roma sta a sud del porto della sua regione anche sotto castello e pedine (richiesta di Federico del 28/11/2026,
+	# DAL_PORTO di tools/mondo/posiziona_luoghi.py): la regione e' piccola e la voleva li', non verso la Toscana
+	var by_port := ["roma"]
 	for s in sites.sites:
+		if s.id in by_port:
+			continue
 		for rid in castles:
 			var c: Vector2 = castles[rid]
 			var d := s.position - c
@@ -99,7 +104,9 @@ func test_le_posizioni_non_coprono_castelli_ne_pedine(t: TestContext) -> void:
 			var on_castle := absf(d.x) < 42.0 * 0.6 * scale and d.y > -72.0 * 0.6 * scale and d.y < 30.0 * 0.6 * scale
 			var on_pieces := d.x > 0.0 and d.x < 175.0 * 0.6 and d.y > -82.0 * 0.6 and d.y < 50.0 * 0.6
 			t.assert_false(on_castle, "%s non copre il castello di %s" % [s.id, rid])
-			t.assert_false(on_pieces and scale == 1.0, "%s non copre le pedine di %s" % [s.id, rid])
+			# le pedine del castello della propria regione mai; quelle di un castello vicino solo se nella regione non c'e'
+			# altro posto (Roma sotto la Corsica, Rodi sotto l'Anatolia, 28/11/2026: si vedono solo con eserciti fuori)
+			t.assert_false(on_pieces and scale == 1.0 and rid == s.region, "%s non copre le pedine di %s" % [s.id, rid])
 		for o in sites.sites:
 			if o != s:
 				t.assert_true(s.position.distance_to(o.position) >= 30.0, "%s lontano da %s" % [s.id, o.id])
@@ -329,3 +336,17 @@ esito={"tesoro": 10}
 			s.events.clear()
 			LegendarySiteProcessor.process_year(s)
 			t.assert_eq(W.events_of(s, GameState.EV_SITE_EVENT).size(), 2 if cap == 0 else 1, "tetto %d, anno %d" % [cap, year])
+
+
+
+## Richiesta di Federico del 28/11/2026: Roma a sud del porto della regione di Roma.
+func test_roma_a_sud_del_porto(t: TestContext) -> void:
+	var sites := LegendarySites.load_file()
+	var port := Vector2.ZERO
+	for line in FileAccess.get_file_as_string("res://data/mappa_mondo/startpos_mondo.txt").split("\n"):
+		var parts := line.split("\t", false)
+		if parts.size() >= 4 and parts[0].strip_edges() == "SetPort::" and parts[1].strip_edges() == "ID_ROME":
+			port = Vector2(float(parts[2]), float(parts[3])) / 16.0
+	var roma = sites.site("roma")
+	t.assert_true(port != Vector2.ZERO, "Roma ha il porto")
+	t.assert_true(roma.position.y > port.y and roma.position.distance_to(port) < 40.0, "a sud del porto: %s, porto %s" % [roma.position, port])

@@ -7,7 +7,7 @@ extends RefCounted
 func test_ogni_evento_storico_ha_una_tavola_vera(t: TestContext) -> void:
 	EventArt.reset()
 	var seen := {}
-	for i in 71:
+	for i in 142:   # 71 dell'originale e 71 aggiunti il 28/11/2026, con la tavola di ripiego
 		var f := EventArt.historical_frame(i, "")
 		t.assert_true(f >= 1 and f <= 160, "evento %d: tavola %d nell'intervallo" % [i, f])
 		t.assert_false(EventArt.is_placeholder(f), "evento %d: la tavola %d non e' un segnaposto" % [i, f])
@@ -15,6 +15,22 @@ func test_ogni_evento_storico_ha_una_tavola_vera(t: TestContext) -> void:
 	t.assert_true(seen.size() >= 35, "abbinamenti vari, non sempre la stessa tavola (%d diverse)" % seen.size())
 	t.assert_eq(EventArt.historical_frame(37, ""), 77, "la polvere da sparo e' l'esplosione")
 	t.assert_eq(EventArt.historical_frame(54, ""), 148, "il giudizio di Dio (la peste nera) sono i ratti")
+
+
+## Eventi aggiunti il 28/11/2026: la vignetta propria assets/eventi/storici/<chiave>.png vince sulla tavola, se c'e'.
+func test_vignetta_propria_degli_eventi_nuovi(t: TestContext) -> void:
+	EventArt.reset()
+	t.assert_eq(EventArt.historical_own_path(""), "", "senza chiave nessuna vignetta")
+	t.assert_eq(EventArt.historical_own_path("evento_inventato"), "", "vignetta mancante")
+	var rules := EventRules.load_file()
+	var e := rules.historical(86)
+	t.assert_true(e != null and e.key == "scisma_d_oriente", "l'evento 86 e' lo scisma d'Oriente")
+	var w := {"indice": 86, "chiave": "scisma_d_oriente"}
+	var own := EventArt.historical_own_path("scisma_d_oriente")
+	if own == "":
+		t.assert_eq(EventArt.historical_frame(86, "scisma_d_oriente"), 97, "senza vignetta la tavola di ripiego di [storici]")
+	else:
+		t.assert_eq((EventArt.window_texture(w) as Texture2D).resource_path, own, "la vignetta propria")
 
 
 func test_temi_e_ripiego_stabili(t: TestContext) -> void:

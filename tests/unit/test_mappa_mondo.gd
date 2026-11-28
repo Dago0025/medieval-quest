@@ -46,7 +46,7 @@ func test_startpos_del_mondo_scenario_storico(t: TestContext) -> void:
 	Scenario.set_auror(false)
 	var d := Scenario.load_startpos()
 	t.assert_eq(d.errors.size(), 0, str(d.errors.slice(0, 3)))
-	t.assert_eq(d.land_regions().size(), 228, "107 europee + 121 nuove")
+	t.assert_eq(d.land_regions().size(), 328, "107 europee + 221 nuove (28/11/2026: frammentati gli altri continenti)")
 	t.assert_eq(d.sea_regions().size(), 73, "36 europei + 50 nuovi, meno 13 zone del Mediterraneo unite ad altre (16/11/2026)")
 	t.assert_eq(d.asymmetric_neighbours().size(), 0, "confinanti simmetrici")
 	t.assert_true(d.region("ID_ATLANTIS") == null, "l'isola solo in modalita' Auror")
@@ -83,7 +83,7 @@ func test_atlantide_e_danesi_in_modalita_auror(t: TestContext) -> void:
 	Scenario.set_auror(true)
 	var d := Scenario.load_startpos()
 	t.assert_eq(d.errors.size(), 0, str(d.errors.slice(0, 3)))
-	t.assert_eq(d.land_regions().size(), 233, "con i cinque territori dell'isola")
+	t.assert_eq(d.land_regions().size(), 333, "con i cinque territori dell'isola")
 	for r in ISLAND:
 		t.assert_eq(d.region(r).owner, "FN_DANISH", "%s agli Auror" % r)
 	t.assert_eq(d.faction("FN_DANISH").leader_region, "ID_ATLANTIS", "Darkos parte da Atlantide")

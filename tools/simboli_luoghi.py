@@ -48,9 +48,9 @@ def _brass_ring(size, width):
     return im
 
 
-def _painted(art, big, reach=None):
+def _painted(art, big, reach=None, edge=None):
     """Simbolo dipinto (RGBA scontornato) dentro il disco: il punto piu' lontano dal centro a REACH del raggio, con
-    un'ombra morbida in basso a destra; tagliato al fondo, mai sopra l'ottone."""
+    un'ombra morbida in basso a destra; tagliato al fondo, mai sopra l'ottone (`edge` = spessore del bordo escluso)."""
     import numpy as np
     a = np.asarray(art.getchannel("A"), dtype=float)
     ys, xs = np.nonzero(a > 128)
@@ -68,7 +68,7 @@ def _painted(art, big, reach=None):
     top.paste(art, pos)
     layer.alpha_composite(top)
     hole = Image.new("L", (big, big), 0)
-    inner = big / 2.0 - int(big * 0.085)
+    inner = big / 2.0 - (int(big * 0.085) if edge is None else edge)
     c = big / 2.0
     ImageDraw.Draw(hole).ellipse((c - inner, c - inner, c + inner, c + inner), fill=255)
     kept = Image.fromarray((np.asarray(layer.getchannel("A"), float) * np.asarray(hole, float) / 255.0).astype("uint8"), "L")
@@ -77,10 +77,27 @@ def _painted(art, big, reach=None):
 
 
 REACH = 0.80   # quanto del raggio occupa il simbolo dipinto (l'anello comincia a 0.83)
+REACH_NUDO = 0.88   # senza anello (28/11/2026): il simbolo arriva quasi al bordo del disco
 
 
-def medallion(simbolo, categoria="storico", size=46, stato=None, scudo=None, art=None, reach=None):
-    """`art`: simbolo dipinto (RGBA scontornato, tools/simboli_dipinti) al posto di quello disegnato a codice."""
+def _rim(big):
+    """Bordo senza anello (richiesta di Federico del 28/11/2026): il disco scurisce verso l'orlo e finisce con un filo
+    scuro sottile, cosi' si stacca dalla mappa senza la cornice d'ottone."""
+    import numpy as np
+    yy, xx = np.mgrid[0:big, 0:big]
+    r = big / 2.0
+    d = np.hypot(xx + 0.5 - r, yy + 0.5 - r) / r
+    shade = np.clip((d - 0.72) / 0.28, 0, 1) ** 1.6 * 120          # ombra interna verso l'orlo
+    line = np.clip(1.0 - np.abs(d - (1.0 - 0.9 * S / r)) / (0.9 * S / r), 0, 1) * 200   # filo scuro sull'orlo
+    alpha = np.where(d <= 1.0, np.maximum(shade, line), 0).astype("uint8")
+    im = Image.new("RGBA", (big, big), (16, 10, 5, 0))
+    im.putalpha(Image.fromarray(alpha, "L"))
+    return im
+
+
+def medallion(simbolo, categoria="storico", size=46, stato=None, scudo=None, art=None, reach=None, anello=True):
+    """`art`: simbolo dipinto (RGBA scontornato, tools/simboli_dipinti) al posto di quello disegnato a codice.
+    `anello=False`: niente anello d'ottone, il disco finisce con un'ombra interna e un filo scuro (_rim)."""
     big = size * S
     cat = CATEGORIE[categoria]
     disc = _radial(big, cat["disco"], cat["disco2"])
@@ -90,12 +107,25 @@ def medallion(simbolo, categoria="storico", size=46, stato=None, scudo=None, art
     out.paste(disc, (0, 0), mask)
     # simbolo
     if art is not None:
-        out.alpha_composite(_painted(art, big, reach))
+        if anello:
+            out.alpha_composite(_painted(art, big, reach))
+        else:
+            out.alpha_composite(_rim(big))
+            out.alpha_composite(_painted(art, big, reach or REACH_NUDO, edge=1.5 * S))
     else:
         sym = Image.new("RGBA", (big, big), (0, 0, 0, 0))
         SIMBOLI[simbolo](ImageDraw.Draw(sym), big)
+        if not anello:
+            out.alpha_composite(_rim(big))
         out.alpha_composite(sym)
-    out.alpha_composite(_brass_ring(big, int(big * 0.085)))
+    if anello:
+        out.alpha_composite(_brass_ring(big, int(big * 0.085)))
+    else:
+        # il simbolo non esce dal disco
+        clip = Image.new("L", (big, big), 0)
+        ImageDraw.Draw(clip).ellipse((0, 0, big - 1, big - 1), fill=255)
+        from PIL import ImageChops
+        out.putalpha(ImageChops.multiply(out.getchannel("A"), clip))
     # alone per i mitologici
     canvas = Image.new("RGBA", (big + 24 * S, big + 24 * S), (0, 0, 0, 0))
     off = 12 * S

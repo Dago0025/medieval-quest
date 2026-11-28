@@ -1457,6 +1457,8 @@ func _confirm_ask(title: String, text: String, ok_text: String, cancel_text: Str
 		_ui.add_child(holder)
 		_confirm_panel = PanelContainer.new()
 		holder.add_child(_confirm_panel)
+		_stack_sheet(_confirm_veil, _confirm_panel, 30)
+		_stack_sheet(holder, _confirm_panel, 31)
 		var margin := _margin()
 		_confirm_panel.add_child(margin)
 		var box := VBoxContainer.new()
@@ -1708,14 +1710,14 @@ func _rebuild_markers() -> void:
 				slot = ArmyLayerScript.garrison_slot(i)
 			else:
 				at = spots[i - garrison_ids.size()]
-			var fill := float(army.stacks.size()) / float(maxi(1, _state.rules.max_stacks))
+			var fill := army.banner_fill(_state.rules.max_stacks)
 			var piece := PieceArt.army_piece(_data, army.faction, _piece_kind(army), not army.path.is_empty(), fill)
 			_army_layer.add_marker(army.id, at, slot, StateTint.owner_color(_region_map, army.faction), str(army.stack_count()), army.is_fleet, army.faction == _player_id, army.id == _selected_army or _group.has(army.id), CampaignUiPapacy.badge_of(army), piece)
 			if i < garrison_ids.size():
 				_army_layer.hide_marker(army.id)   # nel castello la pedina sparisce: lo stendardo del castello dice quanto e' pieno
 		for army_id in spotted_ids:
 			var placed := _state.army(army_id)
-			var placed_fill := float(placed.stacks.size()) / float(maxi(1, _state.rules.max_stacks))
+			var placed_fill := placed.banner_fill(_state.rules.max_stacks)
 			var placed_piece := PieceArt.army_piece(_data, placed.faction, _piece_kind(placed), not placed.path.is_empty(), placed_fill)
 			_army_layer.add_marker(placed.id, placed.spot_here(), Vector2.ZERO, StateTint.owner_color(_region_map, placed.faction), str(placed.stack_count()), placed.is_fleet, placed.faction == _player_id, placed.id == _selected_army or _group.has(placed.id), CampaignUiPapacy.badge_of(placed), placed_piece)
 		for agent_key in spotted_agent_ids:
@@ -3530,6 +3532,7 @@ func _build_game_menu() -> void:
 	_game_menu.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_game_menu.z_index = 8
 	_ui.add_child(_game_menu)
+	_stack_sheet(_game_menu, null, 8)
 	var margin := _margin()
 	_game_menu.add_child(margin)
 	var box := VBoxContainer.new()
@@ -3626,6 +3629,22 @@ func _show_admiral_sheet(army: Army) -> void:
 	_character_panel.visible = true
 
 
+
+## Schede sovrapposte (segnalazione di Federico del 28/11/2026: aperta la scheda di un re dalla sala dei regnanti, non la
+## si poteva chiudere senza chiudere prima la sala). Godot sceglie il destinatario del clic dall'ordine dei nodi, non da
+## z_index: una scheda creata prima restava sotto ai clic anche se disegnata sopra. Le schede hanno tutte lo stesso
+## z_index e quella che si apre passa in cima all'elenco dei figli di _ui, sopra a disegno e clic. Menu e conferme
+## tengono il loro z_index ma salgono anche loro in cima quando compaiono.
+const SHEET_Z := 9
+
+
+func _stack_sheet(top: Control, panel: Control = null, z := SHEET_Z) -> void:
+	var p := panel if panel != null else top
+	top.z_index = z
+	p.visibility_changed.connect(func() -> void:
+		if p.visible and top.get_parent() != null:
+			top.move_to_front())
+
 func _ensure_character_panel() -> void:
 	if _character_panel != null:
 		return
@@ -3636,6 +3655,7 @@ func _ensure_character_panel() -> void:
 	_ui.add_child(holder)
 	_character_panel = PanelContainer.new()
 	holder.add_child(_character_panel)
+	_stack_sheet(holder, _character_panel)
 	var margin := _margin()
 	_character_panel.add_child(margin)
 	_character_box = VBoxContainer.new()
@@ -3656,6 +3676,7 @@ func _show_character_info(character_id: int) -> void:
 		_ui.add_child(holder)
 		_character_panel = PanelContainer.new()
 		holder.add_child(_character_panel)
+		_stack_sheet(holder, _character_panel)
 		var margin := _margin()
 		_character_panel.add_child(margin)
 		_character_box = VBoxContainer.new()
@@ -3733,6 +3754,7 @@ func _toggle_rulers() -> void:
 		_ui.add_child(holder)
 		_rulers_panel = PanelContainer.new()
 		holder.add_child(_rulers_panel)
+		_stack_sheet(holder, _rulers_panel)
 		var margin := _margin()
 		_rulers_panel.add_child(margin)
 		var box := VBoxContainer.new()
@@ -4303,6 +4325,7 @@ func _show_agent_sheet(agent: AgentState) -> void:
 		_ui.add_child(holder)
 		_agent_sheet = PanelContainer.new()
 		holder.add_child(_agent_sheet)
+		_stack_sheet(holder, _agent_sheet)
 		var margin := _margin()
 		_agent_sheet.add_child(margin)
 		_agent_sheet_box = VBoxContainer.new()
@@ -5419,6 +5442,8 @@ func _build_ui() -> void:
 	_army_layer = ArmyLayerScript.new()
 	_army_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_ui.add_child(_army_layer)
+	# luoghi in evidenza (mouse, scheda aperta) sopra le pedine (28/11/2026)
+	_ui.add_child(_site_layer.make_overlay())
 
 	_message = Label.new()
 	_message.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -5452,6 +5477,7 @@ func _build_ui() -> void:
 	_saves_panel.save_requested.connect(_save_named)
 	_saves_panel.load_requested.connect(_on_load_chosen)
 	_ui.add_child(_saves_panel)
+	_stack_sheet(_saves_panel)
 
 	_toast_holder = CenterContainer.new()
 	_toast_holder.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
@@ -5496,6 +5522,7 @@ func _build_ui() -> void:
 	_help_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_help_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_help_panel)
+	_stack_sheet(_help_panel)
 	var help_margin := _margin()
 	_help_panel.add_child(help_margin)
 	var help_box := VBoxContainer.new()
@@ -5934,6 +5961,7 @@ func _build_mission_menu() -> void:
 	_mission_menu.visible = false
 	_mission_menu.z_index = 10
 	_ui.add_child(_mission_menu)
+	_stack_sheet(_mission_menu, null, 10)
 	var margin := _margin()
 	_mission_menu.add_child(margin)
 	_mission_menu_box = VBoxContainer.new()
@@ -5947,6 +5975,7 @@ func _build_diplomacy_panel() -> void:
 	_diplomacy_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_diplomacy_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_diplomacy_panel)
+	_stack_sheet(_diplomacy_panel)
 	var margin := _margin()
 	_diplomacy_panel.add_child(margin)
 	var box := VBoxContainer.new()
@@ -6014,6 +6043,7 @@ func _build_events_panel() -> void:
 	_events_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_events_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_events_panel)
+	_stack_sheet(_events_panel)
 	var margin := _margin()
 	_events_panel.add_child(margin)
 	var box := VBoxContainer.new()
@@ -6083,6 +6113,7 @@ func _build_court_panel() -> void:
 	_court_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_court_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_court_panel)
+	_stack_sheet(_court_panel)
 	var margin := _margin()
 	_court_panel.add_child(margin)
 	var box := VBoxContainer.new()
@@ -6129,6 +6160,7 @@ func _build_standings_panel() -> void:
 	_standings_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_standings_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_standings_panel)
+	_stack_sheet(_standings_panel)
 	var margin := _margin()
 	_standings_panel.add_child(margin)
 	var box := VBoxContainer.new()
@@ -6216,6 +6248,7 @@ func _build_history_panel() -> void:
 	_history_panel.visible = false
 	_history_panel.z_index = 5
 	_ui.add_child(_history_panel)
+	_stack_sheet(_history_panel)
 	_history_scroll = ScrollContainer.new()
 	_history_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_history_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -6424,6 +6457,7 @@ func _build_prisoner_panel() -> void:
 	_prisoner_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_prisoner_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_prisoner_panel)
+	_stack_sheet(_prisoner_panel)
 	var box := modal.body
 	_prisoner_title = Label.new()
 	_prisoner_title.add_theme_font_size_override("font_size", 20)
@@ -6494,6 +6528,7 @@ func _build_proposal_panel() -> void:
 	_proposal_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_proposal_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_proposal_panel)
+	_stack_sheet(_proposal_panel)
 	var box := modal.body
 	_proposal_title = Label.new()
 	_proposal_title.add_theme_font_size_override("font_size", 20)
@@ -6593,6 +6628,7 @@ func _build_province_modal() -> void:
 	_province_modal.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_province_modal.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_province_modal)
+	_stack_sheet(_province_modal)
 	var margin := _margin()
 	_province_modal.add_child(margin)
 	var box := VBoxContainer.new()
@@ -6643,6 +6679,7 @@ func _build_queues_panel() -> void:
 	_queues_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_queues_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_queues_panel)
+	_stack_sheet(_queues_panel)
 	var margin := _margin()
 	_queues_panel.add_child(margin)
 	var box := VBoxContainer.new()
@@ -7139,6 +7176,7 @@ func _build_unit_info_panel() -> void:
 	_unit_info_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_unit_info_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_unit_info_panel)
+	_stack_sheet(_unit_info_panel)
 	var margin := _margin()
 	_unit_info_panel.add_child(margin)
 	var root := VBoxContainer.new()
@@ -7577,6 +7615,7 @@ func _build_end_panel() -> void:
 	_end_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_end_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_end_panel)
+	_stack_sheet(_end_panel)
 	var margin := _margin()
 	_end_panel.add_child(margin)
 	var row := HBoxContainer.new()
@@ -8184,6 +8223,7 @@ func _toggle_economy() -> void:
 		_economy_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 		_economy_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 		_ui.add_child(_economy_panel)
+		_stack_sheet(_economy_panel)
 		var margin := _margin()
 		_economy_panel.add_child(margin)
 		var outer := VBoxContainer.new()
@@ -8474,6 +8514,11 @@ func _show_site_sheet(site_id: String) -> void:
 		_ui.add_child(holder)
 		_site_panel = PanelContainer.new()
 		holder.add_child(_site_panel)
+		_stack_sheet(holder, _site_panel)
+		# il luogo resta in evidenza sulla mappa finche' la scheda e' aperta (28/11/2026)
+		_site_panel.visibility_changed.connect(func() -> void:
+			if _site_layer != null and not _site_panel.visible:
+				_site_layer.set_selected(""))
 		var margin := _margin()
 		_site_panel.add_child(margin)
 		_site_box = VBoxContainer.new()
@@ -8481,6 +8526,8 @@ func _show_site_sheet(site_id: String) -> void:
 		_site_box.add_theme_constant_override("separation", 8)
 		margin.add_child(_site_box)
 	_clear_children(_site_box)
+	if _site_layer != null:
+		_site_layer.set_selected(site_id)
 	var head := HBoxContainer.new()
 	head.add_theme_constant_override("separation", 10)
 	_site_box.add_child(head)
@@ -8573,6 +8620,7 @@ func _build_site_choice_panel() -> void:
 	_site_choice_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_site_choice_panel.grow_vertical = Control.GROW_DIRECTION_BOTH
 	_ui.add_child(_site_choice_panel)
+	_stack_sheet(_site_choice_panel)
 	var box := modal.body
 	_site_choice_title = Label.new()
 	_site_choice_title.add_theme_font_size_override("font_size", 20)
